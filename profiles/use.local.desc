@@ -7,4 +7,5 @@
 
 # Keep it sorted. 
 
+media-video/vdr:dvbcompat - Add support for not multiproto DVB headers
 media-video/vdr:premiereepgfix - set default charset to latin1 for broken provider like German Premiere
