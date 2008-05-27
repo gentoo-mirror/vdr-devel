@@ -15,7 +15,7 @@ EXT_PATCH_FLAGS="analogtv atsc cmdsubmenu cutterlimit cutterqueue cuttime ddepge
 	syncearly dvlfriendlyfnames dvlrecscriptaddon dvlvidprefer
 	volctrl wareagleicon lircsettings deltimeshiftrec em84xx"
 
-IUSE="debug vanilla dxr3 +dvbcompat ${EXT_PATCH_FLAGS}"
+IUSE="debug vanilla dxr3 +dvbcompat h264 ${EXT_PATCH_FLAGS}"
 
 MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
@@ -242,6 +242,15 @@ src_unpack() {
 		# Now apply extensions patch
 		local fname="${PN}-${EXT_VDR_PV:-${PV}}_extensions.diff"
 		epatch "${EXT_DIR}/${fname}"
+
+		if use h264; then
+			# Remove vdr-1.7.0-multiproto-update.diff, that we already have applied.
+			# filterdiff -x '*/dvbdevice.c'
+			# Use sed here to not add more depends (here: patchutils)
+			sed -e '/^diff.*\/dvbdevice.c/,/^d/d' \
+				-i "${EXT_DIR}/vdr-1.7.0-ext_h264.diff"
+			epatch "${EXT_DIR}/vdr-1.7.0-ext_h264.diff"
+		fi
 
 		# other gentoo patches
 		# epatch "${FILESDIR}/..."

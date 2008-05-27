@@ -2,6 +2,9 @@
 # Copyright 1999-2008 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  27 May 2008; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.0.ebuild:
+  Added h264 use-flag and apply the relevant patch then.
+
   26 May 2008; Matthias Schwarzott <zzam@gentoo.org>
   +files/vdr-1.6.0-dxr3-subtitlehack.diff,
   +files/vdr-1.6.0-makefile-install-header.diff,
