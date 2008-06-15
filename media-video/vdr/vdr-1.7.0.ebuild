@@ -30,7 +30,7 @@ APIWRAPPER=vdr-1.7.0-multiproto-update-dvb-api-wrapper-0.4.diff
 
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.cadsoft.de/vdr/"
-SRC_URI="ftp://ftp.cadsoft.de/vdr/${MY_P}.tar.bz2
+SRC_URI="ftp://ftp.cadsoft.de/vdr/Developer/${MY_P}.tar.bz2
 	http://www.zulu-entertainment.de/files/patches/${EXT_P}.tar.bz2
 	dvbcompat? ( http://dev.gentoo.org/~zzam/distfiles/overlay/${APIWRAPPER}.bz2 )"
 
