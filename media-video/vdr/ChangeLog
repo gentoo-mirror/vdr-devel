@@ -2,6 +2,13 @@
 # Copyright 1999-2008 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  13 Sep 2008; Matthias Schwarzott <zzam@gentoo.org> metadata.xml,
+  +vdr-1.7.1.ebuild:
+  Version bumped. Using extensions-patch v63 now. Fixed a typo in name of
+  new extension cmdreccmdi18n. WARNING: This version contains large changes
+  in video handling, so expect it not to work as good as the versions
+  before. Added use-flags to metadata.xml.
+
   15 Jun 2008; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.0.ebuild:
   fixed download url
 
