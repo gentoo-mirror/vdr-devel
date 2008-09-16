@@ -22,7 +22,7 @@ MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
 S="${WORKDIR}/${MY_P}"
 
-EXT_V="63"
+EXT_V="64"
 EXT_P=VDR-Extensions-Patch-${EXT_V}
 EXT_DIR=${WORKDIR}/${EXT_P}/
 EXT_VDR_PV="${PV/_p/-}"
@@ -251,8 +251,8 @@ src_unpack() {
 			# filterdiff -x '*/dvbdevice.c'
 			# Use sed here to not add more depends (here: patchutils)
 			sed -e '/^diff.*\/dvbdevice.c/,/^d/d' \
-				-i "${EXT_DIR}/vdr-1.7.0-ext_h264.diff"
-			epatch "${EXT_DIR}/vdr-1.7.0-ext_h264.diff"
+				-i "${EXT_DIR}/${P}-ext_h264.diff"
+			epatch "${EXT_DIR}/${P}-ext_h264.diff"
 		fi
 
 		# other gentoo patches
