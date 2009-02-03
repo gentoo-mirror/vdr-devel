@@ -49,6 +49,7 @@
 		<flag name="osdmaxitems">Support for text2skin</flag>
 		<flag name="pinplugin">Support for pin plugin</flag>
 		<flag name="rotor">Enable support for plugin vdr-rotor for dish-positioner.</flag>
+		<flag name="s2api">Add support for not s2api DVB headers</flag>
 		<flag name="settime">set system time per script instead of via syscal</flag>
 		<flag name="setup">Enable support for the plugin vdr-setup</flag>
 		<flag name="setup-plugin">Enable support for the plugin vdr-setup</flag>
@@ -59,6 +60,7 @@
 		<flag name="subtitles">Enable support for the subtitles-plugin</flag>
 		<flag name="switchtimer">support for timer that do not record but only switch to a channel</flag>
 		<flag name="syncearly">start live display as soon as possible, not waiting for sync of audio and video</flag>
+		<flag name="softosd">Smooth fade in and fade of the OSD for FF cards</flag>
 		<flag name="timercmd">Adds submenu for user defined commands in timer menu</flag>
 		<flag name="timerinfo">Show with chars +/- if space on HD will suffice for a timer</flag>
 		<flag name="ttxtsubs">support for ttxtsubs plugin</flag>
