@@ -1,0 +1,504 @@
+diff -ru vdr-1.7.4.orig/config.h vdr-1.7.4/config.h
+--- vdr-1.7.4.orig/config.h	2009-01-06 17:56:27.000000000 +0100
++++ vdr-1.7.4/config.h	2009-02-01 20:47:21.611262480 +0100
+@@ -192,11 +192,11 @@
+   void StoreLanguages(const char *Name, int *Values);
+   bool ParseLanguages(const char *Value, int *Values);
+   bool Parse(const char *Name, const char *Value);
+-  cSetupLine *Get(const char *Name, const char *Plugin = NULL);
+   void Store(const char *Name, const char *Value, const char *Plugin = NULL, bool AllowMultiple = false);
+   void Store(const char *Name, int Value, const char *Plugin = NULL);
+ public:
+   // Also adjust cMenuSetup (menu.c) when adding parameters here!
++  cSetupLine *Get(const char *Name, const char *Plugin = NULL);
+   int __BeginData__;
+   char OSDLanguage[I18N_MAX_LOCALE_LEN];
+   char OSDSkin[MaxSkinName];
+diff -ru vdr-1.7.4.orig/device.c vdr-1.7.4/device.c
+--- vdr-1.7.4.orig/device.c	2009-01-25 12:10:56.000000000 +0100
++++ vdr-1.7.4/device.c	2009-02-01 20:35:04.203264160 +0100
+@@ -1304,8 +1304,9 @@
+   if (!dvbSubtitleConverter)
+      dvbSubtitleConverter = new cDvbSubtitleConverter;
+   tsToPesSubtitle.PutTs(Data, Length);
+-  if (const uchar *p = tsToPesSubtitle.GetPes(Length)) {
+-     dvbSubtitleConverter->Convert(p, Length);
++  int l;
++  if (const uchar *p = tsToPesSubtitle.GetPes(l)) {
++     dvbSubtitleConverter->Convert(p, l);
+      tsToPesSubtitle.Reset();
+      }
+   return Length;
+diff -ru vdr-1.7.4.orig/font.h vdr-1.7.4/font.h
+--- vdr-1.7.4.orig/font.h	2007-06-23 12:09:14.000000000 +0200
++++ vdr-1.7.4/font.h	2009-02-01 20:47:21.611262480 +0100
+@@ -36,6 +36,12 @@
+ private:
+   static cFont *fonts[];
+ public:
++  enum { NUMCHARS = 256 };
++  typedef uint32_t tPixelData;
++  struct tCharData {
++  	tPixelData width, height;
++	tPixelData lines[1];  	
++  };
+   virtual ~cFont() {}
+   virtual int Width(uint c) const = 0;
+           ///< Returns the width of the given character in pixel.
+diff -ru vdr-1.7.4.orig/osdbase.h vdr-1.7.4/osdbase.h
+--- vdr-1.7.4.orig/osdbase.h	2007-11-03 15:50:52.000000000 +0100
++++ vdr-1.7.4/osdbase.h	2009-02-01 20:47:21.611262480 +0100
+@@ -84,9 +84,7 @@
+ 
+ class cOsdMenu : public cOsdObject, public cList<cOsdItem> {
+ private:
+-  static cSkinDisplayMenu *displayMenu;
+   static int displayMenuCount;
+-  static int displayMenuItems;
+   char *title;
+   int cols[cSkinDisplayMenu::MaxTabs];
+   int first, current, marked;
+@@ -97,6 +95,7 @@
+   bool hasHotkeys;
+ protected:
+   void SetDisplayMenu(void);
++  static int displayMenuItems;
+   cSkinDisplayMenu *DisplayMenu(void) { return displayMenu; }
+   const char *hk(const char *s);
+   void SetCols(int c0, int c1 = 0, int c2 = 0, int c3 = 0, int c4 = 0);
+@@ -123,6 +122,7 @@
+ public:
+   cOsdMenu(const char *Title, int c0 = 0, int c1 = 0, int c2 = 0, int c3 = 0, int c4 = 0);
+   virtual ~cOsdMenu();
++  static cSkinDisplayMenu *displayMenu;
+   virtual bool NeedsFastResponse(void) { return subMenu ? subMenu->NeedsFastResponse() : cOsdObject::NeedsFastResponse(); }
+   int Current(void) const { return current; }
+   void Add(cOsdItem *Item, bool Current = false, cOsdItem *After = NULL);
+diff -ru vdr-1.7.4.orig/osd.c vdr-1.7.4/osd.c
+--- vdr-1.7.4.orig/osd.c	2009-01-16 15:34:32.000000000 +0100
++++ vdr-1.7.4/osd.c	2009-02-01 20:47:21.611262480 +0100
+@@ -379,13 +379,14 @@
+               if (strncmp(Xpm[i + 1], s, c) == 0) {
+                  if (i == NoneColorIndex)
+                     NoneColorIndex = MAXNUMCOLORS;
+-                 SetIndex(x, y, (IgnoreNone && i > NoneColorIndex) ? i - 1 : i);
++                 SetIndexFast(x, y, (IgnoreNone && i > NoneColorIndex) ? i - 1 : i);
+                  break;
+                  }
+               }
+           s += c;
+           }
+       }
++  UpdateDirty(0,0,w-1,h-1);
+   if (NoneColorIndex < MAXNUMCOLORS && !IgnoreNone)
+      return SetXpm(Xpm, true);
+   return true;
+@@ -415,32 +416,83 @@
+ }
+ 
+ void cBitmap::DrawBitmap(int x, int y, const cBitmap &Bitmap, tColor ColorFg, tColor ColorBg, bool ReplacePalette, bool Overlay)
++  {
++    if (bitmap && Bitmap.bitmap && Intersects(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1)) {
++      if (Covers(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1))
++          Reset();
++      x -= x0;
++      y -= y0;
++      if (ReplacePalette && Covers(x + x0, y + y0, x + x0 + Bitmap.Width() - 1, y + y0 + Bitmap.Height() - 1)) {
++          Replace(Bitmap);
++          for (int iy = 0; iy < Bitmap.height; iy++) {
++              const int lineStart = Bitmap.width * iy;
++              for (int ix = 0; ix < Bitmap.width; ix++) {
++                  if (!Overlay || Bitmap.bitmap[lineStart + ix] != 0)	   
++                  SetIndexFast(x + ix, y + iy, Bitmap.bitmap[lineStart + ix]);
++              }
++          }
++     }
++      else {
++         tIndexes Indexes;
++         Take(Bitmap, &Indexes, ColorFg, ColorBg);
++         for (int iy = 0; iy < Bitmap.height; iy++) {
++            const int lineStart = Bitmap.width * iy;
++            for (int ix = 0; ix < Bitmap.width; ix++) {
++               //SetIndex(x + ix, y + iy, Indexes[int(Bitmap.bitmap[lineStart + ix])]);
++               SetIndexFast(x + ix, y + iy, Indexes[int(Bitmap.bitmap[lineStart + ix])]);
++            }
++         }
++      }
++      UpdateDirty(x,y,x+Bitmap.Width()-1,y+Bitmap.height-1);
++    }
++}
++
++void cBitmap::DrawBitmapHor(int x, int y, int w, const cBitmap &Bitmap)
+ {
+-  if (bitmap && Bitmap.bitmap && Intersects(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1)) {
+-     if (Covers(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1))
+-        Reset();
+-     x -= x0;
+-     y -= y0;
+-     if (ReplacePalette && Covers(x + x0, y + y0, x + x0 + Bitmap.Width() - 1, y + y0 + Bitmap.Height() - 1)) {
+-        Replace(Bitmap);
+-        for (int ix = 0; ix < Bitmap.width; ix++) {
+-            for (int iy = 0; iy < Bitmap.height; iy++) {
+-                if (!Overlay || Bitmap.bitmap[Bitmap.width * iy + ix] != 0)
+-                   SetIndex(x + ix, y + iy, Bitmap.bitmap[Bitmap.width * iy + ix]);
+-                }
++    if (bitmap && Bitmap.bitmap && Intersects(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1))
++    {
++        if (Covers(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1))
++        {
++            Reset();
++        }
++        x -= x0;
++        y -= y0;
++        tIndexes Indexes;
++        Take(Bitmap, &Indexes, 0, 0);
++        for (int iy = 0; iy < Bitmap.height; iy++)
++        {
++            tIndex index = Indexes[int(Bitmap.bitmap[iy])];
++            for (int ix = 0; ix < w; ix++)
++            {
++                SetIndexFast(x + ix, y + iy, index);
+             }
+         }
+-     else {
++    }
++    UpdateDirty(x,y,x+w-1,y+Bitmap.height-1);
++}
++
++void cBitmap::DrawBitmapVert(int x, int y, int h, const cBitmap &Bitmap)
++{
++    if (bitmap && Bitmap.bitmap && Intersects(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1))
++    {
++        if (Covers(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1))
++        {
++            Reset();
++        }
++        x -= x0;
++        y -= y0;
+         tIndexes Indexes;
+-        Take(Bitmap, &Indexes, ColorFg, ColorBg);
+-        for (int ix = 0; ix < Bitmap.width; ix++) {
+-            for (int iy = 0; iy < Bitmap.height; iy++) {
+-                if (!Overlay || Bitmap.bitmap[Bitmap.width * iy + ix] != 0)
+-                   SetIndex(x + ix, y + iy, Indexes[int(Bitmap.bitmap[Bitmap.width * iy + ix])]);
+-                }
++        Take(Bitmap, &Indexes, 0, 0);
++        for (int ix = 0; ix < Bitmap.width; ix++)
++        {
++            tIndex index = Indexes[int(Bitmap.bitmap[ix])];
++            for (int iy = 0; iy < h; iy++)
++            {
++                SetIndexFast(x + ix, y + iy, index);
+             }
+         }
+-     }
++    }
++    UpdateDirty(x,y,x+Bitmap.width-1,y+h-1);
+ }
+ 
+ void cBitmap::DrawText(int x, int y, const char *s, tColor ColorFg, tColor ColorBg, const cFont *Font, int Width, int Height, int Alignment)
+@@ -502,10 +554,48 @@
+      x2 = min(x2, width - 1);
+      y2 = min(y2, height - 1);
+      tIndex c = Index(Color);
+-     for (int y = y1; y <= y2; y++)
+-         for (int x = x1; x <= x2; x++)
+-             SetIndex(x, y, c);
+-     }
++     if (dirtyX1 > x1)  dirtyX1 = x1;
++     if (dirtyY1 > y1)  dirtyY1 = y1;
++     if (dirtyX2 < x2)  dirtyX2 = x2;
++     if (dirtyY2 < y2)  dirtyY2 = y2;
++
++       for (int y = y1; y <= y2; y++)
++       {
++           if (x2 >= x1)
++           {
++               memset(bitmap + y * width + x1, c, x2 - x1 + 1);
++           }
++           //for (int x = x1; x <= x2; x++)
++           //    SetIndex(x, y, c);
++       }
++    }
++}
++
++void cBitmap::DrawRectangle(int x1, int y1, int x2, int y2, tColor Color, int alphaGradH, int alphaGradV, int alphaGradStepH, int alphaGradStepV)
++{
++    if (bitmap && Intersects(x1, y1, x2, y2)) {
++        if (Covers(x1, y1, x2, y2))
++            Reset();
++        x1 -= x0;
++        y1 -= y0;
++        x2 -= x0;
++        y2 -= y0;
++        x1 = max(x1, 0);
++        y1 = max(y1, 0);
++        x2 = min(x2, width - 1);
++        y2 = min(y2, height - 1);
++        tIndex c = Index(Color);
++        if (dirtyX1 > x1)  dirtyX1 = x1;
++        if (dirtyY1 > y1)  dirtyY1 = y1;
++        if (dirtyX2 < x2)  dirtyX2 = x2;
++        if (dirtyY2 < y2)  dirtyY2 = y2;
++
++        for (int y = y1; y <= y2; y++)
++        {
++            for (int x = x1; x <= x2; x++)
++                SetIndex(x, y, c);
++        }
++    }
+ }
+ 
+ void cBitmap::DrawEllipse(int x1, int y1, int x2, int y2, tColor Color, int Quadrants)
+@@ -845,6 +935,18 @@
+       bitmaps[i]->DrawBitmap(x, y, Bitmap, ColorFg, ColorBg, ReplacePalette, Overlay);
+ }
+ 
++void cOsd::DrawBitmapHor(int x, int y, int w, const cBitmap &Bitmap)
++{
++  for (int i = 0; i < numBitmaps; i++)
++      bitmaps[i]->DrawBitmapHor(x, y, w, Bitmap);
++}
++
++void cOsd::DrawBitmapVert(int x, int y, int h, const cBitmap &Bitmap)
++{
++  for (int i = 0; i < numBitmaps; i++)
++      bitmaps[i]->DrawBitmapVert(x, y, h, Bitmap);
++}
++
+ void cOsd::DrawText(int x, int y, const char *s, tColor ColorFg, tColor ColorBg, const cFont *Font, int Width, int Height, int Alignment)
+ {
+   for (int i = 0; i < numBitmaps; i++)
+@@ -857,6 +959,12 @@
+       bitmaps[i]->DrawRectangle(x1, y1, x2, y2, Color);
+ }
+ 
++void cOsd::DrawRectangle(int x1, int y1, int x2, int y2, tColor Color, int alphaGradH, int alphaGradV, int alphaGradStepH, int alphaGradStepV)
++{
++  for (int i = 0; i < numBitmaps; i++)
++      bitmaps[i]->DrawRectangle(x1, y1, x2, y2, Color, alphaGradH, alphaGradV, alphaGradStepH, alphaGradStepV);
++}
++
+ void cOsd::DrawEllipse(int x1, int y1, int x2, int y2, tColor Color, int Quadrants)
+ {
+   for (int i = 0; i < numBitmaps; i++)
+@@ -869,6 +977,16 @@
+       bitmaps[i]->DrawSlope(x1, y1, x2, y2, Color, Type);
+ }
+ 
++void cOsd::DrawImage(u_int imageId, int x, int y, bool blend, int horRepeat, int vertRepeat) // GT: True color support.
++{
++    // No implementation.
++}
++
++void cOsd::SetImagePath(u_int imageId, char const *path) // GT: True color support.
++{
++    // No implementation.
++}
++
+ void cOsd::Flush(void)
+ {
+ }
+@@ -888,6 +1006,11 @@
+   osdProvider = NULL;
+ }
+ 
++cOsd *cOsdProvider::CreateTrueColorOsd(int Left, int Top, uint Level) // GT: True color support.
++{
++    return CreateOsd(Left, Top, Level);
++}
++
+ cOsd *cOsdProvider::NewOsd(int Left, int Top, uint Level)
+ {
+   if (Level == OSD_LEVEL_DEFAULT && cOsd::IsOpen())
+@@ -907,6 +1030,32 @@
+   return new cOsd(Left, Top, 999); // create a dummy cOsd, so that access won't result in a segfault
+ }
+ 
++//cOsd *cOsdProvider::NewTrueColorOsd(int Left, int Top, bool dontHide) // GT: True color osd support.
++cOsd *cOsdProvider::NewTrueColorOsd(int Left, int Top, int Random, uint Level, bool dontHide) // GT: True color osd support.
++{
++    if (Random) {
++	//  Left+=(rand()%Random)-(Random/2);
++	//  Top+=(rand()%Random)-(Random/2);
++	Left+=(rand()%10)-(10/2);
++	Top+=(rand()%20)-(20/2);	  
++    }
++  if (Level == OSD_LEVEL_DEFAULT && cOsd::IsOpen())
++     esyslog("ERROR: attempt to open OSD while it is already open - using dummy OSD!");
++  else if (osdProvider) {
++	 cOsd *ActiveOsd = cOsd::Osds.Size() ? cOsd::Osds[0] : NULL;
++	 cOsd *Osd = osdProvider->CreateTrueColorOsd(Left, Top, Level);
++     if (Osd == cOsd::Osds[0]) {
++        if (ActiveOsd)
++           ActiveOsd->SetActive(false);
++        Osd->SetActive(true);
++        }
++     return Osd;
++     }
++  else
++     esyslog("ERROR: no OSD provider available - using dummy OSD!");
++  return new cOsd(Left, Top, 999); // create a dummy cOsd, so that access won't result in a segfault
++}
++
+ void cOsdProvider::Shutdown(void)
+ {
+   delete osdProvider;
+diff -ru vdr-1.7.4.orig/osd.h vdr-1.7.4/osd.h
+--- vdr-1.7.4.orig/osd.h	2009-01-16 15:37:03.000000000 +0100
++++ vdr-1.7.4/osd.h	2009-02-01 20:54:11.707264000 +0100
+@@ -26,6 +26,7 @@
+                    //AARRGGBB
+   clrTransparent = 0x00000000,
+   clrGray50      = 0x7F000000, // 50% gray
++  clrGray62      = 0xA0000000, // 62% gray
+   clrBlack       = 0xFF000000,
+   clrRed         = 0xFFFC1414,
+   clrGreen       = 0xFF24FC24,
+@@ -155,6 +156,15 @@
+        ///< contents of the bitmap will be lost. If Width and Height are the same
+        ///< as the current values, nothing will happen and the bitmap remains
+        ///< unchanged.
++  inline void SetSizeWithoutRealloc(int Width, int Height)
++  {
++    width = Width;
++    height = Height;
++    dirtyX1 = 0;
++    dirtyY1 = 0;
++    dirtyX2 = width - 1;
++    dirtyY2 = height - 1;
++  }
+   bool Contains(int x, int y) const;
+        ///< Returns true if this bitmap contains the point (x, y).
+   bool Covers(int x1, int y1, int x2, int y2) const;
+@@ -184,6 +194,25 @@
+   void SetIndex(int x, int y, tIndex Index);
+        ///< Sets the index at the given coordinates to Index.
+        ///< Coordinates are relative to the bitmap's origin.
++  //void inline SetIndexFast(int x, int y, tIndex Index) 
++  inline void SetIndexFast(int x, int y, tIndex Index) 
++  {
++	  if (bitmap) {
++		  if (0 <= x && x < width && 0 <= y && y < height) {
++			  bitmap[width * y + x] = Index;			  
++		  }
++	  }
++  };
++       ///< Sets the index at the given coordinates to Index.
++       ///< Coordinates are relative to the bitmap's origin. Does not update dirty-area.
++  void UpdateDirty(int x1, int y1, int x2, int y2)
++  { 
++	  if (dirtyX1 > x1)  dirtyX1 = x1;
++	  if (dirtyY1 > y1)  dirtyY1 = y1;
++	  if (dirtyX2 < x2)  dirtyX2 = x2;
++	  if (dirtyY2 < y2)  dirtyY2 = y2;
++  }
++
+   void DrawPixel(int x, int y, tColor Color);
+        ///< Sets the pixel at the given coordinates to the given Color, which is
+        ///< a full 32 bit ARGB value.
+@@ -198,6 +227,10 @@
+        ///< area shall have its palette replaced with the one from Bitmap.
+        ///< If Overlay is true, any pixel in Bitmap that has color index 0 will
+        ///< not overwrite the corresponding pixel in the target area.
++
++  void DrawBitmapHor(int x, int y, int w, const cBitmap &Bitmap);
++  void DrawBitmapVert(int x, int y, int h, const cBitmap &Bitmap);
++
+   void DrawText(int x, int y, const char *s, tColor ColorFg, tColor ColorBg, const cFont *Font, int Width = 0, int Height = 0, int Alignment = taDefault);
+        ///< Draws the given string at coordinates (x, y) with the given foreground
+        ///< and background color and font. If Width and Height are given, the text
+@@ -209,6 +242,13 @@
+        ///< (x2, y2) corners with the given Color. If the rectangle covers the entire
+        ///< bitmap area, the color palette will be reset, so that new colors can be
+        ///< used for drawing.
++  void DrawRectangle(int x1, int y1, int x2, int y2, tColor Color, int alphaGradH, int alphaGradV, int alphaGradStepH, int alphaGradStepV); //TB
++       ///< Draws a filled rectangle defined by the upper left (x1, y1) and lower right
++       ///< (x2, y2) corners with the given Color. If the rectangle covers the entire
++       ///< bitmap area, the color palette will be reset, so that new colors can be
++       ///< used for drawing.
++       ///< //TB: The Alpha-Value is incremented all alphaGradStepH pixels by the value AlphaGradH in every line,
++       ///< and all alphaGradStepV pixels by the value alphaGradV in every row.
+   void DrawEllipse(int x1, int y1, int x2, int y2, tColor Color, int Quadrants = 0);
+        ///< Draws a filled ellipse defined by the upper left (x1, y1) and lower right
+        ///< (x2, y2) corners with the given Color. Quadrants controls which parts of
+@@ -266,7 +306,6 @@
+   cBitmap *savedRegion;
+   cBitmap *bitmaps[MAXOSDAREAS];
+   int numBitmaps;
+-  int left, top, width, height;
+   uint level;
+   bool active;
+ protected:
+@@ -297,6 +336,7 @@
+ public:
+   virtual ~cOsd();
+        ///< Shuts down the OSD.
++  int left, top, width, height;
+   static int OsdLeft(void) { return osdLeft ? osdLeft : Setup.OSDLeft; }
+   static int OsdTop(void) { return osdTop ? osdTop : Setup.OSDTop; }
+   static int OsdWidth(void) { return osdWidth ? osdWidth : Setup.OSDWidth; }
+@@ -322,7 +362,7 @@
+        ///< a single color combination, and may not be able to serve all
+        ///< requested colors. By default the palette assumes there will be
+        ///< 10 fixed colors and 10 color combinations.
+-  cBitmap *GetBitmap(int Area);
++  virtual cBitmap *GetBitmap(int Area);
+        ///< Returns a pointer to the bitmap for the given Area, or NULL if no
+        ///< such bitmap exists.
+   virtual eOsdError CanHandleAreas(const tArea *Areas, int NumAreas);
+@@ -367,15 +407,25 @@
+        ///< area shall have its palette replaced with the one from Bitmap.
+        ///< If Overlay is true, any pixel in Bitmap that has color index 0 will
+        ///< not overwrite the corresponding pixel in the target area.
++  virtual void DrawBitmapHor(int x, int y, int w, const cBitmap &Bitmap);
++  virtual void DrawBitmapVert(int x, int y, int h, const cBitmap &Bitmap);
+   virtual void DrawText(int x, int y, const char *s, tColor ColorFg, tColor ColorBg, const cFont *Font, int Width = 0, int Height = 0, int Alignment = taDefault);
+        ///< Draws the given string at coordinates (x, y) with the given foreground
+        ///< and background color and font. If Width and Height are given, the text
+        ///< will be drawn into a rectangle with the given size and the given
+        ///< Alignment (default is top-left). If ColorBg is clrTransparent, no
+        ///< background pixels will be drawn, which allows drawing "transparent" text.
++  virtual void DrawImage(u_int imageId, int x, int y, bool blend, int horRepeat = 1, int vertRepeat = 1); // GT: True color support.
++       ///< Draws a 32-Bit true color image at (x, y) (upper left).
++
+   virtual void DrawRectangle(int x1, int y1, int x2, int y2, tColor Color);
+        ///< Draws a filled rectangle defined by the upper left (x1, y1) and lower right
+        ///< (x2, y2) corners with the given Color.
++  virtual void DrawRectangle(int x1, int y1, int x2, int y2, tColor Color, int alphaGradH, int alphaGradV, int alphaGradStepH, int alphaGradStepV); //TB
++       ///< Draws a filled rectangle defined by the upper left (x1, y1) and lower right
++       ///< (x2, y2) corners with the given Color.
++       ///< //TB: The Alpha-Value is incremented all alphaGradStepH pixels by the value AlphaGradH in every line,
++       ///< and all alphaGradStepV pixels by the value alphaGradV in every row.
+   virtual void DrawEllipse(int x1, int y1, int x2, int y2, tColor Color, int Quadrants = 0);
+        ///< Draws a filled ellipse defined by the upper left (x1, y1) and lower right
+        ///< (x2, y2) corners with the given Color. Quadrants controls which parts of
+@@ -400,6 +450,10 @@
+        ///< 7: vertical,   falling, upper
+   virtual void Flush(void);
+        ///< Actually commits all data to the OSD hardware.
++  virtual void SetImagePath(u_int imageId, char const *path); // GT: True color support.
++       ///< Set the path of an image to be user later with DrawImage().
++  tArea vidWin;
++  static bool pinValid;   // PIN PATCH
+   };
+ 
+ class cOsdProvider {
+@@ -409,6 +463,7 @@
+   virtual cOsd *CreateOsd(int Left, int Top, uint Level) = 0;
+       ///< Returns a pointer to a newly created cOsd object, which will be located
+       ///< at the given coordinates.
++  virtual cOsd *CreateTrueColorOsd(int Left, int Top, uint Level); // GT: True color support.
+ public:
+   cOsdProvider(void);
+       //XXX maybe parameter to make this one "sticky"??? (frame-buffer etc.)
+@@ -419,6 +474,8 @@
+       ///< caller must delete it. If the OSD is already in use, or there is no OSD
+       ///< provider, a dummy OSD is returned so that the caller may always use the
+       ///< returned pointer without having to check it every time it is accessed.
++  //static cOsd *NewTrueColorOsd(int Left, int Top, bool dontHide = false); // GT: True color osd support.
++  static cOsd *NewTrueColorOsd(int Left, int Top, int Random, uint Level = OSD_LEVEL_DEFAULT, bool dontHide = false); // GT: True color osd support.
+   static void Shutdown(void);
+       ///< Shuts down the OSD provider facility by deleting the current OSD provider.
+   };
+

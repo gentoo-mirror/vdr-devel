@@ -32,6 +32,7 @@
 		<flag name="dvlvidprefer">controls video-dir choice on recording</flag>
 		<flag name="dxr3-audio-denoise">Mutes audio noise occurring with dxr3-cards using analog audio-out when e.g. cutting</flag>
 		<flag name="dxr3">Enable tweaks to improve vdr behaviour on dxr3-cards</flag>
+		<flag name="ehd">Support for reelbox eHD (HDTV) Card</flag>
 		<flag name="em84xx">Add support for em84xx plugin</flag>
 		<flag name="graphtft">support for grapftft plugin up from vdr-graphtft-0.1.7</flag>
 		<flag name="h264">Add support for h264 encoded tv streams</flag>
@@ -49,7 +50,7 @@
 		<flag name="osdmaxitems">Support for text2skin</flag>
 		<flag name="pinplugin">Support for pin plugin</flag>
 		<flag name="rotor">Enable support for plugin vdr-rotor for dish-positioner.</flag>
-		<flag name="s2api">Add support for not s2api DVB headers</flag>
+		<flag name="s2apiwrapper">Add support for not s2api DVB headers</flag>
 		<flag name="settime">set system time per script instead of via syscal</flag>
 		<flag name="setup">Enable support for the plugin vdr-setup</flag>
 		<flag name="setup-plugin">Enable support for the plugin vdr-setup</flag>

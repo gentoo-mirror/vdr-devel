@@ -16,7 +16,7 @@ EXT_PATCH_FLAGS="analogtv atsc cmdsubmenu cutterlimit cutterqueue cuttime ddepge
 	volctrl wareagleicon lircsettings deltimeshiftrec em84xx
 	cmdreccmdi18n"
 
-IUSE="debug vanilla dxr3 +s2api ${EXT_PATCH_FLAGS}"
+IUSE="debug vanilla dxr3 +s2apiwrapper ehd ${EXT_PATCH_FLAGS}"
 
 MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
@@ -33,7 +33,7 @@ DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DV
 HOMEPAGE="http://www.cadsoft.de/vdr/"
 SRC_URI="ftp://ftp.cadsoft.de/vdr/Developer/${MY_P}.tar.bz2
 	http://www.zulu-entertainment.de/files/patches/${EXT_P}.tar.bz2
-	s2api? ( http://www.udo-richter.de/vdr/files/${APIWRAPPER} )"
+	s2apiwrapper? ( http://www.udo-richter.de/vdr/files/${APIWRAPPER} )"
 
 KEYWORDS="~amd64 ~ppc ~x86"
 
@@ -190,20 +190,20 @@ src_unpack() {
 		fi
 	done
 
-	# checking for multiproto headers
+	# checking for s2api headers
 	local api_minor
 	api_minor=$(awk -F' ' '/define DVB_API_VERSION_MINOR/ {print $3}' "${DVBDIR}"/linux/dvb/version.h)
 
-	if [[ ${api_minor:-0} -lt 3 ]]; then
-		einfo "DVB header files do not contain multiproto support."
-		# no multiproto headers
+	if [[ ${api_minor:-0} -lt 5 ]]; then
+		einfo "DVB header files do not contain s2api support."
+		# no s2api headers
 
-		if ! use s2api; then
-			eerror "You cannot compile VDR against old dvb-headers without USE=s2api"
-			die "DVB headers too old, you need USE=dvbcompat"
+		if ! use s2apiwrapper; then
+			eerror "You cannot compile VDR against old dvb-headers without USE=s2apiwrapper"
+			die "DVB headers too old, you need USE=s2apiwrapper"
 		fi
 	else
-		einfo "DVB header files do contain multiproto support."
+		einfo "DVB header files do contain s2api support."
 	fi
 
 	cat > Make.config <<-EOT
@@ -246,6 +246,7 @@ src_unpack() {
 
 		# ATSC ext-66-patch-fix
 		epatch "${FILESDIR}/${P}"-ext66_atsc-fix.diff
+#		use ehd && epatch "${FILESDIR}/vdr-1.7.4_reelbox.10388.diff"
 
 		# Fix typo in Make.config.template
 #		sed -e 's/CMDRECMDI18N/CMDRECCMDI18N/' -i Make.config.template
@@ -262,7 +263,7 @@ src_unpack() {
 
 		# other gentoo patches
 		# epatch "${FILESDIR}/..."
-		if use s2api; then
+		if use s2apiwrapper; then
 			epatch "${DISTDIR}/${APIWRAPPER}"
 		fi
 
@@ -308,7 +309,7 @@ src_unpack() {
 		emake .dependencies >/dev/null
 		eend $? "make depend failed"
 
-		do_unifdef
+#		do_unifdef
 
 		use iptv && sed -i sources.conf -e 's/^#P/P/'
 	fi
