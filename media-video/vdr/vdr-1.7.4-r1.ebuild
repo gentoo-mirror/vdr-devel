@@ -192,7 +192,7 @@ src_unpack() {
 
 	# checking for s2api headers
 	local api_version
-	api_version=$(awk -F' ' '/define DVB_API_VERSION/ {print $3}' "${DVBDIR}"/linux/dvb/version.h)
+	api_version=$(awk -F' ' '/define DVB_API_VERSION / {print $3}' "${DVBDIR}"/linux/dvb/version.h)
 
 	if [[ ${api_version:-0} -lt 5 ]]; then
 		einfo "DVB header files do not contain s2api support."
