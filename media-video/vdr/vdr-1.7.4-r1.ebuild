@@ -14,9 +14,9 @@ EXT_PATCH_FLAGS="analogtv atsc cmdsubmenu cutterlimit cutterqueue cuttime ddepge
 	timercmd timerinfo validinput yaepg
 	dvlfriendlyfnames dvlrecscriptaddon dvlvidprefer
 	volctrl wareagleicon lircsettings deltimeshiftrec em84xx
-	cmdreccmdi18n"
+	cmdreccmdi18n ehd"
 
-IUSE="debug vanilla dxr3 +s2apiwrapper ehd ${EXT_PATCH_FLAGS}"
+IUSE="debug vanilla dxr3 +s2apiwrapper ${EXT_PATCH_FLAGS}"
 
 MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
@@ -246,20 +246,8 @@ src_unpack() {
 
 		# ATSC ext-66-patch-fix
 		epatch "${FILESDIR}/${P}"-ext66_atsc-fix.diff
-#		use ehd && epatch "${FILESDIR}/vdr-1.7.4_reelbox.10388.diff"
-
-		# Fix typo in Make.config.template
-#		sed -e 's/CMDRECMDI18N/CMDRECCMDI18N/' -i Make.config.template
-
-#	NOT NEEDED ANYMORE for TS ???
-#		if use h264; then
-			# Remove vdr-1.7.0-multiproto-update.diff, that we already have applied.
-			# filterdiff -x '*/dvbdevice.c'
-			# Use sed here to not add more depends (here: patchutils)
-#			sed -e '/^diff.*\/dvbdevice.c/,/^d/d' \
-#				-i "${EXT_DIR}/extras/${PN}-1.7.2-ext_h264.diff"
-#			epatch "${EXT_DIR}/extras/${PN}-1.7.2-ext_h264.diff"
-#		fi
+		# ehd patch
+		epatch "${FILESDIR}/vdr-1.7.4_reelbox.10388_gentoo.diff"
 
 		# other gentoo patches
 		# epatch "${FILESDIR}/..."
@@ -309,7 +297,7 @@ src_unpack() {
 		emake .dependencies >/dev/null
 		eend $? "make depend failed"
 
-#		do_unifdef
+		do_unifdef
 
 		use iptv && sed -i sources.conf -e 's/^#P/P/'
 	fi
