@@ -1,0 +1,1185 @@
+diff -Naur vdr170-h264/config.h vdr-h264-rmm/config.h
+--- vdr170-h264/config.h	2008-04-12 15:02:10.000000000 +0200
++++ vdr-h264-rmm/config.h	2008-10-10 00:40:35.000000000 +0200
+@@ -193,11 +193,11 @@
+   void StoreLanguages(const char *Name, int *Values);
+   bool ParseLanguages(const char *Value, int *Values);
+   bool Parse(const char *Name, const char *Value);
+-  cSetupLine *Get(const char *Name, const char *Plugin = NULL);
+   void Store(const char *Name, const char *Value, const char *Plugin = NULL, bool AllowMultiple = false);
+   void Store(const char *Name, int Value, const char *Plugin = NULL);
+ public:
+   // Also adjust cMenuSetup (menu.c) when adding parameters here!
++  cSetupLine *Get(const char *Name, const char *Plugin = NULL);
+   int __BeginData__;
+   char OSDLanguage[I18N_MAX_LOCALE_LEN];
+   char OSDSkin[MaxSkinName];
+diff -Naur vdr170-h264/dvdIndex.c vdr-h264-rmm/dvdIndex.c
+--- vdr170-h264/dvdIndex.c	1970-01-01 01:00:00.000000000 +0100
++++ vdr-h264-rmm/dvdIndex.c	2008-10-10 00:35:49.000000000 +0200
+@@ -0,0 +1,196 @@
++#include <string.h> 			//strdup()
++#include <stdio.h>  			//popen ()
++#include "dvdIndex.h"
++
++/// computes sha1 sum of a directory by
++// listing all files of the directory and their respective sizes
++
++/**
++ *  cd _mount_point_
++ *  ls -Rl | awk '{ if ( NF >= 8 ) printf "%s %s ", $5,  $8}' ==> get the size ($5) and the name ($8) of all files in _mount_point_
++ *  sha1sum ==> compute SHA1 sum
++ *  ... awk to get the first column which is the sha1sum
++ */
++
++std::string SHA_directory(std::string dir)
++{
++	char cmd [512];
++	char* sha1_str=NULL;
++
++	sprintf( cmd, "cd \"%s\" ; ls -Rl |\
++			awk '{ if ( NF >= 8 ) printf \"%%s %%s \", $5,  $8}' |\
++			sha1sum | awk '{print $1}' ", 
++			dir.c_str() );
++
++	FILE *p = popen(cmd, "r"); // code from devicesetup.c -  device::mount()
++	if (p) {
++		char s[64];
++		fscanf(p," %s", s);
++		sha1_str = strdup(s);
++	}
++	pclose(p);
++
++	return sha1_str; // len(sha1_str) != 40 => ERROR
++
++}
++
++
++/// ---- class cDataBaseEntry -------------
++// one entry of DataBase
++cDataBaseEntry::cDataBaseEntry()		 { }
++cDataBaseEntry::cDataBaseEntry( string plName, string volName, long long mSize, long long t )
++{ 
++	pluginName = plName; 
++	volumeName = volName;
++	lastMounted = t?t:time(0);  // present time
++	mediaSize = mSize;
++}
++
++time_t 		cDataBaseEntry::LastMounted() 	{ return lastMounted; }
++long long 	cDataBaseEntry::MediaSize() 	{ return mediaSize; }
++string 		cDataBaseEntry::VolName() 		{ return volumeName; }
++string 		cDataBaseEntry::PluginName() 	{ return pluginName; }
++
++
++///---- class CMediaDataBase ----------
++
++cMediaDataBase::cMediaDataBase(string fileName) 
++{ 
++	dbFile = fileName; 
++	mediaDB.clear(); 
++	Read();
++	dbIter=mediaDB.begin();
++}       ///
++
++bool cMediaDataBase::Next(cDataBaseEntry& node) // get current entry, and increament dbIter
++{
++	if ( mediaDB.size() <= 0 || dbIter == mediaDB.end() ) return false;
++
++	node = dbIter->second;
++	dbIter++;
++	return true;
++}
++
++void cMediaDataBase::Rewind() // goto the first entry in DB
++{
++	dbIter = mediaDB.begin();
++}
++
++
++bool cMediaDataBase::Save()            /// writes mediaDB object to the DataBase in HDD
++{
++	FILE *fp = fopen(dbFile.c_str(),"w+");
++	if (!fp) return false;
++
++	int flag= -1; // so if for-loop is skipped => nothing written to HDD => nothing saved .ie return false
++	map<string, cDataBaseEntry>::iterator it = mediaDB.begin();
++
++	for ( ; it != mediaDB.end() ; it++)
++	{
++		flag = fprintf(fp, "%s\t%s\t%s\t%lld\t%lld\n", 
++				it->first.c_str(), it->second.PluginName().c_str() , 
++				it->second.VolName().c_str(), it->second.MediaSize(),
++				(long long)it->second.LastMounted() );
++
++		if (flag<0) // error
++		{ 
++			printf("(%s:%d) flag < 0: not saved\n",__FILE__,__LINE__);
++			break;
++		}
++	}
++
++	fclose(fp);
++	return (flag >= 0);
++
++}
++
++
++bool cMediaDataBase::Read()            /// reads from HDD, and populates mediaDB object 
++{
++
++	if ( access( dbFile.c_str(), F_OK ) != 0 ) // file does not exist
++	{
++		printf("(%s:%d) db doesnot exist!! \n", __FILE__, __LINE__);
++		mediaDB.clear();
++		return true;
++	}
++	FILE *fp = fopen(dbFile.c_str(), "r");
++	if ( !fp ) // read error!
++	{
++		printf("(%s:%d) read error: %s \n", __FILE__, __LINE__, dbFile.c_str());
++		return false; // mediaDB not modified
++	}
++
++	// tmp DB
++	map<string, cDataBaseEntry> tmpDB;
++	string plName, volName, key;
++	long long t, s;
++	char buffer[512];
++	int flag = -1;
++
++	while( !feof(fp) )
++	{
++		flag = fscanf(fp, " %s",buffer); // key
++		key = buffer;
++		if (flag<0) break;
++
++		flag = fscanf(fp, " %s",buffer); // pluginName
++		plName = buffer;
++		if (flag<0) break;
++
++		flag = fscanf(fp, " %s",buffer); // VolName
++		volName = buffer;
++		if (flag<0) break;
++
++		flag = fscanf(fp, " %lld", &s); // size
++		if (flag<0) break;
++		flag = fscanf(fp, " %lld", &t); // time
++		if (flag<0) break;
++		/// TODO replace with a single fscanf()
++
++
++		cDataBaseEntry node (plName, volName, s, t);
++		tmpDB[key] = node;
++
++	} // end while
++
++	if ( flag<0 && ferror(fp) ) // flag alone might indicate EOF
++	{ fclose(fp); printf("flag=%d\n",flag); return false; }
++
++	fclose(fp);
++	mediaDB.clear();
++	mediaDB.insert( tmpDB.begin(), tmpDB.end() );
++	return true;
++} //end Read()
++
++bool cMediaDataBase::Add(string hashKey, cDataBaseEntry node)
++{
++	mediaDB[hashKey] = node ;
++	return Save();
++}
++
++/// add new entry into DataBase: calls Save() after updating mediaDB object
++bool cMediaDataBase::Add(string hashKey, string plName, string volName, long long s) 
++{
++	cDataBaseEntry node(plName, volName, s);
++	return Add(hashKey, node);
++}
++
++void cMediaDataBase::Remove(string hashKey) /// remove entry and write it to HDD
++{ 
++	mediaDB.erase(hashKey); 
++	Save(); 
++}  
++
++long cMediaDataBase::Size()  /// number of entries
++{ 
++	return mediaDB.size(); 
++}           
++
++void cMediaDataBase::Clear()  /// clears DataBase
++{ 
++	mediaDB.clear(); 
++	Save(); 
++}        
++
++/// end class  cMediaDataBase
+diff -Naur vdr170-h264/dvdIndex.h vdr-h264-rmm/dvdIndex.h
+--- vdr170-h264/dvdIndex.h	1970-01-01 01:00:00.000000000 +0100
++++ vdr-h264-rmm/dvdIndex.h	2008-10-10 00:35:49.000000000 +0200
+@@ -0,0 +1,63 @@
++#ifndef __DVDINDEX_H__
++#define __DVDINDEX_H__
++
++
++#include <map>
++#include <string>
++#include <time.h>
++
++#define DVD_DB_FILENAME "/etc/vdr/DVD.db"
++// TODO: replace with ConfigDirectory/DVD.db
++
++using namespace std;
++
++std::string SHA_directory(std::string);
++
++/// one entry in the Database
++class cDataBaseEntry
++{
++	private:
++		string pluginName;       // which of the plugins of mediad accessed the medium
++		string volumeName;       //  
++		time_t lastMounted;      // last-time when the media was inserted. automatically set in constructor
++		long long mediaSize;
++	public:
++		cDataBaseEntry(); 
++		cDataBaseEntry( string plName, string volName, long long mSize, long long t=0 );
++		time_t LastMounted(); 
++		long long MediaSize();
++		string VolName();
++		string PluginName();
++};
++
++
++/// The DataBase: needs a unique "key" : now using SHA1
++class cMediaDataBase
++{
++	private:
++	/// DB in data structure
++	map<string, cDataBaseEntry> mediaDB;  
++	map<string, cDataBaseEntry>::iterator dbIter;  /// DB iterator
++	/// the database file
++	string dbFile; 
++	public:
++	cMediaDataBase(string fileName);
++
++	// get current entry, and increament dbIter
++	bool Next(cDataBaseEntry& node); 
++	void Rewind(); // goto the first entry in DB
++
++	bool Save();            /// writes mediaDB object to the DataBase in HDD
++	bool Read();            /// reads from HDD, and populates mediaDB object 
++
++	/// add new entry into DataBase: calls Save() after updating mediaDB object
++	bool Add(string hashKey, cDataBaseEntry node);
++	bool Add(string hashKey, string plName, string volName, long long s); // XXX: remove this function
++	void Remove(string hashKey); /// remove entry and write it to HDD
++
++	long Size();  /// number of entries
++	void Clear();  /// clears DataBase and writes to DB
++};
++
++
++#endif
+diff -Naur vdr170-h264/font.h vdr-h264-rmm/font.h
+--- vdr170-h264/font.h	2007-06-23 12:09:14.000000000 +0200
++++ vdr-h264-rmm/font.h	2008-10-10 00:35:49.000000000 +0200
+@@ -36,6 +36,12 @@
+ private:
+   static cFont *fonts[];
+ public:
++  enum { NUMCHARS = 256 };
++  typedef uint32_t tPixelData;
++  struct tCharData {
++  	tPixelData width, height;
++	tPixelData lines[1];  	
++  };
+   virtual ~cFont() {}
+   virtual int Width(uint c) const = 0;
+           ///< Returns the width of the given character in pixel.
+diff -Naur vdr170-h264/Make.common vdr-h264-rmm/Make.common
+--- vdr170-h264/Make.common	1970-01-01 01:00:00.000000000 +0100
++++ vdr-h264-rmm/Make.common	2008-11-03 23:35:17.000000000 +0100
+@@ -0,0 +1,127 @@
++
++
++### The version number of this plugin (taken from the main source file):
++
++VERSION = $(shell grep 'static const char \*VERSION *=' $(PLUGIN).c | awk '{ print $$6 }' | sed -e 's/[";]//g')
++
++
++### The version number of VDR (taken from VDR's "config.h"):
++
++APIVERSION = $(shell grep 'define APIVERSION ' $(VDRDIR)/config.h | awk '{ print $$3 }' | sed -e 's/"//g')
++
++VDRLOCALE = $(shell grep '^LOCALEDIR' $(VDRDIR)/Makefile)
++
++
++### The name of the distribution archive:
++
++ARCHIVE = $(PLUGIN)-$(VERSION)
++PACKAGE = vdr-$(ARCHIVE)
++
++
++### Includes and Defines (add further entries here):
++
++INCLUDES += -I$(VDRDIR)/include -I$(DVBDIR)/include
++DEFINES  += -D_GNU_SOURCE -D_LARGEFILE_SOURCE
++
++ifdef DEBUG
++  DEFINES += -DDEBUG
++  CXXFLAGS += -g
++endif
++
++ifdef RBLITE
++  DEFINES += -DRBLITE
++endif
++
++ifdef REELVDR
++  DEFINES += -DREELVDR
++endif
++
++### Targets:
++
++plug: libvdr-$(PLUGIN).so
++
++all: libvdr-$(PLUGIN).so i18n
++
++### Implicit rules:
++
++%.o: %.c
++	$(CXX) $(CXXFLAGS) -c $(DEFINES) -DPLUGIN_NAME='"$(PLUGIN)"' -DPLUGIN_NAME_I18N='"$(PLUGIN)"' $(INCLUDES) -o $@ $<
++
++# Dependencies:
++
++MAKEDEP = $(CXX) -MM -MG
++DEPFILE = .dependencies
++$(DEPFILE): Makefile
++	@$(MAKEDEP) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c)   > $@
++
++-include $(DEPFILE)
++
++
++### Internationalization (I18N):
++ifneq ($(strip $(VDRLOCALE)),)
++### do gettext based i18n stuff
++
++PODIR     = po
++LOCALEDIR = $(VDRDIR)/locale
++I18Npo    = $(wildcard $(PODIR)/*.po)
++I18Nmsgs  = $(addprefix $(LOCALEDIR)/, $(addsuffix /LC_MESSAGES/vdr-$(PLUGIN).mo, $(notdir $(foreach file, $(I18Npo), $(basename $(file))))))
++I18Npot   = $(PODIR)/$(PLUGIN).pot
++
++%.mo: %.po
++	msgfmt -c -o $@ $<
++
++$(I18Npot): $(wildcard *.c $(PLUGIN).h)
++	xgettext -C -cTRANSLATORS --no-wrap --no-location -k -ktr -ktrNOOP --from-code=utf-8 --msgid-bugs-address='<reelbox-devel@mailings.reelbox.org>' $^ -o $@
++
++#%.po: $(I18Npot)
++%.po:
++	msgmerge -U --no-wrap --no-location --backup=none -q $@ $<
++	@touch $@
++
++$(I18Nmsgs): $(LOCALEDIR)/%/LC_MESSAGES/vdr-$(PLUGIN).mo: $(PODIR)/%.mo
++	@mkdir -p $(dir $@)
++	cp $< $@
++
++.PHONY: i18n
++i18n: $(I18Npot) $(I18Nmsgs)
++
++i18n-dist: $(I18Nmsgs)
++
++else ### do i18n.c based i18n stuff
++
++i18n:
++	@### nothing to do
++
++#i18n compatibility generator:
++i18n.c: i18n-template.c po2i18n.pl $(I18Npo)
++	./po2i18n.pl < i18n-template.c > i18n.c
++
++endif
++
++
++libvdr-$(PLUGIN).so: $(OBJS)
++	$(CXX) $(CXXFLAGS) -shared $(OBJS) $(LDFLAGS) $(LIBS) -o $@
++	@cp $@ $(LIBDIR)/$@.$(APIVERSION)
++
++dist: clean
++	@rm -rf $(TMPDIR)/$(ARCHIVE)
++	@mkdir $(TMPDIR)/$(ARCHIVE)
++	@cp -a * $(TMPDIR)/$(ARCHIVE)
++	@rm -f $(TMPDIR)/$(ARCHIVE)/$(PLUGIN).kdevelop
++	@rm -f $(TMPDIR)/$(ARCHIVE)/$(PLUGIN).kdevelop.filelist
++	@rm -f $(TMPDIR)/$(ARCHIVE)/$(PLUGIN).kdevelop.pcs
++	@rm -f $(TMPDIR)/$(ARCHIVE)/$(PLUGIN).kdevses
++	@rm -rf $(TMPDIR)/$(ARCHIVE)/CVS
++	@rm -rf $(TMPDIR)/$(ARCHIVE)/Examples/CVS
++	@rm -rf $(TMPDIR)/$(ARCHIVE)/Patch/CVS
++	@ln -s $(ARCHIVE) $(TMPDIR)/$(PLUGIN)
++	@tar czf $(PACKAGE).tgz -C $(TMPDIR) $(ARCHIVE) $(PLUGIN)
++	@rm -rf $(TMPDIR)/$(ARCHIVE) $(TMPDIR)/$(PLUGIN)
++	@echo Distribution package created as $(PACKAGE).tgz
++
++clean:
++	@-rm -f $(PODIR)/*.mo $(PODIR)/*.pot
++	@-rm -f $(OBJS) $(MAIN) $(DEPFILE) *.so *.tgz core* *~
++	@-rm -f $(LIBDIR)/libvdr-$(PLUGIN).so.$(APIVERSION)
++
++MAKECOMMON_IS_SOURCED = 1
+diff -Naur vdr170-h264/Makefile vdr-h264-rmm/Makefile
+--- vdr170-h264/Makefile	2008-10-10 00:41:50.000000000 +0200
++++ vdr-h264-rmm/Makefile	2008-11-04 00:56:59.000000000 +0100
+@@ -41,7 +41,7 @@
+        lirc.o menu.o menuitems.o nit.o osdbase.o osd.o pat.o player.o plugin.o rcu.o\
+        receiver.o recorder.o recording.o remote.o remux.o ringbuffer.o sdt.o sections.o shutdown.o\
+        skinclassic.o skins.o skinsttng.o sources.o spu.o status.o svdrp.o themes.o thread.o\
+-       timers.o tools.o transfer.o vdr.o videodir.o h264parser.o
++       timers.o tools.o transfer.o vdr.o videodir.o h264parser.o dvdIndex.o
+ 
+ ifndef NO_KBD
+ DEFINES += -DREMOTE_KBD
+diff -Naur vdr170-h264/osdbase.h vdr-h264-rmm/osdbase.h
+--- vdr170-h264/osdbase.h	2007-11-03 15:50:52.000000000 +0100
++++ vdr-h264-rmm/osdbase.h	2008-10-10 00:35:49.000000000 +0200
+@@ -84,9 +84,7 @@
+ 
+ class cOsdMenu : public cOsdObject, public cList<cOsdItem> {
+ private:
+-  static cSkinDisplayMenu *displayMenu;
+   static int displayMenuCount;
+-  static int displayMenuItems;
+   char *title;
+   int cols[cSkinDisplayMenu::MaxTabs];
+   int first, current, marked;
+@@ -97,6 +95,7 @@
+   bool hasHotkeys;
+ protected:
+   void SetDisplayMenu(void);
++  static int displayMenuItems;
+   cSkinDisplayMenu *DisplayMenu(void) { return displayMenu; }
+   const char *hk(const char *s);
+   void SetCols(int c0, int c1 = 0, int c2 = 0, int c3 = 0, int c4 = 0);
+@@ -123,6 +122,7 @@
+ public:
+   cOsdMenu(const char *Title, int c0 = 0, int c1 = 0, int c2 = 0, int c3 = 0, int c4 = 0);
+   virtual ~cOsdMenu();
++  static cSkinDisplayMenu *displayMenu;
+   virtual bool NeedsFastResponse(void) { return subMenu ? subMenu->NeedsFastResponse() : cOsdObject::NeedsFastResponse(); }
+   int Current(void) const { return current; }
+   void Add(cOsdItem *Item, bool Current = false, cOsdItem *After = NULL);
+diff -Naur vdr170-h264/osd.c vdr-h264-rmm/osd.c
+--- vdr170-h264/osd.c	2008-10-10 00:41:50.000000000 +0200
++++ vdr-h264-rmm/osd.c	2008-10-10 00:35:49.000000000 +0200
+@@ -217,8 +217,6 @@
+ 
+ bool cBitmap::Covers(int x1, int y1, int x2, int y2) const
+ {
+-  if (x1 > x2 || y1 > y2) // sanity check
+-     return false;
+   x1 -= x0;
+   y1 -= y0;
+   x2 -= x0;
+@@ -228,8 +226,6 @@
+ 
+ bool cBitmap::Intersects(int x1, int y1, int x2, int y2) const
+ {
+-  if (x1 > x2 || y1 > y2) // sanity check
+-     return false;
+   x1 -= x0;
+   y1 -= y0;
+   x2 -= x0;
+@@ -383,13 +379,14 @@
+               if (strncmp(Xpm[i + 1], s, c) == 0) {
+                  if (i == NoneColorIndex)
+                     NoneColorIndex = MAXNUMCOLORS;
+-                 SetIndex(x, y, (IgnoreNone && i > NoneColorIndex) ? i - 1 : i);
++                 SetIndexFast(x, y, (IgnoreNone && i > NoneColorIndex) ? i - 1 : i);
+                  break;
+                  }
+               }
+           s += c;
+           }
+       }
++  UpdateDirty(0,0,w-1,h-1);
+   if (NoneColorIndex < MAXNUMCOLORS && !IgnoreNone)
+      return SetXpm(Xpm, true);
+   return true;
+@@ -398,20 +395,15 @@
+ void cBitmap::SetIndex(int x, int y, tIndex Index)
+ {
+   if (bitmap) {
+-     if (0 <= x && x < width && 0 <= y && y < height)
+-        SetIndexInternal(x, y, Index);
+-     }
+-}
+-
+-void cBitmap::SetIndexInternal(int x, int y, tIndex Index)
+-{
+-  // this function relies on existing bitmap and valid coordinates
+-  if (bitmap[width * y + x] != Index) {
+-     bitmap[width * y + x] = Index;
+-     if (dirtyX1 > x)  dirtyX1 = x;
+-     if (dirtyY1 > y)  dirtyY1 = y;
+-     if (dirtyX2 < x)  dirtyX2 = x;
+-     if (dirtyY2 < y)  dirtyY2 = y;
++     if (0 <= x && x < width && 0 <= y && y < height) {
++        if (bitmap[width * y + x] != Index) {
++           bitmap[width * y + x] = Index;
++           if (dirtyX1 > x)  dirtyX1 = x;
++           if (dirtyY1 > y)  dirtyY1 = y;
++           if (dirtyX2 < x)  dirtyX2 = x;
++           if (dirtyY2 < y)  dirtyY2 = y;
++           }
++        }
+      }
+ }
+ 
+@@ -419,147 +411,88 @@
+ {
+   x -= x0;
+   y -= y0;
+-  if (bitmap && 0 <= x && x < width && 0 <= y && y < height)
+-     SetIndexInternal(x, y, Index(Color));
++  if (0 <= x && x < width && 0 <= y && y < height)
++     SetIndex(x, y, Index(Color));
+ }
+ 
+ void cBitmap::DrawBitmap(int x, int y, const cBitmap &Bitmap, tColor ColorFg, tColor ColorBg, bool ReplacePalette, bool Overlay)
+ {
+   if (bitmap && Bitmap.bitmap && Intersects(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1)) {
+-     bool Covered = Covers(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1);
+-     if (Covered)
++     if (Covers(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1))
+         Reset();
+      x -= x0;
+      y -= y0;
+-     // determine valid destination area [x1,x2]x[y1,y2] to avoid range checks inside the loops
+-     int x1 = max(0, x), x2 = min(0 + width , x + Bitmap.width)  - 1;
+-     int y1 = max(0, y), y2 = min(0 + height, y + Bitmap.height) - 1;
+-
+-#define FOR_Y_LOOP0                                                                                              \
+-        tIndex *pRowSrc = &Bitmap.bitmap[Bitmap.width * (y1 - y) + (x1 - x)];                                    \
+-        tIndex *pRowDst = &bitmap[width * y1 + x1];                                                              \
+-        for (int &yy = y1, ye = min(y2, dirtyY1 - 1); yy <= ye; yy++, pRowDst += width, pRowSrc += Bitmap.width)
+-
+-#define FOR_Y_LOOP1                                                                                              \
+-        tIndex *pRowSrc = &Bitmap.bitmap[Bitmap.width * (y2 - y) + (x1 - x)];                                    \
+-        tIndex *pRowDst = &bitmap[width * y2 + x1];                                                              \
+-        for (int &yy = y2, ye = max(y1, dirtyY2 + 1); yy >= ye; yy--, pRowDst -= width, pRowSrc -= Bitmap.width)
+-
+-#define DETECT_DIRTY_AREA_Y(Reverse, TransferCondition, TransferOperation) \
+-     do {                                                                  \
+-        FOR_Y_LOOP##Reverse {                                              \
+-            tIndex *pSrc = pRowSrc;                                        \
+-            tIndex *pDst = pRowDst;                                        \
+-            bool GotDirty = false;                                         \
+-            for (int xx = x1; xx <= x2; xx++) {                            \
+-                if (TransferCondition) {                                   \
+-                   if (*pDst != TransferOperation) {                       \
+-                      GotDirty = true;                                     \
+-                      if (dirtyX1 > xx)  dirtyX1 = xx;                     \
+-                      if (dirtyX2 < xx)  dirtyX2 = xx;                     \
+-                      }                                                    \
+-                   }                                                       \
+-                pSrc++;                                                    \
+-                pDst++;                                                    \
+-                }                                                          \
+-            if (GotDirty) {                                                \
+-               if (dirtyY1 > yy)  dirtyY1 = yy;                            \
+-               if (dirtyY2 < yy)  dirtyY2 = yy;                            \
+-               break;                                                      \
+-               }                                                           \
+-            }                                                              \
+-        }                                                                  \
+-     while (false)
+-
+-#define FOR_X_LOOP0                                                                         \
+-        tIndex *pColSrc = &Bitmap.bitmap[Bitmap.width * (y1 - y) + (x1 - x)];               \
+-        tIndex *pColDst = &bitmap[width * y1 + x1];                                         \
+-        for (int &xx = x1, xe = min(x2, dirtyX1 - 1); xx <= xe; xx++, pColDst++, pColSrc++)
+-
+-#define FOR_X_LOOP1                                                                         \
+-        tIndex *pColSrc = &Bitmap.bitmap[Bitmap.width * (y1 - y) + (x2 - x)];               \
+-        tIndex *pColDst = &bitmap[width * y1 + x2];                                         \
+-        for (int &xx = x2, xe = max(x1, dirtyX2 + 1); xx >= xe; xx--, pColDst--, pColSrc--)
+-
+-#define DETECT_DIRTY_AREA_X(Reverse, TransferCondition, TransferOperation) \
+-     do {                                                                  \
+-        FOR_X_LOOP##Reverse {                                              \
+-            tIndex *pSrc = pColSrc;                                        \
+-            tIndex *pDst = pColDst;                                        \
+-            bool GotDirty = false;                                         \
+-            for (int yy = y1; yy <= y2; yy++) {                            \
+-                if (TransferCondition) {                                   \
+-                   if (*pDst != TransferOperation) {                       \
+-                      GotDirty = true;                                     \
+-                      if (dirtyX1 > xx)  dirtyX1 = xx;                     \
+-                      if (dirtyX2 < xx)  dirtyX2 = xx;                     \
+-                      break;                                               \
+-                      }                                                    \
+-                   }                                                       \
+-                pSrc += Bitmap.width;                                      \
+-                pDst += width;                                             \
+-                }                                                          \
+-            if (GotDirty)                                                  \
+-               break;                                                      \
+-            }                                                              \
+-        }                                                                  \
+-     while (false)
+-
+-#define DRAW_BITMAP(TransferCondition, TransferOperation, CanUseMemCpy)           \
+-     do {                                                                         \
+-        DETECT_DIRTY_AREA_Y(0, TransferCondition, TransferOperation); /* above */ \
+-        DETECT_DIRTY_AREA_Y(1, TransferCondition, TransferOperation); /* below */ \
+-        if (y2 < y1) /* nothing dirty */                                          \
+-           return;                                                                \
+-        DETECT_DIRTY_AREA_X(0, TransferCondition, TransferOperation); /* left  */ \
+-        DETECT_DIRTY_AREA_X(1, TransferCondition, TransferOperation); /* right */ \
+-        /* process dirty area now */                                              \
+-        tIndex *pRowSrc = &Bitmap.bitmap[Bitmap.width * (y1 - y) + (x1 - x)];     \
+-        tIndex *pRowDst = &bitmap[width * y1 + x1];                               \
+-        int n = sizeof(tIndex) * (x2 - x1 + 1);                                   \
+-        for (int yy = y1; yy <= y2; yy++) {                                       \
+-            tIndex *pSrc = pRowSrc;                                               \
+-            tIndex *pDst = pRowDst;                                               \
+-            if (CanUseMemCpy)                                                     \
+-               memcpy(pDst, pSrc, n);                                             \
+-            else {                                                                \
+-               for (int xx = x1; xx <= x2; xx++) {                                \
+-                   if (TransferCondition)                                         \
+-                      *pDst = TransferOperation;                                  \
+-                   pSrc++;                                                        \
+-                   pDst++;                                                        \
+-                   }                                                              \
+-               }                                                                  \
+-            pRowSrc += Bitmap.width;                                              \
+-            pRowDst += width;                                                     \
+-            }                                                                     \
+-        }                                                                         \
+-     while (false)
+-
+-     if (ReplacePalette && Covered) {
++     if (ReplacePalette && Covers(x + x0, y + y0, x + x0 + Bitmap.Width() - 1, y + y0 + Bitmap.Height() - 1)) {
+         Replace(Bitmap);
+-        if (Overlay)
+-           DRAW_BITMAP(*pSrc != 0, *pSrc, false);
+-        else
+-           DRAW_BITMAP(true, *pSrc, true);
+-        }
++	for (int iy = 0; iy < Bitmap.height; iy++) {
++           const int lineStart = Bitmap.width * iy;
++           for (int ix = 0; ix < Bitmap.width; ix++) {
++	     if (!Overlay || Bitmap.bitmap[lineStart + ix] != 0)	   
++               SetIndexFast(x + ix, y + iy, Bitmap.bitmap[lineStart + ix]);
++           }
++	} 
++     }
+      else {
+         tIndexes Indexes;
+         Take(Bitmap, &Indexes, ColorFg, ColorBg);
+-        if (Overlay)
+-           DRAW_BITMAP(*pSrc != 0, Indexes[(int)*pSrc], false);
+-        else
+-           DRAW_BITMAP(true, Indexes[(int)*pSrc], false);
++        for (int iy = 0; iy < Bitmap.height; iy++) {
++           const int lineStart = Bitmap.width * iy;
++           for (int ix = 0; ix < Bitmap.width; ix++) {
++             //SetIndex(x + ix, y + iy, Indexes[int(Bitmap.bitmap[lineStart + ix])]);
++             SetIndexFast(x + ix, y + iy, Indexes[int(Bitmap.bitmap[lineStart + ix])]);
++           }
+         }
+      }
++     UpdateDirty(x,y,x+Bitmap.Width()-1,y+Bitmap.height-1);
++   }
++}
++
++void cBitmap::DrawBitmapHor(int x, int y, int w, const cBitmap &Bitmap)
++{
++    if (bitmap && Bitmap.bitmap && Intersects(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1))
++    {
++        if (Covers(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1))
++        {
++            Reset();
++        }
++        x -= x0;
++        y -= y0;
++        tIndexes Indexes;
++        Take(Bitmap, &Indexes, 0, 0);
++        for (int iy = 0; iy < Bitmap.height; iy++)
++        {
++            tIndex index = Indexes[int(Bitmap.bitmap[iy])];
++            for (int ix = 0; ix < w; ix++)
++            {
++                SetIndexFast(x + ix, y + iy, index);
++            }
++        }
++    }
++    UpdateDirty(x,y,x+w-1,y+Bitmap.height-1);
++}
+ 
+-#undef DRAW_BITMAP
+-#undef DETECT_DIRTY_AREA_Y
+-#undef FOR_Y_LOOP0
+-#undef FOR_Y_LOOP1
+-#undef DETECT_DIRTY_AREA_X
+-#undef FOR_X_LOOP0
+-#undef FOR_X_LOOP1
++void cBitmap::DrawBitmapVert(int x, int y, int h, const cBitmap &Bitmap)
++{
++    if (bitmap && Bitmap.bitmap && Intersects(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1))
++    {
++        if (Covers(x, y, x + Bitmap.Width() - 1, y + Bitmap.Height() - 1))
++        {
++            Reset();
++        }
++        x -= x0;
++        y -= y0;
++        tIndexes Indexes;
++        Take(Bitmap, &Indexes, 0, 0);
++        for (int ix = 0; ix < Bitmap.width; ix++)
++        {
++            tIndex index = Indexes[int(Bitmap.bitmap[ix])];
++            for (int iy = 0; iy < h; iy++)
++            {
++                SetIndexFast(x + ix, y + iy, index);
++            }
++        }
++    }
++    UpdateDirty(x,y,x+Bitmap.width-1,y+h-1);
+ }
+ 
+ void cBitmap::DrawText(int x, int y, const char *s, tColor ColorFg, tColor ColorBg, const cFont *Font, int Width, int Height, int Alignment)
+@@ -609,103 +542,60 @@
+ 
+ void cBitmap::DrawRectangle(int x1, int y1, int x2, int y2, tColor Color)
+ {
+-  if (bitmap && Intersects(x1, y1, x2, y2)) {
+-     if (Covers(x1, y1, x2, y2))
+-        Reset();
+-     x1 -= x0;
+-     y1 -= y0;
+-     x2 -= x0;
+-     y2 -= y0;
+-     x1 = max(x1, 0);
+-     y1 = max(y1, 0);
+-     x2 = min(x2, width - 1);
+-     y2 = min(y2, height - 1);
+-     tIndex c = Index(Color);
+-
+-#define FOR_Y_LOOP0                                                                     \
+-        tIndex *pRowDst = &bitmap[width * y1 + x1];                                     \
+-        for (int &yy = y1, ye = min(y2, dirtyY1 - 1); yy <= ye; yy++, pRowDst += width)
+-
+-#define FOR_Y_LOOP1                                                                     \
+-        tIndex *pRowDst = &bitmap[width * y2 + x1];                                     \
+-        for (int &yy = y2, ye = max(y1, dirtyY2 + 1); yy >= ye; yy--, pRowDst -= width)
+-
+-#define DETECT_DIRTY_AREA_Y(Reverse)                \
+-     do {                                           \
+-        FOR_Y_LOOP##Reverse {                       \
+-            tIndex *pDst = pRowDst;                 \
+-            bool GotDirty = false;                  \
+-            for (int xx = x1; xx <= x2; xx++) {     \
+-                if (*pDst != c) {                   \
+-                   GotDirty = true;                 \
+-                   if (dirtyX1 > xx)  dirtyX1 = xx; \
+-                   if (dirtyX2 < xx)  dirtyX2 = xx; \
+-                   }                                \
+-                pDst++;                             \
+-                }                                   \
+-            if (GotDirty) {                         \
+-               if (dirtyY1 > yy)  dirtyY1 = yy;     \
+-               if (dirtyY2 < yy)  dirtyY2 = yy;     \
+-               break;                               \
+-               }                                    \
+-            }                                       \
+-        }                                           \
+-     while (false)
+-
+-#define FOR_X_LOOP0                                                              \
+-        tIndex *pColDst = &bitmap[width * y1 + x1];                              \
+-        for (int &xx = x1, xe = min(x2, dirtyX1 - 1); xx <= xe; xx++, pColDst++)
+-
+-#define FOR_X_LOOP1                                                              \
+-        tIndex *pColDst = &bitmap[width * y1 + x2];                              \
+-        for (int &xx = x2, xe = max(x1, dirtyX2 + 1); xx >= xe; xx--, pColDst--)
+-
+-#define DETECT_DIRTY_AREA_X(Reverse)                \
+-     do {                                           \
+-        FOR_X_LOOP##Reverse {                       \
+-            tIndex *pDst = pColDst;                 \
+-            bool GotDirty = false;                  \
+-            for (int yy = y1; yy <= y2; yy++) {     \
+-                if (*pDst != c) {                   \
+-                   GotDirty = true;                 \
+-                   if (dirtyX1 > xx)  dirtyX1 = xx; \
+-                   if (dirtyX2 < xx)  dirtyX2 = xx; \
+-                   break;                           \
+-                   }                                \
+-                pDst += width;                      \
+-                }                                   \
+-            if (GotDirty)                           \
+-               break;                               \
+-            }                                       \
+-        }                                           \
+-     while (false)
+-
+-     DETECT_DIRTY_AREA_Y(0); /* above */
+-     DETECT_DIRTY_AREA_Y(1); /* below */
+-     if (y2 < y1) /* nothing dirty */
+-        return;
+-     DETECT_DIRTY_AREA_X(0); /* left  */
+-     DETECT_DIRTY_AREA_X(1); /* right */
+-     // now fill only dirty area of rectangle
+-     tIndex *pRowDst = &bitmap[width * y1 + x1];
+-     tIndex *pDst = pRowDst;
+-     for (int x = x1; x <= x2; x++)
+-         *pDst++ = c;
+-     // copy the single line above to all other lines
+-     tIndex *pRowSrc = pRowDst;
+-     int n = sizeof(tIndex) * (x2 - x1 + 1);
+-     for (int y = y1 + 1; y <= y2; y++) {
+-         pRowDst += width;
+-         memcpy(pRowDst, pRowSrc, n);
+-         }
+-     }
++    if (bitmap && Intersects(x1, y1, x2, y2)) {
++        if (Covers(x1, y1, x2, y2))
++            Reset();
++        x1 -= x0;
++        y1 -= y0;
++        x2 -= x0;
++        y2 -= y0;
++        x1 = max(x1, 0);
++        y1 = max(y1, 0);
++        x2 = min(x2, width - 1);
++        y2 = min(y2, height - 1);
++        tIndex c = Index(Color);
++        if (dirtyX1 > x1)  dirtyX1 = x1;
++        if (dirtyY1 > y1)  dirtyY1 = y1;
++        if (dirtyX2 < x2)  dirtyX2 = x2;
++        if (dirtyY2 < y2)  dirtyY2 = y2;
++        
++        for (int y = y1; y <= y2; y++)
++        {
++            if (x2 >= x1)
++            {
++                memset(bitmap + y * width + x1, c, x2 - x1 + 1);
++            }
++            //for (int x = x1; x <= x2; x++)
++            //    SetIndex(x, y, c);
++        }
++    }
++}
+ 
+-#undef DETECT_DIRTY_AREA_Y
+-#undef FOR_Y_LOOP0
+-#undef FOR_Y_LOOP1
+-#undef DETECT_DIRTY_AREA_X
+-#undef FOR_X_LOOP0
+-#undef FOR_X_LOOP1
++void cBitmap::DrawRectangle(int x1, int y1, int x2, int y2, tColor Color, int alphaGradH, int alphaGradV, int alphaGradStepH, int alphaGradStepV)
++{
++    if (bitmap && Intersects(x1, y1, x2, y2)) {
++        if (Covers(x1, y1, x2, y2))
++            Reset();
++        x1 -= x0;
++        y1 -= y0;
++        x2 -= x0;
++        y2 -= y0;
++        x1 = max(x1, 0);
++        y1 = max(y1, 0);
++        x2 = min(x2, width - 1);
++        y2 = min(y2, height - 1);
++        tIndex c = Index(Color);
++        if (dirtyX1 > x1)  dirtyX1 = x1;
++        if (dirtyY1 > y1)  dirtyY1 = y1;
++        if (dirtyX2 < x2)  dirtyX2 = x2;
++        if (dirtyY2 < y2)  dirtyY2 = y2;
++        
++        for (int y = y1; y <= y2; y++)
++        {
++            for (int x = x1; x <= x2; x++)
++                SetIndex(x, y, c);
++        }
++    }
+ }
+ 
+ void cBitmap::DrawEllipse(int x1, int y1, int x2, int y2, tColor Color, int Quadrants)
+@@ -835,7 +725,7 @@
+      }
+ }
+ 
+-const tIndex *cBitmap::Data(int x, int y)
++const tIndex *cBitmap::Data(int x, int y) const
+ {
+   return &bitmap[y * width + x];
+ }
+@@ -1045,6 +935,18 @@
+       bitmaps[i]->DrawBitmap(x, y, Bitmap, ColorFg, ColorBg, ReplacePalette, Overlay);
+ }
+ 
++void cOsd::DrawBitmapHor(int x, int y, int w, const cBitmap &Bitmap)
++{
++  for (int i = 0; i < numBitmaps; i++)
++      bitmaps[i]->DrawBitmapHor(x, y, w, Bitmap);
++}
++
++void cOsd::DrawBitmapVert(int x, int y, int h, const cBitmap &Bitmap)
++{
++  for (int i = 0; i < numBitmaps; i++)
++      bitmaps[i]->DrawBitmapVert(x, y, h, Bitmap);
++}
++
+ void cOsd::DrawText(int x, int y, const char *s, tColor ColorFg, tColor ColorBg, const cFont *Font, int Width, int Height, int Alignment)
+ {
+   for (int i = 0; i < numBitmaps; i++)
+@@ -1057,6 +959,12 @@
+       bitmaps[i]->DrawRectangle(x1, y1, x2, y2, Color);
+ }
+ 
++void cOsd::DrawRectangle(int x1, int y1, int x2, int y2, tColor Color, int alphaGradH, int alphaGradV, int alphaGradStepH, int alphaGradStepV)
++{
++  for (int i = 0; i < numBitmaps; i++)
++      bitmaps[i]->DrawRectangle(x1, y1, x2, y2, Color, alphaGradH, alphaGradV, alphaGradStepH, alphaGradStepV);
++}
++
+ void cOsd::DrawEllipse(int x1, int y1, int x2, int y2, tColor Color, int Quadrants)
+ {
+   for (int i = 0; i < numBitmaps; i++)
+@@ -1069,6 +977,16 @@
+       bitmaps[i]->DrawSlope(x1, y1, x2, y2, Color, Type);
+ }
+ 
++void cOsd::DrawImage(u_int imageId, int x, int y, bool blend, int horRepeat, int vertRepeat) // GT: True color support.
++{
++    // No implementation.
++}
++
++void cOsd::SetImagePath(u_int imageId, char const *path) // GT: True color support.
++{
++    // No implementation.
++}
++
+ void cOsd::Flush(void)
+ {
+ }
+@@ -1088,6 +1006,11 @@
+   osdProvider = NULL;
+ }
+ 
++cOsd *cOsdProvider::CreateTrueColorOsd(int Left, int Top, uint Level) // GT: True color support.
++{
++    return CreateOsd(Left, Top, Level);
++}
++
+ cOsd *cOsdProvider::NewOsd(int Left, int Top, uint Level)
+ {
+   if (Level == OSD_LEVEL_DEFAULT && cOsd::IsOpen())
+@@ -1107,6 +1030,32 @@
+   return new cOsd(Left, Top, 999); // create a dummy cOsd, so that access won't result in a segfault
+ }
+ 
++//cOsd *cOsdProvider::NewTrueColorOsd(int Left, int Top, bool dontHide) // GT: True color osd support.
++cOsd *cOsdProvider::NewTrueColorOsd(int Left, int Top, int Random, uint Level, bool dontHide) // GT: True color osd support.
++{
++    if (Random) {
++	//  Left+=(rand()%Random)-(Random/2);
++	//  Top+=(rand()%Random)-(Random/2);
++	Left+=(rand()%10)-(10/2);
++	Top+=(rand()%20)-(20/2);	  
++    }
++  if (Level == OSD_LEVEL_DEFAULT && cOsd::IsOpen())
++     esyslog("ERROR: attempt to open OSD while it is already open - using dummy OSD!");
++  else if (osdProvider) {
++	 cOsd *ActiveOsd = cOsd::Osds.Size() ? cOsd::Osds[0] : NULL;
++	 cOsd *Osd = osdProvider->CreateTrueColorOsd(Left, Top, Level);
++     if (Osd == cOsd::Osds[0]) {
++        if (ActiveOsd)
++           ActiveOsd->SetActive(false);
++        Osd->SetActive(true);
++        }
++     return Osd;
++     }
++  else
++     esyslog("ERROR: no OSD provider available - using dummy OSD!");
++  return new cOsd(Left, Top, 999); // create a dummy cOsd, so that access won't result in a segfault
++}
++
+ void cOsdProvider::Shutdown(void)
+ {
+   delete osdProvider;
+diff -Naur vdr170-h264/osd.h vdr-h264-rmm/osd.h
+--- vdr170-h264/osd.h	2008-10-10 00:41:50.000000000 +0200
++++ vdr-h264-rmm/osd.h	2008-10-10 00:38:19.000000000 +0200
+@@ -26,6 +26,7 @@
+                    //AARRGGBB
+   clrTransparent = 0x00000000,
+   clrGray50      = 0x7F000000, // 50% gray
++  clrGray62      = 0xA0000000, // 62% gray
+   clrBlack       = 0xFF000000,
+   clrRed         = 0xFFFC1414,
+   clrGreen       = 0xFF24FC24,
+@@ -135,7 +136,6 @@
+   int x0, y0;
+   int width, height;
+   int dirtyX1, dirtyY1, dirtyX2, dirtyY2;
+-  void SetIndexInternal(int x, int y, tIndex Index);
+ public:
+   cBitmap(int Width, int Height, int Bpp, int X0 = 0, int Y0 = 0);
+        ///< Creates a bitmap with the given Width, Height and color depth (Bpp).
+@@ -156,6 +156,15 @@
+        ///< contents of the bitmap will be lost. If Width and Height are the same
+        ///< as the current values, nothing will happen and the bitmap remains
+        ///< unchanged.
++  inline void SetSizeWithoutRealloc(int Width, int Height)
++  {
++    width = Width;
++    height = Height;
++    dirtyX1 = 0;
++    dirtyY1 = 0;
++    dirtyX2 = width - 1;
++    dirtyY2 = height - 1;
++  }
+   bool Contains(int x, int y) const;
+        ///< Returns true if this bitmap contains the point (x, y).
+   bool Covers(int x1, int y1, int x2, int y2) const;
+@@ -185,6 +194,25 @@
+   void SetIndex(int x, int y, tIndex Index);
+        ///< Sets the index at the given coordinates to Index.
+        ///< Coordinates are relative to the bitmap's origin.
++  //void inline SetIndexFast(int x, int y, tIndex Index) 
++  inline void SetIndexFast(int x, int y, tIndex Index) 
++  {
++	  if (bitmap) {
++		  if (0 <= x && x < width && 0 <= y && y < height) {
++			  bitmap[width * y + x] = Index;			  
++		  }
++	  }
++  };
++       ///< Sets the index at the given coordinates to Index.
++       ///< Coordinates are relative to the bitmap's origin. Does not update dirty-area.
++  void UpdateDirty(int x1, int y1, int x2, int y2)
++  { 
++	  if (dirtyX1 > x1)  dirtyX1 = x1;
++	  if (dirtyY1 > y1)  dirtyY1 = y1;
++	  if (dirtyX2 < x2)  dirtyX2 = x2;
++	  if (dirtyY2 < y2)  dirtyY2 = y2;
++  }
++
+   void DrawPixel(int x, int y, tColor Color);
+        ///< Sets the pixel at the given coordinates to the given Color, which is
+        ///< a full 32 bit ARGB value.
+@@ -199,6 +227,10 @@
+        ///< area shall have its palette replaced with the one from Bitmap.
+        ///< If Overlay is true, any pixel in Bitmap that has color index 0 will
+        ///< not overwrite the corresponding pixel in the target area.
++
++  void DrawBitmapHor(int x, int y, int w, const cBitmap &Bitmap);
++  void DrawBitmapVert(int x, int y, int h, const cBitmap &Bitmap);
++
+   void DrawText(int x, int y, const char *s, tColor ColorFg, tColor ColorBg, const cFont *Font, int Width = 0, int Height = 0, int Alignment = taDefault);
+        ///< Draws the given string at coordinates (x, y) with the given foreground
+        ///< and background color and font. If Width and Height are given, the text
+@@ -210,6 +242,13 @@
+        ///< (x2, y2) corners with the given Color. If the rectangle covers the entire
+        ///< bitmap area, the color palette will be reset, so that new colors can be
+        ///< used for drawing.
++  void DrawRectangle(int x1, int y1, int x2, int y2, tColor Color, int alphaGradH, int alphaGradV, int alphaGradStepH, int alphaGradStepV); //TB
++       ///< Draws a filled rectangle defined by the upper left (x1, y1) and lower right
++       ///< (x2, y2) corners with the given Color. If the rectangle covers the entire
++       ///< bitmap area, the color palette will be reset, so that new colors can be
++       ///< used for drawing.
++       ///< //TB: The Alpha-Value is incremented all alphaGradStepH pixels by the value AlphaGradH in every line,
++       ///< and all alphaGradStepV pixels by the value alphaGradV in every row.
+   void DrawEllipse(int x1, int y1, int x2, int y2, tColor Color, int Quadrants = 0);
+        ///< Draws a filled ellipse defined by the upper left (x1, y1) and lower right
+        ///< (x2, y2) corners with the given Color. Quadrants controls which parts of
+@@ -232,7 +271,7 @@
+        ///< 5: vertical,   rising,  upper
+        ///< 6: vertical,   falling, lower
+        ///< 7: vertical,   falling, upper
+-  const tIndex *Data(int x, int y);
++  const tIndex *Data(int x, int y) const;
+        ///< Returns the address of the index byte at the given coordinates.
+   tColor GetColor(int x, int y) { return Color(*Data(x, y)); }
+        ///< Returns the color at the given coordinates.
+@@ -267,7 +306,6 @@
+   cBitmap *savedRegion;
+   cBitmap *bitmaps[MAXOSDAREAS];
+   int numBitmaps;
+-  int left, top, width, height;
+   uint level;
+   bool active;
+ protected:
+@@ -298,6 +336,7 @@
+ public:
+   virtual ~cOsd();
+        ///< Shuts down the OSD.
++  int left, top, width, height;
+   static int OsdLeft(void) { return osdLeft ? osdLeft : Setup.OSDLeft; }
+   static int OsdTop(void) { return osdTop ? osdTop : Setup.OSDTop; }
+   static int OsdWidth(void) { return osdWidth ? osdWidth : Setup.OSDWidth; }
+@@ -323,7 +362,7 @@
+        ///< a single color combination, and may not be able to serve all
+        ///< requested colors. By default the palette assumes there will be
+        ///< 10 fixed colors and 10 color combinations.
+-  cBitmap *GetBitmap(int Area);
++  virtual cBitmap *GetBitmap(int Area);
+        ///< Returns a pointer to the bitmap for the given Area, or NULL if no
+        ///< such bitmap exists.
+   virtual eOsdError CanHandleAreas(const tArea *Areas, int NumAreas);
+@@ -368,15 +407,25 @@
+        ///< area shall have its palette replaced with the one from Bitmap.
+        ///< If Overlay is true, any pixel in Bitmap that has color index 0 will
+        ///< not overwrite the corresponding pixel in the target area.
++  virtual void DrawBitmapHor(int x, int y, int w, const cBitmap &Bitmap);
++  virtual void DrawBitmapVert(int x, int y, int h, const cBitmap &Bitmap);
+   virtual void DrawText(int x, int y, const char *s, tColor ColorFg, tColor ColorBg, const cFont *Font, int Width = 0, int Height = 0, int Alignment = taDefault);
+        ///< Draws the given string at coordinates (x, y) with the given foreground
+        ///< and background color and font. If Width and Height are given, the text
+        ///< will be drawn into a rectangle with the given size and the given
+        ///< Alignment (default is top-left). If ColorBg is clrTransparent, no
+        ///< background pixels will be drawn, which allows drawing "transparent" text.
++  virtual void DrawImage(u_int imageId, int x, int y, bool blend, int horRepeat = 1, int vertRepeat = 1); // GT: True color support.
++       ///< Draws a 32-Bit true color image at (x, y) (upper left).
++
+   virtual void DrawRectangle(int x1, int y1, int x2, int y2, tColor Color);
+        ///< Draws a filled rectangle defined by the upper left (x1, y1) and lower right
+        ///< (x2, y2) corners with the given Color.
++  virtual void DrawRectangle(int x1, int y1, int x2, int y2, tColor Color, int alphaGradH, int alphaGradV, int alphaGradStepH, int alphaGradStepV); //TB
++       ///< Draws a filled rectangle defined by the upper left (x1, y1) and lower right
++       ///< (x2, y2) corners with the given Color.
++       ///< //TB: The Alpha-Value is incremented all alphaGradStepH pixels by the value AlphaGradH in every line,
++       ///< and all alphaGradStepV pixels by the value alphaGradV in every row.
+   virtual void DrawEllipse(int x1, int y1, int x2, int y2, tColor Color, int Quadrants = 0);
+        ///< Draws a filled ellipse defined by the upper left (x1, y1) and lower right
+        ///< (x2, y2) corners with the given Color. Quadrants controls which parts of
+@@ -401,6 +450,8 @@
+        ///< 7: vertical,   falling, upper
+   virtual void Flush(void);
+        ///< Actually commits all data to the OSD hardware.
++  virtual void SetImagePath(u_int imageId, char const *path); // GT: True color support.
++       ///< Set the path of an image to be user later with DrawImage().
+   };
+ 
+ class cOsdProvider {
+@@ -410,6 +461,7 @@
+   virtual cOsd *CreateOsd(int Left, int Top, uint Level) = 0;
+       ///< Returns a pointer to a newly created cOsd object, which will be located
+       ///< at the given coordinates.
++  virtual cOsd *CreateTrueColorOsd(int Left, int Top, uint Level); // GT: True color support.
+ public:
+   cOsdProvider(void);
+       //XXX maybe parameter to make this one "sticky"??? (frame-buffer etc.)
+@@ -420,6 +472,8 @@
+       ///< caller must delete it. If the OSD is already in use, or there is no OSD
+       ///< provider, a dummy OSD is returned so that the caller may always use the
+       ///< returned pointer without having to check it every time it is accessed.
++  //static cOsd *NewTrueColorOsd(int Left, int Top, bool dontHide = false); // GT: True color osd support.
++  static cOsd *NewTrueColorOsd(int Left, int Top, int Random, uint Level = OSD_LEVEL_DEFAULT, bool dontHide = false); // GT: True color osd support.
+   static void Shutdown(void);
+       ///< Shuts down the OSD provider facility by deleting the current OSD provider.
+   };

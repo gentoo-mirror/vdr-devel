@@ -2,6 +2,10 @@
 # Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  25 Mar 2009; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.0-r1.ebuild,
+  +files/vdr-1.7.0_ehd-svn-9336.diff, metadata.xml:
+  vdr-1.7.0-r1 support for s2api and ehd, extpatch v68
+
   10 Feb 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.4-r1.ebuild:
   apiwrapper detection fixed again
 
