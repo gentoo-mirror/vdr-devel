@@ -181,6 +181,9 @@ src_unpack() {
 	unpack ${A}
 
 	cd "${S}"
+	# fix for wrong header include #263840 ; this need >libdvdread-0.9.7
+	sed -e "s:dvdread:dvdnav:g" -i "${EXT_DIR}/${P}"_extensions.diff
+	
 	#applying maintainace-patches
 
 	ebegin "Changing pathes for gentoo"
