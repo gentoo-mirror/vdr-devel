@@ -2,6 +2,12 @@
 # Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  05 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.7.ebuild,
+  +files/vdr-1.7.7-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.7-ext_reelbox7_gentoo.diff,
+  +files/vdr-1.7.7-makefile-install-header.diff, metadata.xml:
+  version bump; need >=linux-headers-2.6.29
+
   29 Mar 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.0-r1.ebuild:
   fixed wrong header include dvdread -> dvdnav; thanks to R.Hertell for
   reporting on #263840
