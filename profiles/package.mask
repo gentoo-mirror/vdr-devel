@@ -21,3 +21,6 @@
 ##   End example
 ##
 
+# Joerg Bornkessel <hd_brummy@gentoo.org> ( 05 May 2009 )
+# need >=linux-headers-2.6.29; bug #266837
+=media-video/vdr-1.7.7

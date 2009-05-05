@@ -1,0 +1,7 @@
+# ChangeLog for <CATEGORY>/<PACKAGE_NAME>
+# Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  05 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-1.7.7. masked; need >=linux-headers-2.6.29, bug #266837
+
