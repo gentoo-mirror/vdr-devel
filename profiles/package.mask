@@ -21,6 +21,10 @@
 ##   End example
 ##
 
+# Joerg Bornkessel <h_brummy@gentoo.org> ( 07 May 2009 )
+# need >=vdr-1.7.6
+=media-plugins/vdr-ttxtsubs-0.1.0
+
 # Joerg Bornkessel <hd_brummy@gentoo.org> ( 05 May 2009 )
 # need >=linux-headers-2.6.29; bug #266837
 =media-video/vdr-1.7.7

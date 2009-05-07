@@ -2,6 +2,9 @@
 # Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  07 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> ChangeLog:
+  vdr-ttxtsub-0.1.0 masked; need >=vdr-1.7.6
+
   05 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   vdr-1.7.7. masked; need >=linux-headers-2.6.29, bug #266837
 
