@@ -21,6 +21,10 @@
 ##   End example
 ##
 
+# Joerg Bornkessel <hd_brummy@gentoo.org> ( 10 May 2009 )
+# need >=vdr-1.7.5
+=media-plugins/vdr-streamdev-0.3.5_pre20090510
+
 # Joerg Bornkessel <h_brummy@gentoo.org> ( 07 May 2009 )
 # need >=vdr-1.7.6
 =media-plugins/vdr-ttxtsubs-0.1.0
