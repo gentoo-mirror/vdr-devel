@@ -286,6 +286,8 @@ src_prepare() {
 		for flag in $EXT_PATCH_FLAGS; do
 			use $flag && enable_patch ${flag}
 		done
+		use iptv && enable_patch pluginparam
+		use liemikuutio && enable_patch liemiext
 		eend 0
 
 		extensions_add_make_conf

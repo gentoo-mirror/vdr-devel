@@ -2,6 +2,9 @@
 # Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  10 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.7.ebuild:
+  fixed use-flag handling for iptv, liemikuutio
+
   05 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.7.ebuild,
   +files/vdr-1.7.7-dxr3-subtitlehack.diff,
   +files/vdr-1.7.7-ext_reelbox7_gentoo.diff,
