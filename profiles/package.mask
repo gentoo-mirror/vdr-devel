@@ -20,15 +20,3 @@
 ##
 ##   End example
 ##
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> ( 10 May 2009 )
-# need >=vdr-1.7.5
-=media-plugins/vdr-streamdev-0.3.5_pre20090510
-
-# Joerg Bornkessel <h_brummy@gentoo.org> ( 07 May 2009 )
-# need >=vdr-1.7.6
-=media-plugins/vdr-ttxtsubs-0.1.0
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> ( 05 May 2009 )
-# need >=linux-headers-2.6.29; bug #266837
-=media-video/vdr-1.7.7

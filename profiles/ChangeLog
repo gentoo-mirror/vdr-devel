@@ -2,6 +2,9 @@
 # Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  10 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-1.7.7 unmask, also depended masked plugins
+
   09 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   media-plugins/vdr-streamdev-0.3.5_pre20090510 masked; need vdr-1.7.5
 
