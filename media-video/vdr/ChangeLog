@@ -3,6 +3,9 @@
 # $Header: $
 
   10 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.7.ebuild:
+  linux-headers-2.6.29 added to depend
+
+  10 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.7.ebuild:
   fixed use-flag handling for iptv, liemikuutio
 
   05 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.7.ebuild,

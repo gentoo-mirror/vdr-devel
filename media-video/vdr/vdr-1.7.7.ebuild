@@ -52,7 +52,8 @@ COMMON_DEPEND="media-libs/jpeg
 
 DEPEND="${COMMON_DEPEND}
 	media-tv/linuxtv-dvb-headers
-	dev-util/unifdef"
+	dev-util/unifdef
+	>=sys-kernel/linux-headers-2.6.29"
 
 RDEPEND="${COMMON_DEPEND}
 	dev-lang/perl
