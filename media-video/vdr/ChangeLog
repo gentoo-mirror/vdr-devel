@@ -2,6 +2,13 @@
 # Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  01 Jul 2009; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.4-r1.ebuild,
+  vdr-1.7.7.ebuild:
+  No longer default-enable s2apiwrapper, as linux-headers 2.6.29 needed for
+  s2api are now in mainline gentoo. Fix detecting enabled s2apiwrapper with
+  new headers and die. Depend on linuxtv-dvb-headers-5 for s2api. Moved ehd
+  flag to IUSE.
+
   10 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.7.ebuild:
   linux-headers-2.6.29 added to depend
 

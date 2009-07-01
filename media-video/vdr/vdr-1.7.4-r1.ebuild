@@ -16,7 +16,7 @@ EXT_PATCH_FLAGS="analogtv atsc cmdsubmenu cutterlimit cutterqueue cuttime ddepge
 	volctrl wareagleicon lircsettings deltimeshiftrec em84xx
 	cmdreccmdi18n ehd"
 
-IUSE="debug vanilla dxr3 +s2apiwrapper ${EXT_PATCH_FLAGS}"
+IUSE="debug vanilla dxr3 s2apiwrapper ${EXT_PATCH_FLAGS}"
 
 MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
@@ -48,7 +48,8 @@ COMMON_DEPEND="media-libs/jpeg
 	dvdarchive? ( dvdchapjump? ( media-libs/libdvdnav ) )"
 
 DEPEND="${COMMON_DEPEND}
-	media-tv/linuxtv-dvb-headers
+	!s2apiwrapper? ( ~media-tv/linuxtv-dvb-headers-5 )
+	s2apiwrapper? ( media-tv/linuxtv-dvb-headers )
 	dev-util/unifdef"
 
 RDEPEND="${COMMON_DEPEND}
@@ -204,6 +205,10 @@ src_unpack() {
 		fi
 	else
 		einfo "DVB header files do contain s2api support."
+		if use s2apiwrapper; then
+			eerror "You cannot compile VDR against new s2api dvb-headers with USE=s2apiwrapper"
+			die "new s2api DVB headers, you need USE=-s2apiwrapper"
+		fi
 	fi
 
 	cat > Make.config <<-EOT

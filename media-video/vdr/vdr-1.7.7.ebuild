@@ -8,7 +8,7 @@ inherit eutils flag-o-matic multilib
 
 # Switches supported by extensions-patch
 EXT_PATCH_FLAGS="analogtv atsc cmdsubmenu cutterlimit cutterqueue cuttime ddepgentry
-	dolbyinrec dvbsetup dvdarchive dvdchapjump ehd graphtft hardlinkcutter
+	dolbyinrec dvbsetup dvdarchive dvdchapjump graphtft hardlinkcutter
 	jumpplay lnbshare mainmenuhooks menuorg noepg osdmaxitems parentalrating pinplugin
 	rotor settime setup sortrecords softosd sourcecaps streamdevext ttxtsubs
 	timercmd timerinfo validinput yaepg
@@ -22,7 +22,7 @@ EXT_PATCH_FLAGS_RENAMED="iptv liemikuutio"
 # names ext-patch uses internally, here only used for maintainer checks
 EXT_PATCH_FLAGS_RENAMED_EXT_NAME="pluginparam liemiext"
 
-IUSE="debug vanilla dxr3 ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED}"
+IUSE="debug vanilla dxr3 ehd ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED}"
 
 MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
@@ -51,9 +51,8 @@ COMMON_DEPEND="media-libs/jpeg
 	dvdarchive? ( dvdchapjump? ( media-libs/libdvdnav ) )"
 
 DEPEND="${COMMON_DEPEND}
-	media-tv/linuxtv-dvb-headers
-	dev-util/unifdef
-	>=sys-kernel/linux-headers-2.6.29"
+	~media-tv/linuxtv-dvb-headers-5
+	dev-util/unifdef"
 
 RDEPEND="${COMMON_DEPEND}
 	dev-lang/perl
