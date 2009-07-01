@@ -236,7 +236,9 @@ src_prepare() {
 		-e 's/runvdr//' \
 		-e 's/ install-plugins//'
 
-	if ! use vanilla; then
+	if use vanilla; then
+		epatch "${FILESDIR}/${P}-gcc-4.4.diff"
+	else
 
 		cd "${S}"
 		# Now apply extensions patch
@@ -249,6 +251,8 @@ src_prepare() {
 
 		# other gentoo patches
 		# epatch "${FILESDIR}/..."
+		epatch "${FILESDIR}/${P}-gcc-4.4.diff"
+		epatch "${FILESDIR}/${P}-extensions-gcc-4.4.diff"
 
 		# ehd patch
 		use ehd && epatch "${FILESDIR}/${P}-ext_reelbox7_gentoo.diff"
