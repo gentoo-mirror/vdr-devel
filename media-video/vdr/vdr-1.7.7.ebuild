@@ -171,9 +171,6 @@ EOT
 src_prepare() {
 	#applying maintainace-patches
 
-	# fix for wrong header include #263840 ; this need >libdvdread-0.9.7
-	sed -e "s:dvdread:dvdnav:g" -i "${EXT_DIR}/${P}"_extensions.diff
-
 	ebegin "Changing pathes for gentoo"
 
 	sed \
@@ -218,12 +215,14 @@ src_prepare() {
 		INCLUDES		+= -I\$(DVBDIR)
 
 		# http://www.vdr-portal.de/board/thread.php?postid=808350#post808350
+		# still needed?
 		DEFINES += -D__KERNEL_STRICT_NAMES
 
 	EOT
 	eend 0
 
 	epatch "${FILESDIR}/${P}-makefile-install-header.diff"
+
 	if use dxr3; then
 		einfo "Applying dxr3 subtitle hack"
 		epatch "${FILESDIR}/${P}-dxr3-subtitlehack.diff"
@@ -241,8 +240,12 @@ src_prepare() {
 
 		cd "${S}"
 		# Now apply extensions patch
-		local fname="${PN}-${EXT_VDR_PV:-${PV}}_extensions.diff"
-		epatch "${EXT_DIR}/${fname}"
+		local fname="${EXT_DIR}/${PN}-${EXT_VDR_PV:-${PV}}_extensions.diff"
+
+		# fix for wrong header include #263840 ; this need >libdvdread-0.9.7
+		sed -e "s:dvdread:dvdnav:g" -i "${fname}"
+
+		epatch "${fname}"
 
 		# other gentoo patches
 		# epatch "${FILESDIR}/..."
@@ -286,6 +289,8 @@ src_prepare() {
 		for flag in $EXT_PATCH_FLAGS; do
 			use $flag && enable_patch ${flag}
 		done
+
+		# patches that got renamed
 		use iptv && enable_patch pluginparam
 		use liemikuutio && enable_patch liemiext
 		eend 0
@@ -296,7 +301,7 @@ src_prepare() {
 		emake .dependencies >/dev/null
 		eend $? "make depend failed"
 
-		do_unifdef
+		[[ -z "$NO_UNIFDEF" ]] && do_unifdef
 
 		use iptv && sed -i sources.conf -e 's/^#P/P/'
 	fi
@@ -358,7 +363,7 @@ src_install() {
 	local f
 	rm *vdr-1.4* 2>/dev/null
 	for f in *; do
-		[[ -f ${f} ]] || break
+		[[ -f ${f} ]] || continue
 		newdoc "${f}" "${f}".ExtensionsPatch || die "Could not install extensions-patch doc ${f}"
 	done
 
@@ -382,6 +387,14 @@ src_install() {
 	chown -R vdr:vdr "${D}/${CONF_DIR}"
 }
 
+pkg_preinst() {
+	has_version "<${CATEGORY}/${PN}-1.3.36-r3"
+	previous_less_than_1_3_36_r3=$?
+
+	has_version "<${CATEGORY}/${PN}-1.6.0"
+	previous_less_than_1_6_0=$?
+}
+
 pkg_postinst() {
 	elog "!!!! WARNING !!!!"
 	elog "  ${P} contains large changes with respect to"
@@ -393,7 +406,7 @@ pkg_postinst() {
 	elog
 	elog
 	elog "It is a good idea to run vdrplugin-rebuild now."
-	if has_version "<media-video/vdr-1.3.36-r3"; then
+	if [[ $previous_less_than_1_3_36_r3 = 0 ]] ; then
 		ewarn "Upgrade Info:"
 		ewarn
 		ewarn "If you had used the use-flags lirc, rcu or vfat"
@@ -439,6 +452,17 @@ pkg_postinst() {
 		ewarn "ATSC is only supported by a rudimentary patch"
 		einfo "and need at least this patch and a plugin installed"
 		einfo "emerge media-plugins/vdr-atscepg"
+	fi
+
+	if [[ $previous_less_than_1_6_0 = 0 ]]; then
+		elog "By default vdr is now started with utf8 character encoding"
+		elog
+		elog "To rename the old recordings to utf8 conforming names, do this:"
+		elog "\temerge app-text/convmv"
+		elog "\tconvmv -f latin1 -t utf8 -r --notest -i /var/vdr/video/"
+		elog
+		elog "To fix the descriptions of your recordings do this:"
+		elog "\tfind /var/vdr/video/ -name "info.vdr" -print0|xargs -0 recode latin1..utf8"
 	fi
 
 	elog "To get nice symbols in OSD we recommend to install"

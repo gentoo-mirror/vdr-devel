@@ -14,9 +14,9 @@ EXT_PATCH_FLAGS="analogtv atsc cmdsubmenu cutterlimit cutterqueue cuttime ddepge
 	timercmd timerinfo validinput yaepg
 	dvlfriendlyfnames dvlrecscriptaddon dvlvidprefer
 	volctrl wareagleicon lircsettings deltimeshiftrec em84xx
-	cmdreccmdi18n ehd"
+	cmdreccmdi18n"
 
-IUSE="debug vanilla dxr3 s2apiwrapper ${EXT_PATCH_FLAGS}"
+IUSE="debug vanilla dxr3 s2apiwrapper ehd ${EXT_PATCH_FLAGS}"
 
 MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
@@ -171,7 +171,6 @@ src_unpack() {
 	unpack ${A}
 
 	cd "${S}"
-
 	#applying maintainace-patches
 
 	ebegin "Changing pathes for gentoo"
@@ -229,6 +228,7 @@ src_unpack() {
 	eend 0
 
 	epatch "${FILESDIR}"/vdr-1.6.0-makefile-install-header.diff
+
 	if use dxr3; then
 		einfo "Applying dxr3 subtitle hack"
 		epatch "${FILESDIR}"/vdr-1.6.0-dxr3-subtitlehack.diff
@@ -246,8 +246,12 @@ src_unpack() {
 
 		cd "${S}"
 		# Now apply extensions patch
-		local fname="${PN}-${EXT_VDR_PV:-${PV}}_extensions.diff"
-		epatch "${EXT_DIR}/${fname}"
+		local fname="${EXT_DIR}/${PN}-${EXT_VDR_PV:-${PV}}_extensions.diff"
+
+		# fix for wrong header include #263840 ; this need >libdvdread-0.9.7
+		sed -e "s:dvdread:dvdnav:g" -i "${fname}"
+
+		epatch "${fname}"
 
 		# ATSC ext-66-patch-fix
 		epatch "${FILESDIR}/${P}"-ext66_atsc-fix.diff
@@ -276,7 +280,8 @@ src_unpack() {
 			local IGNORE_PATCHES="channelscan pluginapi pluginmissing"
 
 			extensions_all_defines > "${T}"/new.IUSE
-			echo $EXT_PATCH_FLAGS $IGNORE_PATCHES|tr ' ' '\n' |sort > "${T}"/old.IUSE
+			echo $EXT_PATCH_FLAGS $IGNORE_PATCHES | \
+				tr ' ' '\n' |sort > "${T}"/old.IUSE
 			local DIFFS=$(diff -u "${T}"/old.IUSE "${T}"/new.IUSE|grep '^[+-][^+-]')
 			if [[ -z ${DIFFS} ]]; then
 				einfo "EXT_PATCH_FLAGS is up to date."
@@ -302,7 +307,7 @@ src_unpack() {
 		emake .dependencies >/dev/null
 		eend $? "make depend failed"
 
-		do_unifdef
+		[[ -z "$NO_UNIFDEF" ]] && do_unifdef
 
 		use iptv && sed -i sources.conf -e 's/^#P/P/'
 	fi
@@ -364,7 +369,7 @@ src_install() {
 	local f
 	rm *vdr-1.4* 2>/dev/null
 	for f in *; do
-		[[ -f ${f} ]] || break
+		[[ -f ${f} ]] || continue
 		newdoc "${f}" "${f}".ExtensionsPatch || die "Could not install extensions-patch doc ${f}"
 	done
 
@@ -388,6 +393,14 @@ src_install() {
 	chown -R vdr:vdr "${D}/${CONF_DIR}"
 }
 
+pkg_preinst() {
+	has_version "<${CATEGORY}/${PN}-1.3.36-r3"
+	previous_less_than_1_3_36_r3=$?
+
+	has_version "<${CATEGORY}/${PN}-1.6.0"
+	previous_less_than_1_6_0=$?
+}
+
 pkg_postinst() {
 	elog "!!!! WARNING !!!!"
 	elog "  ${P} contains large changes with respect to"
@@ -399,7 +412,7 @@ pkg_postinst() {
 	elog
 	elog
 	elog "It is a good idea to run vdrplugin-rebuild now."
-	if has_version "<media-video/vdr-1.3.36-r3"; then
+	if [[ $previous_less_than_1_3_36_r3 = 0 ]] ; then
 		ewarn "Upgrade Info:"
 		ewarn
 		ewarn "If you had used the use-flags lirc, rcu or vfat"
@@ -445,6 +458,17 @@ pkg_postinst() {
 		ewarn "ATSC is only supported by a rudimentary patch"
 		einfo "and need at least this patch and a plugin installed"
 		einfo "emerge media-plugins/vdr-atscepg"
+	fi
+
+	if [[ $previous_less_than_1_6_0 = 0 ]]; then
+		elog "By default vdr is now started with utf8 character encoding"
+		elog
+		elog "To rename the old recordings to utf8 conforming names, do this:"
+		elog "\temerge app-text/convmv"
+		elog "\tconvmv -f latin1 -t utf8 -r --notest -i /var/vdr/video/"
+		elog
+		elog "To fix the descriptions of your recordings do this:"
+		elog "\tfind /var/vdr/video/ -name "info.vdr" -print0|xargs -0 recode latin1..utf8"
 	fi
 
 	elog "To get nice symbols in OSD we recommend to install"
