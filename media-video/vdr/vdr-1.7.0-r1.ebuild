@@ -21,7 +21,7 @@ EXT_PATCH_FLAGS_RENAMED="iptv liemikuutio"
 # names ext-patch uses internally, here only used for maintainer checks
 EXT_PATCH_FLAGS_RENAMED_EXT_NAME="pluginparam liemiext"
 
-IUSE="debug vanilla dxr3 +h264 +s2api ehd ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED}"
+IUSE="vanilla dxr3 +h264 +s2api ehd ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED}"
 
 MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
@@ -68,7 +68,6 @@ CAPS="# Capabilities of the vdr-executable for use by startscript etc."
 pkg_setup() {
 	check_menu_flags
 
-	use debug && append-flags -g
 	PLUGIN_LIBDIR="/usr/$(get_libdir)/vdr/plugins"
 }
 

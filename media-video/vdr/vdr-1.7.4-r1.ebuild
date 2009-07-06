@@ -16,7 +16,7 @@ EXT_PATCH_FLAGS="analogtv atsc cmdsubmenu cutterlimit cutterqueue cuttime ddepge
 	volctrl wareagleicon lircsettings deltimeshiftrec em84xx
 	cmdreccmdi18n"
 
-IUSE="debug vanilla dxr3 s2apiwrapper ehd ${EXT_PATCH_FLAGS}"
+IUSE="vanilla dxr3 s2apiwrapper ehd ${EXT_PATCH_FLAGS}"
 
 MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
@@ -67,7 +67,6 @@ CAPS="# Capabilities of the vdr-executable for use by startscript etc."
 pkg_setup() {
 	check_menu_flags
 
-	use debug && append-flags -g
 	PLUGIN_LIBDIR="/usr/$(get_libdir)/vdr/plugins"
 }
 

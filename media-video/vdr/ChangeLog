@@ -2,6 +2,10 @@
 # Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  06 Jul 2009; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.0.ebuild,
+  vdr-1.7.0-r1.ebuild, vdr-1.7.1.ebuild, vdr-1.7.4-r1.ebuild:
+  Remove debug use-flag, that did just enable -g compiler flag.
+
   01 Jul 2009; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.7.ebuild,
   +files/vdr-1.7.7-extensions-gcc-4.4.diff, +files/vdr-1.7.7-gcc-4.4.diff:
   Fix compilation with gcc-4.4
