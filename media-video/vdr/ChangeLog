@@ -2,6 +2,11 @@
 # Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  11 Oct 2009; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.0.ebuild,
+  vdr-1.7.0-r1.ebuild, vdr-1.7.1.ebuild, vdr-1.7.4-r1.ebuild,
+  vdr-1.7.7.ebuild:
+  Change uris to point to the new homepage/download location.
+
   06 Jul 2009; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.0.ebuild,
   vdr-1.7.0-r1.ebuild, vdr-1.7.1.ebuild, vdr-1.7.4-r1.ebuild:
   Remove debug use-flag, that did just enable -g compiler flag.

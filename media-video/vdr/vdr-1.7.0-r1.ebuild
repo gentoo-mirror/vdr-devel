@@ -33,8 +33,8 @@ EXT_DIR=${WORKDIR}/${EXT_P}/
 EXT_VDR_PV="${PV/_p/-}"
 
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
-HOMEPAGE="http://www.cadsoft.de/vdr/"
-SRC_URI="ftp://ftp.cadsoft.de/vdr/Developer/${MY_P}.tar.bz2
+HOMEPAGE="http://www.tvdr.de/"
+SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
 	http://www.zulu-entertainment.de/files/patches/${EXT_P}.tar.bz2"
 
 KEYWORDS="~amd64 ~ppc ~x86"
