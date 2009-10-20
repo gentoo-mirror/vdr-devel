@@ -2,6 +2,9 @@
 # Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  20 Oct 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.9.ebuild:
+  removed docs install of extpatch
+
   20 Oct 2009; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.9.ebuild,
   +files/vdr-1.7.9-dxr3-subtitlehack.diff,
   +files/vdr-1.7.9-ext_reelbox7_gentoo.diff,

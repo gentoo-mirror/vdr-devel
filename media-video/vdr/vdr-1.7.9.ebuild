@@ -361,14 +361,14 @@ src_install() {
 	dohtml *.html
 	dodoc MANUAL INSTALL README* HISTORY* CONTRIBUTORS
 
-	cd "${EXT_DIR}/docs" || die "Could not cd into extensions-patch doc dir."
+#	cd "${EXT_DIR}/docs" || die "Could not cd into extensions-patch doc dir."
 
-	local f
-	rm *vdr-1.4* 2>/dev/null
-	for f in *; do
-		[[ -f ${f} ]] || continue
-		newdoc "${f}" "${f}".ExtensionsPatch || die "Could not install extensions-patch doc ${f}"
-	done
+#	local f
+#	rm *vdr-1.4* 2>/dev/null
+#	for f in *; do
+#		[[ -f ${f} ]] || continue
+#		newdoc "${f}" "${f}".ExtensionsPatch || die "Could not install extensions-patch doc ${f}"
+#	done
 
 	cd "${S}"
 
