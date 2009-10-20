@@ -2,6 +2,13 @@
 # Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  20 Oct 2009; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.9.ebuild,
+  +files/vdr-1.7.9-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.9-ext_reelbox7_gentoo.diff,
+  +files/vdr-1.7.9-extensions-gcc-4.4.diff,
+  +files/vdr-1.7.9-makefile-install-header.diff:
+  version bump; another user ext-patch is used for the zulu extensionspatch
+
   11 Oct 2009; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.0.ebuild,
   vdr-1.7.0-r1.ebuild, vdr-1.7.1.ebuild, vdr-1.7.4-r1.ebuild,
   vdr-1.7.7.ebuild:
