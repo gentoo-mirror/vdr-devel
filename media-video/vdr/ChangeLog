@@ -2,6 +2,11 @@
 # Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  17 Nov 2009; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.4-r1.ebuild,
+  -files/vdr-1.7.4-ext66_atsc-fix.diff,
+  -files/vdr-1.7.4_reelbox.10388_gentoo.diff, vdr-1.7.9.ebuild:
+  cleanup, fixed vdr-1.7.9 compile for vanilla use-flag
+
   20 Oct 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.9.ebuild:
   removed docs install of extpatch
 

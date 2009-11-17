@@ -236,10 +236,7 @@ src_prepare() {
 		-e 's/runvdr//' \
 		-e 's/ install-plugins//'
 
-	if use vanilla; then
-		epatch "${FILESDIR}/${P}-gcc-4.4.diff"
-	else
-
+	if ! use vanilla; then
 		cd "${S}"
 		# Now apply extensions patch
 		local fname="${EXT_DIR}/${PN}-${EXT_VDR_PV:-${PV}}_extensions.diff"
