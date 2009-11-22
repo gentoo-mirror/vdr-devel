@@ -45,7 +45,6 @@
 		<flag name="pinplugin">Support for pin plugin</flag>
 		<flag name="rotor">Enable support for plugin vdr-rotor for dish-positioner.</flag>
 		<flag name="s2api">Add support for s2api DVB header/driver</flag>
-		<flag name="s2apiwrapper">Add support for not s2api DVB headers</flag>
 		<flag name="settime">set system time per script instead of via syscal</flag>
 		<flag name="setup">Enable support for the plugin vdr-setup</flag>
 		<flag name="sortrecords">allows to change sort order of recordings</flag>

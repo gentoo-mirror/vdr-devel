@@ -14,7 +14,7 @@ EXT_PATCH_FLAGS="analogtv atsc cmdsubmenu cutterlimit cutterqueue cuttime ddepge
 	timercmd timerinfo validinput yaepg
 	dvlfriendlyfnames dvlrecscriptaddon dvlvidprefer
 	volctrl wareagleicon lircsettings deltimeshiftrec em84xx
-	cmdreccmdi18n"
+	cmdreccmdi18n ehd"
 
 # names of the use-flags
 EXT_PATCH_FLAGS_RENAMED="iptv liemikuutio"
@@ -22,7 +22,7 @@ EXT_PATCH_FLAGS_RENAMED="iptv liemikuutio"
 # names ext-patch uses internally, here only used for maintainer checks
 EXT_PATCH_FLAGS_RENAMED_EXT_NAME="pluginparam liemiext"
 
-IUSE="debug vanilla dxr3 ehd ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED}"
+IUSE="debug vanilla dxr3 ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED}"
 
 MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
@@ -170,6 +170,8 @@ EOT
 
 src_prepare() {
 	#applying maintainace-patches
+
+	epatch "${FILESDIR}"/vdr-1.7.9-dvb-api-test.diff
 
 	ebegin "Changing pathes for gentoo"
 
