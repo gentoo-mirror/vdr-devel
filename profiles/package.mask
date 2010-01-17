@@ -20,3 +20,7 @@
 ##
 ##   End example
 ##
+
+# <hd_brummy@gentoo.org>
+# need >=vdr-1.7.11
+=media-plugins/vdr-skinsoppalusikka-1.7.0
