@@ -111,11 +111,11 @@ src_install() {
 pkg_postinst() {
 	vdr-plugin_pkg_postinst
 
-	elog "This software maght be illegal in some countries or violate"
+	elog "This software might be illegal in some countries or violate"
 	elog "rules of your DVB provider"
 	elog "Please respect these rules."
 	echo
 	elog "We do not offer support of any kind"
-	elog "Asking for keys or for installation help are ignored by gentoo developers!"
+	elog "Asking for keys or for installation help will be is ignored by gentoo developers!"
 }
 
