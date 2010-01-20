@@ -1,0 +1,22 @@
+diff -Naur sc-0.9.3.20100119.orig/Makefile sc-0.9.3.20100119/Makefile
+--- sc-0.9.3.20100119.orig/Makefile	2010-01-19 17:49:55.000000000 +0100
++++ sc-0.9.3.20100119/Makefile	2010-01-19 17:53:09.000000000 +0100
+@@ -133,9 +133,7 @@
+ endif
+ 
+ # FFdeCSA
+-CPUOPT     ?= pentium
+ PARALLEL   ?= PARALLEL_32_INT
+-CSAFLAGS   ?= -Wall -fPIC -g -O3 -mmmx -fomit-frame-pointer -fexpensive-optimizations -funroll-loops
+ FFDECSADIR  = FFdecsa
+ FFDECSA     = $(FFDECSADIR)/FFdecsa.o
+ FFDECSATEST = $(FFDECSADIR)/FFdecsa_test.done
+@@ -198,7 +196,7 @@
+ 	$(AR) r $@ $(OBJS)
+ 
+ $(FFDECSA) $(FFDECSATEST): $(FFDECSADIR)/*.c $(FFDECSADIR)/*.h
+-	@$(MAKE) COMPILER="$(CXX)" FLAGS="$(CSAFLAGS) -march=$(CPUOPT)" PARALLEL_MODE=$(PARALLEL) -C $(FFDECSADIR) all
++	@$(MAKE) COMPILER="$(CXX)" FLAGS="$(CSAFLAGS)"  PARALLEL_MODE=$(PARALLEL) -C $(FFDECSADIR) all
+ 
+ $(I18Npot): $(shell grep -rl '\(tr\|trNOOP\)(\".*\")' *.c $(SYSDIR))
+ 	xgettext -C -cTRANSLATORS --no-wrap --no-location -k -ktr -ktrNOOP --msgid-bugs-address='<noone@nowhere.org>' -o $@ $^
