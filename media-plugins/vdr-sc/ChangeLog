@@ -3,6 +3,10 @@
 # $Header: $
 
   20 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-sc-0.9.3.20100119.ebuild:
+  pkg_postinst message fixed
+
+  20 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
   +vdr-sc-0.9.3.20100119.ebuild,
   +files/vdr-sc-0.9.3.20100119-makefile-csaflags.diff, +metadata.xml:
   initial ebuild
