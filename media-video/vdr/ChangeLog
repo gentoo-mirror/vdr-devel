@@ -2,6 +2,12 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  20 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.11.ebuild,
+  +files/vdr-1.7.11-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.11-extensions-gcc-4.4.diff,
+  +files/vdr-1.7.11-makefile-install-header.diff:
+  version bump
+
   10 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.10.ebuild,
   +files/vdr-1.7.10-dxr3-subtitlehack.diff,
   +files/vdr-1.7.10-extensions-gcc-4.4.diff,
