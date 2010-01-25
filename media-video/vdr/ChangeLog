@@ -2,6 +2,9 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  25 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.11.ebuild:
+  Manifest fixed; removed debugmacros.h
+
   20 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.11.ebuild,
   +files/vdr-1.7.11-dxr3-subtitlehack.diff,
   +files/vdr-1.7.11-extensions-gcc-4.4.diff,

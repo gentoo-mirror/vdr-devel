@@ -251,6 +251,9 @@ src_prepare() {
 
 		epatch "${fname}"
 
+		# fix for file collision debugmacros.h
+		rm ${S}/debugmacros.h
+
 		# other gentoo patches
 		# epatch "${FILESDIR}/..."
 #		epatch "${FILESDIR}/${P}-extensions-gcc-4.4.diff"
