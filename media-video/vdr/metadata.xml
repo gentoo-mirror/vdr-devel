@@ -7,6 +7,7 @@
 		<name>Gentoo VDR Project</name>
 	</maintainer>
 	<use>
+		<flag name="alternatechannel">Use alternate channel on record</flag>
 		<flag name="analogtv">Add support for the analogtv plugin</flag>
 		<flag name="atsc">Support for NorthAmerican Broadcast ( rudimentary )</flag>
 		<flag name="cmdreccmdi18n">loads translated commands and reccommands files if existing</flag>

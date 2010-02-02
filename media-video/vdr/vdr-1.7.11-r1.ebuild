@@ -7,20 +7,20 @@ EAPI="2"
 inherit eutils flag-o-matic multilib
 
 # Switches supported by extensions-patch
-EXT_PATCH_FLAGS="analogtv atsc cmdsubmenu cutterlimit cutterqueue cuttime ddepgentry
+EXT_PATCH_FLAGS="alternatechannel atsc cmdsubmenu cutterlimit cutterqueue cuttime ddepgentry
 	dolbyinrec dvdarchive dvdchapjump graphtft hardlinkcutter
 	jumpplay lnbshare mainmenuhooks menuorg noepg osdmaxitems pinplugin
-	rotor setup sortrecords softosd sourcecaps streamdevext ttxtsubs
+	rotor setup sortrecords sourcecaps ttxtsubs
 	timercmd timerinfo validinput yaepg
 	dvlfriendlyfnames dvlrecscriptaddon dvlvidprefer
 	volctrl wareagleicon lircsettings deltimeshiftrec em84xx
 	cmdreccmdi18n"
 
 # names of the use-flags
-EXT_PATCH_FLAGS_RENAMED="iptv liemikuutio ehd"
+EXT_PATCH_FLAGS_RENAMED="iptv liemikuutio"
 
 # names ext-patch uses internally, here only used for maintainer checks
-EXT_PATCH_FLAGS_RENAMED_EXT_NAME="pluginparam liemiext reelplugin"
+EXT_PATCH_FLAGS_RENAMED_EXT_NAME="pluginparam liemiext"
 
 IUSE="debug vanilla dxr3 ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED} ehd"
 
@@ -28,17 +28,20 @@ MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
 S="${WORKDIR}/${MY_P}"
 
-EXT_V="1.7.11"
-EXT_P=VDR-Extensions-Patch-${EXT_V}
-EXT_DIR=${WORKDIR}/${EXT_P}/
-EXT_VDR_PV="${PV/_p/-}"
+EXT_P=vdr-1.7.11-ext_copperedit_v6
+#externer reel patch
+EXT_REELPATCH=vdr-1.7.11_ehd_svn13986
+
+#EXT_V="1.7.11"
+#EXT_P=VDR-Extensions-Patch-${EXT_V}
+#EXT_DIR=${WORKDIR}/${EXT_P}/
+#EXT_VDR_PV="${PV/_p/-}"
 
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
-		http://copperhead.vdr-developer.org/downloads/extensionpatch/${PN}-${EXT_V}-ext_copperedit_v4.diff"
-#	http://vdr.websitec.de/download/ext-patch/${EXT_P}.tar.bz2
-#	http://vdr.websitec.de/download/ext-patch/${P}_ehd_svn13986.tar.bz2
+		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff
+		http://vdr.websitec.de/download/ext-patch/${EXT_REELPATCH}.tar.bz2"
 
 KEYWORDS="~amd64 ~ppc ~x86"
 
@@ -173,8 +176,6 @@ EOT
 src_prepare() {
 	#applying maintainace-patches
 
-#	epatch "${FILESDIR}"/vdr-1.7.9-dvb-api-test.diff
-
 	ebegin "Changing pathes for gentoo"
 
 	sed \
@@ -244,18 +245,12 @@ src_prepare() {
 		cd "${S}"
 		# Now apply extensions patch
 #		local fname="${EXT_DIR}/${PN}-${EXT_VDR_PV:-${PV}}_extensions.diff"
-		local fname="${DISTDIR}/${PN}-${EXT_V}-ext_copperedit_v4.diff"
+		local fname="${DISTDIR}/${EXT_P}.diff"
 
 		# fix for wrong header include #263840 ; this need >libdvdread-0.9.7
 		sed -e "s:dvdread:dvdnav:g" -i "${fname}"
 
 		epatch "${fname}"
-
-		# fix for file collision debugmacros.h
-		rm "${S}"/debugmacros.h
-
-		# ehd patch
-#		use ehd && epatch "${FILESDIR}/${P}-ext_reelbox7_gentoo.diff"
 
 		# This allows us to start even if some plugin does not exist
 		# or is not loadable.
@@ -263,13 +258,14 @@ src_prepare() {
 
 		# was default enabled in old versions of extpatch
 		enable_patch MCLI
+		enable_patch CHANNELBIND
 
 		if [[ -n ${VDR_MAINTAINER_MODE} ]]; then
 			einfo "Doing maintainer checks:"
 
 			# these patches we do not support
 			# (or have them already hard enabled)
-			local IGNORE_PATCHES="pluginmissing mcli"
+			local IGNORE_PATCHES="pluginmissing mcli channelbind"
 
 			extensions_all_defines > "${T}"/new.IUSE
 			echo $EXT_PATCH_FLAGS $EXT_PATCH_FLAGS_RENAMED_EXT_NAME \
@@ -296,7 +292,7 @@ src_prepare() {
 		# patches that got renamed
 		use iptv && enable_patch pluginparam
 		use liemikuutio && enable_patch liemiext
-		use ehd && enable_patch reelplugin
+#		use ehd && enable_patch reelplugin
 		eend 0
 
 		extensions_add_make_conf
@@ -307,9 +303,14 @@ src_prepare() {
 
 		[[ -z "$NO_UNIFDEF" ]] && do_unifdef
 
-#		use ehd && epatch "${WORKDIR}/${P}_ehd_svn12986.patch"
+		use ehd && epatch "${WORKDIR}/${EXT_REELPATCH}.patch"
 
 		use iptv && sed -i sources.conf -e 's/^#P/P/'
+	fi
+
+	# fix for file collision debugmacros.h ( reel patch )
+	if [[ -f "${S}"/debugmacros.h ]]; then
+		rm "${S}"/debugmacros.h
 	fi
 
 	# apply local patches defined by variable VDR_LOCAL_PATCHES_DIR
@@ -478,7 +479,7 @@ pkg_postinst() {
 	elog "To get an idea how to proceed now, have a look at our vdr-guide:"
 	elog "\thttp://www.gentoo.org/doc/en/vdr-guide.xml"
 	echo
-	elog "For Full Featured DBV Cards you need up from now an externel plugin!"
+	elog "For Full Featured DVB Cards you need up from now an externel plugin!"
 	elog "emerge media-plugins/vdr-dvbsddevice"
 
 }

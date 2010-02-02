@@ -2,6 +2,11 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  02 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.11.ebuild,
+  +vdr-1.7.11-r1.ebuild, -files/vdr-1.7.11-extensions-gcc-4.4.diff,
+  metadata.xml:
+  new extpatch (copperhead_v6); clean up
+
   25 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.11.ebuild:
   Manifest fixed; removed debugmacros.h
 
