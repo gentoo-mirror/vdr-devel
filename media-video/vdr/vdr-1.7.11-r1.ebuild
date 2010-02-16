@@ -40,7 +40,7 @@ EXT_REELPATCH=vdr-1.7.11_ehd_svn13986
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
-		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff
+		http://copperhead.vdr-developer.org/downloads/extensionpatch/Modded%20Zulu%20Versions%20%28Old%29/${EXT_P}.diff
 		http://vdr.websitec.de/download/ext-patch/${EXT_REELPATCH}.tar.bz2"
 
 KEYWORDS="~amd64 ~ppc ~x86"

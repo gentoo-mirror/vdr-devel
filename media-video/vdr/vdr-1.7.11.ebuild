@@ -36,7 +36,7 @@ EXT_VDR_PV="${PV/_p/-}"
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
-		http://copperhead.vdr-developer.org/downloads/extensionpatch/${PN}-${EXT_V}-ext_copperedit_v4.diff"
+		http://copperhead.vdr-developer.org/downloads/extensionpatch/Modded%20Zulu%20Versions%20%28Old%29/${PN}-${EXT_V}-ext_copperedit_v4.diff"
 #	http://vdr.websitec.de/download/ext-patch/${EXT_P}.tar.bz2
 #	http://vdr.websitec.de/download/ext-patch/${P}_ehd_svn13986.tar.bz2
 
