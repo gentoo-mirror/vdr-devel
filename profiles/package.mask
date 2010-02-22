@@ -21,3 +21,7 @@
 ##   End example
 ##
 
+# Joerg Bornkessel <hd_brummy@g.o>
+# 22 Feb 2010
+# masked, need newer vdr-reelbox version
+=media-video/vdr-1.7.12
