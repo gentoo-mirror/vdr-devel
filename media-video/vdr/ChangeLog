@@ -2,6 +2,13 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  22 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.12.ebuild,
+  +files/vdr-1.7.12-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.12-makefile-install-header.diff,
+  +files/channel_alternative.conf, metadata.xml:
+  version bump, some use-flag renaming, includes extensionspatch-ng from
+  cooperhead
+
   16 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.11.ebuild,
   vdr-1.7.11-r1.ebuild:
   patch url fixed

@@ -15,6 +15,7 @@
 		<flag name="cutterlimit">Limit IO bandwith used for cutting</flag>
 		<flag name="cutterqueue">Adds a queue of recordings to be cutted</flag>
 		<flag name="cuttime">Adjust starttime of cutted recording by length of cut out parts</flag>
+		<flag name="channelprovide">Empfang über DVB-Karten abschalten</flag>
 		<flag name="ddepgentry">remove duplicate EPG entries</flag>
 		<flag name="deltimeshiftrec">Auto delete timeshift recordings</flag>
 		<flag name="dolbyinrec">add a dedicated switch to control recording of dolby digital</flag>
@@ -23,7 +24,9 @@
 		<flag name="dvbsetup">Setup for AC3 transfer, disable primary tuner</flag>
 		<flag name="dvdarchive">DMH DVD - Archiv ( used by vdr-burn-0.1.0_* )</flag>
 		<flag name="dvdchapjump">Jump on capitels on DMH DVD - Archiv</flag>
+		<flag name="dvlfriendlynames">filter file names on recording</flag>
 		<flag name="dvlfriendlyfnames">filter file names on recording</flag>
+		<flag name="dvlscriptaddon">enhancement for record-script</flag>
 		<flag name="dvlrecscriptaddon">enhancement for record-script</flag>
 		<flag name="dvlvidprefer">controls video-dir choice on recording</flag>
 		<flag name="dxr3">Enable tweaks to improve vdr behaviour on dxr3-cards</flag>
@@ -34,6 +37,7 @@
 		<flag name="hardlinkcutter">Speed up cutting by hardlinking unchanged files</flag>
 		<flag name="iptv">Enables support for vdr-iptv</flag>
 		<flag name="jumpplay">Enables automatic jumping over cut marks while watching a recording</flag>
+		<flag name="jumpingseconds">??? discreption will add later</flag>
 		<flag name="liemikuutio">Formerly known as AIO (all-in-one) patch, adds some nice must haves</flag>
 		<flag name="lircsettings">Allows to change lirc settings delay, freq and timeout values in OSD</flag>
 		<flag name="livebuffer">does timeshifting/background recording all the time, allows to rewind live TV</flag>
@@ -49,6 +53,7 @@
 		<flag name="settime">set system time per script instead of via syscal</flag>
 		<flag name="setup">Enable support for the plugin vdr-setup</flag>
 		<flag name="sortrecords">allows to change sort order of recordings</flag>
+		<flag name="status_extension">Statusinterface extension for XBMC-PVR TTXTSUBS plugin</flag>
 		<flag name="streamdevext">Extension for streaming to XBMC</flag>
 		<flag name="sourcecaps">Adds the ability to define capabilities of dvb-cards (e.g. card1 can receive Sat @28.2E)</flag>
 		<flag name="syncearly">start live display as soon as possible, not waiting for sync of audio and video</flag>
