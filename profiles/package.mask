@@ -21,14 +21,3 @@
 ##   End example
 ##
 
-# Joerg Bornkessel <hd_brummy@g.o>
-# 22 Feb 2010
-# masked, need newer vdr-reelbox version
-=media-video/vdr-1.7.12
-=media-plugins/vdr-femon-1.7.6
-=media-video/reelbox-ehd-headers-14440
-=media-video/reelbox-ehd-bin-14440
-=media-video/reelbox-ehd-driver-14440
-=media-video/reelbox-ehd-tools-14440
-=media-video/reelbox-ehd-xine-14440
-=media-plugins/vdr-reelbox-14440
