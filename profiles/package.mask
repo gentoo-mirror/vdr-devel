@@ -25,3 +25,4 @@
 # 22 Feb 2010
 # masked, need newer vdr-reelbox version
 =media-video/vdr-1.7.12
+=media-plugins/vdr-femon-1.7.6
