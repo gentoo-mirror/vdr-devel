@@ -3,6 +3,9 @@
 # $Header: $
 
   23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  reel-*-14440 masked
+
+  23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   =media-plugins/vdr-femon-1.7.6 masked, need vdr-1.7.12
 
   22 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
