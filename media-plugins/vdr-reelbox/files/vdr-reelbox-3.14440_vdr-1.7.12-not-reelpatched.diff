@@ -1,0 +1,351 @@
+diff -Naur vdr-reelbox-3.orig/fs453settings.c vdr-reelbox-3/fs453settings.c
+--- vdr-reelbox-3.orig/fs453settings.c	2010-02-23 19:25:42.000000000 +0100
++++ vdr-reelbox-3/fs453settings.c	2010-02-23 19:26:05.000000000 +0100
+@@ -188,8 +188,8 @@
+         int lineHeight = cFont::GetFont(fontSml)->Height();
+         int helper = RBSetup.usehdext ? 3+1 : FS453_SETTINGS+1;
+         int totalHeight = helper * lineHeight + (helper + 1) * (lineHeight / 2);
+-        osd = cOsdProvider::NewTrueColorOsd(Setup.OSDLeft, Setup.OSDTop + Setup.OSDHeight - totalHeight, 0, 0);  
+-        tArea Areas[] = { { 0, 0, Setup.OSDWidth - 1, totalHeight - 1 , 32 } };
++        osd = cOsdProvider::NewOsd(Setup.OSDLeft, Setup.OSDTop + Setup.OSDHeight - totalHeight, 0);
++        tArea Areas[] = { { 0, 0, Setup.OSDWidth - 1, totalHeight - 1 , 8 } };
+         osd->SetAreas(Areas, sizeof(Areas) / sizeof(tArea));
+         osd->DrawRectangle(0, 0,Setup.OSDWidth - 1, totalHeight - 1, backgroundColor); 
+         int offset = 0;
+diff -Naur vdr-reelbox-3.orig/HdFbTrueColorOsd.c vdr-reelbox-3/HdFbTrueColorOsd.c
+--- vdr-reelbox-3.orig/HdFbTrueColorOsd.c	2010-02-23 19:25:42.000000000 +0100
++++ vdr-reelbox-3/HdFbTrueColorOsd.c	2010-02-23 19:26:14.000000000 +0100
+@@ -529,8 +529,8 @@
+         unsigned char const *xs;
+         unsigned int qx, qy, xt1, yt1, xt, yt, vfx, vfy, vfw, vfh, x, y, w, h, m, *px, n;
+ 
+-        x = X + left;
+-        y = Y + top;
++        x = X + Left();
++        y = Y + Top();
+         w = bitmap.Width();
+         h = bitmap.Height();
+ 
+@@ -611,8 +611,8 @@
+         static unsigned int qx, qy, xt1, yt1, x, y, w, h, *px, line, row;
+         static unsigned int pxs;
+ 
+-        x = X + left;
+-        y = Y + top;
++        x = X + Left();
++        y = Y + Top();
+         w = bitmap.Width();
+         h = bitmap.Height();
+         UpdateDirty(x, y, x+w, y+h);
+@@ -674,10 +674,10 @@
+     //esyslog("HdFbTrueColorOsd: DrawEllipse\n");
+ 
+         unsigned int l, t, r, b;
+-        l = left + X1;
+-        t = top + Y1;
+-        r = left + X2 + 1;
+-        b = top + Y2 + 1;
++        l = Left() + X1;
++        t = Top() + Y1;
++        r = Left() + X2 + 1;
++        b = Top() + Y2 + 1;
+ 
+         int x1 = l;
+         int y1 = t;
+@@ -790,8 +790,8 @@
+         if (ImageIdInRange(imageId))
+             LoadImage(imageId);
+ 
+-        x += left;
+-        y += top;
++        x += Left();
++        y += Top();
+ 
+         CachedImage const *img = cachedImages_[imageId]; //hda->osd_cached_images[imageId];
+         int m, n, h_, v;
+@@ -805,8 +805,8 @@
+             h = img->height;
+             unsigned int w_all = horRepeat ? horRepeat * w : w;
+             unsigned int h_all = vertRepeat ? vertRepeat * h : h;
+-            if(horRepeat * w > width) horRepeat = width / w;
+-            if(vertRepeat * h > height) vertRepeat = height / h;
++            if(horRepeat * w > Width()) horRepeat = Width() / w;
++            if(vertRepeat * h > Height()) vertRepeat = Height() / h;
+             UpdateDirty(x, y, x+w_all, y+h_all);
+ 
+             w_all = horRepeat ? horRepeat * w : w;
+@@ -881,12 +881,12 @@
+     if (ImageIdInRange(imageId)) {
+         LoadImage(imageId);
+ 
+-        x+=left;
+-        y+=top;
+-        x0+=left;
+-        y0+=top;
+-        x1+=left;
+-        y1+=top;
++        x+=Left();
++        y+=Top();
++        x0+=Left();
++        y0+=Top();
++        x1+=Left();
++        y1+=Top();
+         UpdateDirty(x0, y0, x1, y1);
+ 
+         CachedImage const *img = cachedImages_[imageId];
+@@ -914,7 +914,7 @@
+                         unsigned int *tgtPixels = (unsigned int*)(osd->buffer + osd->bpp * osd->width * y0++ + x0*osd->bpp);
+                         for (h = horRepeat; h > 0; --h) {
+                             unsigned int const *src = srcPixels;
+-                            for (m = width; m > 0; --m) {
++                            for (m = Width(); m > 0; --m) {
+                                 *tgtPixels = AlphaBlend((*src++), (*tgtPixels) );
+                                 ++tgtPixels;
+                             }
+@@ -960,10 +960,10 @@
+     //esyslog("HdFbTrueColorOsd: DrawRectangle\n");
+ 
+         unsigned int l, t, r, b;
+-        l = left + x1;
+-        t = top + y1;
+-        r = left + x2 + 1;
+-        b = top + y2 + 1;
++        l = Left() + x1;
++        t = Top() + y1;
++        r = Left() + x2 + 1;
++        b = Top() + y2 + 1;
+ 
+         if (ClipArea(osd, &l, &t, &r, &b)) {
+             UpdateDirty(l, t, r, b);
+@@ -998,10 +998,10 @@
+         dirty_ = true;
+ 
+         unsigned int l, t, r, b;
+-        l = left + x1;
+-        t = top + y1;
+-        r = left + x2 + 1;
+-        b = top + y2 + 1;
++        l = Left() + x1;
++        t = Top() + y1;
++        r = Left() + x2 + 1;
++        b = Top() + y2 + 1;
+ 
+         if (ClipArea(osd, &l, &t, &r, &b)) {
+             UpdateDirty(l, t, r, b);
+@@ -1041,8 +1041,8 @@
+ 
+     if (s_in) {
+         /* adjust coordinates with global OSD-margins */        
+-        x+=left;
+-        y+=top;
++        x+=Left();
++        y+=Top();
+ 
+         /* check for empty string */
+         unsigned int i;
+@@ -1059,7 +1059,7 @@
+ 
+         if(i == len) { /* every char is a space */
+             if((colorBg >> 24) != 0) /* not transparent */
+-                DrawRectangle(x-left, y-top, x + w - left, y + h - top, colorBg); /* clear the background */
++                DrawRectangle(x-Left(), y-Top(), x + w - Left(), y + h - Top(), colorBg); /* clear the background */
+             return;
+         }
+ 
+@@ -1348,7 +1348,7 @@
+ 
+     /* override */ void HdFbTrueColorOsd::SaveRegion(int x1, int y1, int x2, int y2)
+     {
+-        x1 += left; y1 += top; x2 += left; y2 += top;
++        x1 += Left(); y1 += Top(); x2 += Left(); y2 += Top();
+         savedRegion_x0 = x1; savedRegion_y0 = y1; savedRegion_x1 = x2; savedRegion_y1 = y2;
+         int lines = y2 - y1;    
+         int pixels = x2 - x1;
+@@ -1433,10 +1433,10 @@
+ 
+             l = std::max(0, l);
+             t = std::max(0, l);
+-            width = r - l;
+-            height = b - t;
+-            width = std::max(1, width);
+-            height = std::max(1, height);
++//          width = r - l;
++//          height = b - t;
++//          width = std::max(1, width);
++//          height = std::max(1, height);
+         }
+         return ret;
+ 
+diff -Naur vdr-reelbox-3.orig/HdTrueColorOsd.c vdr-reelbox-3/HdTrueColorOsd.c
+--- vdr-reelbox-3.orig/HdTrueColorOsd.c	2010-02-23 19:25:42.000000000 +0100
++++ vdr-reelbox-3/HdTrueColorOsd.c	2010-02-23 19:26:20.000000000 +0100
+@@ -371,7 +371,7 @@
+         // Send the palette indexes.
+         SendOsdCmd(bco, sizeof(hdcmd_osd_palette_t) + payloadSize);
+ 
+-        hdcmd_osd_draw8_t bco2 = {HDCMD_OSD_DRAW8, left + x, top + y, bitmap.Width(), bitmap.Height(), blend};
++        hdcmd_osd_draw8_t bco2 = {HDCMD_OSD_DRAW8, Left() + x, Top() + y, bitmap.Width(), bitmap.Height(), blend};
+ 
+         SendOsdCmd(&bco2, sizeof(hdcmd_osd_draw8_t), bitmap.Data(0, 0), bitmap.Width() * bitmap.Height());
+         free(buffer);
+@@ -419,7 +419,7 @@
+         // Send the palette indexes.
+         SendOsdCmd(bco, sizeof(hdcmd_osd_palette_t) + payloadSize);
+ 
+-        hdcmd_osd_draw8_t bco2 = {HDCMD_OSD_DRAW8_OVERLAY, left + x, top + y, width, height, blend};
++        hdcmd_osd_draw8_t bco2 = {HDCMD_OSD_DRAW8_OVERLAY, Left() + x, Top() + y, width, height, blend};
+ 
+         SendOsdCmd(&bco2, sizeof(hdcmd_osd_draw8_t), bitmap.Data(0, 0), width * height);
+         free(buffer);
+@@ -448,10 +448,10 @@
+ 	//esyslog("HdTrueColorOsd: DrawEllipse\n");
+ 
+         hdcmd_osd_draw_ellipse const bco = {HDCMD_OSD_DRAW_ELLIPSE,
+-                                             left + x1,
+-                                             top + y1,
+-                                             left + x2 + 1,
+-                                             top + y2 + 1,
++                                             Left() + x1,
++                                             Top() + y1,
++                                             Left() + x2 + 1,
++                                             Top() + y2 + 1,
+                                              color,
+                                              quadrants};
+ 
+@@ -473,7 +473,7 @@
+             CacheImage(imageId);
+             hdcmd_osd_draw_image const bco = {HDCMD_OSD_DRAW_IMAGE,
+                                                imageId,
+-                                               left + x, top + y,
++                                               Left() + x, Top() + y,
+                                                blend,
+                                                horRepeat, vertRepeat};
+     
+@@ -494,9 +494,9 @@
+             CacheImage(imageId);
+             hdcmd_osd_draw_crop_image const bco = {HDCMD_OSD_DRAW_CROP_IMAGE,
+                                                imageId,
+-                                               left + x, top + y,
+-                                               left + x0, top + y0,
+-                                               left + x1, top + y1,
++                                               Left() + x, Top() + y,
++                                               Left() + x0, Top() + y0,
++                                               Left() + x1, Top() + y1,
+                                                blend};
+             SendOsdCmd(bco);
+         }
+@@ -519,10 +519,10 @@
+ 	//esyslog("HdTrueColorOsd: DrawRectangle\n");
+ 
+   hdcmd_osd_draw_rect const bco = {HDCMD_OSD_DRAW_RECT,
+-                                          left + x1,
+-                                          top + y1,
+-                                          left + x2 + 1,
+-                                          top + y2 + 1,
++                                          Left() + x1,
++                                          Top() + y1,
++                                          Left() + x2 + 1,
++                                          Top() + y2 + 1,
+                                           color};
+ 
+         SendOsdCmd(bco);
+@@ -537,10 +537,10 @@
+ 	//esyslog("HdTrueColorOsd: DrawRectangle\n");
+ 
+   hdcmd_osd_draw_rect2 const bco = {HDCMD_OSD_DRAW_RECT2,
+-                                          left + x1,
+-                                          top + y1,
+-                                          left + x2 + 1,
+-                                          top + y2 + 1,
++                                          Left() + x1,
++                                          Top() + y1,
++                                          Left() + x2 + 1,
++                                          Top() + y2 + 1,
+                                           color,
+                                           alphaGradH,
+                                           alphaGradV,
+@@ -590,7 +590,7 @@
+         if(height == 0)
+ 	     height=font->Height();
+ 
+-        cacheBitmap->SetSizeWithoutRealloc(width, height); 
++        cacheBitmap->SetSize(width, height);
+ 
+         if((colorBg >> 24 == 0) || ((colorBg&0x00ffffff) == 0x00000000)){ /* TB: transparent as bgcolor is evil */
+ 		colorBg = colorFg&0x01ffffff; 
+@@ -782,7 +782,7 @@
+ 
+     /* override */ void HdTrueColorOsd::SaveRegion(int x1, int y1, int x2, int y2)
+     {
+-        hdcmd_osd_clear_t const bco = {HDCMD_OSD_SAVE_REGION, x1+left, y1+top, x2+left, y2+top};
++        hdcmd_osd_clear_t const bco = {HDCMD_OSD_SAVE_REGION, x1+Left(), y1+Top(), x2+Left(), y2+Top()};
+         SendOsdCmd(bco);
+     }
+ 
+@@ -904,10 +904,10 @@
+ 
+             l = std::max(0, l);
+             t = std::max(0, l);
+-            width = r - l;
+-            height = b - t;
+-            width = std::max(1, width);
+-            height = std::max(1, height);
++//          width = r - l;
++//          height = b - t;
++//          width = std::max(1, width);
++//          height = std::max(1, height);
+         }
+         return ret;
+ 
+diff -Naur vdr-reelbox-3.orig/ReelBoxDevice.c vdr-reelbox-3/ReelBoxDevice.c
+--- vdr-reelbox-3.orig/ReelBoxDevice.c	2010-02-23 19:25:42.000000000 +0100
++++ vdr-reelbox-3/ReelBoxDevice.c	2010-02-23 19:26:28.000000000 +0100
+@@ -1030,6 +1030,18 @@
+         }
+     }
+ 
++    void ReelBoxDevice::GetOsdSize(int &Width, int &Height, double &PixelAspect)
++    {
++        Width = 720;
++        Height = 576;
++
++        if (Setup.VideoFormat == 1) // 16:9 Format
++            PixelAspect = 16.0 /9.0;
++        else
++            PixelAspect = 4.0 /3.0;
++        PixelAspect /= double(Width) / Height;
++    }
++
+     void ReelBoxDevice::SetVolumeDevice(int volume)
+     {
+         DEBUG_DEVICE("[reelbox] \033[0;44n %s  \033[0m \n", __PRETTY_FUNCTION__);
+diff -Naur vdr-reelbox-3.orig/ReelBoxDevice.h vdr-reelbox-3/ReelBoxDevice.h
+--- vdr-reelbox-3.orig/ReelBoxDevice.h	2010-02-23 19:25:42.000000000 +0100
++++ vdr-reelbox-3/ReelBoxDevice.h	2010-02-23 19:26:33.000000000 +0100
+@@ -35,7 +35,7 @@
+ #include <vdr/device.h>
+ #include <vdr/plugin.h>
+ 
+-#if 1 //def REELVDR
++#ifdef REELVDR
+ #include <vdr/reelboxbase.h>
+ #endif
+ 
+@@ -43,7 +43,7 @@
+ 
+ namespace Reel
+ {
+-#if 1 //def REELVDR
++#ifdef REELVDR
+     class ReelBoxDevice : public cDevice, public cReelBoxBase /* final */
+ #else
+     class ReelBoxDevice : public cDevice /* final */
+@@ -115,6 +115,8 @@
+ 
+         /* override */ void SetVideoFormat(bool videoFormat16_9);
+ 
++        /* override */ void GetOsdSize(int &Width, int &Height, double &PixelAspect);
++
+         /* override */ void SetVolumeDevice(int volume);
+ 
+         /* override */ void StartPip(bool on);
