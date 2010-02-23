@@ -9,7 +9,7 @@ inherit eutils flag-o-matic multilib
 # Switches supported by extensions-patch
 EXT_PATCH_FLAGS="alternatechannel atsc channelprovide cutterlimit cutterqueue cuttime
 	ddepgentry dolbyinrec graphtft hardlinkcutter
-	jumpplay jumpingseconds lnbshare mainmenuhooks menuorg noepg pinplugin
+	jumpplay lnbshare mainmenuhooks menuorg noepg pinplugin
 	rotor setup sortrecords sourcecaps status_extension ttxtsubs
 	validinput yaepg
 	dvlfriendlynames dvlscriptaddon dvlvidprefer
@@ -19,7 +19,7 @@ EXT_PATCH_FLAGS="alternatechannel atsc channelprovide cutterlimit cutterqueue cu
 EXT_PATCH_FLAGS_RENAMED="iptv liemikuutio"
 
 # names ext-patch uses internally, here only used for maintainer checks
-EXT_PATCH_FLAGS_RENAMED_EXT_NAME="pluginparam liemiext"
+EXT_PATCH_FLAGS_RENAMED_EXT_NAME="pluginparam liemiext jumpingseconds"
 
 IUSE="debug vanilla dxr3 ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED}"
 
@@ -35,7 +35,6 @@ DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DV
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
 		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff"
-#		http://vdr.websitec.de/download/ext-patch/${P}_ehd_svn13986.tar.bz2
 
 KEYWORDS="~amd64 ~ppc ~x86"
 
@@ -289,6 +288,7 @@ src_prepare() {
 		# patches that got renamed
 		use iptv && enable_patch pluginparam
 		use liemikuutio && enable_patch liemiext
+		use liemikuutio && enable_patch jumpingseconds
 #		use ehd && enable_patch reelplugin
 		eend 0
 
@@ -475,8 +475,10 @@ pkg_postinst() {
 	elog ""
 	elog "To get an idea how to proceed now, have a look at our vdr-guide:"
 	elog "\thttp://www.gentoo.org/doc/en/vdr-guide.xml"
-	echo
+	elog
 	elog "For Full Featured DVB Cards you need up from now an externel plugin!"
 	elog "emerge media-plugins/vdr-dvbsddevice"
-
+	elog
+	elog "use-flag ehd removed, >=media-plugins/vdr-reelbox will compile without vdr patch"
+	elog
 }
