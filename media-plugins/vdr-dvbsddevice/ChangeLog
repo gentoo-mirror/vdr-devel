@@ -2,6 +2,10 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-dvbsddevice-1.7.12.ebuild:
+  version bump
+
   20 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
   +vdr-dvbsddevice-1.7.11.ebuild, +metadata.xml:
   initial ebuild, needed for >=vdr-1.7.11 if you use a Full Featured DVB Card
