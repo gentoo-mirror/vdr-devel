@@ -479,6 +479,6 @@ pkg_postinst() {
 	elog "For Full Featured DVB Cards you need up from now an externel plugin!"
 	elog "emerge media-plugins/vdr-dvbsddevice"
 	elog
-	elog "use-flag ehd removed, >=media-plugins/vdr-reelbox will compile without vdr patch"
+	elog "use-flag ehd removed, >=media-plugins/vdr-reelbox-14440 will compile without vdr patch"
 	elog
 }
