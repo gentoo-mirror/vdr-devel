@@ -1,0 +1,3 @@
+# module hdshm create next free framebuffer device and add a symlink to fb_reel
+ATTR{name}=="hde_fb", SYMLINK+="fb_reel"
+
