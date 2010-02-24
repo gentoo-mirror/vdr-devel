@@ -27,14 +27,15 @@ MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
 S="${WORKDIR}/${MY_P}"
 
-EXT_P=vdr-1.7.12_ExtP-NG-v1.2
+EXT_P=vdr-1.7.12_ExtP-NG-v1.2-r1
 #externer reel patch
 #EXT_REELPATCH=vdr-1.7.11_ehd_svn13986
 
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
-		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff"
+		http://vdr.websitec.de/download/${EXT_P}.diff"
+#		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff
 
 KEYWORDS="~amd64 ~ppc ~x86"
 
