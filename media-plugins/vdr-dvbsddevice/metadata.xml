@@ -6,4 +6,7 @@
 		<email>vdr@gentoo.org</email>
 		<name>Gentoo VDR Project</name>
     </maintainer>
+	<use>
+		<flag name="softosd">Smoot fade in and fade of the OSD for FF cards</flag>
+	</use>
 </pkgmetadata>
