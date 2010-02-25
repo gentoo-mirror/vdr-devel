@@ -2,6 +2,9 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  25 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> metadata.xml:
+  -
+
   25 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
   vdr-ttxtsubs-0.1.0.ebuild:
   moved to EAPI=2
