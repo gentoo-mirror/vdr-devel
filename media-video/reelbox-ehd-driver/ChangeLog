@@ -4,6 +4,10 @@
 
   27 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
   reelbox-ehd-driver-14440.ebuild:
+  fix for kernel 2.6.33
+
+  27 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  reelbox-ehd-driver-14440.ebuild:
   removed kernel depended fix
 
   23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org>

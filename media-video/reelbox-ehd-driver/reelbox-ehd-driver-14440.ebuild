@@ -39,6 +39,11 @@ pkg_setup() {
 
 src_prepare() {
 
+	if kernel_is ge 2 6 32 ; then
+		sed -i "${S}"/src/driver/hdshm.c \
+			-e "s:linux/autoconf.h:generated/autoconf.h:"
+	fi
+
 	einfo "Changing framebuffer device to /dev/fb_reel"
 	find . -type f -exec sed -i "s:/dev/fb0:/dev/fb_reel:g" {} \;
 }
