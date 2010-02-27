@@ -39,13 +39,6 @@ pkg_setup() {
 
 src_prepare() {
 
-	if kernel_is ge 2 6 26 ; then
-		sed -i "${S}"/src/driver/hdshm.c \
-			-e "s:pci_get_device_reverse:pci_get_device:" \
-			-e "s:class_device_create:device_create:" \
-			-e "s:class_device_destroy:device_destroy:"
-	fi
-
 	einfo "Changing framebuffer device to /dev/fb_reel"
 	find . -type f -exec sed -i "s:/dev/fb0:/dev/fb_reel:g" {} \;
 }
