@@ -39,7 +39,7 @@ pkg_setup() {
 
 src_prepare() {
 
-	if kernel_is ge 2 6 32 ; then
+	if kernel_is ge 2 6 33 ; then
 		sed -i "${S}"/src/driver/hdshm.c \
 			-e "s:linux/autoconf.h:generated/autoconf.h:"
 	fi
