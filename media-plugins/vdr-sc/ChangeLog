@@ -2,6 +2,11 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  01 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-sc-0.9.3.20100119.ebuild, +vdr-sc-0.9.3.20100228.ebuild,
+  +vdr-sc-9999.ebuild:
+  new snapshot; masked mercurial live added
+
   20 Jan 2010; Matthias Schwarzott <zzam@gentoo.org>
   vdr-sc-0.9.3.20100119.ebuild:
   Fix text.

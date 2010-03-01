@@ -24,15 +24,23 @@ DEPEND=">=media-video/vdr-1.7.11
 	>=dev-libs/openssl-0.9.7"
 RDEPEND="${DEPEND}"
 
+# dirty fix, fails on more jobserver on FFdecsa
+export MAKEOPTS="-j1"
+
 src_prepare() {
 	vdr-plugin_src_prepare
 
-	# Respect environment CXXFLAGS in FFdeCSA
-	epatch "${FILESDIR}"/${P}-makefile-csaflags.diff
+	sed -e 's:^SINCLUDES += :&-I/usr/include/vdr :' \
+		-e 's:^LIBDIR.*$:LIBDIR = ${S}:' \
+		-i  Makefile.system || "sed Makefile.system failed"
 
-	# This is needed in order to compile viaccess plugin
-	sed -i -e 's:^SINCLUDES += :&-I/usr/include/vdr :' \
-		Makefile.system || die "sed failed"
+	sed -e "s: -march=\$(CPUOPT)::" \
+		-e "s:\$(CSAFLAGS):\$(CXXFLAGS):" \
+		-e "s:ci.c:ci.h:" \
+		-i Makefile || die "sed Makefile failed"
+
+	sed -e "s:FLAGS:CXXFLAGS:" \
+		-i FFdecsa/Makefile || die "sed FFdecsa Makefile failed"
 
 	# Prepare flags for FFdeCSA
 	if [ -n "${VDR_SC_PARALLEL}" ]; then
@@ -85,16 +93,6 @@ src_prepare() {
 	done
 }
 
-src_test() {
-	cd FFdecsa/ || die "cd failed"
-
-	# We don't need to care about PARALLEL or FLAGS, FFdecsa itself is already
-	# compiled and FFdecsa_test uses almost no code of its' own.
-
-	emake FLAGS="${CXXFLAGS}" FFdecsa_test || die "emake failed"
-	./FFdecsa_test || die "FFdeCSA selftest failed, please try other VDR_SC_PARALLEL"
-}
-
 src_install() {
 	vdr-plugin_src_install
 
@@ -117,4 +115,5 @@ pkg_postinst() {
 	echo
 	elog "We do not offer support of any kind"
 	elog "Asking for keys or for installation help will be is ignored by gentoo developers!"
+	echo
 }
