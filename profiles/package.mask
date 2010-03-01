@@ -21,3 +21,12 @@
 ##   End example
 ##
 
+# Joerg Bornkessel <hd_brummy@gentoo.org>
+#  on behalf of QA Team
+#
+# Mass-masking of live ebuilds; we cannot guarantee working state of
+# live ebuilds, nor the availability of the server hosting them. As
+# per QA team policy, all these need to be kept masked by default, if
+# available in the tree.
+#
+=media-plugins/vdr-sc-9999

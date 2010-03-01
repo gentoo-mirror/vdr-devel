@@ -2,6 +2,9 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  01 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-sc-9999, masked for live time
+
   23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   removed all masks for vdr-1.7.12
 
