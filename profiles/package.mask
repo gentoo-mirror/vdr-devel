@@ -30,3 +30,11 @@
 # available in the tree.
 #
 =media-plugins/vdr-sc-9999
+
+# <hd_brummy@gentoo.org> ( 05 Mar 2010 )
+# need vdr-1.7.13
+#
+=media-plugins/vdr-femon-1.7.7
+=media-plugins/vdr-iptv-0.4.0
+=media-plugins/vdr-skinsoppalusikka-1.7.1
+=media-plugins/vdr-rssreader-1.7.0
