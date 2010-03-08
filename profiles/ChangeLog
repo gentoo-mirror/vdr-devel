@@ -2,6 +2,9 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  08 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  masked vdr-1.7.13; vdr-txttsubs-0.2.1
+
   05 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   masked some plugins, need vdr-1.7.13
 
