@@ -34,8 +34,8 @@ EXT_P=ExtP-NG-vdr-1.7.13-V2
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
-		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff"
-#		http://vdr.websitec.de/download/${EXT_P}.diff
+		http://vdr.websitec.de/download/${EXT_P}.tar.bz2"
+#		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff
 
 KEYWORDS="~amd64 ~ppc ~x86"
 
@@ -47,7 +47,6 @@ COMMON_DEPEND="media-libs/jpeg
 	>=media-libs/fontconfig-2.4.2
 	>=media-libs/freetype-2
 	sys-devel/gettext"
-#	dvdarchive? ( dvdchapjump? ( media-libs/libdvdnav ) )
 
 DEPEND="${COMMON_DEPEND}
 	~media-tv/linuxtv-dvb-headers-5
@@ -235,10 +234,7 @@ src_prepare() {
 		cd "${S}"
 		# Now apply extensions patch
 #		local fname="${EXT_DIR}/${PN}-${EXT_VDR_PV:-${PV}}_extensions.diff"
-		local fname="${DISTDIR}/${EXT_P}.diff"
-
-		# fix for wrong header include #263840 ; this need >libdvdread-0.9.7
-		sed -e "s:dvdread:dvdnav:g" -i "${fname}"
+		local fname="${WORKDIR}/${EXT_P}.diff"
 
 		epatch "${fname}"
 
