@@ -2,6 +2,11 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  21 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-dvbsddevice-0.0.3.ebuild, -vdr-dvbsddevice-1.7.11.ebuild,
+  -vdr-dvbsddevice-1.7.12.ebuild, -vdr-dvbsddevice-1.7.12-r1.ebuild:
+  fixed versioning to the real versionsnumber of the plugin, downgrad needed
+
   25 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
   +vdr-dvbsddevice-1.7.12-r1.ebuild, +files/dvbsddevice_softosd_v1.diff,
   metadata.xml:

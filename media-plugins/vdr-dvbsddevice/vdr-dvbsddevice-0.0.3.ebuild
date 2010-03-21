@@ -6,16 +6,16 @@ EAPI="2"
 
 inherit vdr-plugin
 
-DESCRIPTION="VDR Plugin: output device for the 'Full Featured' Card"
+DESCRIPTION="VDR Plugin: output device for the 'Full Featured' DVB Card"
 HOMEPAGE="http://www.tvdr.de/"
-SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/vdr-${PV}.tar.bz2"
+SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/vdr-1.7.11.tar.bz2"
 
 KEYWORDS="~x86 ~amd64"
 SLOT="0"
 LICENSE="GPL-2"
 IUSE="softosd"
 
-DEPEND="=media-video/vdr-${PV}"
+DEPEND=">=media-video/vdr-1.7.11"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/vdr-${PV}/PLUGINS/src/${VDRPLUGIN}"
