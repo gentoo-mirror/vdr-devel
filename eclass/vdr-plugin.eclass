@@ -385,6 +385,10 @@ vdr-plugin_pkg_setup() {
 	# Plugins need to be compiled with position independent code, otherwise linking
 	# VDR against it will fail.
 	if has_version ">=media-video/vdr-1.7.13"; then
+		einfo
+		einfo "!!! append-flags changes from vdr-plugin.eclass"
+		einfo "!!! eclass testing for >=vdr-1.7.13; overlay vdr-devel"
+		einfo
 		append-flags -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
 	fi
 

@@ -2,6 +2,9 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  07 Apr 2010; Joerg Bornkessel <hd_brummy@gentoo.org> ChangeLog:
+  add some debuginfo for eclass changes
+
   22 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   unmask vdr-1.7.13/14 and plugins depended on this version
 
