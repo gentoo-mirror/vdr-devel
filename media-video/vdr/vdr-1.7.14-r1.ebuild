@@ -7,12 +7,12 @@ EAPI="2"
 inherit eutils flag-o-matic multilib
 
 # Switches supported by extensions-patch
-EXT_PATCH_FLAGS="alternatechannel channelprovide cutterlimit cutterqueue cuttime
+EXT_PATCH_FLAGS="atsc alternatechannel channelprovide cutterlimit cutterqueue cuttime
 	ddepgentry graphtft hardlinkcutter
 	jumpplay lnbshare mainmenuhooks menuorg noepg pinplugin
 	rotor setup sortrecords status_extension timerinfo ttxtsubs
 	validinput yaepg
-	dvlfriendlynames dvlscriptaddon dvlvidprefer
+	dvlfriendlyfnames dvlscriptaddon dvlvidprefer
 	volctrl wareagleicon lircsettings"
 
 # names of the use-flags
@@ -27,14 +27,14 @@ MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
 S="${WORKDIR}/${MY_P}"
 
-EXT_P=ExtP-NG-vdr-1.7.14-V1
+EXT_P=ExtP-NG-vdr-1.7.14-V5
 #externer reel patch
 #EXT_REELPATCH=vdr-1.7.11_ehd_svn13986
 
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
-		http://copperhead.vdr-developer.org/downloads/extensionpatch/Older%20ExtP_NG%20Versions/${EXT_P}.diff"
+		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff"
 #		http://vdr.websitec.de/download/${EXT_P}.tar.bz2
 
 KEYWORDS="~amd64 ~ppc ~x86"
