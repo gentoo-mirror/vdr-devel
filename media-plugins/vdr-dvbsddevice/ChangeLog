@@ -3,6 +3,10 @@
 # $Header: $
 
   08 May 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-dvbsddevice-0.0.3-r1.ebuild:
+  fix to compile on vdr-1.7.14
+
+  08 May 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
   vdr-dvbsddevice-0.0.3.ebuild:
   fixed S=...
 
