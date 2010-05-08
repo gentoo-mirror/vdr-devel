@@ -18,7 +18,7 @@ IUSE="softosd"
 DEPEND=">=media-video/vdr-1.7.11"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/vdr-${PV}/PLUGINS/src/${VDRPLUGIN}"
+S="${WORKDIR}/vdr-1.7.11/PLUGINS/src/${VDRPLUGIN}"
 
 src_prepare() {
 	vdr-plugin_src_prepare
