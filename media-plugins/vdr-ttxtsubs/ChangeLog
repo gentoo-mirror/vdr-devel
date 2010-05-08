@@ -2,6 +2,10 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  08 May 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-ttxtsubs-0.2.2.ebuild:
+  version bump
+
   08 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
   +vdr-ttxtsubs-0.2.1.ebuild:
   version bump ( vdr-1.7.13 )
