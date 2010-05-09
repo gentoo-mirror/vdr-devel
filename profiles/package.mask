@@ -30,3 +30,4 @@
 # available in the tree.
 #
 =media-plugins/vdr-sc-9999
+=media-plugins/vdr-vnsiserver-9999
