@@ -2,6 +2,10 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  03 Jun 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.14-r1.ebuild,
+  +vdr-1.7.14-r2.ebuild:
+  new ext-patch-ng-V7, fixed url for -V5 patch
+
   04 May 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.14.ebuild,
   +vdr-1.7.14-r1.ebuild:
   new ext-patch-ng-V5, fixed url for -V1 patch
