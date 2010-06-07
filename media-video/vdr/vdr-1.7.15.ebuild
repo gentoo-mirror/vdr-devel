@@ -238,8 +238,9 @@ src_prepare() {
 
 		epatch "${fname}"
 
-		# fix for file collision debugmacros.h
-#		rm ${S}/debugmacros.h
+		# fix for broken limikuutio patch
+		iconv -f iso-8859-1 -t utf8 "${S}"/po/fi_FI.po > "${S}"/po/fi_FI.po.fixed
+		mv "${S}"/po/fi_FI.po.fixed "${S}"/po/fi_FI.po
 
 		# This allows us to start even if some plugin does not exist
 		# or is not loadable.
