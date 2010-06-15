@@ -34,7 +34,7 @@ EXT_P=ExtP-NG-vdr-1.7.15-V1
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
-		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff"
+		http://copperhead.vdr-developer.org/downloads/extensionpatch/Older%20ExtP_NG%20Versions/${EXT_P}.diff"
 #		http://vdr.websitec.de/download/${EXT_P}.tar.bz2
 
 KEYWORDS="~amd64 ~ppc ~x86"

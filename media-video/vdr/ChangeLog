@@ -2,6 +2,9 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  15 Jun 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.15.ebuild:
+  fixed Extp-NG url
+
   07 Jun 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.15.ebuild:
   compile fixed for broken extp-ng
 
