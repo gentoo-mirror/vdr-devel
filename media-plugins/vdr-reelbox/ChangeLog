@@ -2,6 +2,10 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  30 Jun 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-reelbox-3.14440.ebuild:
+  compilefix for >=ffmpeg-0.6
+
   23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
   +vdr-reelbox-3.14440.ebuild, +files/reelbox-3.14440_makefile.diff,
   +files/save-setup_3.14440.diff,

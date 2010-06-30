@@ -48,4 +48,7 @@ src_prepare() {
 	epatch "${FILESDIR}/${P}_vdr-1.7.12-not-reelpatched.diff"
 
 	sed -e "s:/dev/fb0:/dev/fb_reel:g" -i HdFbTrueColorOsd.c VideoPlayerPipHd.c
+
+	# UINT64_C is needed by ffmpeg headers
+	append-flags -D__STDC_CONSTANT_MACROS
 }
