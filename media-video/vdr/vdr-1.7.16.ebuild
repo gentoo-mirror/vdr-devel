@@ -369,6 +369,10 @@ src_install() {
 		doins "${FILESDIR}"/channel_alternative.conf
 	fi
 
+	if use setup; then
+		insinto /usr/share/vdr/setup
+		doins "${S}"/menu.c
+	fi
 	chown -R vdr:vdr "${D}/${CONF_DIR}"
 }
 
