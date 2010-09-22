@@ -7,12 +7,12 @@ EAPI="2"
 inherit eutils flag-o-matic multilib
 
 # Switches supported by extensions-patch
-EXT_PATCH_FLAGS="atsc alternatechannel channelprovide cutterlimit cuttime
+EXT_PATCH_FLAGS="alternatechannel channelprovide cutterlimit cuttime
 	ddepgentry graphtft hardlinkcutter
 	jumpplay lnbshare mainmenuhooks menuorg noepg pinplugin
-	rotor setup sortrecords status_extension timerinfo ttxtsubs
+	rotor setup timerinfo ttxtsubs
 	validinput yaepg
-	dvlfriendlyfnames dvlscriptaddon dvlvidprefer
+	dvlscriptaddon dvlvidprefer
 	volctrl wareagleicon lircsettings"
 
 # names of the use-flags
@@ -432,12 +432,6 @@ pkg_postinst() {
 			ewarn "#  ${warn_keys}"
 		fi
 	fi
-
-#	if use atsc; then
-#		ewarn "ATSC is only supported by a rudimentary patch"
-#		einfo "and need at least this patch and a plugin installed"
-#		einfo "emerge media-plugins/vdr-atscepg"
-#	fi
 
 	if [[ $previous_less_than_1_6_0 = 0 ]]; then
 		elog "By default vdr is now started with utf8 character encoding"
