@@ -3,6 +3,10 @@
 # $Header: $
 
   02 Oct 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  files/090-vdr-setup-0.3.1_extern-tinyxml.diff:
+  fixed include in diff
+
+  02 Oct 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
   +vdr-setup-0.3.1-r3.ebuild,
   +files/090-vdr-setup-0.3.1_extern-tinyxml.diff:
   another fix to use externel tinyxml lib

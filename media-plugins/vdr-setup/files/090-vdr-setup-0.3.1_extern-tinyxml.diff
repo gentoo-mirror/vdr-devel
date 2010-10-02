@@ -101,7 +101,7 @@ diff -Naur setup-0.3.1.orig/menus.h setup-0.3.1/menus.h
  #include <vdr/tools.h>
  #include "util.h"
 -#include "vdr/tinystr.h"
-+#include <tinystr.h>
++#include <tinyxml.h>
  #include "sysconfig.h"
  
  
