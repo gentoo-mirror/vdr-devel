@@ -2,6 +2,11 @@
 # Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  02 Oct 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-setup-0.3.1-r3.ebuild,
+  +files/090-vdr-setup-0.3.1_extern-tinyxml.diff:
+  another fix to use externel tinyxml lib
+
   21 Sep 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
   +vdr-setup-0.3.1-r2.ebuild, +files/vdr-setup-0.3.1-gcc-4.x.diff,
   +files/vdr-setup-0.3.1-gentoo.diff, +files/vdr-setup-0.3.1-lang.diff,
