@@ -16,7 +16,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=">=media-video/vdr-1.7.16[setup]
-		>=dev-libs/tinyxml-2.6.1"
+		>=dev-libs/tinyxml-2.6.1[stl]"
+RDEPEND="${DEPEND}"
 
 PATCHES=( "${FILESDIR}/${P}-gcc-4.x.diff"
 		"${FILESDIR}/${P}-gentoo.diff"

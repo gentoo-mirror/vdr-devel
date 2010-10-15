@@ -17,8 +17,9 @@ IUSE=""
 
 DEPEND=">=media-video/vdr-1.7.16[setup]
 		>=dev-libs/tinyxml-2.6.1"
+RDEPEND="${DEPEND}"
 
-PATCHES="${FILESDIR}/${P}-*.diff"
+PATCHES=( "${FILESDIR}/${P}-*.diff" )
 
 LANGS="en de"
 
