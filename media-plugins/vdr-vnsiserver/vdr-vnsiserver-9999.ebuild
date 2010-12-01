@@ -26,14 +26,15 @@ src_prepare() {
 
 	sed -i 's/vnsi-server/vnsiserver/g' config.h || die 'sed failed'
 
-	fix_vdr_libsi_include server/livestreamer.c
+	fix_vdr_libsi_include recplayer.c
+	fix_vdr_libsi_include receiver.c
 }
 
 src_install() {
 	vdr-plugin_src_install
 
 	insinto /etc/vdr/plugins/vnsiserver
-	doins vnsi-server/allowed_hosts.conf
-	doins vnsi-server/noSignal.mpg
+	doins vnsiserver/allowed_hosts.conf
+	doins vnsiserver/noSignal.mpg
 	diropts -gvdr -ovdr
 }
