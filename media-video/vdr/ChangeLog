@@ -1,6 +1,14 @@
 # ChangeLog for media-video/vdr
-# Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+*vdr-1.7.17 (13 Mar 2011)
+
+  13 Mar 2011; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.17.ebuild,
+  +files/vdr-1.7.17-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.17-makefile-install-header.diff,
+  +files/vdr-1.7.17-shared-tinyxml.diff:
+  version bump; new default locale DIR, some use-flags temp dropped
 
 *vdr-1.7.16-r1 (05 Oct 2010)
 
