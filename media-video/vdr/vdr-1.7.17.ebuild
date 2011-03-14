@@ -33,15 +33,14 @@ EXT_P="extpngvdr1.7.17v1b2"
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
+		http://copperhead.vdr-developer.org/downloads/extensionpatch/Older%20ExtP_NG%20Versions/${EXT_P}.diff.gz
 		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff.gz"
-#		http://copperhead.vdr-developer.org/downloads/extensionpatch/Older%20ExtP_NG%20Versions/${EXT_P}.diff"
-#		http://vdr.websitec.de/download/${EXT_P}.tar.bz2
 
 KEYWORDS="~amd64 ~x86"
 SLOT="0"
 LICENSE="GPL-2"
 
-COMMON_DEPEND="media-libs/jpeg
+COMMON_DEPEND="virtual/jpeg
 	sys-libs/libcap
 	>=media-libs/fontconfig-2.4.2
 	>=media-libs/freetype-2

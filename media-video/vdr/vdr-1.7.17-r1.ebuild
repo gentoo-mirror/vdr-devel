@@ -1,25 +1,23 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-video/vdr/vdr-1.6.0_p1.ebuild,v 1.6 2008/05/21 05:50:50 zzam Exp $
 
-EAPI="2"
+EAPI="3"
 
 inherit eutils flag-o-matic multilib
 
 # Switches supported by extensions-patch
-EXT_PATCH_FLAGS="alternatechannel atsc channelprovide cutterlimit cutterqueue cuttime
-	ddepgentry dolbyinrec graphtft hardlinkcutter
-	jumpplay lnbshare mainmenuhooks menuorg noepg pinplugin
-	rotor setup sortrecords sourcecaps status_extension ttxtsubs
-	validinput yaepg
-	dvlfriendlynames dvlscriptaddon dvlvidprefer
-	volctrl wareagleicon lircsettings deltimeshiftrec"
+EXT_PATCH_FLAGS="alternatechannel channelprovide cutterlimit cuttime
+	ddepgentry dvlvidprefer graphtft hardlinkcutter
+	lnbshare mainmenuhooks menuorg noepg pinplugin rotor setup timerinfo
+	ttxtsubs validinput yaepg wareagleicon lircsettings"
+# droped --> jumpplay volctrl livebuffer
 
 # names of the use-flags
-EXT_PATCH_FLAGS_RENAMED="iptv liemikuutio"
+EXT_PATCH_FLAGS_RENAMED="liemikuutio" #iptv/pluginparam
 
 # names ext-patch uses internally, here only used for maintainer checks
-EXT_PATCH_FLAGS_RENAMED_EXT_NAME="pluginparam liemiext jumpingseconds"
+EXT_PATCH_FLAGS_RENAMED_EXT_NAME="liemiext jumpingseconds"
 
 IUSE="debug vanilla dxr3 ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED}"
 
@@ -27,18 +25,18 @@ MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
 S="${WORKDIR}/${MY_P}"
 
-EXT_P=vdr-1.7.12_ExtP-NG-v1.2-r1
+EXT_P="extpngvdr1.7.17v1b3"
+
 #externer reel patch
 #EXT_REELPATCH=vdr-1.7.11_ehd_svn13986
 
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
-		http://vdr.websitec.de/download/${EXT_P}.diff"
-#		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff
+		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff.gz
+		http://copperhead.vdr-developer.org/downloads/extensionpatch/Older%20ExtP_NG%20Versions/${EXT_P}.diff.gz"
 
-KEYWORDS="~amd64 ~ppc ~x86"
-
+KEYWORDS="~amd64 ~x86"
 SLOT="0"
 LICENSE="GPL-2"
 
@@ -47,11 +45,11 @@ COMMON_DEPEND="virtual/jpeg
 	>=media-libs/fontconfig-2.4.2
 	>=media-libs/freetype-2
 	sys-devel/gettext"
-#	dvdarchive? ( dvdchapjump? ( media-libs/libdvdnav ) )
 
 DEPEND="${COMMON_DEPEND}
 	~media-tv/linuxtv-dvb-headers-5
-	dev-util/unifdef"
+	dev-util/unifdef
+	setup? ( >=dev-libs/tinyxml-2.6.1[stl] )"
 
 RDEPEND="${COMMON_DEPEND}
 	dev-lang/perl
@@ -59,7 +57,7 @@ RDEPEND="${COMMON_DEPEND}
 	media-fonts/corefonts"
 
 # pull in vdr-setup to get the xml files, else menu will not work
-PDEPEND="setup? ( >=media-plugins/vdr-setup-0.3.1-r1 )"
+PDEPEND="setup? ( >=media-plugins/vdr-setup-0.3.1-r3 )"
 
 CONF_DIR=/etc/vdr
 CAP_FILE=${S}/capabilities.sh
@@ -208,14 +206,10 @@ src_prepare() {
 		PLUGINLIBDIR	= ${PLUGIN_LIBDIR}
 		CONFDIR			= ${CONF_DIR}
 		VIDEODIR		= /var/vdr/video
-		LOCDIR			= \$(PREFIX)/share/vdr/locale
+		LOCDIR			= \$(PREFIX)/share/locale
 
 		DEFINES			+= -DCONFDIR=\"\$(CONFDIR)\"
 		INCLUDES		+= -I\$(DVBDIR)
-
-		# http://www.vdr-portal.de/board/thread.php?postid=808350#post808350
-		# still needed?
-#		DEFINES += -D__KERNEL_STRICT_NAMES
 
 	EOT
 	eend 0
@@ -238,16 +232,15 @@ src_prepare() {
 	if ! use vanilla; then
 		cd "${S}"
 		# Now apply extensions patch
-#		local fname="${EXT_DIR}/${PN}-${EXT_VDR_PV:-${PV}}_extensions.diff"
-		local fname="${DISTDIR}/${EXT_P}.diff"
+		local fname="${WORKDIR}/${EXT_P}.diff"
 
-		# fix for wrong header include #263840 ; this need >libdvdread-0.9.7
-		sed -e "s:dvdread:dvdnav:g" -i "${fname}"
+		# most extpatch are full of windows line breaks
+		edos2unix "${fname}"
 
 		epatch "${fname}"
 
-		# fix for file collision debugmacros.h
-#		rm ${S}/debugmacros.h
+		# force to use shared tinyxml for use-flag setup
+		epatch "${FILESDIR}/${P}-shared-tinyxml.diff"
 
 		# This allows us to start even if some plugin does not exist
 		# or is not loadable.
@@ -287,7 +280,6 @@ src_prepare() {
 		done
 
 		# patches that got renamed
-		use iptv && enable_patch pluginparam
 		use liemikuutio && enable_patch liemiext
 		use liemikuutio && enable_patch jumpingseconds
 #		use ehd && enable_patch reelplugin
@@ -303,7 +295,6 @@ src_prepare() {
 
 #		use ehd && epatch "${WORKDIR}/${P}_ehd_svn13986.patch"
 
-		use iptv && sed -i sources.conf -e 's/^#P/P/'
 	fi
 
 	# apply local patches defined by variable VDR_LOCAL_PATCHES_DIR
@@ -357,15 +348,6 @@ src_install() {
 
 	dohtml *.html
 	dodoc MANUAL INSTALL README* HISTORY* CONTRIBUTORS
-
-#	cd "${EXT_DIR}/docs" || die "Could not cd into extensions-patch doc dir."
-
-#	local f
-#	rm *vdr-1.4* 2>/dev/null
-#	for f in *; do
-#		[[ -f ${f} ]] || continue
-#		newdoc "${f}" "${f}".ExtensionsPatch || die "Could not install extensions-patch doc ${f}"
-#	done
 
 	cd "${S}"
 
@@ -451,12 +433,6 @@ pkg_postinst() {
 			ewarn "Please remove these keys or vdr will not start:"
 			ewarn "#  ${warn_keys}"
 		fi
-	fi
-
-	if use atsc; then
-		ewarn "ATSC is only supported by a rudimentary patch"
-		einfo "and need at least this patch and a plugin installed"
-		einfo "emerge media-plugins/vdr-atscepg"
 	fi
 
 	if [[ $previous_less_than_1_6_0 = 0 ]]; then
