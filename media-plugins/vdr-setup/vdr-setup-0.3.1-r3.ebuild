@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-plugins/vdr-setup/vdr-setup-0.3.1-r1.ebuild,v 1.5 2008/01/12 11:50:51 zzam Exp $
 
@@ -12,7 +12,7 @@ SRC_URI="http://www.vdrtools.de/download/${P}.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86 ~ppc"
 IUSE=""
 
 DEPEND=">=media-video/vdr-1.7.16[setup]
