@@ -2,6 +2,14 @@
 # Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-1.7.18 (23 Apr 2011)
+
+  23 Apr 2011; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.18.ebuild,
+  +files/vdr-1.7.18-makefile-install-header.diff,
+  +files/vdr-1.7.18-shared-tinyxml.diff,
+  +files/vdr-1.7.18_jumpplay-hotfix.diff:
+  version bump
+
 *vdr-1.7.17-r3 (26 Mar 2011)
 
   26 Mar 2011; Joerg Bornkessel <hd_brummy@gentoo.org>
