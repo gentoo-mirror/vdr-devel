@@ -1,0 +1,13 @@
+diff -NaurbE vdr-dvbhddevice-0.0.3/work/vdr-1.7.18/PLUGINS/src/dvbhddevice/dvbhdffdevice.c vdr-dvbhddevice-0.0.4-r1/work/dvbhddevice-ce6bf00ed982/dvbhdffdevice.c
+--- vdr-dvbhddevice-0.0.3/work/vdr-1.7.18/PLUGINS/src/dvbhddevice/dvbhdffdevice.c	2011-04-17 13:20:22.000000000 +0200
++++ vdr-dvbhddevice-0.0.4-r1/work/dvbhddevice-ce6bf00ed982/dvbhdffdevice.c	2011-04-24 22:13:58.407140905 +0200
+@@ -725,7 +725,8 @@
+ bool cDvbHdFfDeviceProbe::Probe(int Adapter, int Frontend)
+ {
+   static uint32_t SubsystemIds[] = {
+-    0x13C23009, // Technotrend S2-6400 HDFF
++    0x13C23009, // Technotrend S2-6400 HDFF development samples
++    0x13C2300A, // Technotrend S2-6400 HDFF production version
+     0x00000000
+     };
+   cString FileName;
