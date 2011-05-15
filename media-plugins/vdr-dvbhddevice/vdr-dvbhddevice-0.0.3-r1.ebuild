@@ -19,7 +19,6 @@ DEPEND=">=media-video/vdr-1.7.18"
 RDEPEND="${DEPEND}
 		media-tv/tt-s2-6400-firmware"
 
-
 S="${WORKDIR}/vdr-1.7.18/PLUGINS/src/${VDRPLUGIN}"
 
 src_prepare() {
