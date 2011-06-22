@@ -21,6 +21,12 @@
 ##   End example
 ##
 
+# Joerg Bornkessel <hd_brummy@gentoo.org> (22 Jun 2011)
+# masked for testing
+=media-video/vdr-1.7.19
+=media-plugins/vdr-dvbhddevice-0.0.4
+=media-plugins/vdr-dvbsddevice-0.0.4
+
 # Joerg Bornkessel <hd_brummy@gentoo.org>
 #  on behalf of QA Team
 #
