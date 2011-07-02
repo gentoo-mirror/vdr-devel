@@ -22,6 +22,5 @@ S="${WORKDIR}/vdr-1.7.19/PLUGINS/src/${VDRPLUGIN}"
 
 src_prepare() {
 	vdr-plugin_src_prepare
-
 #	use softosd && epatch "${FILESDIR}"/dvbsddevice_softosd_v1.diff
 }
