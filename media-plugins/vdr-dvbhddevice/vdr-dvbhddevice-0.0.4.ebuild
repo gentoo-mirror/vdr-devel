@@ -23,7 +23,6 @@ S="${WORKDIR}/vdr-1.7.19/PLUGINS/src/${VDRPLUGIN}"
 
 src_prepare() {
 	vdr-plugin_src_prepare
-
 #	epatch "${FILESDIR}/transfermode-0.0.4.diff"
 #	epatch "${FILESDIR}/dag1-dag2-0.0.4.diff"
 
