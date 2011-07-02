@@ -2,6 +2,9 @@
 # Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  02 Jul 2011; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.19.ebuild:
+  fixed download URL
+
 *vdr-1.7.19 (22 Jun 2011)
 
   22 Jun 2011; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.19.ebuild,

@@ -33,8 +33,8 @@ EXT_P="extpngvdr1.7.19v2"
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
-		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff
-		http://copperhead.vdr-developer.org/downloads/extensionpatch/Older%20ExtP_NG%20Versions/${EXT_P}.diff"
+		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff.gz
+		http://copperhead.vdr-developer.org/downloads/extensionpatch/Older%20ExtP_NG%20Versions/${EXT_P}.diff.gz"
 
 KEYWORDS="~amd64 ~x86 ~ppc"
 SLOT="0"
@@ -232,7 +232,7 @@ src_prepare() {
 	if ! use vanilla; then
 		cd "${S}"
 		# Now apply extensions patch
-		local fname="${DISTDIR}/${EXT_P}.diff"
+		local fname="${WORKDIR}/${EXT_P}.diff"
 
 		# most extpatch are full of windows line breaks
 		edos2unix "${fname}"
