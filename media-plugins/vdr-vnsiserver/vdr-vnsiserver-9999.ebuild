@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -6,9 +6,10 @@ EAPI=2
 
 RESTRICT="mirror strip"
 
-inherit vdr-plugin subversion
+inherit vdr-plugin git
 
-ESVN_REPO_URI="https://xbmc.svn.sourceforge.net/svnroot/xbmc/branches/pvr-testing2/xbmc/pvrclients/vdr-vnsi/vdr-plugin-vnsiserver"
+ESVN_REPO_URI="git://github.com/pipelka/vdr-plugin-vnsiserver.git"
+
 DESCRIPTION="VDR plugin: VNSI Streamserver Plugin"
 HOMEPAGE="http://xbmc.org"
 SRC_URI=""
@@ -35,6 +36,6 @@ src_install() {
 
 	insinto /etc/vdr/plugins/vnsiserver
 	doins vnsiserver/allowed_hosts.conf
-	doins vnsiserver/noSignal.mpg
+#	doins vnsiserver/noSignal.mpg
 	diropts -gvdr -ovdr
 }
