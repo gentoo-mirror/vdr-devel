@@ -37,8 +37,7 @@ SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
 		http://copperhead.vdr-developer.org/downloads/extensionpatch/${EXT_P}.diff.gz
 		http://copperhead.vdr-developer.org/downloads/extensionpatch/Older%20ExtP_NG%20Versions/${EXT_P}.diff.gz"
 
-#KEYWORDS="~amd64 ~x86 ~ppc"
-KEYWORDS="-*"
+KEYWORDS="~amd64 ~x86 ~ppc"
 SLOT="0"
 LICENSE="GPL-2"
 
