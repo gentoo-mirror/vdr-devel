@@ -2,6 +2,12 @@
 # Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-dvbsddevice-0.0.5 (16 Sep 2011)
+
+  16 Sep 2011; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-dvbsddevice-0.0.5.ebuild:
+  version bump, need vdr-1.7.21
+
   02 Jul 2011; Joerg Bornkessel <hd_brummy@gentoo.org>
   vdr-dvbsddevice-0.0.4.ebuild:
   digest
