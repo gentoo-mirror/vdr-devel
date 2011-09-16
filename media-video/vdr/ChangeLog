@@ -2,6 +2,14 @@
 # Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-1.7.21 (16 Sep 2011)
+
+  16 Sep 2011; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.21.ebuild,
+  +files/vdr-1.7.21-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.21-makefile-install-header.diff,
+  +files/vdr-1.7.21-shared-tinyxml.diff, +files/vdr-1.7.21_po-files-fix.diff:
+  version bump
+
   02 Jul 2011; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.19.ebuild:
   fixed download URL
 
