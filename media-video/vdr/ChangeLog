@@ -2,6 +2,9 @@
 # Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  24 Oct 2011; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.21-r1.ebuild:
+  keyworded ~arm
+
 *vdr-1.7.21-r1 (23 Oct 2011)
 
   23 Oct 2011; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.21-r1.ebuild:
