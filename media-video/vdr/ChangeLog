@@ -2,6 +2,18 @@
 # Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  30 Dec 2011; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.22.ebuild,
+  +files/vdr-1.7.22-makefile-install-header.diff,
+  +files/vdr-1.7.22-shared-tinyxml.diff, metadata.xml:
+  bump to vdr-1.7.22, pmasked
+
+*vdr-1.7.22 (30 Dec 2011)
+
+  30 Dec 2011; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.22.ebuild,
+  +files/vdr-1.7.22-makefile-install-header.diff,
+  +files/vdr-1.7.22-shared-tinyxml.diff:
+  bump to vdr-1.7.22, pmasked
+
   24 Oct 2011; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.21-r1.ebuild:
   keyworded ~arm
 
