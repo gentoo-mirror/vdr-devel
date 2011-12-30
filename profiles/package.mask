@@ -24,6 +24,7 @@
 # <hd_brummy@gentoo.org 30 Dec 2011
 =media-video/vdr-1.7.22
 =media-plugins/vdr-ttxtsubs-0.2.4
+=media-plugins/vdr-femon-1.7.11
 
 # Joerg Bornkessel <hd_brummy@gentoo.org>
 #  on behalf of QA Team
