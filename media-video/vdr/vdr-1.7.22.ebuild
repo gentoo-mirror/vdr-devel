@@ -8,15 +8,15 @@ inherit eutils flag-o-matic multilib
 
 # Switches supported by extensions-patch
 EXT_PATCH_FLAGS="alternatechannel cutterlimit
-	ddepgentry dvlvidprefer graphtft hardlinkcutter jumpingseconds jumpplay
+	ddepgentry dvlvidprefer graphtft hardlinkcutter jumpplay
 	liemikuutio lircsettings mainmenuhooks menuorg nalustripper noepg pinplugin
 	rotor setup timerinfo ttxtsubs volctrl wareagleicon yaepg"
 
 # names of the use-flags
-EXT_PATCH_FLAGS_RENAMED="" #iptv/pluginparam
+EXT_PATCH_FLAGS_RENAMED=""
 
 # names ext-patch uses internally, here only used for maintainer checks
-EXT_PATCH_FLAGS_RENAMED_EXT_NAME=""
+EXT_PATCH_FLAGS_RENAMED_EXT_NAME="jumpingseconds"
 
 IUSE="debug vanilla dxr3 ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED}"
 
@@ -268,9 +268,8 @@ src_prepare() {
 		done
 
 		# patches that got renamed
-#		use liemikuutio && enable_patch liemiext
-#		use liemikuutio && enable_patch jumpingseconds
-#		use ehd && enable_patch reelplugin
+		use liemikuutio && enable_patch jumpingseconds
+
 		eend 0
 
 		extensions_add_make_conf
