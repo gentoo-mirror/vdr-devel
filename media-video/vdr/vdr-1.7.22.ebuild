@@ -221,12 +221,15 @@ src_prepare() {
 	if ! use vanilla; then
 		cd "${S}"
 		# Now apply extensions patch
-		local fname="${DISTDIR}/${EXT_P}.diff"
+		local fname="${WORKDIR}/${EXT_P}.diff"
 
 		# most extpatch are full of windows line breaks
 		edos2unix "${fname}"
 
 		epatch "${fname}"
+
+		#fix for install
+		sed -i Makefile -e 's:svdrpsend:svdrpsend.pl:'
 
 		# force to use shared tinyxml for use-flag setup
 		epatch "${FILESDIR}/${P}-shared-tinyxml.diff"
@@ -234,6 +237,7 @@ src_prepare() {
 		# This allows us to start even if some plugin does not exist
 		# or is not loadable.
 		enable_patch PLUGINMISSING
+		enable_patch CHANNELBIND
 
 		# was default enabled in old versions of extpatch
 		enable_patch MCLI
@@ -243,7 +247,7 @@ src_prepare() {
 
 			# these patches we do not support
 			# (or have them already hard enabled)
-			local IGNORE_PATCHES="pluginmissing mcli"
+			local IGNORE_PATCHES="pluginmissing mcli channelbind"
 
 			extensions_all_defines > "${T}"/new.IUSE
 			echo $EXT_PATCH_FLAGS $EXT_PATCH_FLAGS_RENAMED_EXT_NAME \
@@ -329,7 +333,7 @@ src_install() {
 	keepdir "${PLUGIN_LIBDIR}"
 
 	exeinto /usr/share/vdr/bin
-	doexe i18n-to-gettext.pl
+	doexe i18n-to-gettext
 
 	dohtml *.html
 	dodoc MANUAL INSTALL README* HISTORY* CONTRIBUTORS

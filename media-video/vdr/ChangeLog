@@ -2,6 +2,9 @@
 # Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  30 Dec 2011; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.22.ebuild:
+  some fixe for install
+
   30 Dec 2011; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.22.ebuild,
   metadata.xml:
   changed handling of use-flag jumpingseconds
