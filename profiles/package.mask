@@ -21,8 +21,8 @@
 ##   End example
 ##
 
-# <hd_brummy@gentoo.org> 09 Oct 2011
-# need patched =vdr-1.7.21
+# <hd_brummy@gentoo.org 30 Dec 2011
+=media-video/vdr-1.7.22
 =media-plugins/vdr-ttxtsubs-0.2.4
 
 # Joerg Bornkessel <hd_brummy@gentoo.org>
