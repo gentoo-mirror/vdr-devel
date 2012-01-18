@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-video/vdr/vdr-1.6.0_p1.ebuild,v 1.6 2008/05/21 05:50:50 zzam Exp $
 
@@ -56,7 +56,7 @@ COMMON_DEPEND="virtual/jpeg
 	dvdarchive? ( dvdchapjump? ( media-libs/libdvdnav ) )"
 
 DEPEND="${COMMON_DEPEND}
-	~media-tv/linuxtv-dvb-headers-5
+	=media-tv/linuxtv-dvb-headers-5*
 	dev-util/unifdef"
 
 RDEPEND="${COMMON_DEPEND}

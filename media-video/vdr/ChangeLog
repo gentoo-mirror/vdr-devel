@@ -1,6 +1,16 @@
 # ChangeLog for media-video/vdr
-# Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+  18 Jan 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.7.ebuild,
+  vdr-1.7.9.ebuild, vdr-1.7.10.ebuild, vdr-1.7.11.ebuild, vdr-1.7.11-r1.ebuild,
+  vdr-1.7.12.ebuild, vdr-1.7.13.ebuild, vdr-1.7.14.ebuild,
+  vdr-1.7.14-r1.ebuild, vdr-1.7.14-r2.ebuild, vdr-1.7.15.ebuild,
+  vdr-1.7.16.ebuild, vdr-1.7.16-r1.ebuild, vdr-1.7.17.ebuild,
+  vdr-1.7.17-r1.ebuild, vdr-1.7.17-r2.ebuild, vdr-1.7.17-r3.ebuild,
+  vdr-1.7.18.ebuild, vdr-1.7.19.ebuild, vdr-1.7.21.ebuild,
+  vdr-1.7.21-r1.ebuild, vdr-1.7.22.ebuild:
+  Fix media-tv/linuxtv-dvb-headers dependencies
 
   30 Dec 2011; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.22.ebuild:
   some fixe for install
