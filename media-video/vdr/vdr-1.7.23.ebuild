@@ -36,16 +36,19 @@ KEYWORDS="~arm ~amd64 ~ppc ~x86"
 SLOT="0"
 LICENSE="GPL-2"
 
+REQUIRED_USE="setup? ( !menuorg )
+	menuorg? ( !setup )"
+
 COMMON_DEPEND="virtual/jpeg
 	sys-libs/libcap
 	>=media-libs/fontconfig-2.4.2
 	>=media-libs/freetype-2
-	sys-devel/gettext"
+	setup? ( >=dev-libs/tinyxml-2.6.1[stl] )"
 
 DEPEND="${COMMON_DEPEND}
 	=media-tv/linuxtv-dvb-headers-5*
 	dev-util/unifdef
-	setup? ( >=dev-libs/tinyxml-2.6.1[stl] )"
+	sys-devel/gettext"
 
 RDEPEND="${COMMON_DEPEND}
 	dev-lang/perl
@@ -61,19 +64,8 @@ CAP_FILE=${S}/capabilities.sh
 CAPS="# Capabilities of the vdr-executable for use by startscript etc."
 
 pkg_setup() {
-	check_menu_flags
-
 	use debug && append-flags -g
 	PLUGIN_LIBDIR="/usr/$(get_libdir)/vdr/plugins"
-}
-
-check_menu_flags() {
-	if use menuorg && use setup; then
-		echo
-		eerror "Please use only one of this USE-Flags"
-		eerror "\tmenuorg setup"
-		die "multiple menu manipulation"
-	fi
 }
 
 add_cap() {
