@@ -1,6 +1,9 @@
 # ChangeLog for media-plugins/vdr-sc
-# Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+  05 Feb 2012; Christian Ruppert <idl0r@gentoo.org> vdr-sc-9999.ebuild:
+  Use -j1 for now
 
 *vdr-sc-0.9.3.20110911 (19 Sep 2011)
 
