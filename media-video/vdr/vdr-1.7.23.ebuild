@@ -18,7 +18,7 @@ EXT_PATCH_FLAGS_RENAMED=""
 # names ext-patch uses internally, here only used for maintainer checks
 EXT_PATCH_FLAGS_RENAMED_EXT_NAME="jumpingseconds"
 
-IUSE="debug vanilla dxr3 ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED}"
+IUSE="debug html vanilla dxr3 ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED}"
 
 MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
@@ -331,8 +331,11 @@ src_install() {
 	exeinto /usr/share/vdr/bin
 	doexe i18n-to-gettext
 
-	dohtml *.html
-	dodoc MANUAL INSTALL README* HISTORY* CONTRIBUTORS
+	if use html; then
+		dohtml *.html
+	fi
+
+	dodoc MANUAL INSTALL README* HISTORY CONTRIBUTORS
 
 	insinto /usr/share/vdr
 	doins "${CAP_FILE}"

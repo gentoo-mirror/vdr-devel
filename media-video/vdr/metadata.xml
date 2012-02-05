@@ -7,6 +7,7 @@
 		<name>Gentoo VDR Project</name>
 	</maintainer>
 	<use>
+		<flag name="html">Install HTML documentation</flag>
 		<flag name="alternatechannel">Use alternate channel on record</flag>
 		<flag name="cutterlimit">Limit IO bandwith used for cutting</flag>
 		<flag name="ddepgentry">remove duplicate EPG entries</flag>
