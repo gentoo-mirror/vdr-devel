@@ -220,7 +220,6 @@ src_prepare() {
 		-e 's/ install-plugins//'
 
 	if ! use vanilla; then
-		cd "${S}"
 		# Now apply extensions patch
 #		local fname="${WORKDIR}/${EXT_P}.patch"
 		# most extpatch are full of windows line breaks
@@ -334,8 +333,6 @@ src_install() {
 
 	dohtml *.html
 	dodoc MANUAL INSTALL README* HISTORY* CONTRIBUTORS
-
-	cd "${S}"
 
 	insinto /usr/share/vdr
 	doins "${CAP_FILE}"
