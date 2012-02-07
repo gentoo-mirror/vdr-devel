@@ -46,7 +46,7 @@ COMMON_DEPEND="virtual/jpeg
 	setup? ( >=dev-libs/tinyxml-2.6.1[stl] )"
 
 DEPEND="${COMMON_DEPEND}
-	=media-tv/linuxtv-dvb-headers-5*
+	>=media-tv/linuxtv-dvb-headers-5.3
 	dev-util/unifdef
 	sys-devel/gettext"
 
@@ -178,7 +178,7 @@ src_prepare() {
 	local api_version
 	api_version=$(awk -F' ' '/define DVB_API_VERSION / {print $3}' "${DVBDIR}"/linux/dvb/version.h)
 
-	if [[ ${api_version:-0} -lt 5 ]]; then
+	if [[ ${api_version:-0} -lt 5.3 ]]; then
 		eerror "DVB header files do not contain s2api support or to old for ${P}"
 		eerror "You cannot compile VDR against old dvb-headers"
 		die "DVB headers too old"
