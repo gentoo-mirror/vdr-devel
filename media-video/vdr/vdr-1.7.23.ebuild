@@ -52,7 +52,7 @@ DEPEND="${COMMON_DEPEND}
 
 RDEPEND="${COMMON_DEPEND}
 	dev-lang/perl
-	>=media-tv/gentoo-vdr-scripts-0.4.5
+	>=media-tv/gentoo-vdr-scripts-0.4.10
 	media-fonts/corefonts"
 
 # pull in vdr-setup to get the xml files, else menu will not work
