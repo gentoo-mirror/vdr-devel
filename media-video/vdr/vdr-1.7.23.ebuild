@@ -64,6 +64,14 @@ CAP_FILE=${S}/capabilities.sh
 CAPS="# Capabilities of the vdr-executable for use by startscript etc."
 
 pkg_setup() {
+	if [ -n "${VDR_LOCAL_PATCHES_DIR}" ]; then
+		eerror "Using VDR_LOCAL_PATCHES_DIR is deprecated!"
+		eerror "Please move all your patches into"
+		eerror "${EROOT}/etc/portage/patches/${CATEGORY}/${P}"
+		eerror "and remove or unset the VDR_LOCAL_PATCHES_DIR variable."
+		die
+	fi
+
 	use debug && append-flags -g
 	PLUGIN_LIBDIR="/usr/$(get_libdir)/vdr/plugins"
 }
@@ -274,27 +282,7 @@ src_prepare() {
 
 	fi
 
-	# apply local patches defined by variable VDR_LOCAL_PATCHES_DIR
-	if test -n "${VDR_LOCAL_PATCHES_DIR}"; then
-		local dir_tmp_var
-		local LOCALPATCHES_SUBDIR=${PV}
-		for dir_tmp_var in allversions-fallback ${PV%_p*} ${PV} ; do
-			if [[ -d ${VDR_LOCAL_PATCHES_DIR}/${dir_tmp_var} ]]; then
-				LOCALPATCHES_SUBDIR="${dir_tmp_var}"
-			fi
-		done
-
-		echo
-		if [[ ${LOCALPATCHES_SUBDIR} == ${PV} ]]; then
-			einfo "Applying local patches"
-		else
-			einfo "Applying local patches (Using subdirectory: ${LOCALPATCHES_SUBDIR})"
-		fi
-
-		for LOCALPATCH in ${VDR_LOCAL_PATCHES_DIR}/${LOCALPATCHES_SUBDIR}/*.{diff,patch}; do
-			test -f "${LOCALPATCH}" && epatch "${LOCALPATCH}"
-		done
-	fi
+	epatch_user
 
 	if [[ -n "${VDRSOURCE_DIR}" ]]; then
 		cp -r "${S}" "${T}"/source-tree
