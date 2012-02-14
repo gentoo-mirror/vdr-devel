@@ -2,6 +2,9 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  14 Feb 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.23.ebuild:
+  fixed wrong api version detection
+
   11 Feb 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.23.ebuild:
   VDR_LOCAL_PATCHES are deprecated up from vdr-1.7.23, use now the portage
   feature epatch_user for user own patches

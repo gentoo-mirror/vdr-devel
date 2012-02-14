@@ -185,8 +185,9 @@ src_prepare() {
 	# checking for s2api headers
 	local api_version
 	api_version=$(awk -F' ' '/define DVB_API_VERSION / {print $3}' "${DVBDIR}"/linux/dvb/version.h)
+	api_version=${api_version}*$(awk -F' ' '/define DVB_API_VERSION_MINOR / {print $3}' "${DVBDIR}"/linux/dvb/version.h)
 
-	if [[ ${api_version:-0} -lt 5.3 ]]; then
+	if [[ ${api_version:-0} -lt 5*3 ]]; then
 		eerror "DVB header files do not contain s2api support or to old for ${P}"
 		eerror "You cannot compile VDR against old dvb-headers"
 		die "DVB headers too old"
