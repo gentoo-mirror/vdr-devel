@@ -46,7 +46,7 @@ COMMON_DEPEND="virtual/jpeg
 	setup? ( >=dev-libs/tinyxml-2.6.1[stl] )"
 
 DEPEND="${COMMON_DEPEND}
-	>=media-tv/linuxtv-dvb-headers-5.3
+	>=virtual/linuxtv-dvb-headers-5.3
 	dev-util/unifdef
 	sys-devel/gettext"
 

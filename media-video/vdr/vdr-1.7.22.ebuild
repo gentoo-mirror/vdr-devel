@@ -42,7 +42,7 @@ COMMON_DEPEND="virtual/jpeg
 	sys-devel/gettext"
 
 DEPEND="${COMMON_DEPEND}
-	=media-tv/linuxtv-dvb-headers-5*
+	=virtual/linuxtv-dvb-headers-5*
 	dev-util/unifdef
 	setup? ( >=dev-libs/tinyxml-2.6.1[stl] )"
 
