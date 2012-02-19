@@ -336,11 +336,8 @@ src_install() {
 }
 
 pkg_preinst() {
-	has_version "<${CATEGORY}/${PN}-1.3.36-r3"
-	previous_less_than_1_3_36_r3=$?
-
-	has_version "<${CATEGORY}/${PN}-1.6.0"
-	previous_less_than_1_6_0=$?
+	has_version "<${CATEGORY}/${PN}-1.6.0_p2-r7"
+	previous_less_than_1_6_0_p2_r7=$?
 }
 
 pkg_postinst() {
@@ -354,17 +351,12 @@ pkg_postinst() {
 	elog
 	elog
 	elog "It is a good idea to run vdrplugin-rebuild now."
-	if [[ $previous_less_than_1_3_36_r3 = 0 ]] ; then
-		ewarn "Upgrade Info:"
-		ewarn
-		ewarn "If you had used the use-flags lirc, rcu or vfat"
-		ewarn "then, you now have to enable the associated functionality"
-		ewarn "in /etc/conf.d/vdr"
-		ewarn
-		ewarn "vfat is now set with VFAT_FILENAMES."
-		ewarn "lirc/rcu are now set with IR_CTRL."
-		ebeep
-	fi
+#	if [[ previous_less_than_1_6_0_p2_r7=$? = 0 ]] ; then
+#		ewarn "Upgrade Info:"
+
+# 	TODO, upgrade info
+#	http://paste.pocoo.org/show/553594/
+#	fi
 
 	if use setup; then
 		if ! has_version media-plugins/vdr-setup || \
