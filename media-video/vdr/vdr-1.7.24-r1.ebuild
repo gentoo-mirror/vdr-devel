@@ -107,61 +107,6 @@ extensions_all_defines() {
 		| tr '[:upper:]' '[:lower:]'
 }
 
-extensions_all_defines_unset() {
-	# extract all possible settings for extensions-patch
-	# and convert them to -U... for unifdef
-	sed -e '/^#\?[A-Z].*= 1/!d' -e 's/^#\?/-UUSE_/' -e 's/ .*//' \
-		Make.config.template \
-		| tr '\n' ' '
-}
-
-do_unifdef() {
-	ebegin "Unifdef sources"
-	local mf="Makefile.get"
-	cat <<'EOT' > $mf
-include Makefile
-show_def:
-	@echo $(DEFINES)
-show_src_files:
-	@echo $(OBJS:%.o=%.c)
-EOT
-
-	local DEFINES=$(extensions_all_defines_unset)
-
-	local RAW_DEFINES=$(make -f "$mf" show_def)
-	local VDR_SRC_FILES=$(make -f "$mf" show_src_files)
-	local KEEP_FILES=""
-	rm "$mf"
-
-	local def
-	for def in $RAW_DEFINES; do
-		case "${def}" in
-			-DUSE*)
-				DEFINES="${DEFINES} ${def}"
-				;;
-		esac
-	done
-
-	local f
-	for f in *.c; do
-
-		# Removing the src files the Makefile does not use for compiling vdr
-		if ! has $f ${VDR_SRC_FILES} ${KEEP_FILES}; then
-			rm -f ${f} ${f%.c}.h
-			continue
-		fi
-
-		unifdef ${DEFINES} "$f" > "tmp.$f"
-		mv "tmp.$f" "$f"
-	done
-	for f in *.h; do
-		unifdef ${DEFINES} "$f" > "tmp.$f"
-		mv "tmp.$f" "$f"
-		[[ -s $f ]] || rm "$f"
-	done
-	eend 0
-}
-
 src_prepare() {
 	#applying maintainace-patches
 
@@ -272,9 +217,6 @@ src_prepare() {
 		ebegin "Make depend"
 		emake .dependencies >/dev/null
 		eend $? "make depend failed"
-
-		[[ -z "$NO_UNIFDEF" ]] && do_unifdef
-
 	fi
 
 	epatch_user

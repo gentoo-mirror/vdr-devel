@@ -2,6 +2,10 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  20 Feb 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.24-r1.ebuild:
+  Remove useless do_unifdef() stuff as the non-defined blocks will be ignored
+  by the compiler anyway.
+
 *vdr-1.7.24-r1 (20 Feb 2012)
 
   20 Feb 2012; Christian Ruppert <idl0r@gentoo.org> -vdr-1.7.24.ebuild,
