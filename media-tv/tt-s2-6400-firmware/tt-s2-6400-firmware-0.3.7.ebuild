@@ -6,8 +6,8 @@ EAPI="3"
 
 DESCRIPTION="Firmware for the Technotrend S2-6400 DVB Card"
 HOMEPAGE="http://www.aregel.de/"
-SRC_URI="http://www.aregel.de/file_download/9/dvb-ttpremium-st7109-01_v0_3_4.zip
-		http://www.aregel.de/file_download/10/dvb-ttpremium-fpga-01_v1_09.zip
+SRC_URI="http://www.aregel.de/file_download/18/dvb-ttpremium-st7109-01_v0_3_7.zip
+		http://www.aregel.de/file_download/14/dvb-ttpremium-fpga-01_v1_09.zip
 		http://www.aregel.de/file_download/7/dvb-ttpremium-loader-01_v1_03.zip"
 
 LICENSE="as-is"
