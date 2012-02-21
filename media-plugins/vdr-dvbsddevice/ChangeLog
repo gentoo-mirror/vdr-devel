@@ -1,6 +1,11 @@
 # ChangeLog for media-plugins/vdr-dvbsddevice
-# Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+  21 Feb 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  -vdr-dvbsddevice-0.0.3.ebuild, -vdr-dvbsddevice-0.0.3-r1.ebuild,
+  -vdr-dvbsddevice-0.0.4.ebuild, vdr-dvbsddevice-0.0.5.ebuild:
+  cleanup, eapi=4, changed src_uri
 
 *vdr-dvbsddevice-0.0.5 (16 Sep 2011)
 
