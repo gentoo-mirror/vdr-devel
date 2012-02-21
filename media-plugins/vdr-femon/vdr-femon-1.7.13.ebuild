@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-plugins/vdr-femon/vdr-femon-1.6.4.ebuild,v 1.1 2008/11/30 21:35:01 hd_brummy Exp $
 
-EAPI="3"
+EAPI="4"
 
 inherit vdr-plugin
 
