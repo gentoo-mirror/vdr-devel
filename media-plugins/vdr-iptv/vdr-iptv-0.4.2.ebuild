@@ -1,8 +1,8 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-plugins/vdr-iptv/vdr-iptv-0.3.0.ebuild,v 1.1 2009/06/04 13:08:26 zzam Exp $
 
-EAPI="2"
+EAPI="4"
 
 inherit vdr-plugin eutils
 
