@@ -1,14 +1,14 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="3"
+EAPI="4"
 
 inherit vdr-plugin
 
 DESCRIPTION="VDR Plugin: output device for the 'Full Featured' DVB Card"
 HOMEPAGE="http://www.tvdr.de/"
-SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/vdr-1.7.19.tar.bz2"
+SRC_URI="http://dev.gentoo.org/~hd_brummy/distfiles/${P}.tar.gz"
 
 KEYWORDS="~x86 ~amd64"
 SLOT="0"
@@ -18,8 +18,6 @@ IUSE=""
 DEPEND=">=media-video/vdr-1.7.19"
 RDEPEND="${DEPEND}
 		media-tv/tt-s2-6400-firmware"
-
-S="${WORKDIR}/vdr-1.7.19/PLUGINS/src/${VDRPLUGIN}"
 
 src_prepare() {
 	vdr-plugin_src_prepare
