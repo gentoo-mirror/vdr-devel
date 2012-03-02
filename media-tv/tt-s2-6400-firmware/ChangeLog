@@ -2,6 +2,9 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  02 Mar 2012; Joerg Krause <joerg_pb@gmx.net> Manifest:
+  dvb-ttpremium-fpga-01_v1_09.zip: fixed wrong filesize
+
 *tt-s2-6400-firmware-0.3.7 (20 Feb 2012)
 
   20 Feb 2012; Joerg Krause <joerg_pb@gmx.net>
