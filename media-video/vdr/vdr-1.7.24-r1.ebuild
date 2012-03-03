@@ -355,10 +355,4 @@ pkg_postinst() {
 	elog ""
 	elog "To get an idea how to proceed now, have a look at our vdr-guide:"
 	elog "\thttp://www.gentoo.org/doc/en/vdr-guide.xml"
-	elog
-	elog "For Full Featured DVB Cards you need up from now an externel plugin!"
-	elog "emerge media-plugins/vdr-dvbsddevice"
-	elog
-	elog "use-flag ehd removed, >=media-plugins/vdr-reelbox-14440 will compile without vdr patch"
-	elog
 }
