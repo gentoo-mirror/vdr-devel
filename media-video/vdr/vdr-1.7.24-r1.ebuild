@@ -290,36 +290,35 @@ pkg_postinst() {
 	elog
 	elog "  We strongly advise you NOT to use this version"
 	elog "  on a productive system!"
-	elog
-	elog
-	elog "It is a good idea to run vdrplugin-rebuild now."
 
 	if [[ previous_less_than_1_6_0_p2_r8=$? = 0 ]] ; then
-		ewarn "Upgrade Info:"
+		elog "  Upgrade Info:"
 
-		einfo "The recording format is now Transport Stream. Existing recordings in PES format"
-		einfo "can still be replayed and edited, but new recordings are done in TS."
+		elog "  The recording format is now Transport Stream. Existing recordings in PES format"
+		elog "  can still be replayed and edited, but new recordings are done in TS."
 
-		einfo "The support for full featured DVB cards of the TT/FuSi design has been moved"
-		einfo "into the new plugin 'dvbsddevice'. On systems that use such a card as their"
-		einfo "primary device, this plugin now needs to be loaded when running VDR in order"
-		einfo "to view live or recorded video. If the plugin is not loaded, the card will"
-		einfo "be treated like a budget DVB card, and there will be no OSD or viewing"
-		einfo "capability."
+		elog "  The support for full featured DVB cards of the TT/FuSi design has been moved"
+		elog "  into the new plugin 'dvbsddevice'. On systems that use such a card as their"
+		elog "  primary device, this plugin now needs to be loaded when running VDR in order"
+		elog "  to view live or recorded video. If the plugin is not loaded, the card will"
+		elog "  be treated like a budget DVB card, and there will be no OSD or viewing"
+		elog "  capability."
 
-		einfo "The index file for TS recordings is now regenerated on-the-fly if a"
-		einfo "recording is replayed that has no index. This can also be used to"
-		einfo "re-create a broken index file by manually deleting the index file and then"
-		einfo "replaying the recording."
+		elog "  The index file for TS recordings is now regenerated on-the-fly if a"
+		elog "  recording is replayed that has no index. This can also be used to"
+		elog "  re-create a broken index file by manually deleting the index file and then"
+		elog "  replaying the recording."
 
-		einfo "The files 'commands.conf' and 'reccmd.conf' can now contain nested lists of"
-		einfo "commands. See vdr.5 for information about the new file format."
+		elog "  The files \"commands.conf\" and \"reccmd.conf\" can now contain nested lists of"
+		elog "  commands. See vdr.5 for information about the new file format."
 
-		einfo "The option "Setup/DVB/Use Dolby Digital" now only controls whether Dolby Digital"
-		einfo "tracks appear in the "Audio" menu. Dolby Digital is always recorded"
+		elog "  The option \"Setup/DVB/Use Dolby Digital\" now only controls whether Dolby Digital"
+		elog "  tracks appear in the 'Audio' menu. Dolby Digital is always recorded"
 
-		einfo "The default SVDRP port is now 6419"
+		elog "  The default SVDRP port is now 6419"
 	fi
+
+	elog "It is a good idea to run vdrplugin-rebuild now."
 
 	if use setup; then
 		if ! has_version media-plugins/vdr-setup || \

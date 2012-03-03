@@ -3,6 +3,9 @@
 # $Header: $
 
   03 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.24-r1.ebuild:
+  fixed quoting
+
+  03 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.24-r1.ebuild:
   added user info for upgrade from vdr-1.6.x
 
   20 Feb 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.24-r1.ebuild:
