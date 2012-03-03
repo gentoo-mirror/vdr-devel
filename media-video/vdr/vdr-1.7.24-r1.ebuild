@@ -47,7 +47,6 @@ COMMON_DEPEND="virtual/jpeg
 
 DEPEND="${COMMON_DEPEND}
 	>=virtual/linuxtv-dvb-headers-5.3
-	dev-util/unifdef
 	sys-devel/gettext"
 
 RDEPEND="${COMMON_DEPEND}
