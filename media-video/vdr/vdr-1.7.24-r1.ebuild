@@ -350,17 +350,6 @@ pkg_postinst() {
 		fi
 	fi
 
-	if [[ $previous_less_than_1_6_0 = 0 ]]; then
-		elog "By default vdr is now started with utf8 character encoding"
-		elog
-		elog "To rename the old recordings to utf8 conforming names, do this:"
-		elog "\temerge app-text/convmv"
-		elog "\tconvmv -f latin1 -t utf8 -r --notest -i /var/vdr/video/"
-		elog
-		elog "To fix the descriptions of your recordings do this:"
-		elog "\tfind /var/vdr/video/ -name "info.vdr" -print0|xargs -0 recode latin1..utf8"
-	fi
-
 	elog "To get nice symbols in OSD we recommend to install"
 	elog "\t1. emerge media-fonts/vdrsymbols-ttf"
 	elog "\t2. select font VDRSymbolsSans in Setup"

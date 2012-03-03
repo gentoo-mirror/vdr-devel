@@ -3,6 +3,9 @@
 # $Header: $
 
   03 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.24-r1.ebuild:
+  cleanup unused upgrade info
+
+  03 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.24-r1.ebuild:
   fixed quoting
 
   03 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.24-r1.ebuild:
