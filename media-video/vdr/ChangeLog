@@ -2,6 +2,12 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-1.7.25 (04 Mar 2012)
+
+  04 Mar 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.25.ebuild:
+  Version bump to 1.7.25. The noepg patch has been removed as vdr offers almost
+  the same functionality as of 1.7.25
+
   03 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.24-r1.ebuild:
   more cleanups for install info
 
