@@ -12,7 +12,7 @@ SRC_URI="http://www.vdrtools.de/download/${P}.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~ppc"
+KEYWORDS="~arm ~amd64 ~x86 ~ppc"
 IUSE=""
 
 DEPEND=">=media-video/vdr-1.7.16[setup]
