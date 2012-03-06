@@ -2,6 +2,10 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  06 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-dvbhddevice-0.0.4_p20120226.ebuild:
+  cosmetic; removed unneeded firmeware depend
+
 *vdr-dvbhddevice-0.0.4_p20120226 (02 Mar 2012)
 
   02 Mar 2012; Joerg Krause <joerg_pb@gmx.net> -vdr-dvbhddevice-0.0.4.ebuild,
