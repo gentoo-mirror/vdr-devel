@@ -1,0 +1,10 @@
+# ChangeLog for media-plugins/vdr-noepg
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*vdr-noepg-0.0.1 (12 Mar 2012)
+
+  12 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-noepg-0.0.1.ebuild,
+  +metadata.xml:
+  initial ebuld, need up from vdr-1.7.26 for extern epg handling
+
