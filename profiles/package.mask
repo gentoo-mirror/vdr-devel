@@ -21,6 +21,9 @@
 ##   End example
 ##
 
+# Joerg Bornkessel <hd_brummy@gentoo.org> (2012.03.12)
+# need vdr-1.7.26
+>=media-plugins/vdr-noepg-0.0.1
 
 # Joerg Bornkessel <hd_brummy@gentoo.org>
 #  on behalf of QA Team
