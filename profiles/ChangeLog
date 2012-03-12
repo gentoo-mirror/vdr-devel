@@ -3,6 +3,9 @@
 # $Header: $
 
   12 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  masked vdr-femon-1.7.14, need vdr-1.7.26
+
+  12 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   masked vdr-noepg-0.0.1, need vdr-1.7.26
 
   08 Feb 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
