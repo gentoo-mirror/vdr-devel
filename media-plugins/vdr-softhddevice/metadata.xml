@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer>
+		<email>idl0r@gentoo.org</email>
+		<name>Christian Ruppert</name>
+	</maintainer>
+	<use>
+		<flag name="vaapi">Enables VAAPI (Video Acceleration API) for hardware decoding</flag>
+		<flag name="vdpau">Enables VDPAU decoders (requires nVidia video cards and binary
+			nvidia-drivers to offload CPU processing to video card)</flag>
+		<flag name="yaepg">Enables yaepg plugin support</flag>
+	</use>
+</pkgmetadata>
