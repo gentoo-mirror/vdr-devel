@@ -26,6 +26,8 @@ S="${WORKDIR}/sc"
 MAKEOPTS="-j1" # workaround for now
 
 src_prepare() {
+	vdr-plugin_src_prepare
+
 	fix_vdr_libsi_include systems/viaccess/tps.c
 	fix_vdr_libsi_include systems/viaccess/viaccess.c
 

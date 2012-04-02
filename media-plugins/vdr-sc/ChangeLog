@@ -2,6 +2,9 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  02 Apr 2012; Christian Ruppert <idl0r@gentoo.org> vdr-sc-9999.ebuild:
+  Add missing vdr-plugin_src_prepare
+
 *vdr-sc-0.9.3.20111122 (28 Feb 2012)
 
   28 Feb 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
