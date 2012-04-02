@@ -2,6 +2,9 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  02 Apr 2012; Christian Ruppert <idl0r@gentoo.org> package.mask:
+  Mask 1.7.27 for now as there a too many plugins broken currently
+
   12 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   masked vdr-femon-1.7.14, need vdr-1.7.26
 

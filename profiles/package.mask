@@ -21,6 +21,10 @@
 ##   End example
 ##
 
+# Christian Ruppert <idl0r@gentoo.org> (2012/04/02)
+# Too many plugins broken right now
+>=media-video/vdr-1.7.27
+
 # Joerg Bornkessel <hd_brummy@gentoo.org> (2012.03.12)
 # need vdr-1.7.26
 >=media-plugins/vdr-noepg-0.0.1
