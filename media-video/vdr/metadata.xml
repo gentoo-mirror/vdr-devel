@@ -22,7 +22,8 @@
 		<flag name="lnbshare">Enables support for two or more dvb cards sharing the same cable to the lnb</flag>
 		<flag name="mainmenuhooks">Allows to replace main menu entries by some special plugins (like epgsearch, extrecmenu, ...)</flag>
 		<flag name="menuorg">Enables support for the menuorg-plugin</flag>
-		<flag name="nalustripper"> </flag>
+		<flag name="naludump">Removes NALU fill data from h.264-Streams of TS files</flag>
+		<flag name="nalustripper"></flag>
 		<flag name="noepg">Adds code to selectively disable epg-reception for specific channels</flag>
 		<flag name="pinplugin">Support for pin plugin</flag>
 		<flag name="rotor">Enable support for plugin vdr-rotor for dish-positioner.</flag>

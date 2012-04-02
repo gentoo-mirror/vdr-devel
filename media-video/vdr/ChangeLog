@@ -2,6 +2,16 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-1.7.27 (02 Apr 2012)
+
+  02 Apr 2012; Christian Ruppert <idl0r@gentoo.org> -vdr-1.7.21.ebuild,
+  -vdr-1.7.21-r1.ebuild, -vdr-1.7.22.ebuild, -vdr-1.7.23.ebuild,
+  +vdr-1.7.27.ebuild, -files/vdr-1.7.21-dxr3-subtitlehack.diff,
+  -files/vdr-1.7.21-makefile-install-header.diff,
+  -files/vdr-1.7.21-shared-tinyxml.diff, -files/vdr-1.7.21_po-files-fix.diff,
+  +files/vdr-1.7.27-fix_channel_names.patch, metadata.xml:
+  Version bump and cleanup.
+
 *vdr-1.7.25 (04 Mar 2012)
 
   04 Mar 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.25.ebuild:
