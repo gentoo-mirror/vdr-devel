@@ -3,6 +3,9 @@
 # $Header: $
 
   03 Apr 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.27.ebuild:
+  Export CC and CXX
+
+  03 Apr 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.27.ebuild:
   Fix liemikuutio patch
 
 *vdr-1.7.27 (02 Apr 2012)

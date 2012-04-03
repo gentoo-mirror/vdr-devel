@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-inherit eutils flag-o-matic multilib
+inherit eutils flag-o-matic multilib toolchain-funcs
 
 # Switches supported by extensions-patch
 EXT_PATCH_FLAGS="alternatechannel cutterlimit
@@ -73,6 +73,8 @@ pkg_setup() {
 
 	use debug && append-flags -g
 	PLUGIN_LIBDIR="/usr/$(get_libdir)/vdr/plugins"
+
+	tc-export CC CXX
 }
 
 add_cap() {
