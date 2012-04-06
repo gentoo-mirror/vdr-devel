@@ -24,13 +24,12 @@ MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
 S="${WORKDIR}/${MY_P}"
 
-EXT_P="extpng-${P}-gentoo-edition-r1"
+EXT_P="extpng-${P}-gentoo-edition-r2"
 
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
-	http://dev.gentoo.org/~idl0r/vdr/${EXT_P}.patch.bz2"
-#		http://vdr.websitec.de/download/ext-patch/${EXT_P}.diff.tgz"
+	http://dev.gentoo.org/~hd_brummy/distfiles/${EXT_P}.patch.bz2"
 
 KEYWORDS="~arm ~amd64 ~ppc ~x86"
 SLOT="0"

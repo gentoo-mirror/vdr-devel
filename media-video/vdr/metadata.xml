@@ -19,7 +19,6 @@
 		<flag name="liemikuutio">Formerly known as AIO (all-in-one) patch, adds some nice must haves</flag>
 		<flag name="lircsettings">Allows to change lirc settings delay, freq and timeout values in OSD</flag>
 		<flag name="livebuffer">does timeshifting/background recording all the time, allows to rewind live TV</flag>
-		<flag name="lnbshare">Enables support for two or more dvb cards sharing the same cable to the lnb</flag>
 		<flag name="mainmenuhooks">Allows to replace main menu entries by some special plugins (like epgsearch, extrecmenu, ...)</flag>
 		<flag name="menuorg">Enables support for the menuorg-plugin</flag>
 		<flag name="naludump">Removes NALU fill data from h.264-Streams of TS files</flag>
