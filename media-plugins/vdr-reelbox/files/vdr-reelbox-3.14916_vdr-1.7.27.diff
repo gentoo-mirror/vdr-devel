@@ -1,0 +1,52 @@
+diff -Naur vdr-reelbox-3.orig/fs453settings.c vdr-reelbox-3/fs453settings.c
+--- vdr-reelbox-3.orig/fs453settings.c	2012-04-07 02:27:16.000000000 +0200
++++ vdr-reelbox-3/fs453settings.c	2012-04-07 02:32:47.000000000 +0200
+@@ -13,7 +13,6 @@
+ #include "BspCommChannel.h"
+ #include "HdCommChannel.h"
+ #include "fs453settings.h"
+-#include "i18n.h"
+ #include "reelbox.h"
+ #include "ReelBoxMenu.h"
+ #include <math.h>
+diff -Naur vdr-reelbox-3.orig/Makefile vdr-reelbox-3/Makefile
+--- vdr-reelbox-3.orig/Makefile	2012-04-07 02:27:16.000000000 +0200
++++ vdr-reelbox-3/Makefile	2012-04-07 02:32:09.000000000 +0200
+@@ -18,7 +18,7 @@
+ 	AudioDecoderNull.o AudioDecoderPcm.o AudioOut.o \
+ 	AudioPacketQueue.o AudioPlayer.o AudioPlayerBsp.o AudioPlayerHd.o \
+ 	BspCommChannel.o BspOsd.o BspOsdProvider.o BkgPicPlayer.o \
+-	bspchannel.o bspshmlib.o dts.o fs453settings.o iec60958.o i18n.o MpegPes.o \
++	bspchannel.o bspshmlib.o dts.o fs453settings.o iec60958.o MpegPes.o \
+ 	hdchannel.o hdshmlib.o HdCommChannel.o \
+ 	Reel.o ReelBoxDevice.o ReelBoxMenu.o \
+ 	VideoPlayer.o VideoPlayerBsp.o VideoPlayerHd.o \
+@@ -101,7 +101,7 @@
+ 
+ plug: libvdr-$(PLUGIN).so
+ 
+-all: libvdr-$(PLUGIN).so i18n
++all: libvdr-$(PLUGIN).so
+ 
+ ### Implicit rules:
+ 
+diff -Naur vdr-reelbox-3.orig/reelbox.c vdr-reelbox-3/reelbox.c
+--- vdr-reelbox-3.orig/reelbox.c	2012-04-07 02:27:16.000000000 +0200
++++ vdr-reelbox-3/reelbox.c	2012-04-07 02:34:16.000000000 +0200
+@@ -29,7 +29,6 @@
+ #include "ReelBoxDevice.h"
+ #include "fs453settings.h"
+ #include "ReelBoxMenu.h"
+-#include "i18n.h"
+ #include "config.h"
+ #include "VdrXineMpIf.h"
+ #include "fs453settings.h"
+@@ -153,7 +152,7 @@
+ 
+     bool Plugin::Initialize() NO_THROW
+     {
+-        RegisterI18n(Phrases);
++//        RegisterI18n(Phrases);
+         // Open communications to the BSP
+ 
+         if (RBSetup.usehdext)

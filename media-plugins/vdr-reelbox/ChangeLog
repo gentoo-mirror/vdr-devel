@@ -1,6 +1,16 @@
 # ChangeLog for media-plugins/vdr-reelbox
-# Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+*vdr-reelbox-3.14916 (09 Apr 2012)
+
+  09 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-reelbox-3.14916.ebuild, +files/vdr-reelbox-3.14916_ffmpeg.diff,
+  +files/vdr-reelbox-3.14916_libpng-1.5.diff,
+  +files/vdr-reelbox-3.14916_vdr-1.7.12-not-reelpatched.diff,
+  +files/vdr-reelbox-3.14916_vdr-1.7.27.diff, +files/save-setup_3.14916.diff:
+  version bump to revision 14916, png-1.5 compile fix, ffmpeg compile fix,
+  eapi=4
 
   30 Jun 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
   vdr-reelbox-3.14440.ebuild:

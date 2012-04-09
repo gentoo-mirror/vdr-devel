@@ -1,0 +1,54 @@
+diff -Naur vdr-reelbox-3.orig/HdFbTrueColorOsd.c vdr-reelbox-3/HdFbTrueColorOsd.c
+--- vdr-reelbox-3.orig/HdFbTrueColorOsd.c	2012-04-09 12:06:09.000000000 +0200
++++ vdr-reelbox-3/HdFbTrueColorOsd.c	2012-04-09 12:14:49.000000000 +0200
+@@ -1307,8 +1307,8 @@
+ 
+         png_read_info(png_ptr, info_ptr);
+ 
+-        png_byte h = info_ptr->height;
+-        png_byte color_type = info_ptr->color_type;
++		png_byte h = png_get_image_height(png_ptr, info_ptr);
++		png_byte color_type = png_get_color_type(png_ptr, info_ptr);
+ 
+ //#define PRINT_COLOR_TYPE 1
+ #ifdef PRINT_COLOR_TYPE
+@@ -1333,10 +1333,10 @@
+ 
+         png_read_update_info(png_ptr, info_ptr);
+ 
+-        rows = (png_bytep*) malloc(sizeof(png_bytep) * h);
++        rows = (png_bytep*) malloc(png_get_rowbytes(png_ptr, info_ptr) * h);
+         int y;
+         for (y=0; y<h; y++) {
+-            rows[y] = (png_byte*) malloc(info_ptr->rowbytes);
++            rows[y] = (png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
+         }
+ 
+         png_read_image(png_ptr, rows);
+diff -Naur vdr-reelbox-3.orig/HdTrueColorOsd.c vdr-reelbox-3/HdTrueColorOsd.c
+--- vdr-reelbox-3.orig/HdTrueColorOsd.c	2012-04-09 12:06:09.000000000 +0200
++++ vdr-reelbox-3/HdTrueColorOsd.c	2012-04-09 12:16:03.000000000 +0200
+@@ -730,8 +730,8 @@
+ 
+ 	png_read_info(png_ptr, info_ptr);
+ 
+-	png_byte h = info_ptr->height;
+-	png_byte color_type = info_ptr->color_type;
++	png_byte h = png_get_image_height(png_ptr, info_ptr);
++	png_byte color_type = png_get_color_type(png_ptr, info_ptr);
+ 
+ //#define PRINT_COLOR_TYPE 1
+ #ifdef PRINT_COLOR_TYPE
+@@ -756,10 +756,10 @@
+ 
+ 	png_read_update_info(png_ptr, info_ptr);
+ 
+-	rows = (png_bytep*) malloc(sizeof(png_bytep) * h);
++	rows = (png_bytep*) malloc(png_get_rowbytes(png_ptr, info_ptr) * h);
+ 	int y;
+ 	for (y=0; y<h; y++) {
+-		rows[y] = (png_byte*) malloc(info_ptr->rowbytes);
++		rows[y] = (png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
+         }
+ 
+ 	png_read_image(png_ptr, rows);

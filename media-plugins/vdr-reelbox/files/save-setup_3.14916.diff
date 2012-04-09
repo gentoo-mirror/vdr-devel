@@ -1,0 +1,24 @@
+diff -ru reelbox-3.10388.orig/setupmenu.c reelbox-3.10388/setupmenu.c
+--- reelbox-3.10388.orig/setupmenu.c	2009-01-19 13:22:30.000000000 +0100
++++ reelbox-3.10388/setupmenu.c	2009-01-19 17:10:08.000000000 +0100
+@@ -27,6 +27,7 @@
+ 
+     if (state == osUnknown && key == kOk)
+     {
++        if (HasSubMenu()) return cMenuSetupPage::ProcessKey(key);
+         const char *text = Get(Current())->Text();
+ 
+         if ( text && strstr(text, tr("Video Settings")) )
+diff -ru reelbox-3.10388.orig/VideoPlayerPipHd.c reelbox-3.10388/VideoPlayerPipHd.c
+--- reelbox-3.10388.orig/VideoPlayerPipHd.c	2009-01-19 13:22:30.000000000 +0100
++++ reelbox-3.10388/VideoPlayerPipHd.c	2009-01-19 17:03:12.000000000 +0100
+@@ -39,6 +39,8 @@
+ // I like standards...
+ typedef unsigned char uchar;
+ 
++#include <stdlib.h>
++
+ #define PICS_BUF 16
+ #define HDFB_DEVICE "/dev/fb0"
+ #define ES_BUFFER_SIZE (262144)
+
