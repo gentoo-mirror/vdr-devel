@@ -1,6 +1,12 @@
 # ChangeLog for media-video/reelbox-ehd-bin
-# Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+*reelbox-ehd-bin-14916 (09 Apr 2012)
+
+  09 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org> +files/reelbox-ehd-v2,
+  +reelbox-ehd-bin-14916.ebuild:
+  version bump to revision 14916, eapi=4, new init file
 
   23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
   +reelbox-ehd-bin-14440.ebuild, +files/reelbox-ehd, +metadata.xml:
