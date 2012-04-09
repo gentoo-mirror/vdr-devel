@@ -1,0 +1,30 @@
+Fix ioctl compile kernel >=2.6.35
+Joerg Bornkessel <hd_brummy@g.o> Nov 29 2010
+diff -Naur hdshm3.orig/src/driver/hdshm.c hdshm3/src/driver/hdshm.c
+--- hdshm3.orig/src/driver/hdshm.c	2010-11-28 23:48:13.000000000 +0100
++++ hdshm3/src/driver/hdshm.c	2010-11-29 00:13:04.000000000 +0100
+@@ -493,8 +493,12 @@
+ }
+ #endif
+ /* --------------------------------------------------------------------- */
++#if LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 35)
+ static int hdshm_ioctl (struct inode *inode, struct file *file, 
+ 	unsigned int cmd, unsigned long arg)
++#else
++static long hdshm_ioctl (struct file *file, unsigned int cmd, unsigned long arg)
++#endif
+ {
+ 	int ret=0;
+ 	struct hdshm_file *bsf=(struct hdshm_file*)file->private_data;
+@@ -664,7 +668,11 @@
+ static struct file_operations hdshm_fops =
+ {
+         owner:          THIS_MODULE,
++#if LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 35)
+         ioctl:          hdshm_ioctl,
++#else
++        unlocked_ioctl: hdshm_ioctl,
++#endif
+         open:           hdshm_open,
+ //      read:           hdshm_read,
+ 	mmap:           hdshm_mmap,
