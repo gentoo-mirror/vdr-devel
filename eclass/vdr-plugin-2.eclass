@@ -1,8 +1,8 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/vdr-plugin.eclass,v 1.86 2012/04/07 10:18:24 hd_brummy Exp $
+# $Header: /var/cvsroot/gentoo-x86/eclass/vdr-plugin-2.eclass,v 1.86 2012/04/07 10:18:24 hd_brummy Exp $
 
-# @ECLASS: vdr-plugin.eclass
+# @ECLASS: vdr-plugin-2.eclass
 # @MAINTAINER:
 # vdr@gentoo.org
 # @BLURB: common vdr plugin ebuild functions
@@ -45,8 +45,8 @@
 
 inherit base multilib eutils flag-o-matic
 
-if ! has "${EAPI:-0}" 0 1 2 3 4; then
-	die "API of vdr-plugin.eclass in EAPI=\"${EAPI}\" not established"
+if ! has "${EAPI:-0}" 4; then
+	die "API of vdr-plugin-2.eclass in EAPI=\"${EAPI}\" not established"
 fi
 
 IUSE=""
@@ -56,7 +56,7 @@ VDRPLUGIN="${PN/#vdrplugin-/}"
 VDRPLUGIN="${VDRPLUGIN/#vdr-/}"
 VDRPLUGIN="${VDRPLUGIN/%-cvs/}"
 
-DESCRIPTION="vdr Plugin: ${VDRPLUGIN} (based on vdr-plugin.eclass)"
+DESCRIPTION="vdr Plugin: ${VDRPLUGIN} (based on vdr-plugin-2.eclass)"
 
 # works in most cases
 S="${WORKDIR}/${VDRPLUGIN}-${PV}"
@@ -102,7 +102,7 @@ create_plugindb_file() {
 	} > "${D}/${DB_FILE}"
 }
 
-# Delete files created outside of vdr-plugin.eclass
+# Delete files created outside of vdr-plugin-2.eclass
 #   vdrplugin-rebuild.ebuild converted plugindb and files are
 #   not deleted by portage itself - should only be needed as
 #   long as not every system has switched over to
@@ -223,111 +223,16 @@ vdr_patchmakefile() {
 	touch "${WORKDIR}"/.vdr-plugin_makefile_patched
 }
 
-# use eclass content only to <=vdr-1.7.26
-# beginn old vdr-plugin.eclass
-# leave this untouched !!!
-if has_version "<=media-video/vdr-1.7.26"; then
-
-vdr_has_gettext() {
-	has_version ">=media-video/vdr-1.5.7"
-}
-
-plugin_has_gettext() {
-	[[ -d po ]]
-	# some plugins gives false positive results, keep this list short
-	# temporary workout, ToDo: fix the plugins/eclass
-	has_version ">=media-plugins/vdr-streamdev-0.5.0"
-	has_version ">=media-plugins/vdr-vdrmanager-0.6"
-}
-
-vdr_i18n_convert_to_gettext() {
-	if has_version ">=media-video/vdr-1.7.22"; then
-		local i18n_tool="${ROOT}/usr/share/vdr/bin/i18n-to-gettext"
-	else
-		local i18n_tool="${ROOT}/usr/share/vdr/bin/i18n-to-gettext.pl"
-	fi
-
-	if [[ ${NO_GETTEXT_HACK} == "1" ]]; then
-		ewarn "Conversion to gettext disabled in ebuild"
-		return 1
-	fi
-
-	if [[ ! -x ${i18n_tool} ]]; then
-		eerror "Missing ${i18n_tool}"
-		eerror "Please re-emerge vdr"
-		die "Missing ${i18n_tool}"
-	fi
-
-	ebegin "Auto converting translations to gettext"
-	# call i18n-to-gettext tool
-	# take all texts missing tr call into special file
-	"${i18n_tool}" 2>/dev/null \
-		|sed -e '/^"/!d' \
-			-e '/^""$/d' \
-			-e 's/\(.*\)/trNOOP(\1)/' \
-		> dummy-translations-trNOOP.c
-
-	# if there were untranslated texts just run it again
-	# now the missing calls are listed in
-	# dummy-translations-trNOOP.c
-	if [[ -s dummy-translations-trNOOP.c ]]; then
-		"${i18n_tool}" &>/dev/null
-	fi
-
-	# now use the modified Makefile
-	if [[ -f Makefile.new ]]; then
-		mv Makefile.new Makefile
-		eend 0 ""
-	else
-		eend 1 "Conversion to gettext failed. Plugin needs fixing."
-		return 1
-	fi
-}
-
-vdr_i18n_disable_gettext() {
-	#einfo "Disabling gettext support in plugin"
-
-	# Remove i18n Target if using older vdr
-	sed -i Makefile \
-		-e '/^all:/s/ i18n//'
-}
-
-vdr_i18n() {
-	if vdr_has_gettext; then
-		#einfo "VDR has gettext support"
-		if plugin_has_gettext; then
-			#einfo "Plugin has gettext support, fine"
-			if [[ ${NO_GETTEXT_HACK} == "1" ]]; then
-				ewarn "Please remove unneeded NO_GETTEXT_HACK from ebuild."
-			fi
-		else
-			vdr_i18n_convert_to_gettext
-			if [[ $? != 0 ]]; then
-				einfo "Plugin has no OSD texts or will have only english OSD texts"
-			fi
-		fi
-	else
-		#einfo "VDR has no gettext support"
-		if plugin_has_gettext; then
-			vdr_i18n_disable_gettext
-		fi
-	fi
-}
-
-fi 
-# end old vdr-plugin.eclass
 
 # start new vdr-plugin-2.eclass content
-if has_version ">=media-video/vdr-1.7.27"; then
-# start fixing deprecated i18n handling
 # start only gettext handling, no backport for depricated i18n crap
 # idl0r, hd_brummy,
 	einfo "using vdr-plugin-2.eclass only for developing and testing"
 	einfo "dont use it in public content"
 
-fi # end new content vdr-plugin-2.eclass
+# end new content vdr-plugin-2.eclass
 
-vdr-plugin_copy_source_tree() {
+vdr-plugin-2_copy_source_tree() {
 	pushd . >/dev/null
 	cp -r "${S}" "${T}"/source-tree
 	cd "${T}"/source-tree
@@ -341,7 +246,7 @@ vdr-plugin_copy_source_tree() {
 	popd >/dev/null
 }
 
-vdr-plugin_install_source_tree() {
+vdr-plugin-2_install_source_tree() {
 	einfo "Installing sources"
 	destdir="${VDRSOURCE_DIR}/vdr-${VDRVERSION}/PLUGINS/src/${VDRPLUGIN}"
 	insinto "${destdir}-${PV}"
@@ -350,7 +255,7 @@ vdr-plugin_install_source_tree() {
 	dosym "${VDRPLUGIN}-${PV}" "${destdir}"
 }
 
-vdr-plugin_print_enable_command() {
+vdr-plugin-2_print_enable_command() {
 	local p_name c=0 l=""
 	for p_name in ${vdr_plugin_list}; do
 		c=$(( c+1 ))
@@ -373,7 +278,7 @@ has_vdr() {
 
 ## exported functions
 
-vdr-plugin_pkg_setup() {
+vdr-plugin-2_pkg_setup() {
 	# -fPIC is needed for shared objects on some platforms (amd64 and others)
 	append-flags -fPIC
 
@@ -433,14 +338,14 @@ vdr-plugin_pkg_setup() {
 	fi
 }
 
-vdr-plugin_src_util() {
+vdr-plugin-2_src_util() {
 	while [ "$1" ]; do
 		case "$1" in
 		all)
-			vdr-plugin_src_util unpack add_local_patch patchmakefile i18n
+			vdr-plugin_2_src_util unpack add_local_patch patchmakefile i18n
 			;;
 		prepare|all_but_unpack)
-			vdr-plugin_src_util add_local_patch patchmakefile i18n
+			vdr-plugin-2_src_util add_local_patch patchmakefile i18n
 			;;
 		unpack)
 			base_src_unpack
@@ -463,51 +368,51 @@ vdr-plugin_src_util() {
 	done
 }
 
-vdr-plugin_src_unpack() {
+vdr-plugin-2_src_unpack() {
 	if [[ -z ${VDR_INCLUDE_DIR} ]]; then
-		eerror "Wrong use of vdr-plugin.eclass."
-		eerror "An ebuild for a vdr-plugin will not work without calling vdr-plugin_pkg_setup."
+		eerror "Wrong use of vdr-plugin-2.eclass."
+		eerror "An ebuild for a vdr-plugin will not work without calling vdr-plugin-2_pkg_setup."
 		echo
 		eerror "Please report this at bugs.gentoo.org."
-		die "vdr-plugin_pkg_setup not called!"
+		die "vdr-plugin-2_pkg_setup not called!"
 	fi
 	if [ -z "$1" ]; then
 		case "${EAPI:-0}" in
 			2|3|4)
-				vdr-plugin_src_util unpack
+				vdr-plugin-2_src_util unpack
 				;;
 			*)
-				vdr-plugin_src_util all
+				vdr-plugin-2_src_util all
 				;;
 		esac
 
 	else
-		vdr-plugin_src_util $@
+		vdr-plugin-2_src_util $@
 	fi
 }
 
-vdr-plugin_src_prepare() {
+vdr-plugin-2_src_prepare() {
 	base_src_prepare
-	vdr-plugin_src_util prepare
+	vdr-plugin-2_src_util prepare
 }
 
-vdr-plugin_src_compile() {
-	[ -z "$1" ] && vdr-plugin_src_compile copy_source compile
+vdr-plugin-2_src_compile() {
+	[ -z "$1" ] && vdr-plugin-2_src_compile copy_source compile
 
 	while [ "$1" ]; do
 
 		case "$1" in
 		copy_source)
-			[[ -n "${VDRSOURCE_DIR}" ]] && vdr-plugin_copy_source_tree
+			[[ -n "${VDRSOURCE_DIR}" ]] && vdr-plugin-2_copy_source_tree
 			;;
 		compile)
 			if [[ ! -f ${WORKDIR}/.vdr-plugin_makefile_patched ]]; then
-				eerror "Wrong use of vdr-plugin.eclass."
+				eerror "Wrong use of vdr-plugin-2.eclass."
 				eerror "An ebuild for a vdr-plugin will not work without"
-				eerror "calling vdr-plugin_src_unpack to patch the Makefile."
+				eerror "calling vdr-plugin-2_src_unpack to patch the Makefile."
 				echo
 				eerror "Please report this at bugs.gentoo.org."
-				die "vdr-plugin_src_unpack not called!"
+				die "vdr-plugin-2_src_unpack not called!"
 			fi
 			cd "${S}"
 
@@ -526,8 +431,8 @@ vdr-plugin_src_compile() {
 	done
 }
 
-vdr-plugin_src_install() {
-	[[ -n "${VDRSOURCE_DIR}" ]] && vdr-plugin_install_source_tree
+vdr-plugin-2_src_install() {
+	[[ -n "${VDRSOURCE_DIR}" ]] && vdr-plugin-2_install_source_tree
 	cd "${WORKDIR}"
 
 	if [[ -n ${VDR_MAINTAINER_MODE} ]]; then
@@ -596,8 +501,8 @@ vdr-plugin_src_install() {
 	fi
 }
 
-vdr-plugin_pkg_postinst() {
-	vdr-plugin_print_enable_command
+vdr-plugin-2_pkg_postinst() {
+	vdr-plugin-2_print_enable_command
 
 	if [[ -n "${VDR_CONFD_FILE}" ]]; then
 		elog "Please have a look at the config-file"
@@ -606,11 +511,11 @@ vdr-plugin_pkg_postinst() {
 	fi
 }
 
-vdr-plugin_pkg_postrm() {
+vdr-plugin-2_pkg_postrm() {
 	delete_orphan_plugindb_file
 }
 
-vdr-plugin_pkg_config() {
+vdr-plugin-2_pkg_config() {
 :
 }
 
