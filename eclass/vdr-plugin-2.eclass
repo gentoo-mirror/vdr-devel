@@ -45,7 +45,7 @@
 
 inherit base multilib eutils flag-o-matic
 
-if ! has "${EAPI:-0}" 4; then
+if ! has "${EAPI:-4}" 4; then
 	die "API of vdr-plugin-2.eclass in EAPI=\"${EAPI}\" not established"
 fi
 
@@ -342,10 +342,10 @@ vdr-plugin-2_src_util() {
 	while [ "$1" ]; do
 		case "$1" in
 		all)
-			vdr-plugin_2_src_util unpack add_local_patch patchmakefile i18n
+			vdr-plugin_2_src_util unpack add_local_patch patchmakefile
 			;;
 		prepare|all_but_unpack)
-			vdr-plugin-2_src_util add_local_patch patchmakefile i18n
+			vdr-plugin-2_src_util add_local_patch patchmakefile
 			;;
 		unpack)
 			base_src_unpack
@@ -357,10 +357,6 @@ vdr-plugin-2_src_util() {
 		patchmakefile)
 			cd "${S}" || die "Could not change to plugin-source-directory!"
 			vdr_patchmakefile
-			;;
-		i18n)
-			cd "${S}" || die "Could not change to plugin-source-directory!"
-			vdr_i18n
 			;;
 		esac
 
@@ -378,11 +374,12 @@ vdr-plugin-2_src_unpack() {
 	fi
 	if [ -z "$1" ]; then
 		case "${EAPI:-0}" in
-			2|3|4)
+			4)
 				vdr-plugin-2_src_util unpack
 				;;
 			*)
-				vdr-plugin-2_src_util all
+				eerror "vdr-plugin-2.eclass supports only eapi=4"
+#				vdr-plugin-2_src_util all
 				;;
 		esac
 
@@ -471,12 +468,12 @@ vdr-plugin-2_src_install() {
 	create_header_checksum_file ${vdr_plugin_list}
 	create_plugindb_file ${vdr_plugin_list}
 
-	if vdr_has_gettext && [[ -d ${TMP_LOCALE_DIR} ]]; then
-		einfo "Installing locales"
-		cd "${TMP_LOCALE_DIR}"
-		insinto "${LOCDIR}"
-		doins -r *
-	fi
+#	if vdr_has_gettext && [[ -d ${TMP_LOCALE_DIR} ]]; then
+#		einfo "Installing locales"
+#		cd "${TMP_LOCALE_DIR}"
+#		insinto "${LOCDIR}"
+#		doins -r *
+#	fi
 
 	cd "${S}"
 	local docfile
@@ -520,10 +517,11 @@ vdr-plugin-2_pkg_config() {
 }
 
 case "${EAPI:-0}" in
-	2|3|4)
+	4)
 		EXPORT_FUNCTIONS pkg_setup src_unpack src_prepare src_compile src_install pkg_postinst pkg_postrm pkg_config
 		;;
 	*)
-		EXPORT_FUNCTIONS pkg_setup src_unpack src_compile src_install pkg_postinst pkg_postrm pkg_config
+		eerror "vdr-plugin-2.eclass supports only eapi=4"
+#		EXPORT_FUNCTIONS pkg_setup src_unpack src_compile src_install pkg_postinst pkg_postrm pkg_config
 		;;
 esac
