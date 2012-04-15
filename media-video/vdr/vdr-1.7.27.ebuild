@@ -107,6 +107,14 @@ extensions_all_defines() {
 		| tr '[:upper:]' '[:lower:]'
 }
 
+lang_linguas() {
+	LING1=$( cat /etc/make.conf | grep LINGUAS | sed -e "s:LINGUAS=::" -e "s:\"::g" )
+}
+
+lang_po() {
+	LING2=$( ls ${S}/po | tr \\\012 ' ' | sed -e "s:_::g" -e "s:[A-Z]::g" -e "s:.po::g" )
+}
+
 src_prepare() {
 	#applying maintainace-patches
 
@@ -157,6 +165,7 @@ src_prepare() {
 
 	epatch "${FILESDIR}/${PN}-1.7.22-makefile-install-header.diff"
 	epatch "${FILESDIR}/${P}-fix_channel_names.patch"
+	epatch "${FILESDIR}/${P}_linguas.diff"
 
 	# Do not install runvdr script and plugins
 	sed -i Makefile \
@@ -230,6 +239,22 @@ src_prepare() {
 			CAP_SHUTDOWN_AUTO_RETRY
 
 	echo -e ${CAPS} > "${CAP_FILE}"
+
+	# some new improvments for LINGUAS handling
+	einfo "\n \t VDR supports now the LINGUAS values"
+
+	lang_po
+	lang_linguas
+
+	einfo "\t Please set one of this values in /etc/make.conf"
+	einfo "\t LINGUAS=\"${LING2}\"\n"
+
+	if [[ -z ${LINGUAS} ]]; then
+		eerror "\n \t No values in LINGUAS="
+		eerror "\t you will get only english text on OSD \n"
+	else
+		einfo "\t Language for ${LING1} will installed \n"
+	fi
 }
 
 src_install() {

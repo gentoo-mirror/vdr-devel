@@ -2,6 +2,10 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  15 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.27.ebuild,
+  +files/vdr-1.7.27_linguas.diff:
+  first improvement for LINGUAS support
+
   08 Apr 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.23.ebuild:
   Temp. restore vdr-1.7.23
 
