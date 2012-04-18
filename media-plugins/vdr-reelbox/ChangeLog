@@ -2,6 +2,10 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  18 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +files/reelbox-3.14916_makefile.diff:
+  added missing makefile.diff
+
 *vdr-reelbox-3.14916 (09 Apr 2012)
 
   09 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
