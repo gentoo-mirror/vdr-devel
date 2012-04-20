@@ -227,8 +227,39 @@ vdr_patchmakefile() {
 # start new vdr-plugin-2.eclass content
 # start only gettext handling, no backport for depricated i18n crap
 # idl0r, hd_brummy,
-	einfo "using vdr-plugin-2.eclass only for developing and testing"
-	einfo "dont use it in public content"
+eclass_test_warning() {
+	eerror "using vdr-plugin-2.eclass only for developing and testing"
+	eerror "dont use it in public content"
+
+}
+vdr-plugin-2_linguas() {
+	eclass_test_warning
+	# Patching Makefile for Linguas Support
+	# only value in /etc/make.conf LINGUAS=
+	# will be compiled, installed
+	#
+	# Some plugins have /po in a subdir
+	# set PO_SUBDIR in .ebuild
+	# i.e media-plugins/vdr-streamdev
+	# PO_SUBDIR="client server"
+
+	einfo "Patching for Linguas support"
+	einfo "available Languages for ${P} are:"
+
+	[[ -f po ]] && local po_dir="${S}"
+
+	makefile_dir=( ${po_dir} ${S}/${PO_SUBDIR} )
+
+	for f in ${makefile_dir[*]}; do
+
+		PLUGIN_LINGUAS=$( ls ${f}/po | tr \\\012 ' ' | tr -d [:upper:] | tr -d [:punct:] |sed -e "s:po::g" )
+		einfo "LINGUAS=\"${PLUGIN_LINGUAS}\""
+
+		sed -i ${f}/Makefile \
+			-e 's:\$(wildcard[[:space:]]*\$(PODIR)/\*.po):\$(foreach dir,\$(LINGUAS),\$(wildcard \$(PODIR)\/\$(dir)\*.po)):' \
+			|| die "sed failed for Linguas"
+	done
+}
 
 # end new content vdr-plugin-2.eclass
 
@@ -342,10 +373,12 @@ vdr-plugin-2_src_util() {
 	while [ "$1" ]; do
 		case "$1" in
 		all)
-			vdr-plugin_2_src_util unpack add_local_patch patchmakefile
+			vdr-plugin-2_src_util unpack add_local_patch patchmakefile
+			vdr-plugin-2_linguas
 			;;
 		prepare|all_but_unpack)
 			vdr-plugin-2_src_util add_local_patch patchmakefile
+			vdr-plugin-2_linguas
 			;;
 		unpack)
 			base_src_unpack
@@ -373,7 +406,7 @@ vdr-plugin-2_src_unpack() {
 		die "vdr-plugin-2_pkg_setup not called!"
 	fi
 	if [ -z "$1" ]; then
-		case "${EAPI:-0}" in
+		case "${EAPI:-4}" in
 			4)
 				vdr-plugin-2_src_util unpack
 				;;
@@ -516,12 +549,11 @@ vdr-plugin-2_pkg_config() {
 :
 }
 
-case "${EAPI:-0}" in
+case "${EAPI:-4}" in
 	4)
 		EXPORT_FUNCTIONS pkg_setup src_unpack src_prepare src_compile src_install pkg_postinst pkg_postrm pkg_config
 		;;
 	*)
 		eerror "vdr-plugin-2.eclass supports only eapi=4"
-#		EXPORT_FUNCTIONS pkg_setup src_unpack src_compile src_install pkg_postinst pkg_postrm pkg_config
 		;;
 esac
