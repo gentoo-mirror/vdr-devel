@@ -247,8 +247,10 @@ vdr-plugin-2_linguas() {
 	einfo "available Languages for ${P} are:"
 
 	[[ -f po ]] && local po_dir="${S}"
+	local po_subdir=( ${S}/${PO_SUBDIR} )
+	local f
 
-	makefile_dir=( ${po_dir} ${S}/${PO_SUBDIR} )
+	makefile_dir=( ${po_dir} ${po_subdir[*]} )
 
 	for f in ${makefile_dir[*]}; do
 
