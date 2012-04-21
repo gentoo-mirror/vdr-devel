@@ -227,8 +227,8 @@ vdr_patchmakefile() {
 # start only gettext handling, no backport for depricated i18n crap
 # idl0r, hd_brummy,
 eclass_test_warning() {
-	eerror "using vdr-plugin-2.eclass only for developing and testing"
-	eerror "dont use it in public content"
+	eerror "\n using vdr-plugin-2.eclass only for developing and testing"
+	eerror "dont use it in public content \n"
 
 }
 vdr-plugin-2_linguas() {
@@ -263,8 +263,7 @@ vdr-plugin-2_linguas() {
 
 	# maintainer check
 	if [[ -n ${VDR_MAINTAINER_MODE} ]]; then
-		cd ${S}
-		if [[ ! -f po ]]; then
+		if [[ ! -d po ]]; then
 			eerror "Maintainer check:"
 			eerror "Plugin/ebuild need reviewing/fixing"
 		fi
