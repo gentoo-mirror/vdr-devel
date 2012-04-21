@@ -223,10 +223,6 @@ vdr_patchmakefile() {
 	touch "${WORKDIR}"/.vdr-plugin_makefile_patched
 }
 
-vdr_has_gettext() {
-	has_version ">=media-video/vdr-1.5.7"
-}
-
 # start new vdr-plugin-2.eclass content
 # start only gettext handling, no backport for depricated i18n crap
 # idl0r, hd_brummy,
@@ -264,8 +260,28 @@ vdr-plugin-2_linguas() {
 			-e 's:\$(wildcard[[:space:]]*\$(PODIR)/\*.po):\$(foreach dir,\$(LINGUAS),\$(wildcard \$(PODIR)\/\$(dir)\*.po)):' \
 			|| die "sed failed for Linguas"
 	done
+
+	# maintainer check
+	if [[ -n ${VDR_MAINTAINER_MODE} ]]; then
+		cd ${S}
+		if [[ ! -f po ]]; then
+			eerror "Maintainer check:"
+			eerror "Plugin/ebuild need reviewing/fixing"
+		fi
+	fi
 }
 
+vdr_i18n() {
+	# i18n handling is deprecated since >=media-video/vdr-1.5.9
+	# finaly on >=media-video/vdr-1.7.27 plugins will failed on compile
+	# simply remove OBJECT i18n.o from Makefile
+	# disable "static const tI18nPhrase*" from i18n.h
+	# old plugins without converting to gettext handling will be pmasked,
+	# after plugin maintainer timeout for fixing, removing from tree
+
+	sed -i "s:i18n.o::g" Makefile
+	sed -i "s:^extern[[:space:]]*const[[:space:]]*tI18nPhrase://static const tI18nPhrase:" i18n.h
+}
 # end new content vdr-plugin-2.eclass
 
 vdr-plugin-2_copy_source_tree() {
@@ -364,8 +380,7 @@ vdr-plugin-2_pkg_setup() {
 	einfo "Compiling against"
 	einfo "\tvdr-${VDRVERSION} [API version ${APIVERSION}]"
 
-
-	if [ -n "${VDR_LOCAL_PATCHES_DIR}" ]; then
+	if [[ -n "${VDR_LOCAL_PATCHES_DIR}" ]]; then
 		eerror "Using VDR_LOCAL_PATCHES_DIR is deprecated!"
 		eerror "Please move all your patches into"
 		eerror "${EROOT}/etc/portage/patches/${CATEGORY}/${P}"
@@ -379,11 +394,11 @@ vdr-plugin-2_src_util() {
 		case "$1" in
 		all)
 			vdr-plugin-2_src_util unpack add_local_patch patchmakefile
-			vdr-plugin-2_linguas
+			vdr-plugin-2_linguas i18n
 			;;
 		prepare|all_but_unpack)
 			vdr-plugin-2_src_util add_local_patch patchmakefile
-			vdr-plugin-2_linguas
+			vdr-plugin-2_linguas i18n
 			;;
 		unpack)
 			base_src_unpack
@@ -395,6 +410,9 @@ vdr-plugin-2_src_util() {
 		patchmakefile)
 			cd "${S}" || die "Could not change to plugin-source-directory!"
 			vdr_patchmakefile
+			;;
+		i18n)
+			vdr_i18n
 			;;
 		esac
 
@@ -417,7 +435,6 @@ vdr-plugin-2_src_unpack() {
 				;;
 			*)
 				eerror "vdr-plugin-2.eclass supports only eapi=4"
-#				vdr-plugin-2_src_util all
 				;;
 		esac
 
@@ -488,8 +505,6 @@ vdr-plugin-2_src_install() {
 
 	fi
 
-
-
 	cd "${S}"
 	insinto "${VDR_PLUGIN_DIR}"
 	doins libvdr-*.so.*
@@ -506,7 +521,7 @@ vdr-plugin-2_src_install() {
 	create_header_checksum_file ${vdr_plugin_list}
 	create_plugindb_file ${vdr_plugin_list}
 
-	if vdr_has_gettext && [[ -d ${TMP_LOCALE_DIR} ]]; then
+	if [[ -d ${TMP_LOCALE_DIR} ]]; then
 		einfo "Installing locales"
 		cd "${TMP_LOCALE_DIR}"
 		insinto "${LOCDIR}"
