@@ -223,6 +223,9 @@ vdr_patchmakefile() {
 	touch "${WORKDIR}"/.vdr-plugin_makefile_patched
 }
 
+vdr_has_gettext() {
+	has_version ">=media-video/vdr-1.5.7"
+}
 
 # start new vdr-plugin-2.eclass content
 # start only gettext handling, no backport for depricated i18n crap
@@ -503,12 +506,12 @@ vdr-plugin-2_src_install() {
 	create_header_checksum_file ${vdr_plugin_list}
 	create_plugindb_file ${vdr_plugin_list}
 
-#	if vdr_has_gettext && [[ -d ${TMP_LOCALE_DIR} ]]; then
-#		einfo "Installing locales"
-#		cd "${TMP_LOCALE_DIR}"
-#		insinto "${LOCDIR}"
-#		doins -r *
-#	fi
+	if vdr_has_gettext && [[ -d ${TMP_LOCALE_DIR} ]]; then
+		einfo "Installing locales"
+		cd "${TMP_LOCALE_DIR}"
+		insinto "${LOCDIR}"
+		doins -r *
+	fi
 
 	cd "${S}"
 	local docfile
