@@ -49,6 +49,8 @@ if ! has "${EAPI:-4}" 4; then
 	die "API of vdr-plugin-2.eclass in EAPI=\"${EAPI}\" not established"
 fi
 
+EXPORT_FUNCTIONS pkg_setup src_unpack src_prepare src_compile src_install pkg_postinst pkg_postrm pkg_config
+
 IUSE=""
 
 # Name of the plugin stripped from all vdrplugin-, vdr- and -cvs pre- and postfixes
@@ -567,12 +569,3 @@ vdr-plugin-2_pkg_postrm() {
 vdr-plugin-2_pkg_config() {
 :
 }
-
-case "${EAPI:-4}" in
-	4)
-		EXPORT_FUNCTIONS pkg_setup src_unpack src_prepare src_compile src_install pkg_postinst pkg_postrm pkg_config
-		;;
-	*)
-		eerror "vdr-plugin-2.eclass supports only eapi=4"
-		;;
-esac
