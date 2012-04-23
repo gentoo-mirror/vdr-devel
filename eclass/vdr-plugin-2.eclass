@@ -156,7 +156,7 @@ create_header_checksum_file()
 
 fix_vdr_libsi_include()
 {
-	#einfo "Fixing include of libsi-headers"
+	dev_check "Fixing include of libsi-headers"
 	local f
 	for f; do
 		sed -i "${f}" \
@@ -227,33 +227,23 @@ vdr_patchmakefile() {
 
 # start new vdr-plugin-2.eclass content
 # start only gettext handling, no backport for depricated i18n crap
-# idl0r, hd_brummy,
-eclass_test_warning() {
-	eerror "\n using vdr-plugin-2.eclass only for developing and testing"
-	eerror "dont use it in public content \n"
-}
-
-#all_but_unpack_depricated_check() {
-#}
-
 dev_check() {
 	# a lot usefull debuginfos
 	# set VDR_MAINTAINER_MODE="1" in /etc/make.conf
 	if [[ -n ${VDR_MAINTAINER_MODE} ]]; then
-		eerror "\n Maintainer Info: $@"
+		eerror "\t Maintainer Info: $@"
 	fi
 }
 
 linguas_support() {
-	eclass_test_warning
-	# Patching Makefile for Linguas Support
-	# only value in /etc/make.conf LINGUAS=
-	# will be compiled, installed
-	#
-	# Some plugins have /po in a subdir
-	# set PO_SUBDIR in .ebuild
-	# i.e media-plugins/vdr-streamdev
-	# PO_SUBDIR="client server"
+# Patching Makefile for Linguas Support
+#  only value in /etc/make.conf LINGUAS=
+#  will be compiled, installed
+#
+#  Some plugins have /po in a subdir
+#  set PO_SUBDIR in .ebuild
+#  i.e media-plugins/vdr-streamdev
+#  PO_SUBDIR="client server"
 
 	einfo "Patching for Linguas support"
 	einfo "available Languages for ${P} are:"
@@ -276,29 +266,29 @@ linguas_support() {
 
 	# maintainer check
 	if [[ ! -d po ]]; then
-		dev_check "po dir not found!"
+		dev_check "po dir not found? Maybe in subdir?"
 	fi
 }
 
 vdr_i18n() {
-	# i18n handling is deprecated since >=media-video/vdr-1.5.9
-	# finaly on >=media-video/vdr-1.7.27 plugins will failed on compile
-	# simply remove OBJECT i18n.o from Makefile
-	# disable "static const tI18nPhrase*" from i18n.h
-	# old plugins without converting to gettext handling will be pmasked,
-	# after plugin maintainer timeout for fixing, removing from tree
-	local I18N_OBJECT=$( grep ${S}/Makefile i18n.o )
-	if [ -z ${I18N_OBJECT} ]; then
+# i18n handling is deprecated since >=media-video/vdr-1.5.9
+#  finaly on >=media-video/vdr-1.7.27 plugins will failed on compile
+#  simply remove OBJECT i18n.o from Makefile
+#  disable "static const tI18nPhrase*" from i18n.h
+#  old plugins without converting to gettext handling will be pmasked,
+#  after plugin maintainer timeout for fixing, removing from tree
+	local I18N_OBJECT=$( grep i18n.o ${S}/Makefile )
+	if [[ -n ${I18N_OBJECT} ]]; then
 		sed -i "s:i18n.o::g" Makefile
 		dev_check "OBJECT i18n.o found"
 		dev_check "removed per sed"
 	else
-		dev_check "OBJECT 18n.o not found"
-		dev_check "manuel review needed"
+		dev_check "OBJECT i18n.o not found in Makefile"
+		dev_check "all fine or manuel review needed?"
 	fi
 
-	local I18N_STRING=$( grep ${S}/i18n.h tI18nPhrase )
-	if [ -z ${I18N_STRING} ]; then
+	local I18N_STRING=$( grep tI18nPhrase ${S}/i18n.h )
+	if [[ -n ${I18N_STRING} ]]; then
 		sed -i "s:^extern[[:space:]]*const[[:space:]]*tI18nPhrase://static const tI18nPhrase:" i18n.h
 		dev_check "deprecated tI18nPhrase found"
 		dev_check "disabled pe sed, Please recheck"
@@ -415,13 +405,15 @@ vdr-plugin-2_src_util() {
 		case "$1" in
 		all)
 			vdr-plugin-2_src_util unpack add_local_patch patchmakefile
-			linguas_patch i18n
+			linguas_support
+			vdr_i18n
 			;;
 		prepare)
-			# do we need this in eapi=4? some plugins have to convert! 
+			# do we need this in eapi=4? some plugins have to convert!
 			# move call all_but_unpack --> function scr_prepare()
 			vdr-plugin-2_src_util add_local_patch patchmakefile
-			linguas_patch i18n
+			linguas_support
+			vdr_i18n
 			;;
 		unpack)
 			base_src_unpack
@@ -434,12 +426,12 @@ vdr-plugin-2_src_util() {
 			cd "${S}" || die "Could not change to plugin-source-directory!"
 			vdr_patchmakefile
 			;;
-		i18n)
-			vdr_i18n
-			;;
-		linguas_patch)
-			linguas_support
-			;;
+#		i18n)
+#			vdr_i18n
+#			;;
+#		linguas_patch)
+#			linguas_support
+#			;;
 		esac
 
 		shift
@@ -455,7 +447,7 @@ vdr-plugin-2_src_unpack() {
 		die "vdr-plugin-2_pkg_setup not called!"
 	fi
 
-	# do we need this? 
+	# do we need this?
 	# check in vdr-plugin-2.eclass head still available
 	if [ -z "$1" ]; then
 		case "${EAPI:-4}" in
