@@ -231,9 +231,20 @@ vdr_patchmakefile() {
 eclass_test_warning() {
 	eerror "\n using vdr-plugin-2.eclass only for developing and testing"
 	eerror "dont use it in public content \n"
-
 }
-vdr-plugin-2_linguas() {
+
+#all_but_unpack_depricated_check() {
+#}
+
+dev_check() {
+	# a lot usefull debuginfos
+	# set VDR_MAINTAINER_MODE="1" in /etc/make.conf
+	if [[ -n ${VDR_MAINTAINER_MODE} ]]; then
+		eerror "\n Maintainer Info: $@"
+	fi
+}
+
+linguas_support() {
 	eclass_test_warning
 	# Patching Makefile for Linguas Support
 	# only value in /etc/make.conf LINGUAS=
@@ -264,11 +275,8 @@ vdr-plugin-2_linguas() {
 	done
 
 	# maintainer check
-	if [[ -n ${VDR_MAINTAINER_MODE} ]]; then
-		if [[ ! -d po ]]; then
-			eerror "Maintainer check:"
-			eerror "Plugin/ebuild need reviewing/fixing"
-		fi
+	if [[ ! -d po ]]; then
+		dev_check "po dir not found!"
 	fi
 }
 
@@ -279,9 +287,25 @@ vdr_i18n() {
 	# disable "static const tI18nPhrase*" from i18n.h
 	# old plugins without converting to gettext handling will be pmasked,
 	# after plugin maintainer timeout for fixing, removing from tree
+	local I18N_OBJECT=$( grep ${S}/Makefile i18n.o )
+	if [ -z ${I18N_OBJECT} ]; then
+		sed -i "s:i18n.o::g" Makefile
+		dev_check "OBJECT i18n.o found"
+		dev_check "removed per sed"
+	else
+		dev_check "OBJECT 18n.o not found"
+		dev_check "manuel review needed"
+	fi
 
-	sed -i "s:i18n.o::g" Makefile
-	sed -i "s:^extern[[:space:]]*const[[:space:]]*tI18nPhrase://static const tI18nPhrase:" i18n.h
+	local I18N_STRING=$( grep ${S}/i18n.h tI18nPhrase )
+	if [ -z ${I18N_STRING} ]; then
+		sed -i "s:^extern[[:space:]]*const[[:space:]]*tI18nPhrase://static const tI18nPhrase:" i18n.h
+		dev_check "deprecated tI18nPhrase found"
+		dev_check "disabled pe sed, Please recheck"
+	else
+		dev_check "deprecated tI18nPhrase not found, fine..."
+		dev_check "please review, maybe in subdir..."
+	fi
 }
 # end new content vdr-plugin-2.eclass
 
@@ -354,11 +378,7 @@ vdr-plugin-2_pkg_setup() {
 	DVB_INCLUDE_DIR="/usr/include"
 
 	TMP_LOCALE_DIR="${WORKDIR}/tmp-locale"
-	if has_version ">=media-video/vdr-1.6.0_p2-r7"; then
-		LOCDIR="/usr/share/locale"
-	else
-		LOCDIR="/usr/share/vdr/locale"
-	fi
+	LOCDIR="/usr/share/locale"
 
 	if ! has_vdr; then
 		# set to invalid values to detect abuses
@@ -395,11 +415,13 @@ vdr-plugin-2_src_util() {
 		case "$1" in
 		all)
 			vdr-plugin-2_src_util unpack add_local_patch patchmakefile
-			vdr-plugin-2_linguas i18n
+			linguas_patch i18n
 			;;
-		prepare|all_but_unpack)
+		prepare)
+			# do we need this in eapi=4? some plugins have to convert! 
+			# move call all_but_unpack --> function scr_prepare()
 			vdr-plugin-2_src_util add_local_patch patchmakefile
-			vdr-plugin-2_linguas i18n
+			linguas_patch i18n
 			;;
 		unpack)
 			base_src_unpack
@@ -415,6 +437,9 @@ vdr-plugin-2_src_util() {
 		i18n)
 			vdr_i18n
 			;;
+		linguas_patch)
+			linguas_support
+			;;
 		esac
 
 		shift
@@ -429,6 +454,9 @@ vdr-plugin-2_src_unpack() {
 		eerror "Please report this at bugs.gentoo.org."
 		die "vdr-plugin-2_pkg_setup not called!"
 	fi
+
+	# do we need this? 
+	# check in vdr-plugin-2.eclass head still available
 	if [ -z "$1" ]; then
 		case "${EAPI:-4}" in
 			4)
@@ -438,7 +466,6 @@ vdr-plugin-2_src_unpack() {
 				eerror "vdr-plugin-2.eclass supports only eapi=4"
 				;;
 		esac
-
 	else
 		vdr-plugin-2_src_util $@
 	fi
@@ -453,7 +480,6 @@ vdr-plugin-2_src_compile() {
 	[ -z "$1" ] && vdr-plugin-2_src_compile copy_source compile
 
 	while [ "$1" ]; do
-
 		case "$1" in
 		copy_source)
 			[[ -n "${VDRSOURCE_DIR}" ]] && vdr-plugin-2_copy_source_tree
@@ -541,7 +567,6 @@ vdr-plugin-2_src_install() {
 	if [[ -n ${VDR_CONFD_FILE} ]]; then
 		newconfd "${VDR_CONFD_FILE}" vdr.${VDRPLUGIN}
 	fi
-
 
 	# if VDR_RCADDON_FILE is empty and ${FILESDIR}/rc-addon.sh exists take it
 	[[ -z ${VDR_RCADDON_FILE} ]] && [[ -e ${FILESDIR}/rc-addon.sh ]] && VDR_RCADDON_FILE=${FILESDIR}/rc-addon.sh
