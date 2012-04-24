@@ -225,8 +225,7 @@ vdr_patchmakefile() {
 	touch "${WORKDIR}"/.vdr-plugin_makefile_patched
 }
 
-# start new vdr-plugin-2.eclass content
-# start only gettext handling, no backport for depricated i18n crap
+# beginn new content vdr-plugin-2.eclass
 dev_check() {
 	# a lot usefull debuginfos
 	# set VDR_MAINTAINER_MODE="1" in /etc/make.conf
@@ -237,13 +236,13 @@ dev_check() {
 
 linguas_support() {
 # Patching Makefile for Linguas Support
-#  only value in /etc/make.conf LINGUAS=
-#  will be compiled, installed
+#	only value in /etc/make.conf LINGUAS=
+#	will be compiled, installed
 #
-#  Some plugins have /po in a subdir
-#  set PO_SUBDIR in .ebuild
-#  i.e media-plugins/vdr-streamdev
-#  PO_SUBDIR="client server"
+#	Some plugins have /po in a subdir
+#	set PO_SUBDIR in .ebuild
+#	i.e media-plugins/vdr-streamdev
+#	PO_SUBDIR="client server"
 
 	einfo "Patching for Linguas support"
 	einfo "available Languages for ${P} are:"
@@ -272,12 +271,13 @@ linguas_support() {
 
 vdr_i18n() {
 # i18n handling is deprecated since >=media-video/vdr-1.5.9
-#  finaly on >=media-video/vdr-1.7.27 plugins will failed on compile
-#  simply remove OBJECT i18n.o from Makefile
-#  disable "static const tI18nPhrase*" from i18n.h
-#  old plugins without converting to gettext handling will be pmasked,
-#  after plugin maintainer timeout for fixing, removing from tree
-	local I18N_OBJECT=$( grep i18n.o ${S}/Makefile )
+#	finaly on >=media-video/vdr-1.7.27 it is obsolet, plugins will failed on compile
+#	simply remove OBJECT i18n.o from Makefile
+#	disable "static const tI18nPhrase*" from i18n.h
+#	old plugins without converting to gettext handling will be pmasked,
+#	after plugin maintainer timeout for fixing, removing from tree
+
+	local I18N_OBJECT=$( grep i18n.o Makefile )
 	if [[ -n ${I18N_OBJECT} ]]; then
 		sed -i "s:i18n.o::g" Makefile
 		dev_check "OBJECT i18n.o found"
@@ -287,13 +287,13 @@ vdr_i18n() {
 		dev_check "all fine or manuel review needed?"
 	fi
 
-	local I18N_STRING=$( grep tI18nPhrase ${S}/i18n.h )
+	local I18N_STRING=$( [[ -e i18n.h ]] && grep tI18nPhrase i18n.h )
 	if [[ -n ${I18N_STRING} ]]; then
 		sed -i "s:^extern[[:space:]]*const[[:space:]]*tI18nPhrase://static const tI18nPhrase:" i18n.h
-		dev_check "deprecated tI18nPhrase found"
+		dev_check "obsoleted tI18nPhrase found"
 		dev_check "disabled pe sed, Please recheck"
 	else
-		dev_check "deprecated tI18nPhrase not found, fine..."
+		dev_check "obsoleted tI18nPhrase not found, fine..."
 		dev_check "please review, maybe in subdir..."
 	fi
 }
@@ -404,16 +404,10 @@ vdr-plugin-2_src_util() {
 	while [ "$1" ]; do
 		case "$1" in
 		all)
-			vdr-plugin-2_src_util unpack add_local_patch patchmakefile
-			linguas_support
-			vdr_i18n
+			vdr-plugin-2_src_util unpack add_local_patch patchmakefile linguas_patch i18n
 			;;
 		prepare)
-			# do we need this in eapi=4? some plugins have to convert!
-			# move call all_but_unpack --> function scr_prepare()
-			vdr-plugin-2_src_util add_local_patch patchmakefile
-			linguas_support
-			vdr_i18n
+			vdr-plugin-2_src_util add_local_patch patchmakefile linguas_patch i18n
 			;;
 		unpack)
 			base_src_unpack
@@ -426,12 +420,12 @@ vdr-plugin-2_src_util() {
 			cd "${S}" || die "Could not change to plugin-source-directory!"
 			vdr_patchmakefile
 			;;
-#		i18n)
-#			vdr_i18n
-#			;;
-#		linguas_patch)
-#			linguas_support
-#			;;
+		i18n)
+			vdr_i18n
+			;;
+		linguas_patch)
+			linguas_support
+			;;
 		esac
 
 		shift
@@ -447,17 +441,8 @@ vdr-plugin-2_src_unpack() {
 		die "vdr-plugin-2_pkg_setup not called!"
 	fi
 
-	# do we need this?
-	# check in vdr-plugin-2.eclass head still available
 	if [ -z "$1" ]; then
-		case "${EAPI:-4}" in
-			4)
-				vdr-plugin-2_src_util unpack
-				;;
-			*)
-				eerror "vdr-plugin-2.eclass supports only eapi=4"
-				;;
-		esac
+		vdr-plugin-2_src_util unpack
 	else
 		vdr-plugin-2_src_util $@
 	fi
