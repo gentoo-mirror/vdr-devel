@@ -60,7 +60,7 @@ VDRPLUGIN="${VDRPLUGIN/%-cvs/}"
 
 DESCRIPTION="vdr Plugin: ${VDRPLUGIN} (based on vdr-plugin-2.eclass)"
 
-# works in most cases
+# Works in most cases
 S="${WORKDIR}/${VDRPLUGIN}-${PV}"
 
 # depend on headers for DVB-driver
@@ -71,10 +71,9 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	>=app-admin/eselect-vdr-0.0.2"
 
-# this is a hack for ebuilds like vdr-xineliboutput that want to
+# This is a hack for ebuilds like vdr-xineliboutput that want to
 # conditionally install a vdr-plugin
 if [[ "${GENTOO_VDR_CONDITIONAL:-no}" = "yes" ]]; then
-	# make DEPEND conditional
 	IUSE="${IUSE} vdr"
 	DEPEND="vdr? ( ${DEPEND} )"
 	RDEPEND="vdr? ( ${RDEPEND} )"
@@ -129,8 +128,7 @@ delete_orphan_plugindb_file() {
 }
 
 
-create_header_checksum_file()
-{
+create_header_checksum_file() {
 	# Danger: Not using $ROOT here, as compile will also not use it !!!
 	# If vdr in $ROOT and / differ, plugins will not run anyway
 
@@ -154,8 +152,7 @@ create_header_checksum_file()
 	done
 }
 
-fix_vdr_libsi_include()
-{
+fix_vdr_libsi_include() {
 	dev_check "Fixing include of libsi-headers"
 	local f
 	for f; do
@@ -194,7 +191,7 @@ vdr_patchmakefile() {
 		-e 's:-I$(DVBDIR)/include::' \
 		-e 's:-I$(DVBDIR)::'
 
-	# maybe needed for multiproto:
+	# may be needed for multiproto:
 	#sed -i Makefile \
 	#	-e "s:^DVBDIR.*$:DVBDIR = ${DVB_INCLUDE_DIR}:" \
 	#	-e 's:-I$(DVBDIR)/include:-I$(DVBDIR):'
@@ -214,7 +211,7 @@ vdr_patchmakefile() {
 		-e '/^CXXFLAGS[[:space:]]*=/s/=/?=/' \
 		-e '/LDFLAGS/!s:-shared:$(LDFLAGS) -shared:'
 
-	# Disabling file stripping, useful for debugging
+	# Disabling file stripping, the package manager takes care of it
 	sed -i Makefile \
 		-e '/@.*strip/d' \
 		-e '/strip \$(LIBDIR)\/\$@/d' \
@@ -225,9 +222,9 @@ vdr_patchmakefile() {
 	touch "${WORKDIR}"/.vdr-plugin_makefile_patched
 }
 
-# beginn new content vdr-plugin-2.eclass
+# Begin new vdr-plugin-2.eclass content
 dev_check() {
-	# a lot usefull debuginfos
+	# A lot useful debug infos
 	# set VDR_MAINTAINER_MODE="1" in /etc/make.conf
 	if [[ -n ${VDR_MAINTAINER_MODE} ]]; then
 		eerror "\t Maintainer Info: $@"
@@ -235,11 +232,11 @@ dev_check() {
 }
 
 linguas_support() {
-# Patching Makefile for Linguas Support
-#	only value in /etc/make.conf LINGUAS=
-#	will be compiled, installed
+#	Patching Makefile for linguas support.
+#	Only locales, enabled through the LINGUAS (make.conf) variable will be
+#	"compiled" and installed.
 #
-#	Some plugins have /po in a subdir
+#	Some plugins have po/ in a subdir
 #	set PO_SUBDIR in .ebuild
 #	i.e media-plugins/vdr-streamdev
 #	PO_SUBDIR="client server"
@@ -265,17 +262,19 @@ linguas_support() {
 
 	# maintainer check
 	if [[ ! -d po ]]; then
-		dev_check "po dir not found? Maybe in subdir?"
+		dev_check "po dir not found? May be in subdir?"
 	fi
 }
 
 vdr_i18n() {
-# i18n handling is deprecated since >=media-video/vdr-1.5.9
-#	finaly on >=media-video/vdr-1.7.27 it is obsolet, plugins will failed on compile
-#	simply remove OBJECT i18n.o from Makefile
-#	disable "static const tI18nPhrase*" from i18n.h
-#	old plugins without converting to gettext handling will be pmasked,
-#	after plugin maintainer timeout for fixing, removing from tree
+# 	i18n handling was deprecated since >=media-video/vdr-1.5.9,
+#	finally with >=media-video/vdr-1.7.27 it has been dropped entirely and some
+#	plugins will fail to "compile" because they're still using the old variant.
+#	Simply remove the i18n.o object from Makefile (OBJECT) and
+#	remove "static const tI18nPhrase*" from i18n.h.
+#
+#	Plugins that are still using the old method will be pmasked until they're
+#	fixed or in case of maintainer timeout they'll be masked for removal.
 
 	local I18N_OBJECT=$( grep i18n.o Makefile )
 	if [[ -n ${I18N_OBJECT} ]]; then
@@ -284,20 +283,20 @@ vdr_i18n() {
 		dev_check "removed per sed"
 	else
 		dev_check "OBJECT i18n.o not found in Makefile"
-		dev_check "all fine or manuel review needed?"
+		dev_check "all fine or manual review needed?"
 	fi
 
 	local I18N_STRING=$( [[ -e i18n.h ]] && grep tI18nPhrase i18n.h )
 	if [[ -n ${I18N_STRING} ]]; then
 		sed -i "s:^extern[[:space:]]*const[[:space:]]*tI18nPhrase://static const tI18nPhrase:" i18n.h
-		dev_check "obsoleted tI18nPhrase found"
-		dev_check "disabled pe sed, Please recheck"
+		dev_check "obsolete tI18nPhrase found"
+		dev_check "disabled per sed, please recheck"
 	else
-		dev_check "obsoleted tI18nPhrase not found, fine..."
-		dev_check "please review, maybe in subdir..."
+		dev_check "obsolete tI18nPhrase not found, fine..."
+		dev_check "please review, may be in subdir..."
 	fi
 }
-# end new content vdr-plugin-2.eclass
+# end new vdr-plugin-2.eclass content
 
 vdr-plugin-2_copy_source_tree() {
 	pushd . >/dev/null
