@@ -231,6 +231,15 @@ dev_check() {
 	fi
 }
 
+gettext_missing() {
+	# plugins without converting to gettext
+
+	local GETTEXT_MISSING=$( grep xgettext Makefile )
+	if [ -n ${GETTEXT_MISSING} ]; then
+		dev_check "Plugin isn't converted to gettext handling \n"
+	fi
+}
+
 linguas_support() {
 #	Patching Makefile for linguas support.
 #	Only locales, enabled through the LINGUAS (make.conf) variable will be
@@ -262,7 +271,7 @@ linguas_support() {
 
 	# maintainer check
 	if [[ ! -d po ]]; then
-		dev_check "po dir not found? May be in subdir?"
+		dev_check "po dir not found? May be in subdir? \n"
 	fi
 }
 
@@ -276,24 +285,26 @@ vdr_i18n() {
 #	Plugins that are still using the old method will be pmasked until they're
 #	fixed or in case of maintainer timeout they'll be masked for removal.
 
+	gettext_missing
+
 	local I18N_OBJECT=$( grep i18n.o Makefile )
 	if [[ -n ${I18N_OBJECT} ]]; then
 		sed -i "s:i18n.o::g" Makefile
 		dev_check "OBJECT i18n.o found"
-		dev_check "removed per sed"
+		dev_check "removed per sed \n"
 	else
 		dev_check "OBJECT i18n.o not found in Makefile"
-		dev_check "all fine or manual review needed?"
+		dev_check "all fine or manual review needed? \n"
 	fi
 
 	local I18N_STRING=$( [[ -e i18n.h ]] && grep tI18nPhrase i18n.h )
 	if [[ -n ${I18N_STRING} ]]; then
 		sed -i "s:^extern[[:space:]]*const[[:space:]]*tI18nPhrase://static const tI18nPhrase:" i18n.h
 		dev_check "obsolete tI18nPhrase found"
-		dev_check "disabled per sed, please recheck"
+		dev_check "disabled per sed, please recheck \n"
 	else
 		dev_check "obsolete tI18nPhrase not found, fine..."
-		dev_check "please review, may be in subdir..."
+		dev_check "please review, may be in subdir... \n"
 	fi
 }
 # end new vdr-plugin-2.eclass content
