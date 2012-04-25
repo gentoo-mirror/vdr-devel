@@ -235,7 +235,7 @@ gettext_missing() {
 	# plugins without converting to gettext
 
 	local GETTEXT_MISSING=$( grep xgettext Makefile )
-	if [ -n ${GETTEXT_MISSING} ]; then
+	if [ -z ${GETTEXT_MISSING} ]; then
 		dev_check "Plugin isn't converted to gettext handling \n"
 	fi
 }
