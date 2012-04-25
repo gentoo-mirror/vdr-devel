@@ -11,7 +11,7 @@ if [ "${PV}" = "9999" ]; then
 	EGIT_REPO_URI="git://projects.vdr-developer.org/vdr-plugin-softhddevice.git"
 	KEYWORDS=""
 else
-	SRC_URI="mirror://vdr-developerorg/889/${P}.tgz"
+	SRC_URI="mirror://vdr-developerorg/919/${P}.tgz"
 	KEYWORDS="~amd64 ~x86"
 fi
 

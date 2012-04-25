@@ -2,6 +2,12 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-softhddevice-0.5.0 (25 Apr 2012)
+
+  25 Apr 2012; Christian Ruppert <idl0r@gentoo.org>
+  +vdr-softhddevice-0.5.0.ebuild, vdr-softhddevice-9999.ebuild:
+  Version bump
+
 *vdr-softhddevice-9999 (21 Mar 2012)
 *vdr-softhddevice-0.4.9 (21 Mar 2012)
 
