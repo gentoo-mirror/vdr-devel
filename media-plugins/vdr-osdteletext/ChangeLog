@@ -1,0 +1,10 @@
+# ChangeLog for media-plugins/vdr-osdteletext
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*vdr-osdteletext-0.9.3 (26 Apr 2012)
+
+  26 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org> +files/confd-v2,
+  +vdr-osdteletext-0.9.3.ebuild, +files/rc-addon-v2.sh, +metadata.xml:
+  taken from portage, need vdr-1.7.27; pmasked on depend of pmasked vdr-1.7.27
+
