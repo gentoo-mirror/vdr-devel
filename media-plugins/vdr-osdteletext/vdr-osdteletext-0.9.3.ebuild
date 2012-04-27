@@ -17,7 +17,7 @@ LICENSE="GPL-2"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND=">=media-video/vdr-1.5.7"
+DEPEND=">=media-video/vdr-1.7.23"
 RDEPEND="${DEPEND}"
 
 VDR_RCADDON_FILE="${FILESDIR}/rc-addon-v2.sh"
