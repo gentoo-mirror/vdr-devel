@@ -1,0 +1,10 @@
+# ChangeLog for media-plugins/vdr-actuator
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*vdr-actuator-1.2.1 (29 Apr 2012)
+
+  29 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-actuator-1.2.1.ebuild, +metadata.xml:
+  bump, need >=vdr-1.7.23
+
