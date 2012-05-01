@@ -2,6 +2,10 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  01 May 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.27.ebuild,
+  +files/vdr-1.7.27_fontconfig_fontsort.patch:
+  compilefix contconfig-2.9.0
+
   15 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.27.ebuild,
   +files/vdr-1.7.27_linguas.diff:
   first improvement for LINGUAS support
