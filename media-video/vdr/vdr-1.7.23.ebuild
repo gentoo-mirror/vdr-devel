@@ -230,6 +230,7 @@ src_prepare() {
 
 		# force to use shared tinyxml for use-flag setup
 		epatch "${FILESDIR}/${PN}-1.7.22-shared-tinyxml.diff"
+		epatch "${FILESDIR}/vdr-1.7.27_fontconfig_fontsort.patch"
 
 		# This allows us to start even if some plugin does not exist
 		# or is not loadable.
