@@ -2,6 +2,10 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  06 May 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  files/vdr-1.7.27_linguas.diff:
+  fixed linguas patch, failed on install if LINGUAS value is en
+
   02 May 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.23.ebuild,
   vdr-1.7.24-r1.ebuild:
   added fontconfig_fonsort.patch to vdr-1.7.24 vdr-1.7.23
