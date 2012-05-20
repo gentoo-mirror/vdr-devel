@@ -253,9 +253,9 @@ src_prepare() {
 	if [[ -z ${LINGUAS} ]]; then
 		eerror "\n \t No values in LINGUAS="
 		eerror "\t you will get only english text on OSD \n"
-	else
-		einfo "\t Language for ${LING1} will installed \n"
 	fi
+
+	strip-linguas ${LING2}
 }
 
 src_install() {

@@ -2,6 +2,11 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  20 May 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.27.ebuild,
+  files/vdr-1.7.27_linguas.diff:
+  linguas install fails on unsupported values, reported by Michael B. on IRC
+  #gentoo-vdr
+
   06 May 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
   files/vdr-1.7.27_linguas.diff:
   fixed linguas patch, failed on install if LINGUAS value is en
