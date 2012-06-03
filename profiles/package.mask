@@ -21,10 +21,11 @@
 ##   End example
 ##
 
-# Joerg Bornkessel <hd_brummy@gentoo.org> (2012/04/26)
+# Joerg Bornkessel <hd_brummy@gentoo.org> (2012/06/03)
 # Christian Ruppert <idl0r@gentoo.org> (2012/04/02)
 # Too many plugins broken right now
 >=media-video/vdr-1.7.27
+>=media-video/vdr-1.7.28
 =media-plugins/vdr-femon-1.7.17
 >=media-plugins/vdr-noepg-0.0.1
 
