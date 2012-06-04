@@ -2,6 +2,13 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-dvbhddevice-0.0.4_p20120603 (04 Jun 2012)
+
+  04 Jun 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-dvbhddevice-0.0.4_p20120603.ebuild,
+  +files/dvbhddevice-0.0.4_20120603_transfer.diff:
+  new snapshot; thx to Martin.D
+
 *vdr-dvbhddevice-0.0.4_p20120324 (01 Apr 2012)
 
   01 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
