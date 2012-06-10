@@ -10,7 +10,8 @@ inherit eutils flag-o-matic multilib toolchain-funcs
 EXT_PATCH_FLAGS="alternatechannel cutterlimit
 	ddepgentry dvlvidprefer graphtft hardlinkcutter jumpplay
 	liemikuutio lircsettings mainmenuhooks menuorg naludump pinplugin
-	rotor setup timerinfo ttxtsubs volctrl wareagleicon yaepg"
+	rotor setup ttxtsubs volctrl wareagleicon yaepg"
+# timerinfo temp droped, need new version in extpatch
 
 # names of the use-flags
 EXT_PATCH_FLAGS_RENAMED=""
