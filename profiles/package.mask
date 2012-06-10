@@ -25,9 +25,9 @@
 # Christian Ruppert <idl0r@gentoo.org> (2012/04/02)
 # Too many plugins broken right now
 >=media-video/vdr-1.7.27
->=media-video/vdr-1.7.28
 =media-plugins/vdr-femon-1.7.17
 >=media-plugins/vdr-noepg-0.0.1
+>=media-plugins/vdr-skinsoppalusikka-1.7.7
 
 # Joerg Bornkessel <hd_brummy@gentoo.org>
 #  on behalf of QA Team
