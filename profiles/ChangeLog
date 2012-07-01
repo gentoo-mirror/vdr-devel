@@ -2,6 +2,9 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  01 Jul 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  media-video/vdr-osdpip-0.1.2 pmasked, need vdr-1.7.27
+
   10 Jun 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   vdr-skinsoppalusikka-1.7.7 pmask, need >=vdr-1.7.27
 

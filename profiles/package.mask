@@ -28,6 +28,7 @@
 =media-plugins/vdr-femon-1.7.17
 >=media-plugins/vdr-noepg-0.0.1
 >=media-plugins/vdr-skinsoppalusikka-1.7.7
+>=media-plugins/vdr-osdpip-0.1.2
 
 # Joerg Bornkessel <hd_brummy@gentoo.org>
 #  on behalf of QA Team
