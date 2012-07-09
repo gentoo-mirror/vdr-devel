@@ -2,6 +2,11 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  09 Jul 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.27.ebuild,
+  -files/vdr-1.7.27_linguas.diff, +files/vdr-1.7.27_linguas-v2.diff,
+  vdr-1.7.28.ebuild:
+  fixed install on empty or unsupported linguas variable
+
   10 Jun 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.28.ebuild:
   timerinfo temp droped, need new version in extpatch
 

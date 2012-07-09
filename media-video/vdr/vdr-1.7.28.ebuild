@@ -165,7 +165,7 @@ src_prepare() {
 	eend 0
 
 	epatch "${FILESDIR}/${PN}-1.7.22-makefile-install-header.diff"
-	epatch "${FILESDIR}/${PN}-1.7.27_linguas.diff"
+	epatch "${FILESDIR}/${PN}-1.7.27_linguas-v2.diff"
 
 	# Do not install runvdr script and plugins
 	sed -i Makefile \
@@ -254,7 +254,7 @@ src_prepare() {
 		eerror "\t you will get only english text on OSD \n"
 	fi
 
-	strip-linguas ${LING2}
+	strip-linguas ${LING2} en
 }
 
 src_install() {

@@ -165,7 +165,7 @@ src_prepare() {
 
 	epatch "${FILESDIR}/${PN}-1.7.22-makefile-install-header.diff"
 	epatch "${FILESDIR}/${P}-fix_channel_names.patch"
-	epatch "${FILESDIR}/${P}_linguas.diff"
+	epatch "${FILESDIR}/${P}_linguas-v2.diff"
 	epatch "${FILESDIR}/${P}_fontconfig_fontsort.patch"
 
 	# Do not install runvdr script and plugins
@@ -255,7 +255,7 @@ src_prepare() {
 		eerror "\t you will get only english text on OSD \n"
 	fi
 
-	strip-linguas ${LING2}
+	strip-linguas ${LING2} en
 }
 
 src_install() {
