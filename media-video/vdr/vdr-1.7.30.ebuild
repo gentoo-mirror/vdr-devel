@@ -108,12 +108,8 @@ extensions_all_defines() {
 		| tr '[:upper:]' '[:lower:]'
 }
 
-lang_linguas() {
-	LING1=$( cat /etc/make.conf | grep LINGUAS | sed -e "s:LINGUAS=::" -e "s:\"::g" )
-}
-
 lang_po() {
-	LING2=$( ls ${S}/po | tr \\\012 ' ' | sed -e "s:_::g" -e "s:[A-Z]::g" -e "s:.po::g" )
+	LING_PO=$( ls ${S}/po | sed -e "s:.po::g" | cut -d_ -f1 | tr \\\012 ' ' )
 }
 
 src_prepare() {
@@ -244,17 +240,16 @@ src_prepare() {
 	einfo "\n \t VDR supports now the LINGUAS values"
 
 	lang_po
-	lang_linguas
 
-	einfo "\t Please set one of this values in /etc/make.conf"
-	einfo "\t LINGUAS=\"${LING2}\"\n"
+	einfo "\t Please set one of this values in /etc/make.conf or /etc/portage/make.conf"
+	einfo "\t LINGUAS=\"${LING_PO}\"\n"
 
 	if [[ -z ${LINGUAS} ]]; then
 		eerror "\n \t No values in LINGUAS="
 		eerror "\t you will get only english text on OSD \n"
 	fi
 
-	strip-linguas ${LING2} en
+	strip-linguas ${LING_PO} en
 }
 
 src_install() {

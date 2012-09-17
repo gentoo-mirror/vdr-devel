@@ -2,6 +2,10 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  17 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.27.ebuild,
+  vdr-1.7.28.ebuild, vdr-1.7.29.ebuild, vdr-1.7.30.ebuild:
+  better linguas detection
+
 *vdr-1.7.30 (10 Sep 2012)
 
   10 Sep 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.30.ebuild:
