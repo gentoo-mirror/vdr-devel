@@ -10,17 +10,6 @@ diff -Naur vdr-reelbox-3.orig/fs453settings.c vdr-reelbox-3/fs453settings.c
  #include "ReelBoxMenu.h"
  #include <math.h>
 diff -Naur vdr-reelbox-3.orig/Makefile vdr-reelbox-3/Makefile
---- vdr-reelbox-3.orig/Makefile	2012-04-07 02:27:16.000000000 +0200
-+++ vdr-reelbox-3/Makefile	2012-04-07 02:32:09.000000000 +0200
-@@ -18,7 +18,7 @@
- 	AudioDecoderNull.o AudioDecoderPcm.o AudioOut.o \
- 	AudioPacketQueue.o AudioPlayer.o AudioPlayerBsp.o AudioPlayerHd.o \
- 	BspCommChannel.o BspOsd.o BspOsdProvider.o BkgPicPlayer.o \
--	bspchannel.o bspshmlib.o dts.o fs453settings.o iec60958.o i18n.o MpegPes.o \
-+	bspchannel.o bspshmlib.o dts.o fs453settings.o iec60958.o MpegPes.o \
- 	hdchannel.o hdshmlib.o HdCommChannel.o \
- 	Reel.o ReelBoxDevice.o ReelBoxMenu.o \
- 	VideoPlayer.o VideoPlayerBsp.o VideoPlayerHd.o \
 @@ -101,7 +101,7 @@
  
  plug: libvdr-$(PLUGIN).so

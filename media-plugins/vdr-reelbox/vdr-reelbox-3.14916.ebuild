@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-inherit vdr-plugin
+inherit vdr-plugin-2
 
 DESCRIPTION="VDR Plugin: for the Reel eHD PCI card"
 HOMEPAGE="http://www.reel-multimedia.com"
@@ -26,7 +26,7 @@ DEPEND=">=media-video/vdr-1.7.12
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	vdr-plugin_src_prepare
+	vdr-plugin-2_src_prepare
 
 	epatch "${FILESDIR}/reelbox-${PV}_makefile.diff"
 
