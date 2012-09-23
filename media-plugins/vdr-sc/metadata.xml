@@ -11,6 +11,8 @@
 		<flag name='conax'>No Description</flag>
 		<flag name='constcw'>No Description</flag>
 		<flag name='cryptoworks'>No Description</flag>
+		<flag name='dvbhddevice'>Supports transfermode for multituner systems"</flag>
+		<flag name='dvbsddevice'>Supports transfermode for multituner systems"</flag>
 		<flag name='irdeto'>No Description</flag>
 		<flag name='nagra'>No Description</flag>
 		<flag name='nds'>No Description</flag>
