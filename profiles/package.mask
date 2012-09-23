@@ -21,6 +21,12 @@
 ##   End example
 ##
 
+# Joerg Bornkessel <hd_brummy>@gentoo.org> (2012/09/23)
+# tmp masked for testing on transfermode included in vdr-sc
+=media-plugins/vdr-dvbhddevice-0.0.4_p20120614
+=media-plugins/vdr-dvbsddevice-0.0.5-r1
+=media-plugins/vdr-sc-0.9.3.20120815
+
 # Joerg Bornkessel <hd_brummy@gentoo.org> (2012/06/03)
 # Christian Ruppert <idl0r@gentoo.org> (2012/04/02)
 # Too many plugins broken right now
