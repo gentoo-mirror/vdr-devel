@@ -2,6 +2,13 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-dvbhddevice-0.0.4_p20120614 (23 Sep 2012)
+
+  23 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-dvbhddevice-0.0.4_p20120614.ebuild:
+  new version, without transfermodepatch, supported now by vdr-sc with use-flag
+  dvbhddevice
+
 *vdr-dvbhddevice-0.0.4_p20120603 (04 Jun 2012)
 
   04 Jun 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
