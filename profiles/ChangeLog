@@ -2,6 +2,9 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  24 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  unmask >=vdr-1.7.27 and depende plugins
+
   23 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   tmp masked for testing on transfermode included in vdr-sc
 
