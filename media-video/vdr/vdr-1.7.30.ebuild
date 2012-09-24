@@ -296,6 +296,9 @@ src_install() {
 pkg_preinst() {
 	has_version "<${CATEGORY}/${PN}-1.6.0_p2-r8"
 	previous_less_than_1_6_0_p2_r8=$?
+
+	has_version "<${CATEGORY}/${PN}-1.7.27"
+	previous_less_than_1_7_27=$?
 }
 
 pkg_postinst() {
@@ -314,7 +317,7 @@ pkg_postinst() {
 		elog "  can still be replayed and edited, but new recordings are done in TS."
 
 		elog "  The support for full featured DVB cards of the TT/FuSi design has been moved"
-		elog "  into the new plugin 'dvbsddevice'. On systems that use such a card as their"
+		elog "  into the new plugins 'dvbsddevice' 'dvbhddevice'. On systems that use such a card as their"
 		elog "  primary device, this plugin now needs to be loaded when running VDR in order"
 		elog "  to view live or recorded video. If the plugin is not loaded, the card will"
 		elog "  be treated like a budget DVB card, and there will be no OSD or viewing"
@@ -326,12 +329,20 @@ pkg_postinst() {
 		elog "  replaying the recording."
 
 		elog "  The files \"commands.conf\" and \"reccmd.conf\" can now contain nested lists of"
-		elog "  commands. See vdr.5 for information about the new file format."
+		elog "  commands. See man vdr.5 for information about the new file format."
 
 		elog "  The option \"Setup/DVB/Use Dolby Digital\" now only controls whether Dolby Digital"
 		elog "  tracks appear in the 'Audio' menu. Dolby Digital is always recorded"
 
 		elog "  The default SVDRP port is now 6419"
+	fi
+
+	if [[ previous_less_than_1_7_27=$? = 0 ]] ; then
+		elog "In vdr releases >=vdr-1.7.27 the depricated i18n handling is removed"
+		elog "This results now in a lot of not working plugins on compile process"
+		elog "Please visit for more infos:"
+		elog "https://bugs.gentoo.org/show_bug.cgi?id=414177"
+		elog "and depended bugs"
 	fi
 
 	elog "It is a good idea to run vdrplugin-rebuild now."

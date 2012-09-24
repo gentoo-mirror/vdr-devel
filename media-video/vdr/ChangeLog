@@ -2,6 +2,10 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  24 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.27.ebuild,
+  -vdr-1.7.28.ebuild, -vdr-1.7.29.ebuild, vdr-1.7.30.ebuild:
+  cleanup; added some info about the obsoleted i18n handling, see bug #414177
+
   17 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.27.ebuild,
   vdr-1.7.28.ebuild, vdr-1.7.29.ebuild, vdr-1.7.30.ebuild:
   better linguas detection
