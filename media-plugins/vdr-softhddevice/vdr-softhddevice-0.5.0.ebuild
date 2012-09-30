@@ -36,7 +36,7 @@ RDEPEND=">=media-video/vdr-1.7
 DEPEND="${RDEPEND}
 	x11-libs/xcb-util
 	sys-devel/gettext
-	dev-util/pkgconfig
+	virtual/pkgconfig
 	oss? ( sys-kernel/linux-headers )
 	jpeg? ( virtual/jpeg )"
 

@@ -2,6 +2,15 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-softhddevice-0.5.1 (30 Sep 2012)
+
+  30 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-softhddevice-0.4.9.ebuild, vdr-softhddevice-0.5.0.ebuild,
+  +files/confd-0.5.1, +vdr-softhddevice-0.5.1.ebuild,
+  +files/vdr-softhddevice-0.5.1_Makefile.patch, +files/rc-addon-0.5.1.sh,
+  vdr-softhddevice-9999.ebuild:
+  bump; some major/minor fixes in .ebuild
+
   25 Apr 2012; Christian Ruppert <idl0r@gentoo.org>
   vdr-softhddevice-9999.ebuild, +files/vdr-softhddevice-9999-Makefile.patch:
   Update Makefile.patch for the git version
