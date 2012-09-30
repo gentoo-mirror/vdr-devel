@@ -2,6 +2,10 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  30 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org> files/confd-0.5.1,
+  files/vdr-softhddevice-0.5.1_Makefile.patch:
+  removed windows linebreaks
+
 *vdr-softhddevice-0.5.1 (30 Sep 2012)
 
   30 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
