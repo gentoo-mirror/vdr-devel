@@ -162,7 +162,7 @@ src_prepare() {
 
 	epatch "${FILESDIR}/${PN}-1.7.22-makefile-install-header.diff"
 	epatch "${FILESDIR}/${PN}-1.7.27_linguas-v2.diff"
-	epatch "${FILESDIR}/${P}_parallel-install.patch"
+	epatch "${FILESDIR}/${PN}-1.7.30_parallel-install.patch"
 
 	# Do not install runvdr script and plugins
 	sed -i Makefile \
