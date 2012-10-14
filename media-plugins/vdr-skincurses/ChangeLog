@@ -1,0 +1,10 @@
+# ChangeLog for media-plugins/vdr-skincurses
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*vdr-skincurses-0.1.10 (14 Oct 2012)
+
+  14 Oct 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-skincurses-0.1.10.ebuild, +metadata.xml:
+  taken from main tree, need vdr-1.7.x?
+
