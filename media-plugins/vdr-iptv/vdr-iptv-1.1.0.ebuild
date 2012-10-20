@@ -15,8 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND=">=media-video/vdr-1.7.15"
-
+DEPEND=">=media-video/vdr-1.7.30"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
