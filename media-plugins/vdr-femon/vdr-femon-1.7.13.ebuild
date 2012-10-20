@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-inherit vdr-plugin
+inherit vdr-plugin-2
 
 DESCRIPTION="VDR Plugin: DVB Frontend Status Monitor (signal strengt/noise)"
 HOMEPAGE="http://www.saunalahti.fi/~rahrenbe/vdr/femon/"
