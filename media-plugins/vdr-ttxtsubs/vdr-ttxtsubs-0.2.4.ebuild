@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-inherit vdr-plugin eutils
+inherit vdr-plugin-2
 
 VERSION="725"
 
