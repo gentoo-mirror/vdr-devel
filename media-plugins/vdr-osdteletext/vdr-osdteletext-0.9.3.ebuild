@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-inherit vdr-plugin
+inherit vdr-plugin-2
 
 VERSION="912" # every bump, new version
 
@@ -24,7 +24,7 @@ VDR_RCADDON_FILE="${FILESDIR}/rc-addon-v2.sh"
 VDR_CONFD_FILE="${FILESDIR}/confd-v2"
 
 src_install() {
-	vdr-plugin_src_install
+	vdr-plugin-2_src_install
 
 	# create the teletext directory
 	diropts -m755 -ovdr -gvdr

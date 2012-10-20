@@ -2,6 +2,10 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  20 Oct 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-osdteletext-0.9.3.ebuild:
+  vdr-plugin-2.eclass
+
   27 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
   vdr-osdteletext-0.9.3.ebuild:
   fixed depend
