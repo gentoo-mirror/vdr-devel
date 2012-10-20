@@ -26,5 +26,5 @@ src_prepare() {
 	vdr-plugin-2_src_prepare
 
 	# UINT64_C is needed by ffmpeg headers
-	append-flags -D__STDC_CONSTANT_MACROS
+	append-cxxflags -D__STDC_CONSTANT_MACROS
 }
