@@ -15,18 +15,17 @@ KEYWORDS="~amd64 ~x86"
 
 LICENSE="AGPL-3"
 SLOT="0"
-IUSE="alsa jpeg opengl oss vaapi vdpau yaepg xscreensaver"
-
+IUSE="alsa jpeg oss vaapi vdpau yaepg xscreensaver"
+# opengl, not supported in sources yet
 DEPEND=">=media-video/vdr-1.7
 		>=virtual/ffmpeg-0.7
 		x11-libs/libX11
 		>=x11-libs/libxcb-1.8
 		x11-libs/xcb-util-wm
 		virtual/pkgconfig
-		opengl? ( virtual/opengl )
 		alsa? ( media-libs/alsa-lib )
 		vdpau? ( x11-libs/libvdpau )
-		vaapi? ( x11-libs/libva[opengl?] )
+		vaapi? ( x11-libs/libva )
 		alsa? ( media-libs/alsa-lib )
 		yaepg? ( >=media-video/vdr-1.7[yaepg] )"
 RDEPEND="${DEPEND}"
