@@ -2,6 +2,10 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  15 Nov 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-reelbox-3.14916.ebuild:
+  moved to virtual/ffmpeg
+
   19 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
   vdr-reelbox-3.14916.ebuild, files/vdr-reelbox-3.14916_vdr-1.7.27.diff:
   moved to vdr-plugin-2.eclass

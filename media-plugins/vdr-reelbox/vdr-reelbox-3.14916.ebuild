@@ -19,7 +19,7 @@ S="${WORKDIR}/${PN}-3"
 
 DEPEND=">=media-video/vdr-1.7.12
 		>=media-video/reelbox-ehd-headers-${PV}
-		media-video/ffmpeg
+		virtual/ffmpeg
 		media-libs/libmad
 		media-libs/libpng
 		media-libs/alsa-lib"
