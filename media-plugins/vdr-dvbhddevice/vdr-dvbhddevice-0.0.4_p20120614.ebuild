@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
 
 inherit vdr-plugin-2
 
@@ -34,10 +34,8 @@ src_prepare() {
 src_install() {
 	vdr-plugin-2_src_install
 
-	insinto /usr/include
-	doins "${S}"/dvbhdffdevice.h
-	doins "${S}"/hdffcmd.h
+	doheader dvbhdffdevice.h hdffcmd.h
 
 	insinto /usr/include/libhdffcmd
-	doins "${S}"/libhdffcmd/*.h
+	doins libhdffcmd/*.h
 }
