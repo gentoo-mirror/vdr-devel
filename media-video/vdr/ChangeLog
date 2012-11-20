@@ -2,6 +2,10 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  20 Nov 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +files/vdr-1.7.32_parallel-install.patch:
+  parallel-install.patch
+
   06 Oct 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.31.ebuild:
   Fix epatch
 
