@@ -9,7 +9,7 @@ inherit vdr-plugin-2
 VERSION="1130" # every bump, new version
 
 DESCRIPTION="VDR Plugin: allows remote programming VDR using VDR-Manager running on Android devices"
-HOMEPAGE="http://projects.vdr-developer.org/wiki/androvdr"
+HOMEPAGE="http://http://projects.vdr-developer.org/projects/vdr-manager/wiki"
 SRC_URI="mirror://vdr-developerorg/${VERSION}/${P}.tar.gz"
 
 KEYWORDS="~x86 ~amd64"
