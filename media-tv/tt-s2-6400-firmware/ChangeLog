@@ -2,6 +2,12 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*tt-s2-6400-firmware-0.3.9 (01 Dec 2012)
+
+  01 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +tt-s2-6400-firmware-0.3.9.ebuild:
+  bump, new firmware
+
 *tt-s2-6400-firmware-0.3.8 (26 Mar 2012)
 
   26 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
