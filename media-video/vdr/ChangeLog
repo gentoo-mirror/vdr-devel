@@ -2,6 +2,15 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-1.7.32-r1 (07 Dec 2012)
+
+  07 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.32.ebuild,
+  +vdr-1.7.32-r1.ebuild:
+  disable cutterlimit part; fixed compile on use-flag wareagleicon
+
+  04 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.32.ebuild:
+  added missing parallel install patch
+
 *vdr-1.7.32 (03 Dec 2012)
 
   03 Dec 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.32.ebuild:

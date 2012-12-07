@@ -7,8 +7,7 @@ EAPI="4"
 inherit eutils flag-o-matic multilib toolchain-funcs
 
 # Switches supported by extensions-patch
-EXT_PATCH_FLAGS="alternatechannel cutterlimit
-	ddepgentry dvlvidprefer graphtft jumpplay
+EXT_PATCH_FLAGS="alternatechannel ddepgentry dvlvidprefer graphtft jumpplay
 	liemikuutio lircsettings mainmenuhooks menuorg naludump pinplugin
 	rotor setup ttxtsubs volctrl wareagleicon yaepg"
 
@@ -24,12 +23,12 @@ MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
 S="${WORKDIR}/${MY_P}"
 
-EXT_P="extpng-${P}-gentoo-edition"
+EXT_P="extpng-${P}-gentoo-edition-v3"
 
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
-	http://dev.gentoo.org/~idl0r/vdr/${EXT_P}.patch.bz2"
+	http://dev.gentoo.org/~hd_brummy/distfiles/${EXT_P}.patch.bz2"
 
 KEYWORDS="~arm ~amd64 ~ppc ~x86"
 SLOT="0"
@@ -161,6 +160,7 @@ src_prepare() {
 
 	epatch "${FILESDIR}/${PN}-1.7.22-makefile-install-header.diff"
 	epatch "${FILESDIR}/${PN}-1.7.27_linguas-v2.diff"
+	epatch "${FILESDIR}/${P}_parallel-install.patch"
 
 	# Do not install runvdr script and plugins
 	sed -i Makefile \
