@@ -3,6 +3,9 @@
 # $Header: $
 
   15 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.33.ebuild:
+  extpatch -v13, fixed jumpplay part
+
+  15 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.33.ebuild:
   fixed extpatch v12
 
 *vdr-1.7.33 (15 Dec 2012)
