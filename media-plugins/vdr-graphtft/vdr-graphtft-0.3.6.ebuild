@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-plugins/vdr-graphtft/vdr-graphtft-0.3.6.ebuild,v 1.2 2012/10/31 19:23:11 hd_brummy Exp $
 
-EAPI="4"
+EAPI="5"
 
 inherit vdr-plugin-2 flag-o-matic
 
@@ -54,6 +54,11 @@ src_prepare() {
 
 	# UINT64_C is needed by ffmpeg headers
 	append-cxxflags -D__STDC_CONSTANT_MACROS
+
+	if has_version ">=media-video/vdr-1.7.33"; then
+		sed -i dspitems.c \
+			-e "s:int timerMatch = 0:eTimerMatch timerMatch = tmNone:"
+	fi
 }
 
 src_compile() {

@@ -2,6 +2,10 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  15 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-graphtft-0.3.6.ebuild:
+  eapi=5; compile fix for >=vdr-1.7.33
+
 *vdr-graphtft-0.3.6 (31 Oct 2012)
 
   31 Oct 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
