@@ -8,7 +8,7 @@ inherit eutils flag-o-matic multilib toolchain-funcs
 
 # Switches supported by extensions-patch
 EXT_PATCH_FLAGS="alternatechannel ddepgentry dvlvidprefer graphtft jumpplay
-	liemikuutio lircsettings mainmenuhooks menuorg naludump
+	liemikuutio lircsettings mainmenuhooks menuorg naludump pinplugin
 	rotor setup ttxtsubs volctrl wareagleicon yaepg"
 # pinplugin, broken yet
 
@@ -24,7 +24,7 @@ MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
 S="${WORKDIR}/${MY_P}"
 
-EXT_P="extpng-${P}-gentoo-edition-v13"
+EXT_P="extpng-${P}-gentoo-edition-v14"
 
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
