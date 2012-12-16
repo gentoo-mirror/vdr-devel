@@ -21,9 +21,6 @@
 ##   End example
 ##
 
-# Joerg Bornkessel <hd_brummy@gentoo.org> ( 2012/12/15 )
-# to many broken plugins yet
-=media-video/vdr-1.7.33
 
 # Joerg Bornkessel <hd_brummy@gentoo.org>
 #  on behalf of QA Team
