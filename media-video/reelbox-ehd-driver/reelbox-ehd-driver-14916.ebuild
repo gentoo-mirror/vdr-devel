@@ -46,6 +46,11 @@ src_prepare() {
 
 	einfo "Changing framebuffer device to /dev/fb_reel"
 	find . -type f -exec sed -i "s:/dev/fb0:/dev/fb_reel:g" {} \;
+
+	if kernel_is ge 3 7 0 ; then
+		sed -i "${S}"/src/driver/hdshm.c \
+			-e "s:VM_RESERVED:VM_DONTEXPAND | VM_DONTDUMP :"
+	fi
 }
 
 src_install() {
