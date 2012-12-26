@@ -2,6 +2,13 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-1.7.33-r1 (26 Dec 2012)
+
+  26 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.33-r1.ebuild,
+  metadata.xml:
+  replaced limiekuutio with vasarajanauloja patch; note: the do finaly the
+  same, yust renaming from the patch developer for the vdr-1.7 developer tree
+
   16 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.33.ebuild:
   extpatch -v14, fixed pinplugin patch
 
