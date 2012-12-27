@@ -21,6 +21,11 @@
 ##   End example
 ##
 
+# <hd_brummy@gentoo.org> ( 27 Dec 2012 )
+# all plugins are broken now,
+# this needs to convert all plugins to use pkgconfig
+# good luck, if you unmasked local
+=media-video/vdr-1.7.34
 
 # Joerg Bornkessel <hd_brummy@gentoo.org>
 #  on behalf of QA Team
