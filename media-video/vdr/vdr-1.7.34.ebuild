@@ -287,6 +287,9 @@ src_install() {
 	insinto /usr/share/vdr
 	doins "${CAP_FILE}"
 
+	insinto /usr/$(get_libdir)/pkgconfig
+	doins vdr.pc
+
 	if [[ -n "${VDRSOURCE_DIR}" ]]; then
 		local SOURCES_DEST="${VDRSOURCE_DIR}/${P/_p/-}"
 		einfo "Installing sources"
