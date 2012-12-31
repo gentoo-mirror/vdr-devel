@@ -2,6 +2,9 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  31 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-1.7.34 pmask, need some global testing
+
   27 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   masked =vdr-1.7.34, all plugins broken yet
 

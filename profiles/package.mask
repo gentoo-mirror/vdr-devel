@@ -21,6 +21,12 @@
 ##   End example
 ##
 
+# <hd_brummy@gentoo.org> ( 31 Dec 2012 )
+# need some global testing
+# maybe some errors with the new Makefile handling in plugins
+# and depended changes in vdr-plugin-2.eclass
+=media-video/vdr-1.7.35
+
 # <hd_brummy@gentoo.org> ( 27 Dec 2012 )
 # all plugins are broken now,
 # this needs to convert all plugins to use pkgconfig
