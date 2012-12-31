@@ -44,6 +44,8 @@ src_prepare() {
 		-i client/Makefile \
 		-e "s:\$(CXXFLAGS) -shared:\$(CXXFLAGS) \$(LDFLAGS) -shared:"
 
+	sed -i "s:include \$(VDRDIR)/Make.global:-include \$(VDRDIR)/Make.global:" Makefile
+
 	fix_vdr_libsi_include server/livestreamer.c
 }
 
