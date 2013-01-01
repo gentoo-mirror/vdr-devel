@@ -3,6 +3,9 @@
 # $Header: $
 
   01 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  typo
+
+  01 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   depend on >=vdr-1.7.35, masked some plugins
 
   31 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:

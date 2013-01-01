@@ -28,8 +28,8 @@
 # +vdr-1.7.35 depended plugins
 =media-video/vdr-1.7.35
 =media-plugins/vdr-rcu-0.0.3
-=media-plugins/vdr-vdr-skincurses-0.1.13
-=media-plugins/vdr-vdr-dvbsddevice-0.0.7
+=media-plugins/vdr-skincurses-0.1.13
+=media-plugins/vdr-dvbsddevice-0.0.7
 =media-plugins/vdr-remote-0.0.5
 
 # <hd_brummy@gentoo.org> ( 27 Dec 2012 )
