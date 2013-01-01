@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
 
 inherit vdr-plugin-2
 
@@ -15,12 +15,11 @@ SLOT="0"
 LICENSE="GPL-2"
 IUSE=""
 
-DEPEND=">=media-video/vdr-1.7.31"
+DEPEND=">=media-video/vdr-1.7.35"
 RDEPEND="${DEPEND}"
 
 src_install() {
 	vdr-plugin-2_src_install
 
-	insinto /usr/include
-	doins "${S}"/dvbsdffdevice.h
+	doheader "${S}"/dvbsdffdevice.h
 }

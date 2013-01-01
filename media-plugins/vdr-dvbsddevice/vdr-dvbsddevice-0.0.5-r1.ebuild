@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -19,8 +19,8 @@ DEPEND=">=media-video/vdr-1.7.21"
 RDEPEND="${DEPEND}"
 
 src_install() {
-    vdr-plugin-2_src_install
+	vdr-plugin-2_src_install
 
-    insinto /usr/include
+	insinto /usr/include
 	doins "${S}"/dvbsdffdevice.h
 }
