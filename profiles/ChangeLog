@@ -3,6 +3,9 @@
 # $Header: $
 
   01 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  removed pmask =vdr-1.7.34
+
+  01 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   typo
 
   01 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
