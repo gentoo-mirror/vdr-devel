@@ -3,6 +3,9 @@
 # $Header: $
 
   06 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmasked vdr-1.7.35-r1 for USEFHS handling test
+
+  06 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   removed pmaks media-video/vdr-1.7.35 and depende plugins
 
   01 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
