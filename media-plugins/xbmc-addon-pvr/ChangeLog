@@ -2,6 +2,12 @@
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*xbmc-addon-pvr-0.0.1_p20130110 (13 Jan 2013)
+
+  13 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +xbmc-addon-pvr-0.0.1_p20130110.ebuild:
+  snapshot 20130110
+
 *xbmc-addon-pvr-9999 (13 Jan 2013)
 
   13 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org>
