@@ -1,6 +1,13 @@
 # ChangeLog for media-plugins/vdr-vnsiserver
-# Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+*vdr-vnsiserver-0.9.0_p20130105 (13 Jan 2013)
+
+  13 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-vnsiserver-0.9.0_p20130105.ebuild, -vdr-vnsiserver-9999.ebuild,
+  -vdr-vnsiserver-9999-r1.ebuild:
+  rewrite ebuilds to use the Odenkamp git branch
 
 *vdr-vnsiserver-9999-r1 (17 Sep 2011)
 

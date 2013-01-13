@@ -6,8 +6,12 @@ EAPI="5"
 
 inherit vdr-plugin-2 git-2
 
+GIT_REVISION="e7015f037bca07c3f6b325136900883bb65954d1"
+GIT_DATE="20130105"
+
 EGIT_REPO_URI="git://github.com/opdenkamp/xbmc-pvr-addons.git"
 EGIT_SOURCEDIR="${WORKDIR}"
+EGIT_COMMIT="${GIT_REVISION}"
 
 DESCRIPTION="VDR plugin: VNSI Streamserver Plugin (Odenkamp branch)"
 HOMEPAGE="https://github.com/opdenkamp/xbmc-pvr-addons"
