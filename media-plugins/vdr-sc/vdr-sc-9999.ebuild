@@ -1,12 +1,13 @@
-# Copyright 1999-2012 Warez Incorporated
+# Copyright 1999-2013 Warez Incorporated
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=3
 
-inherit eutils vdr-plugin mercurial
+inherit multilib vdr-plugin mercurial
 
 : ${EHG_REPO_URI:=http://85.17.209.13:6100/sc}
+: ${EHG_REVISION:=trunk}
 
 DESCRIPTION="VDR plugin: softcam HG-Version"
 HOMEPAGE="http://207.44.152.197/vdr2.htm"
@@ -18,7 +19,7 @@ KEYWORDS=""
 IUSE=""
 
 DEPEND=">=media-video/vdr-1.4.6
-		dev-libs/openssl"
+	dev-libs/openssl"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/sc"
