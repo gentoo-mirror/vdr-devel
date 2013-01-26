@@ -3,6 +3,9 @@
 # $Header: $
 
   26 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  rm pmask vdr-1.7.35-r1, gentoo-vdr-scripts-2.0.0_rc1
+
+  26 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   gentoo-vdr-scripts-2.0.0_rc1 pmasked
 
   13 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
