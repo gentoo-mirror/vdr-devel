@@ -2,6 +2,13 @@
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-1.7.36 (26 Jan 2013)
+
+  26 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.35.ebuild,
+  -vdr-1.7.35-r1.ebuild, -files/vdr-1.7.35_gentoo.patch, +vdr-1.7.36.ebuild,
+  +files/vdr-1.7.36_gentoo.patch:
+  bump; thx to C. Siebholz for the extpng fix on use-flag wareagle
+
 *vdr-1.7.35-r1 (06 Jan 2013)
 
   06 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.35-r1.ebuild:

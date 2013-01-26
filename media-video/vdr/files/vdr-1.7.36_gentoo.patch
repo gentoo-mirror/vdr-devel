@@ -3,14 +3,14 @@ support for linguas handling
 fixed install an multicore cpu
 
 changed path to install header files in own dir vdr, libsi
-this have to fix, need some adaption in vdr-plugin-2.eclass and depended plugins, later...
+need fixing, need some adaption in vdr-plugin-2.eclass and depended plugins, later...
 
-Signed-of-by: Joerg Bornkessel <hd_brummy@gentoo.org> (2012/12/30)
+Signed-of-by: Joerg Bornkessel <hd_brummy@gentoo.org> (2013/01/26)
 
-diff -Naur vdr-1.7.35.orig/Makefile vdr-1.7.35/Makefile
---- vdr-1.7.35.orig/Makefile	2012-12-30 14:47:57.000000000 +0100
-+++ vdr-1.7.35/Makefile	2012-12-30 14:48:30.000000000 +0100
-@@ -101,7 +101,7 @@
+diff -Naur vdr-1.7.36.orig/Makefile vdr-1.7.36/Makefile
+--- vdr-1.7.36.orig/Makefile	2013-01-26 16:55:15.000000000 +0100
++++ vdr-1.7.36/Makefile	2013-01-26 17:04:00.000000000 +0100
+@@ -109,7 +109,7 @@
  VDRVERSION = $(shell sed -ne '/define VDRVERSION/s/^.*"\(.*\)".*$$/\1/p' config.h)
  APIVERSION = $(shell sed -ne '/define APIVERSION/s/^.*"\(.*\)".*$$/\1/p' config.h)
  
@@ -19,44 +19,46 @@ diff -Naur vdr-1.7.35.orig/Makefile vdr-1.7.35/Makefile
  
  # Implicit rules:
  
-@@ -154,7 +154,7 @@
+@@ -162,7 +162,7 @@
  
  PODIR     = po
  LOCALEDIR = locale
 -I18Npo    = $(wildcard $(PODIR)/*.po)
 +I18Npo    = $(foreach dir,$(LINGUAS),$(wildcard $(PODIR)/$(dir)*.po))
+ I18Nmo    = $(addsuffix .mo, $(foreach file, $(I18Npo), $(basename $(file))))
  I18Nmsgs  = $(addprefix $(LOCALEDIR)/, $(addsuffix /LC_MESSAGES/vdr.mo, $(notdir $(foreach file, $(I18Npo), $(basename $(file))))))
  I18Npot   = $(PODIR)/vdr.pot
- 
-@@ -177,7 +177,7 @@
+@@ -185,7 +185,7 @@
  
  install-i18n:
  	@mkdir -p $(DESTDIR)$(LOCDIR)
--	@(cd $(LOCALEDIR); cp -r --parents * $(DESTDIR)$(LOCDIR))
+-	cp -r $(LOCALEDIR)/* $(DESTDIR)$(LOCDIR)
 +	@(cd $(LOCALEDIR); for linguas in $(LINGUAS); do [ "$$linguas" = "en" ] && continue; cp -r --parents $$linguas* $(DESTDIR)$(LOCDIR); done)
  
  # The 'include' directory (for plugins):
  
-@@ -242,11 +242,12 @@
+@@ -259,11 +259,12 @@
  
  install-dirs:
  	@mkdir -p $(DESTDIR)$(VIDEODIR)
--	@mkdir -p $(DESTDIR)$(CONFDIRDEF)
-+#	@mkdir -p $(DESTDIR)$(CONFDIRDEF)
- 	@mkdir -p $(DESTDIR)$(CACHEDIRDEF)
- 	@mkdir -p $(DESTDIR)$(RESDIRDEF)
+-	@mkdir -p $(DESTDIR)$(CONFDIR)
++#	@mkdir -p $(DESTDIR)$(CONFDIR)
+ 	@mkdir -p $(DESTDIR)$(CACHEDIR)
+ 	@mkdir -p $(DESTDIR)$(RESDIR)
  
  install-conf:
-+	@mkdir -p $(DESTDIR)$(CONFDIRDEF)
- 	@cp -n *.conf $(DESTDIR)$(CONFDIRDEF)
++	@mkdir -p $(DESTDIR)$(CONFDIR)
+ 	@cp -n *.conf $(DESTDIR)$(CONFDIR)
  
- 
-@@ -268,8 +269,9 @@
+ # Documentation:
+@@ -289,8 +290,11 @@
  # Includes:
  
  install-includes: include-dir
 -	@mkdir -p $(DESTDIR)$(INCDIR)
 -	@cp -pLR include/vdr include/libsi $(DESTDIR)$(INCDIR)
++#	@mkdir -p $(DESTDIR)$(INCDIR)
++#	@cp -pLR include/vdr include/libsi $(DESTDIR)$(INCDIR)
 +	@mkdir -p $(DESTDIR)$(INCDIR)/vdr $(DESTDIR)$(INCDIR)/vdr/libsi
 +	@cp -pLR include/vdr $(DESTDIR)$(INCDIR)
 +	@cp -pLR include/libsi Make.config $(DESTDIR)$(INCDIR)/vdr

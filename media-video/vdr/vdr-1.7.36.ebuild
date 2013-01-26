@@ -8,8 +8,9 @@ inherit eutils flag-o-matic multilib toolchain-funcs
 
 # Switches supported by extensions-patch
 EXT_PATCH_FLAGS="alternatechannel ddepgentry dvlvidprefer graphtft jumpplay
-	lircsettings mainmenuhooks menuorg naludump pinplugin
+	lircsettings mainmenuhooks menuorg naludump
 	rotor setup ttxtsubs vasarajanauloja volctrl wareagleicon yaepg"
+# pinplugin, temp disabled, need fixing
 
 # names of the use-flags
 EXT_PATCH_FLAGS_RENAMED=""
@@ -49,7 +50,7 @@ DEPEND="${COMMON_DEPEND}
 
 RDEPEND="${COMMON_DEPEND}
 	dev-lang/perl
-	>=media-tv/gentoo-vdr-scripts-0.4.10
+	>=media-tv/gentoo-vdr-scripts-2.0.0_rc1
 	media-fonts/corefonts"
 
 # pull in vdr-setup to get the xml files, else menu will not work
@@ -160,15 +161,6 @@ src_prepare() {
 
 		DEFINES			+= -DCONFDIR=\"\$(CONFDIR)\"
 		INCLUDES		+= -I\$(DVBDIR)
-
-		USEFHS = 1
-
-		ifdef USEFHS
-		DEFINES += -DUSEFHS
-		CACHEDIR     = /var/cache/vdr
-		RESDIR       = \$(PREFIX)/share/vdr
-		endif
-
 	EOT
 	eend 0
 
@@ -199,7 +191,7 @@ src_prepare() {
 
 			# these patches we do not support
 			# (or have them already hard enabled)
-			local IGNORE_PATCHES="pluginmissing mcli channelbind usefhs"
+			local IGNORE_PATCHES="pluginmissing mcli channelbind"
 
 			extensions_all_defines > "${T}"/new.IUSE
 			echo $EXT_PATCH_FLAGS $EXT_PATCH_FLAGS_RENAMED_EXT_NAME \
@@ -312,8 +304,8 @@ pkg_preinst() {
 	has_version "<${CATEGORY}/${PN}-1.7.27"
 	previous_less_than_1_7_27=$?
 
-	has_version "<${CATEGORY}/${PN}-1.7.34-r1"
-	previous_less_than_1_7_34_r1=$?
+	has_version "<${CATEGORY}/${PN}-1.7.36"
+	previous_less_than_1_7_36=$?
 }
 
 pkg_postinst() {
@@ -356,9 +348,9 @@ pkg_postinst() {
 		elog "and depended bugs"
 	fi
 
-	if [[ previous_less_than_1_7_34_r1=$? = 0 ]] ; then
-		elog "USEFHS from vdr source is now enabled by default"
-		elog "Gentoo still use the standard from"
+	if [[ previous_less_than_1_7_36=$? = 0 ]] ; then
+		elog "By default VDR is now built according to the FHS"
+		elog "Gentoo VDR still use the standard from"
 		elog "Filesystem Hirarchy Standard"
 		elog "It is supported thins beginning of support"
 		elog "of VDR on Gentoo"
