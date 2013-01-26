@@ -29,6 +29,7 @@
 # EPGFILE="-E-"
 # VDR_EXTRA_OPTIONS="--cachedir=/var/cache/vdr"
 =media-video/vdr-1.7.35-r1
+=media-tv/gentoo-vdr-scripts-2.0.0_rc1
 
 # Joerg Bornkessel <hd_brummy@gentoo.org>
 #  on behalf of QA Team
