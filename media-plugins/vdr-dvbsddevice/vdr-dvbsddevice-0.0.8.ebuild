@@ -15,7 +15,7 @@ SLOT="0"
 LICENSE="GPL-2"
 IUSE=""
 
-DEPEND=">=media-video/vdr-1.7.35"
+DEPEND=">=media-video/vdr-1.7.36"
 RDEPEND="${DEPEND}"
 
 src_install() {
