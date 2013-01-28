@@ -22,6 +22,11 @@
 ##
 
 # Joerg Bornkessel <hd_brummy@gentoo.org>
+# need addaption in vdr-plugin-2.eclass for new plugin makefile handling
+=media-plugins/vdr-dvbsddevice-0.0.8
+=media-plugins/vdr-rcu-0.0.4
+
+# Joerg Bornkessel <hd_brummy@gentoo.org>
 #  on behalf of QA Team
 #
 # Mass-masking of live ebuilds; we cannot guarantee working state of
