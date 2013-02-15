@@ -2,6 +2,11 @@
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-1.7.36-r1 (15 Feb 2013)
+
+  15 Feb 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.36-r1.ebuild:
+  fixed handling for missing exptng compile option in vdr.pc
+
 *vdr-1.7.36 (26 Jan 2013)
 
   26 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.35.ebuild,
