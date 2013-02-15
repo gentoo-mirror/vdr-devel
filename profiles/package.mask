@@ -25,6 +25,7 @@
 # need addaption in vdr-plugin-2.eclass for new plugin makefile handling
 =media-plugins/vdr-dvbsddevice-0.0.8
 =media-plugins/vdr-rcu-0.0.4
+=media-video/vdr-1.7.36-r1
 
 # Joerg Bornkessel <hd_brummy@gentoo.org>
 #  on behalf of QA Team
