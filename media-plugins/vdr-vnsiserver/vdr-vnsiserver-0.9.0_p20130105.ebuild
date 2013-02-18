@@ -29,7 +29,6 @@ S="${WORKDIR}/addons/pvr.vdr.vnsi/vdr-plugin-vnsiserver"
 
 src_prepare() {
 	vdr-plugin-2_src_prepare
-
 	sed -e "s:### The object files (add further files here)\::-include \$(shell pkg-config --variable=plgcfg vdr):"\
 		-i Makefile
 
