@@ -1,0 +1,298 @@
+diff -Naur vdr-1.7.38.orig/dvbplayer.c vdr-1.7.38/dvbplayer.c
+--- vdr-1.7.38.orig/dvbplayer.c	2013-02-18 14:45:02.363002713 +0100
++++ vdr-1.7.38/dvbplayer.c	2013-02-18 14:45:35.681583841 +0100
+@@ -213,6 +213,9 @@
+   double framesPerSecond;
+   bool isPesRecording;
+   bool pauseLive;
++#ifdef USE_PERMASHIFT
++  bool reusedPauseLive;
++#endif /* PERMASHIFT */
+   bool eof;
+   bool firstPacket;
+   ePlayModes playMode;
+@@ -232,7 +235,11 @@
+   virtual void Activate(bool On);
+   virtual void Action(void);
+ public:
++#ifdef USE_PERMASHIFT
++  cDvbPlayer(const char *FileName, bool PauseLive, bool ReusedPauseLive = false);
++#else
+   cDvbPlayer(const char *FileName, bool PauseLive);
++#endif /* PERMASHIFT */
+   virtual ~cDvbPlayer();
+   bool Active(void) { return cThread::Running(); }
+   void Pause(void);
+@@ -253,7 +260,11 @@
+ #define SPEED_MULT   12 // the speed multiplier
+ int cDvbPlayer::Speeds[] = { 0, -2, -4, -8, 1, 2, 4, 12, 0 };
+ 
++#ifdef USE_PERMASHIFT
++cDvbPlayer::cDvbPlayer(const char *FileName, bool PauseLive, bool ReusedPauseLive)
++#else
+ cDvbPlayer::cDvbPlayer(const char *FileName, bool PauseLive)
++#endif /* PERMASHIFT */
+ :cThread("dvbplayer")
+ {
+   nonBlockingFileReader = NULL;
+@@ -263,6 +274,9 @@
+   framesPerSecond = Recording.FramesPerSecond();
+   isPesRecording = Recording.IsPesRecording();
+   pauseLive = PauseLive;
++#ifdef USE_PERMASHIFT
++  reusedPauseLive = ReusedPauseLive;
++#endif /* PERMASHIFT */
+   eof = false;
+   firstPacket = true;
+   playMode = pmPlay;
+@@ -449,8 +463,22 @@
+   int LastReadIFrame = -1;
+   int SwitchToPlayFrame = 0;
+ 
++#ifdef USE_PERMASHIFT
++  if (reusedPauseLive) {
++    int Current, Total;
++    GetIndex(Current, Total, false);
++    readIndex = max(Total - 1, 0);
++    Goto(readIndex, true);
++    playMode = pmStill;
++    }
++  else if (pauseLive) {
++    Goto(0, true);
++  }
++
++#else
+   if (pauseLive)
+      Goto(0, true);
++#endif /* PERMASHIFT */
+   while (Running()) {
+         if (WaitingForData)
+            WaitingForData = !nonBlockingFileReader->WaitForDataMs(3); // this keeps the CPU load low, but reacts immediately on new data
+@@ -937,8 +965,13 @@
+ 
+ // --- cDvbPlayerControl -----------------------------------------------------
+ 
++#ifdef USE_PERMASHIFT
++cDvbPlayerControl::cDvbPlayerControl(const char *FileName, bool PauseLive, bool ReusedPauseLive)
++:cControl(player = new cDvbPlayer(FileName, PauseLive, ReusedPauseLive))
++#else
+ cDvbPlayerControl::cDvbPlayerControl(const char *FileName, bool PauseLive)
+ :cControl(player = new cDvbPlayer(FileName, PauseLive))
++#endif /* PERMASHIFT */
+ {
+ }
+ 
+diff -Naur vdr-1.7.38.orig/dvbplayer.h vdr-1.7.38/dvbplayer.h
+--- vdr-1.7.38.orig/dvbplayer.h	2013-02-18 14:45:02.343002964 +0100
++++ vdr-1.7.38/dvbplayer.h	2013-02-18 14:45:35.682583829 +0100
+@@ -19,7 +19,11 @@
+ private:
+   cDvbPlayer *player;
+ public:
++#ifdef USE_PERMASHIFT
++  cDvbPlayerControl(const char *FileName, bool PauseLive = false, bool ReusedPauseLive = false);
++#else
+   cDvbPlayerControl(const char *FileName, bool PauseLive = false);
++#endif /* PERMASHIFT */
+        // Sets up a player for the given file.
+        // If PauseLive is true, special care is taken to make sure the index
+        // file of the recording is long enough to allow the player to display
+diff -Naur vdr-1.7.38.orig/Make.config.template vdr-1.7.38/Make.config.template
+--- vdr-1.7.38.orig/Make.config.template	2013-02-18 14:45:02.406002172 +0100
++++ vdr-1.7.38/Make.config.template	2013-02-18 14:45:35.683583816 +0100
+@@ -90,6 +90,7 @@
+ #MAINMENUHOOKS = 1
+ #MENUORG = 1
+ #NALUDUMP = 1
++#PERMASHIFT = 1
+ #PINPLUGIN = 1
+ #PLUGINMISSING = 1
+ #ROTOR = 1
+@@ -177,3 +178,7 @@
+ DEFINES += -DUSE_YAEPG
+ //VDR_XINE_SET_VIDEO_WINDOW = 1
+ endif
++
++ifdef PERMASHIFT
++DEFINES += -DUSE_PERMASHIFT
++endif
+\ Kein Zeilenumbruch am Dateiende.
+diff -Naur vdr-1.7.38.orig/menu.c vdr-1.7.38/menu.c
+--- vdr-1.7.38.orig/menu.c	2013-02-18 14:45:02.357002788 +0100
++++ vdr-1.7.38/menu.c	2013-02-18 14:45:35.685583791 +0100
+@@ -5168,7 +5168,11 @@
+ cRecordControl *cRecordControls::RecordControls[MAXRECORDCONTROLS] = { NULL };
+ int cRecordControls::state = 0;
+ 
++#ifdef USE_PERMASHIFT
++bool cRecordControls::Start(cTimer *Timer, bool Pause, bool* reused)
++#else
+ bool cRecordControls::Start(cTimer *Timer, bool Pause)
++#endif /* PERMASHIFT */
+ {
+   static time_t LastNoDiskSpaceMessage = 0;
+   int FreeMB = 0;
+@@ -5187,6 +5191,15 @@
+      }
+   LastNoDiskSpaceMessage = 0;
+ 
++#ifdef USE_PERMASHIFT
++  if (Timer == NULL) {
++    if (TryReuseRecording(Pause)) {
++      if (reused != NULL) *reused = true;
++      return true;
++      }
++    }
++
++#endif /* PERMASHIFT */
+   ChangeState();
+   int ch = Timer ? Timer->Channel()->Number() : cDevice::CurrentChannel();
+   cChannel *channel = Channels.GetByNumber(ch);
+@@ -5257,12 +5270,62 @@
+       }
+ }
+ 
++#ifdef USE_PERMASHIFT
++bool cRecordControls::TryReuseRecording(bool Pause)
++{
++  cRecordControl* runningRecording = cRecordControls::GetRecordControl(cDevice::CurrentChannel());
++  if (runningRecording != NULL && runningRecording->Timer() != NULL) {
++    cTimer *reuseTimer = runningRecording->Timer();
++    // calculate length from current time
++    time_t t = time(NULL);
++    struct tm *tmNow = localtime(&t);
++    int now = tmNow->tm_hour * 60 + tmNow->tm_min;
++    int stop = reuseTimer->Stop();
++    stop = stop / 100 * 60 + stop % 100;
++    int lengthFromNow = stop - now;
++    if (lengthFromNow < 0)
++      lengthFromNow += SECSINDAY;
++    // Only use low priority recordings or, for pause, recordings which are long enough.
++    if (runningRecording->Timer()->Priority() <= LIVEPRIORITY || (Pause && lengthFromNow >= Setup.InstantRecordTime)) {
++      // possibly raise stop time
++      if (lengthFromNow < Setup.InstantRecordTime) {
++        int stop = now + Setup.InstantRecordTime;
++        stop = (stop / 60) * 100 + (stop % 60);
++        if (stop >= 2400) stop -= 2400;
++        reuseTimer->SetStop(stop);
++        }
++      ChangeState();
++      // for pause, set replay to the recording
++      if (Pause) {
++        cReplayControl::SetRecording(runningRecording->FileName());
++        }
++      // for instant recording, raise priority and lifetime
++      else {
++        reuseTimer->SetPriority(max(Setup.DefaultPriority, reuseTimer->Priority()));
++        reuseTimer->SetLifetime(max(Setup.DefaultLifetime, reuseTimer->Lifetime()));
++        }
++      // We found a usable recording, don't create a new one.
++      return true;
++      }
++    }
++  return false;
++}
++
++#endif /* PERMASHIFT */
+ bool cRecordControls::PauseLiveVideo(void)
+ {
+   Skins.Message(mtStatus, tr("Pausing live video..."));
++#ifdef USE_PERMASHIFT
++  bool reused = false;
++#endif /* PERMASHIFT */
+   cReplayControl::SetRecording(NULL); // make sure the new cRecordControl will set cReplayControl::LastReplayed()
++#ifdef USE_PERMASHIFT
++  if (Start(NULL, true, &reused)) {
++     cReplayControl *rc = new cReplayControl(true, reused);
++#else
+   if (Start(NULL, true)) {
+      cReplayControl *rc = new cReplayControl(true);
++#endif /* PERMASHIFT */
+      cControl::Launch(rc);
+      cControl::Attach();
+      Skins.Message(mtStatus, NULL);
+@@ -5305,6 +5368,25 @@
+   return NULL;
+ }
+ 
++#ifdef USE_PERMASHIFT
++cRecordControl *cRecordControls::GetRecordControl(int channelNo)
++{
++  for (int i = 0; i < MAXRECORDCONTROLS; i++) {
++    if (RecordControls[i] != NULL) {
++      cTimer* existentTimer = RecordControls[i]->Timer();
++      if (existentTimer != NULL && existentTimer->Channel() != NULL) {
++        if (RecordControls[i]->Timer()->Channel()->Number() == channelNo) {
++          if (existentTimer->Recording()) {
++            return RecordControls[i];
++            }
++          }
++        }
++      }
++    }
++  return NULL;
++}
++
++#endif /* PERMASHIFT */
+ void cRecordControls::Process(time_t t)
+ {
+   for (int i = 0; i < MAXRECORDCONTROLS; i++) {
+@@ -5369,8 +5451,13 @@
+ cReplayControl *cReplayControl::currentReplayControl = NULL;
+ cString cReplayControl::fileName;
+ 
++#ifdef USE_PERMASHIFT
++cReplayControl::cReplayControl(bool PauseLive, bool ReusedPauseLive)
++:cDvbPlayerControl(fileName, PauseLive, ReusedPauseLive)
++#else
+ cReplayControl::cReplayControl(bool PauseLive)
+ :cDvbPlayerControl(fileName, PauseLive)
++#endif /* PERMASHIFT */
+ {
+   cDevice::PrimaryDevice()->SetKeepTracks(PauseLive);
+   currentReplayControl = this;
+diff -Naur vdr-1.7.38.orig/menu.h vdr-1.7.38/menu.h
+--- vdr-1.7.38.orig/menu.h	2013-02-18 14:45:02.358002775 +0100
++++ vdr-1.7.38/menu.h	2013-02-18 14:47:50.186892881 +0100
+@@ -272,8 +272,17 @@
+ private:
+   static cRecordControl *RecordControls[];
+   static int state;
++#ifdef USE_PERMASHIFT
++  static bool TryReuseRecording(bool Pause);
++         ///< Tries to reuse an existing recording instead of creating a second one in parallel
++         ///< Returns true if successful
++#endif /* PERMASHIFT */
+ public:
++#ifdef USE_PERMASHIFT
++  static bool Start(cTimer *Timer = NULL, bool Pause = false, bool* reused = NULL);
++#else
+   static bool Start(cTimer *Timer = NULL, bool Pause = false);
++#endif /* PERMASHIFT */
+   static void Stop(const char *InstantId);
+   static bool PauseLiveVideo(void);
+   static const char *GetInstantId(const char *LastInstantId);
+@@ -281,6 +290,11 @@
+   static cRecordControl *GetRecordControl(const cTimer *Timer);
+          ///< Returns the cRecordControl for the given Timer.
+          ///< If there is no cRecordControl for Timer, NULL is returned.
++#ifdef USE_PERMASHIFT
++  static cRecordControl *GetRecordControl(int channelNo);
++         ///< Returns the cRecordControl for the given channel number.
++         ///< If there is no cRecordControl, NULL is returned.
++#endif /* PERMASHIFT */
+   static void Process(time_t t);
+   static void ChannelDataModified(cChannel *Channel);
+   static bool Active(void);
+@@ -320,7 +334,11 @@
+   void EditCut(void);
+   void EditTest(void);
+ public:
++#ifdef USE_PERMASHIFT
++  cReplayControl(bool PauseLive = false, bool ReusedPauseLive = false);
++#else
+   cReplayControl(bool PauseLive = false);
++#endif /*PERMASHIFT */
+   virtual ~cReplayControl();
+   void Stop(void);
+   virtual cOsdObject *GetInfo(void);

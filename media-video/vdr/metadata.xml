@@ -24,6 +24,7 @@
 		<flag name="naludump">Removes NALU fill data from h.264-Streams of TS files</flag>
 		<flag name="nalustripper"></flag>
 		<flag name="noepg">Adds code to selectively disable epg-reception for specific channels</flag>
+		<flag name="permashift"> permanent timeshift by recording live TV on hard disk, need plugin vdr-permashift</flag>
 		<flag name="pinplugin">Support for pin plugin</flag>
 		<flag name="rotor">Enable support for plugin vdr-rotor for dish-positioner.</flag>
 		<flag name="setup">Enable support for the plugin vdr-setup</flag>
