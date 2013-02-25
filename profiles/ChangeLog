@@ -3,6 +3,9 @@
 # $Header: $
 
   25 Feb 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vompserver-0.4.0 depend on >=vdr-1.7.36-r1
+
+  25 Feb 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   vdr-burn-0.2.2, depend on pmasked >=vdr-1.7.36-r1
 
   18 Feb 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
