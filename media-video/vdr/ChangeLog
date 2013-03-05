@@ -2,6 +2,12 @@
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-1.7.39 (05 Mar 2013)
+
+  05 Mar 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.39.ebuild,
+  +files/vdr-1.7.39-fixutf8.diff, +files/vdr-1.7.39_gentoo.patch:
+  bump
+
   20 Feb 2013; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.38.ebuild:
   extpatchng -v5, fix in fr_FR.po file
 
