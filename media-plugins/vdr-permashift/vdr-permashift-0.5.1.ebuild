@@ -21,7 +21,7 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}/${VDRPLUGIN}"
 
 src_prepare() {
-	cp ${FILESDIR}/Makefile.permashift ${S}/Makefile
+	cp "${FILESDIR}/${VDRPLUGIN}.mk" "${S}"/Makefile
 
 	vdr-plugin-2_src_prepare
 }
