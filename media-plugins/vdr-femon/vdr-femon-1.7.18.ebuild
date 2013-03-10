@@ -17,3 +17,11 @@ IUSE=""
 
 DEPEND=">=media-video/vdr-1.7.37"
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	vdr-plugin-2_src_prepare
+
+	if has_version ">=media-video/vdr-1.7.40"; then
+		sed -e "s:PlpId:StreamId:g" -i femonosd.c
+	fi
+}
