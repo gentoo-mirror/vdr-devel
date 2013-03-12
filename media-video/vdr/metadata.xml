@@ -16,6 +16,7 @@
 		<flag name="graphtft">support for grapftft plugin up from vdr-graphtft-0.1.7</flag>
 		<flag name="hardlinkcutter">Speed up cutting by hardlinking unchanged files</flag>
 		<flag name="jumpplay">Enables automatic jumping over cut marks while watching a recording</flag>
+		<flag name="jumpingseconds"> </flag>
 		<flag name="liemikuutio">Formerly known as AIO (all-in-one) patch, adds some nice must haves</flag>
 		<flag name="lircsettings">Allows to change lirc settings delay, freq and timeout values in OSD</flag>
 		<flag name="livebuffer">does timeshifting/background recording all the time, allows to rewind live TV</flag>
