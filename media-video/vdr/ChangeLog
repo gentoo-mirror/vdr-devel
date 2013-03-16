@@ -2,6 +2,13 @@
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-1.7.41 (16 Mar 2013)
+
+  16 Mar 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.41.ebuild,
+  +files/extpng-vdr-1.7.41-gentoo-edition-v1_001-plugin-permashift.patch,
+  +files/vdr-1.7.41_gentoo.patch:
+  bump; droped deprecated use-flag vasarajanauloja
+
 *vdr-1.7.40 (12 Mar 2013)
 
   12 Mar 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.40.ebuild,
