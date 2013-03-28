@@ -13,7 +13,7 @@ fi
 plugin_pre_vdr_start() {
 
 
-        add_plugin_param "-p${VDRMANAGER_PORT}"
+		add_plugin_param "-p${VDRMANAGER_PORT}"
 		add_plugin_param "-P${VDRMANAGER_PASS}"
 
 	if yesno ${SVDRPHOSTS_CHECK:-no}; then
