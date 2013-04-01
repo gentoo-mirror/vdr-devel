@@ -2,6 +2,15 @@
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  01 Apr 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.23.ebuild,
+  -vdr-1.7.24-r1.ebuild, -vdr-1.7.25.ebuild, -vdr-1.7.30.ebuild,
+  -vdr-1.7.31.ebuild, -vdr-1.7.32-r1.ebuild, -vdr-1.7.33.ebuild,
+  -vdr-1.7.33-r1.ebuild, -vdr-1.7.36.ebuild, -vdr-1.7.36-r1.ebuild,
+  -vdr-1.7.38.ebuild, -vdr-1.7.39.ebuild, -vdr-1.7.40.ebuild,
+  -vdr-1.7.41.ebuild, -vdr-1.7.41-r1.ebuild, -vdr-1.7.42.ebuild,
+  -vdr-2.0.0.ebuild, -metadata.xml:
+  cleanup
+
 *vdr-2.0.0 (31 Mar 2013)
 
   31 Mar 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.0.0.ebuild,
