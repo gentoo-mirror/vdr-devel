@@ -1,10 +1,10 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
 
-inherit linux-mod eutils multilib
+inherit eutils linux-mod multilib
 
 DESCRIPTION="eHD PCI card; driver svn r${PV}"
 HOMEPAGE="http://www.reel-multimedia.com"
@@ -17,7 +17,7 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}
-		>=sys-fs/udev-141"
+		virtual/udev"
 
 S=${WORKDIR}/hdshm3
 
@@ -77,4 +77,9 @@ pkg_postinst() {
 		elog "Use for your scripts, progs, ..."
 		elog "the device /dev/fb_reel"
 		echo
+
+	einfo "From now it is possible to run VDR as user vdr"
+	einfo "Please fix then your permission"
+	einfo "/nchown -R vdr:vdr /etc/vdr/*"
+	einfo "/nchown -R vdr:vdr /var/vdr/*"
 }
