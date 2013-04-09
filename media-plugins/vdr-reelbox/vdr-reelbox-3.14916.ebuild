@@ -1,8 +1,8 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="5"
 
 inherit vdr-plugin-2
 
@@ -26,6 +26,8 @@ DEPEND=">=media-video/vdr-1.7.12
 RDEPEND="${DEPEND}"
 
 src_prepare() {
+	rm "${S}"/po/{da_DK,el_GR,et_EE,fi_FI,fr_FR,hr_HR,hu_HU,nn_NO,pt_PT,ru_RU,sl_SI,sv_SE,tr_TR}.po
+
 	vdr-plugin-2_src_prepare
 
 	epatch "${FILESDIR}/reelbox-${PV}_makefile.diff"
@@ -54,4 +56,7 @@ src_prepare() {
 	if has_version ">=media-libs/libpng-1.5"; then
 		epatch "${FILESDIR}/${P}_libpng-1.5.diff"
 	fi
+
+	# disabled deprecated ffmpeg function
+	sed -e "s:avcodec_init://avcodec_init:" -i VideoPlayerPipHd.c
 }

@@ -1,6 +1,10 @@
 # ChangeLog for media-plugins/vdr-reelbox
-# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+  09 Apr 2013; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-reelbox-3.14916.ebuild:
+  eapi=5; removed untranslated po files; fixed compile ffmepg
 
   15 Nov 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
   vdr-reelbox-3.14916.ebuild:
