@@ -2,6 +2,17 @@
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-reelbox-3.14916-r1 (11 Apr 2013)
+
+  11 Apr 2013; Joerg Bornkessel <hd_brummy@gentoo.org>
+  -vdr-reelbox-3.14440.ebuild, -files/reelbox-3.14440_makefile.diff,
+  -files/vdr-reelbox-3.14440_vdr-1.7.12-not-reelpatched.diff,
+  +vdr-reelbox-3.14916-r1.ebuild,
+  +files/vdr-reelbox-3.14916-v2_vdr-1.7.12-not-reelpatched.diff,
+  +files/reelbox.mk, -files/save-setup_3.14440.diff,
+  -files/save-setup_3.14916.diff:
+  cleanup; new default Makefile
+
   09 Apr 2013; Joerg Bornkessel <hd_brummy@gentoo.org>
   vdr-reelbox-3.14916.ebuild:
   eapi=5; removed untranslated po files; fixed compile ffmepg
