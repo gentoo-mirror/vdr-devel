@@ -78,8 +78,8 @@ pkg_postinst() {
 		elog "the device /dev/fb_reel"
 		echo
 
-	einfo "From now it is possible to run VDR as user vdr"
-	einfo "Please fix then your permission"
-	einfo "/nchown -R vdr:vdr /etc/vdr/*"
-	einfo "/nchown -R vdr:vdr /var/vdr/*"
+	elog "From now it is possible to run VDR as user vdr"
+	elog "Please fix then your permission"
+	elog "chown -R vdr:vdr /etc/vdr/*"
+	elog "chown -R vdr:vdr /var/vdr/*"
 }
