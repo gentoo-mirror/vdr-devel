@@ -2,6 +2,13 @@
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-2.1.1 (01 Sep 2013)
+
+  01 Sep 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.1.ebuild,
+  +files/vdr-2.1.1_gentoo.patch, +files/channel_alternative.conf,
+  +metadata.xml:
+  start next developer tree vdr-2.1.x
+
   01 Apr 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.23.ebuild,
   -vdr-1.7.24-r1.ebuild, -vdr-1.7.25.ebuild, -vdr-1.7.30.ebuild,
   -vdr-1.7.31.ebuild, -vdr-1.7.32-r1.ebuild, -vdr-1.7.33.ebuild,
