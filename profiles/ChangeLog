@@ -2,6 +2,10 @@
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  22 Oct 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmasked vdr-2.1.2, a lot of broken plugins, extpatchng with use-flag
+  combination pinplugin setup
+
   05 Mar 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   unmaks >vdr-1.7.36-r1 and depende plugins
 
