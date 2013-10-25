@@ -7,9 +7,9 @@ EAPI="5"
 inherit eutils flag-o-matic multilib toolchain-funcs
 
 # Switches supported by extensions-patch
-EXT_PATCH_FLAGS="alternatechannel ddepgentry graphtft
-	jumpplay jumpingseconds mainmenuhooks menuorg naludump permashift
-	pinplugin setup ttxtsubs wareagleicon yaepg"
+EXT_PATCH_FLAGS="alternatechannel binaryskip graphtft jumpingseconds jumpplay naludump permashift 
+		pinplugin mainmenuhooks menuorg menuselection resumereset ttxtsubs wareagleicon yaepg"
+# ddepgentry setup
 
 # names of the use-flags
 EXT_PATCH_FLAGS_RENAMED=""
@@ -17,13 +17,13 @@ EXT_PATCH_FLAGS_RENAMED=""
 # names ext-patch uses internally, here only used for maintainer checks
 EXT_PATCH_FLAGS_RENAMED_EXT_NAME=""
 
-IUSE="bidi debug dxr3 html vanilla ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED}"
+IUSE="bidi debug  html vanilla ${EXT_PATCH_FLAGS} ${EXT_PATCH_FLAGS_RENAMED}"
 
 MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
 S="${WORKDIR}/${MY_P}"
 
-EXT_P="extpng-${P}-gentoo-edition-v1"
+EXT_P="extpng-${P}-gentoo-edition-v3"
 
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
@@ -35,14 +35,14 @@ KEYWORDS="~arm ~amd64 ~ppc ~x86"
 SLOT="0"
 LICENSE="GPL-2"
 
-REQUIRED_USE="setup? ( !menuorg )
-	menuorg? ( !setup )"
+#REQUIRED_USE="setup? ( !menuorg )
+#	menuorg? ( !setup )"
 
 COMMON_DEPEND="virtual/jpeg
 	sys-libs/libcap
 	>=media-libs/fontconfig-2.4.2
-	>=media-libs/freetype-2
-	setup? ( >=dev-libs/tinyxml-2.6.1[stl] )"
+	>=media-libs/freetype-2"
+#	setup? ( >=dev-libs/tinyxml-2.6.1[stl] )"
 
 DEPEND="${COMMON_DEPEND}
 	>=virtual/linuxtv-dvb-headers-5.3
@@ -55,7 +55,7 @@ RDEPEND="${COMMON_DEPEND}
 	bidi? ( dev-libs/fribidi )"
 
 # pull in vdr-setup to get the xml files, else menu will not work
-PDEPEND="setup? ( >=media-plugins/vdr-setup-0.3.1-r3 )"
+#PDEPEND="setup? ( >=media-plugins/vdr-setup-0.3.1-r3 )"
 
 CONF_DIR=/etc/vdr
 CAP_FILE=${S}/capabilities.sh
@@ -273,10 +273,10 @@ src_install() {
 		doins "${FILESDIR}"/channel_alternative.conf
 	fi
 
-	if use setup; then
-		insinto /usr/share/vdr/setup
-		doins "${S}"/menu.c
-	fi
+#	if use setup; then
+#		insinto /usr/share/vdr/setup
+#		doins "${S}"/menu.c
+#	fi
 
 	chown -R vdr:vdr "${D}/${CONF_DIR}"
 }
@@ -307,16 +307,16 @@ pkg_postinst() {
 
 	elog "It is a good idea to run vdrplugin-rebuild now."
 
-	if use setup; then
-		if ! has_version media-plugins/vdr-setup || \
-			! egrep -q '^setup$' "${ROOT}/etc/conf.d/vdr.plugins"; then
-
-			echo
-			ewarn "You have compiled media-video/vdr with USE=\"setup\""
-			ewarn "It is very important to emerge media-plugins/vdr-setup now!"
-			ewarn "and you have to loaded it in /etc/conf.d/vdr.plugins"
-		fi
-	fi
+#	if use setup; then
+#		if ! has_version media-plugins/vdr-setup || \
+#			! egrep -q '^setup$' "${ROOT}/etc/conf.d/vdr.plugins"; then
+#
+#			echo
+#			ewarn "You have compiled media-video/vdr with USE=\"setup\""
+#			ewarn "It is very important to emerge media-plugins/vdr-setup now!"
+#			ewarn "and you have to loaded it in /etc/conf.d/vdr.plugins"
+#		fi
+#	fi
 
 	elog "To get nice symbols in OSD we recommend to install"
 	elog "\t1. emerge media-fonts/vdrsymbols-ttf"

@@ -2,6 +2,18 @@
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  25 Oct 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-2.1.2.ebuild,
+  +vdr-2.1.2-r1.ebuild, metadata.xml:
+  new extpng patchsetM use-flag/patch setup removed, please use use-flag
+  menuorg and depended plugin vdr-menuorg
+
+*vdr-2.1.2-r1 (25 Oct 2013)
+
+  25 Oct 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-2.1.2.ebuild,
+  +vdr-2.1.2-r1.ebuild, metadata.xml:
+  new extpng patchsetM use-flag/patch setup removed, please use use-flag
+  menuorg and depended plugin vdr-menuorg
+
 *vdr-2.1.2 (22 Oct 2013)
 
   22 Oct 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.2.ebuild:
