@@ -6,8 +6,12 @@ EAPI="5"
 
 inherit vdr-plugin-2 git-2
 
+GIT_REVISION="f3e5aca6f7010d9c9d606fffcca79cdb4251bf71"
+GIT_DATE="20131021"
+
 EGIT_REPO_URI="git://github.com/opdenkamp/xbmc-pvr-addons.git"
 EGIT_SOURCEDIR="${WORKDIR}"
+EGIT_COMMIT="${GIT_REVISION}"
 
 DESCRIPTION="VDR plugin: VNSI Streamserver Plugin (Odenkamp branch)"
 HOMEPAGE="https://github.com/opdenkamp/xbmc-pvr-addons"
@@ -25,6 +29,8 @@ S="${WORKDIR}/addons/pvr.vdr.vnsi/vdr-plugin-vnsiserver"
 
 src_prepare() {
 	vdr-plugin-2_src_prepare
+	sed -e "s:### The object files (add further files here)\::-include \$(shell pkg-config --variable=plgcfg vdr):"\
+		-i Makefile
 
 	fix_vdr_libsi_include demuxer.c
 	fix_vdr_libsi_include videoinput.c
