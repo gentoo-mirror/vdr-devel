@@ -2,6 +2,9 @@
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  07 Nov 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -use.local.desc:
+  removed empty use.local.desc
+
   26 Oct 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   removed pmask vdr-2.1.2-r1
 
