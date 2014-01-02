@@ -1,0 +1,10 @@
+# ChangeLog for media-plugins/vdr-rpihddevice
+# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*vdr-rpihddevice-0.0.7 (02 Jan 2014)
+
+  02 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-rpihddevice-0.0.7.ebuild, +metadata.xml:
+  initial
+
