@@ -12,7 +12,6 @@
 		<flag name="bidi">fribid support, for languages, written from right to left</flag>
 		<flag name="binaryskip">add supports for binary skipping in records</flag>
 		<flag name="ddepgentry">remove duplicate EPG entries</flag>
-		<flag name="dvlvidprefer">controls video-dir choice on recording</flag>
 		<flag name="dxr3">Enable tweaks to improve vdr behaviour on dxr3-cards</flag>
 		<flag name="graphtft">support for grapftft plugin up from vdr-graphtft-0.1.7</flag>
 		<flag name="html">Install HTML documentation</flag>

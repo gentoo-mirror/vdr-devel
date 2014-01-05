@@ -2,14 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-video/vdr/vdr-2.0.2-r1.ebuild,v 1.2 2013/07/07 09:52:20 hd_brummy Exp $
 
-EAPI="5"
+EAPI=5
 
 inherit eutils flag-o-matic multilib toolchain-funcs
 
 # Switches supported by extensions-patch
 EXT_PATCH_FLAGS="alternatechannel binaryskip graphtft jumpingseconds jumpplay naludump permashift
 		pinplugin mainmenuhooks menuorg menuselection resumereset ttxtsubs wareagleicon yaepg"
-# ddepgentry setup
+# ddepgentry
 
 # names of the use-flags
 EXT_PATCH_FLAGS_RENAMED=""
@@ -23,26 +23,21 @@ MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
 S="${WORKDIR}/${MY_P}"
 
-EXT_P="extpng-${P}-gentoo-edition-v3"
+EXT_P="extpng-${P}-gentoo-edition-v1"
 
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
 HOMEPAGE="http://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
-	http://dev.gentoo.org/~hd_brummy/distfiles/${EXT_P}.patch.bz2
-	http://www.saunalahti.fi/~rahrenbe/vdr/patches/${P}-gcc.patch.gz"
+	http://dev.gentoo.org/~hd_brummy/distfiles/${EXT_P}.patch.bz2"
 
 KEYWORDS="~arm ~amd64 ~ppc ~x86"
 SLOT="0"
 LICENSE="GPL-2"
 
-#REQUIRED_USE="setup? ( !menuorg )
-#	menuorg? ( !setup )"
-
 COMMON_DEPEND="virtual/jpeg
 	sys-libs/libcap
 	>=media-libs/fontconfig-2.4.2
 	>=media-libs/freetype-2"
-#	setup? ( >=dev-libs/tinyxml-2.6.1[stl] )"
 
 DEPEND="${COMMON_DEPEND}
 	>=virtual/linuxtv-dvb-headers-5.3
@@ -53,9 +48,6 @@ RDEPEND="${COMMON_DEPEND}
 	>=media-tv/gentoo-vdr-scripts-0.2.0
 	media-fonts/corefonts
 	bidi? ( dev-libs/fribidi )"
-
-# pull in vdr-setup to get the xml files, else menu will not work
-#PDEPEND="setup? ( >=media-plugins/vdr-setup-0.3.1-r3 )"
 
 CONF_DIR=/etc/vdr
 CAP_FILE=${S}/capabilities.sh
@@ -163,7 +155,7 @@ src_prepare() {
 	BUILD_PARAMS+=" BIDI=$(usex bidi 1 0)"
 
 	epatch "${FILESDIR}/${PN}-2.1.1_gentoo.patch"
-	epatch "${WORKDIR}/${P}-gcc.patch" # tmp gcc fix from Rolf Ahrenberg
+#	epatch "${WORKDIR}/${P}-gcc.patch" # tmp gcc fix from Rolf Ahrenberg
 
 	if ! use vanilla; then
 
@@ -273,11 +265,6 @@ src_install() {
 		doins "${FILESDIR}"/channel_alternative.conf
 	fi
 
-#	if use setup; then
-#		insinto /usr/share/vdr/setup
-#		doins "${S}"/menu.c
-#	fi
-
 	chown -R vdr:vdr "${D}/${CONF_DIR}"
 }
 
@@ -306,17 +293,6 @@ pkg_postinst() {
 #	fi
 
 	elog "It is a good idea to run vdrplugin-rebuild now."
-
-#	if use setup; then
-#		if ! has_version media-plugins/vdr-setup || \
-#			! egrep -q '^setup$' "${ROOT}/etc/conf.d/vdr.plugins"; then
-#
-#			echo
-#			ewarn "You have compiled media-video/vdr with USE=\"setup\""
-#			ewarn "It is very important to emerge media-plugins/vdr-setup now!"
-#			ewarn "and you have to loaded it in /etc/conf.d/vdr.plugins"
-#		fi
-#	fi
 
 	elog "To get nice symbols in OSD we recommend to install"
 	elog "\t1. emerge media-fonts/vdrsymbols-ttf"
