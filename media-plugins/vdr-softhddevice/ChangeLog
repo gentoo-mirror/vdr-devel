@@ -1,6 +1,15 @@
 # ChangeLog for media-plugins/vdr-softhddevice
-# Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+*vdr-softhddevice-0.6.0_p20140108 (18 Jan 2014)
+
+  18 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  -vdr-softhddevice-0.4.9.ebuild, -vdr-softhddevice-0.5.0.ebuild,
+  -vdr-softhddevice-0.5.1.ebuild, -vdr-softhddevice-0.5.2.ebuild,
+  +vdr-softhddevice-0.6.0_p20140108.ebuild, vdr-softhddevice-9999.ebuild,
+  -files/vdr-softhddevice-9999-Makefile.patch, metadata.xml:
+  snapshot from 20140108; fixed 9999 versions ebuild; cleanup
 
 *vdr-softhddevice-0.6.0 (18 Mar 2013)
 

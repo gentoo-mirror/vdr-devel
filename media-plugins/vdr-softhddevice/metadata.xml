@@ -5,10 +5,13 @@
 		<email>idl0r@gentoo.org</email>
 		<name>Christian Ruppert</name>
 	</maintainer>
+	<maintainer>
+		<email>hd_brummy@gentoo.org</email>
+		<name>Joerg Bornkessel</name>
+	</maintainer>
 	<use>
 		<flag name="vaapi">Enables VAAPI (Video Acceleration API) for hardware decoding</flag>
 		<flag name="vdpau">Enables VDPAU decoders (requires nVidia video cards and binary
 			nvidia-drivers to offload CPU processing to video card)</flag>
-		<flag name="yaepg">Enables yaepg plugin support</flag>
 	</use>
 </pkgmetadata>

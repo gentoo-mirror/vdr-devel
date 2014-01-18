@@ -2,21 +2,21 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="5"
+EAPI=5
 
-inherit vdr-plugin-2 git-2
+inherit vdr-plugin-2
 
-RESTRICT="test"
-
-EGIT_REPO_URI="git://projects.vdr-developer.org/vdr-plugin-softhddevice.git"
-KEYWORDS=""
+GIT_REVISION="978fc59abadba1b9d305572554e6638198753a00"
+#GIT_DATE="20140108"
 
 DESCRIPTION="VDR Plugin: Software and GPU emulated HD output device"
 HOMEPAGE="http://projects.vdr-developer.org/projects/show/plg-softhddevice"
+SRC_URI="http://projects.vdr-developer.org/git/vdr-plugin-softhddevice.git/snapshot/vdr-plugin-softhddevice-${GIT_REVISION}.tar.bz2"
+KEYWORDS="~amd64 ~x86"
 
 LICENSE="AGPL-3"
 SLOT="0"
-IUSE="alsa +debug opengl oss vaapi vdpau xscreensaver"
+IUSE="alsa debug opengl oss vaapi vdpau -xscreensaver"
 
 RDEPEND=">=media-video/vdr-2
 	x11-libs/libX11
@@ -27,9 +27,9 @@ RDEPEND=">=media-video/vdr-2
 	alsa? ( media-libs/alsa-lib )
 	opengl? ( virtual/opengl )
 	vaapi? ( x11-libs/libva
-		virtual/ffmpeg[vaapi] )
+			virtual/ffmpeg[vaapi] )
 	vdpau? ( x11-libs/libvdpau
-		virtual/ffmpeg[vdpau] )"
+			virtual/ffmpeg[vdpau] )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	x11-libs/xcb-util"
@@ -41,6 +41,8 @@ REQUIRED_USE="opengl? ( vaapi )
 VDR_CONFD_FILE="${FILESDIR}/confd-0.6.0"
 VDR_RCADDON_FILE="${FILESDIR}/rc-addon-0.6.0.sh"
 
+S="${WORKDIR}/vdr-plugin-softhddevice-${GIT_REVISION}"
+
 pkg_setup() {
 	vdr-plugin-2_pkg_setup
 
@@ -48,6 +50,7 @@ pkg_setup() {
 
 	use debug && append-cppflags -DDEBUG -DOSD_DEBUG
 }
+
 src_prepare() {
 	vdr-plugin-2_src_prepare
 
@@ -66,5 +69,5 @@ src_prepare() {
 src_install() {
 	vdr-plugin-2_src_install
 
-	nonfatal dodoc ChangeLog Todo
+	dodoc ChangeLog Todo
 }
