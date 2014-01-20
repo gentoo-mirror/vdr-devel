@@ -1,0 +1,10 @@
+# ChangeLog for media-tv/gentoo-vdr-scripts
+# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*gentoo-vdr-scripts-9999 (20 Jan 2014)
+
+  20 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +gentoo-vdr-scripts-9999.ebuild, +metadata.xml:
+  added pmasked -9999.ebuild to check out the git repo; pmasked
+

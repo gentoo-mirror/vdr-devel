@@ -1,6 +1,9 @@
 # ChangeLog for <CATEGORY>/<PACKAGE_NAME>
-# Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+  20 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmasked media-tv/gentoo-vdr-scripts-9999 for live time
 
   07 Nov 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -use.local.desc:
   removed empty use.local.desc
