@@ -15,7 +15,7 @@ SRC_URI=""
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~ppc ~x86"
-IUSE="nvram systemd"
+IUSE="nvram"
 
 RDEPEND="nvram? ( sys-power/nvram-wakeup )
 	app-admin/sudo
@@ -33,9 +33,10 @@ pkg_setup() {
 	enewuser vdr -1 /bin/bash "${VDR_HOME}" vdr,video,audio,cdrom
 }
 
-src_prepare() {
-	use systemd && sed -i "${S}"/Makefile -e "s:VDRSYSTEMD ?= 0:VDRSYSTEMD = 1:"
-}
+# disabled for testing
+#src_prepare() {
+#	use systemd && sed -i "${S}"/Makefile -e "s:VDRSYSTEMD ?= 0:VDRSYSTEMD = 1:"
+#}
 
 src_install() {
 	emake -s install DESTDIR="${D}" || die "make install failed"
@@ -49,74 +50,4 @@ src_install() {
 	for kd in shutdown-data merged-config-files dvd-images tmp; do
 		keepdir "${VDR_HOME}/${kd}"
 	done
-}
-
-pkg_preinst() {
-	local PLUGINS_NEW=0
-	if [[ -f "${ROOT}"/etc/conf.d/vdr.plugins ]]; then
-		PLUGINS_NEW=$(grep -v '^#' "${ROOT}"/etc/conf.d/vdr.plugins |grep -v '^$'|wc -l)
-	fi
-	if [[ ${PLUGINS_NEW} > 0 ]]; then
-		cp "${ROOT}"/etc/conf.d/vdr.plugins "${D}"/etc/conf.d/vdr.plugins
-	else
-		einfo "Migrating PLUGINS setting from /etc/conf.d/vdr to /etc/conf.d/vdr.plugins"
-		local PLUGIN
-		for PLUGIN in $(source "${ROOT}"/etc/conf.d/vdr;echo $PLUGINS); do
-			echo ${PLUGIN} >> "${D}"/etc/conf.d/vdr.plugins
-		done
-	fi
-}
-
-VDRSUDOENTRY="vdr ALL=NOPASSWD:/usr/share/vdr/bin/vdrshutdown-really.sh"
-
-pkg_postinst() {
-	elog "nvram wakeup is optional."
-	elog "To make use of it emerge sys-power/nvram-wakeup."
-	elog
-
-	elog "Plugins which should be used are now set via its"
-	elog "own config-file called /etc/conf.d/vdr.plugins"
-	elog "or enabled via the frontend eselect vdr-plugin."
-	elog
-
-	if [[ -f "${ROOT}/etc/init.d/dvbsplash" ]]; then
-		ewarn
-		ewarn "You have dvbsplash installed!"
-		ewarn "/etc/init.d/dvbsplash will now be deleted"
-		ewarn "as it causes difficult to debug problems."
-		ewarn
-		rm "${ROOT}/etc/init.d/dvbsplash"
-	fi
-
-	if [[ -f "${ROOT}"/etc/conf.d/vdr.dvdswitch ]] &&
-		grep -q ^DVDSWITCH_BURNSPEED= "${ROOT}"/etc/conf.d/vdr.dvdswitch
-	then
-		ewarn "You are setting DVDSWITCH_BURNSPEED in /etc/conf.d/vdr.dvdswitch"
-		ewarn "This no longer has any effect, please use"
-		ewarn "VDR_DVDBURNSPEED in /etc/conf.d/vdr.cd-dvd"
-	fi
-
-	einfo "This snapshot was last changed:"
-	cd "${S}"
-	grep Id ChangeLog
-}
-
-pkg_config() {
-	if grep -q /usr/share/vdr/bin/vdrshutdown-really.sh "${ROOT}"/etc/sudoers; then
-
-		einfo "Removing depricated entry from /etc/sudoers:"
-		einfo "-  ${VDRSUDOENTRY}"
-
-		cd "${T}"
-		cat >sudoedit-vdr.sh <<-SUDOEDITOR
-			#!/bin/bash
-			sed -i \${1} -e '/\/usr\/share\/vdr\/bin\/vdrshutdown-really.sh *$/d'
-
-		SUDOEDITOR
-		chmod a+x sudoedit-vdr.sh
-
-		VISUAL="${T}"/sudoedit-vdr.sh visudo -f "${ROOT}"/etc/sudoers || die "visudo failed"
-
-		einfo "Edited /etc/sudoers"
-	fi
 }

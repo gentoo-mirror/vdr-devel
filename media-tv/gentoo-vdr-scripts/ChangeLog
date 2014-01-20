@@ -2,6 +2,11 @@
 # Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  20 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  gentoo-vdr-scripts-9999.ebuild:
+  disabled use-flag systemd, system relevanted files will installed by default;
+  ebuild cleaned up from unneeded code
+
 *gentoo-vdr-scripts-9999 (20 Jan 2014)
 
   20 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
