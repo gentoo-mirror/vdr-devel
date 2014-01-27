@@ -43,6 +43,10 @@ src_prepare() {
 		sed -i device.c -e "s:MAXDVBDEVICES:MAXDEVICES:"
 	fi
 
+	if has_version ">=media-video/vdr-2.1.4"; then
+		epatch "${FILESDIR}"/vdr-sc-0.9.3.20120815_vdr-2.1.4_compilefix.diff
+	fi
+
 	sed -e 's:^SINCLUDES += :&-I/usr/include/vdr :' \
 		-e 's:^LIBDIR.*$:LIBDIR = ${S}:' \
 		-i  Makefile.system || "sed Makefile.system failed"
