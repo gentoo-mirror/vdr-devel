@@ -2,6 +2,11 @@
 # Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-2.1.4 (27 Jan 2014)
+
+  27 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.4.ebuild:
+  bump
+
 *vdr-2.1.3 (05 Jan 2014)
 
   05 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-2.1.2-r1.ebuild,
