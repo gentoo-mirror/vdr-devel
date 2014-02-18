@@ -6,7 +6,7 @@ EAPI=5
 
 inherit vdr-plugin-2
 
-VERSION="1604" #every bump, new version
+VERSION="1629" #every bump, new version
 
 DESCRIPTION="VDR Plugin: Output Device for Raspberry Pi"
 HOMEPAGE="http://projects.vdr-developer.org/projects/plg-rpihddevice"
