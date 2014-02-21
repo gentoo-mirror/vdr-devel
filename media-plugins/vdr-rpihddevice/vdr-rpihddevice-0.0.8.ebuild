@@ -18,7 +18,7 @@ LICENSE="GPL-2"
 IUSE=""
 
 DEPEND=">=media-video/vdr-2.0.0
-		=media-libs/raspberrypi-userland-0_pre20140117
+		>=media-libs/raspberrypi-userland-0_pre20140117
 		<=media-video/ffmpeg-1.0.8"
 #		virtual/ffmpeg fixing later, sources needs exactly <=ffmpeg-1.0.8, libav not implemented yet
 RDEPEND="${DEPEND}"

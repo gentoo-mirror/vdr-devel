@@ -4,6 +4,10 @@
 
   21 Feb 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
   vdr-rpihddevice-0.0.8.ebuild:
+  typo in depend fixed
+
+  21 Feb 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-rpihddevice-0.0.8.ebuild:
   fixed depend, reported by Upstream T.Reufer
 
 *vdr-rpihddevice-0.0.8 (18 Feb 2014)
