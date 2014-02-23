@@ -21,6 +21,9 @@
 ##   End example
 ##
 
+# Joerg Bornkessel <hd_brummy@gentoo.org> ( 23/Feb/2014 )
+# tmp masked for testing, still some bugs and missing themes
+media-plugins/vdr-graphtftng
 
 # Joerg Bornkessel <hd_brummy@gentoo.org>
 #  on behalf of QA Team
