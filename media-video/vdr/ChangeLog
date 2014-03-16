@@ -665,4 +665,3 @@
   +files/vdr-1.7.0-multiproto-update.diff, +metadata.xml, +vdr-1.7.0.ebuild:
   Added ebuild with added multiproto support based on vdr-1.6.0_p1-r1 from
   portage tree.
-
