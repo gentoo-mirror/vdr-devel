@@ -2,6 +2,11 @@
 # Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-satip-0.2.0 (29 Mar 2014)
+
+  29 Mar 2014; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-satip-0.2.0.ebuild:
+  bump
+
   26 Mar 2014; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-satip-0.0.1.ebuild,
   vdr-satip-0.1.1.ebuild:
   cleanup; fixed digest, depend, thx to tinitus@vdrportal.de for reporting this
