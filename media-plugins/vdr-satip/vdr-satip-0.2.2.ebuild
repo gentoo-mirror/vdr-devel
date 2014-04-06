@@ -25,7 +25,7 @@ src_prepare() {
 	vdr-plugin-2_src_prepare
 
 	if has_version "dev-libs/tinyxml" ; then
-		sed "s:#SATIP_USE_TINYXML:SATIP_USE_TINYXML:" Makefile
+		sed -e "s:#SATIP_USE_TINYXML:SATIP_USE_TINYXML:" -i Makefile
 		#BUILD_PARAMS+=" SATIP_USE_TINYXML = 1 "
 	fi
 }

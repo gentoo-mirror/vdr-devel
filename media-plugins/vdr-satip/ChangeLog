@@ -2,6 +2,9 @@
 # Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  06 Apr 2014; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-satip-0.2.2.ebuild:
+  sed syntax
+
 *vdr-satip-0.2.2 (06 Apr 2014)
 
   06 Apr 2014; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-satip-0.2.2.ebuild:
