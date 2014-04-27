@@ -1,10 +1,10 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=5
 
-inherit vdr-plugin git-2
+inherit vdr-plugin-2 git-2
 
 DESCRIPTION="yaepghd plugin for nice epg"
 HOMEPAGE="http://projects.vdr-developer.org/projects/show/plg-yaepghd"
@@ -21,11 +21,11 @@ DEPEND="${RDEPEND}"
 
 src_prepare() {
 	epatch "${FILESDIR}/operands.patch"
-	vdr-plugin_src_prepare
+	vdr-plugin-2_src_prepare
 }
 
 src_install() {
-	vdr-plugin_src_install
+	vdr-plugin-2_src_install
 
 	dodir /etc/vdr/plugins || die
 	insinto /etc/vdr/plugins
