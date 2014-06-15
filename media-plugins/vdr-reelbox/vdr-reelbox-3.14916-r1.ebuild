@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -53,4 +53,6 @@ src_prepare() {
 	fi
 
 	sed -e "s:avcodec_init://avcodec_init:" -i VideoPlayerPipHd.c
+
+	epatch "${FILESDIR}/${P}_libav9-ffmpeg2.patch"
 }

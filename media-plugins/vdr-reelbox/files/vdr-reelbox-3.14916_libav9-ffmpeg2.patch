@@ -1,0 +1,17 @@
+diff -Naur vdr-reelbox-3.orig/VideoPlayerPipHd.c vdr-reelbox-3/VideoPlayerPipHd.c
+--- vdr-reelbox-3.orig/VideoPlayerPipHd.c	2014-06-15 19:18:32.072477999 +0200
++++ vdr-reelbox-3/VideoPlayerPipHd.c	2014-06-15 19:19:45.075815949 +0200
+@@ -141,11 +141,11 @@
+ 			    printf("codec not found\n");
+ 			    return;
+ 		}
+-		av_context = avcodec_alloc_context();
++		av_context = avcodec_alloc_context3(NULL);
+ 		av_context->flags|=CODEC_FLAG_TRUNCATED;
+ 		av_context->error_concealment=0;
+ 
+-		if (avcodec_open(av_context, av_codec) < 0)
++		if (avcodec_open2(av_context, av_codec, NULL) < 0)
+ 		{
+ 			printf("could not open codec\n");
+ 			return;
