@@ -2,6 +2,12 @@
 # Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  11 Aug 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  -vdr-sc-0.9.3.20100119.ebuild, -vdr-sc-0.9.3.20100228.ebuild,
+  -vdr-sc-0.9.3.20101013.ebuild, -vdr-sc-0.9.3.20110911.ebuild,
+  -vdr-sc-0.9.3.20111122.ebuild, -vdr-sc-0.9.3.20120815.ebuild:
+  cleanup old
+
   27 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
   vdr-sc-0.9.3.20120815-r1.ebuild,
   +files/vdr-sc-0.9.3.20120815_vdr-2.1.4_compilefix.diff:
