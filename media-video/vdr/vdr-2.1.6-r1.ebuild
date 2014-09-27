@@ -23,7 +23,7 @@ MY_PV="${PV%_p*}"
 MY_P="${PN}-${MY_PV}"
 S="${WORKDIR}/${MY_P}"
 
-EXT_P="extpng-${P}-gentoo-edition-v1"
+EXT_P="extpng-${P}-gentoo-edition-v2"
 #EXT_P="extpng-${PN}-2.1.6-gentoo-edition-v1"
 
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"

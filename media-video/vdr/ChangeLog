@@ -2,6 +2,9 @@
 # Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  27 Sep 2014; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-2.1.6-r1.ebuild:
+  fixed typo in patchset
+
 *vdr-2.1.6-r1 (26 Sep 2014)
 
   26 Sep 2014; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.6-r1.ebuild,
