@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="5"
+EAPI=5
 
 inherit vdr-plugin-2
 
@@ -54,5 +54,9 @@ src_prepare() {
 
 	sed -e "s:avcodec_init://avcodec_init:" -i VideoPlayerPipHd.c
 
+	# libav9 support
 	epatch "${FILESDIR}/${P}_libav9-ffmpeg2.patch"
+	sed -i \
+		-e 's:avcodec.h>:avcodec.h>\n#include <libavutil/mem.h>:' \
+		VideoPlayerPipHd.c || die
 }
