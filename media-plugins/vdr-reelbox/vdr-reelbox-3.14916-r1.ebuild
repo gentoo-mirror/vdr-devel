@@ -59,4 +59,9 @@ src_prepare() {
 	sed -i \
 		-e 's:avcodec.h>:avcodec.h>\n#include <libavutil/mem.h>:' \
 		VideoPlayerPipHd.c || die
+
+	# libav10 support
+	sed -i \
+		-e "s:avcodec_alloc_frame:av_frame_alloc:" \
+		VideoPlayerPipHd.c
 }

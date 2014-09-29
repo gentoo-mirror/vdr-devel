@@ -4,6 +4,10 @@
 
   29 Sep 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
   vdr-reelbox-3.14916-r1.ebuild:
+  libav10 fixes
+
+  29 Sep 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-reelbox-3.14916-r1.ebuild:
   libav9 compile fix
 
   15 Jun 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
