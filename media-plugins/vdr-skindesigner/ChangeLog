@@ -1,0 +1,10 @@
+# ChangeLog for media-plugins/vdr-skindesigner
+# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*vdr-skindesigner-0.0.1 (03 Oct 2014)
+
+  03 Oct 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-skindesigner-0.0.1.ebuild, +metadata.xml:
+  initial commit, ebuild provided by M.Dummer
+
