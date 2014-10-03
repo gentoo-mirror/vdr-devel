@@ -6,8 +6,8 @@ EAPI=5
 
 inherit vdr-plugin-2
 
-GIT_REVISION="978fc59abadba1b9d305572554e6638198753a00"
-#GIT_DATE="20140108"
+GIT_REVISION="a3c0052c"
+#GIT_DATE="20140923"
 
 DESCRIPTION="VDR Plugin: Software and GPU emulated HD output device"
 HOMEPAGE="http://projects.vdr-developer.org/projects/show/plg-softhddevice"
@@ -24,7 +24,7 @@ RDEPEND=">=media-video/vdr-2
 	x11-libs/xcb-util-wm
 	x11-libs/xcb-util-keysyms
 	x11-libs/xcb-util-renderutil
-	alsa? ( <media-libs/alsa-lib-1.0.28 )
+	alsa? ( >=media-libs/alsa-lib-1.0.28 )
 	opengl? ( virtual/opengl )
 	vaapi? ( x11-libs/libva
 			virtual/ffmpeg[vaapi] )

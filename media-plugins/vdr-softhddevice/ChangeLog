@@ -2,6 +2,14 @@
 # Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-softhddevice-0.6.0_p20140923 (03 Oct 2014)
+
+  03 Oct 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-softhddevice-0.6.0_p20140108.ebuild,
+  +vdr-softhddevice-0.6.0_p20140923.ebuild:
+  new git snapshot, need alsa-lib-1.0.28; fixed alsa-lib depend; thx to
+  M.Dummer for reporting and testing
+
 *vdr-softhddevice-0.6.0_p20140108 (18 Jan 2014)
 
   18 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
