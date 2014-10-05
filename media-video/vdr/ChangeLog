@@ -2,6 +2,11 @@
 # Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-2.1.6-r2 (05 Oct 2014)
+
+  05 Oct 2014; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.6-r2.ebuild:
+  better systemd support, reported by L.Muresan on wrt bug 524428
+
   27 Sep 2014; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-2.1.6-r1.ebuild:
   fixed typo in patchset
 
