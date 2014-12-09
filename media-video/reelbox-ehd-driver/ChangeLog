@@ -1,6 +1,9 @@
 # ChangeLog for media-video/reelbox-ehd-driver
-# Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+  09 Dec 2014; Joerg Bornkessel <hd_brummy@gentoo.org> files/45-reelbox.rules:
+  udev error, added empty 'Newline' to fix it
 
   09 Apr 2013; Joerg Bornkessel <hd_brummy@gentoo.org> files/45-reelbox.rules,
   reelbox-ehd-driver-14916.ebuild:
