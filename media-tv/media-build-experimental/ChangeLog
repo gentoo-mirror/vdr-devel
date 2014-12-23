@@ -1,0 +1,10 @@
+# ChangeLog for media-tv/media-build-experimental
+# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*media-build-experimental-0.0.1_p20141123 (23 Dec 2014)
+
+  23 Dec 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +media-build-experimental-0.0.1_p20141123.ebuild, +metadata.xml:
+  initial commmit
+
