@@ -1,6 +1,11 @@
 # ChangeLog for media-video/vdr
-# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+  04 Jan 2015; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-2.1.1.ebuild,
+  vdr-2.1.2-r1.ebuild, vdr-2.1.3.ebuild, vdr-2.1.4.ebuild, vdr-2.1.5.ebuild,
+  vdr-2.1.6.ebuild, vdr-2.1.6-r1.ebuild, vdr-2.1.6-r2.ebuild:
+  fixed documentation URL, wrt bug 534486
 
 *vdr-2.1.6-r2 (05 Oct 2014)
 

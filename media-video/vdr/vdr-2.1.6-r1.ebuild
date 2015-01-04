@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-video/vdr/vdr-2.0.2-r1.ebuild,v 1.2 2013/07/07 09:52:20 hd_brummy Exp $
 
@@ -298,5 +298,5 @@ pkg_postinst() {
 	elog "\t2. select font VDRSymbolsSans in Setup"
 	elog ""
 	elog "To get an idea how to proceed now, have a look at our vdr-guide:"
-	elog "\thttp://www.gentoo.org/doc/en/vdr-guide.xml"
+	elog "\thttps://wiki.gentoo.org/wiki/VDR"
 }
