@@ -4,23 +4,24 @@
 
 EAPI=5
 
-inherit vdr-plugin-2 git-r3
+inherit vdr-plugin-2
 
-EGIT_REPO_URI="git://github.com/FernetMenta/vdr-plugin-vnsiserver.git"
-
-DESCRIPTION="VDR plugin: VNSI Streamserver Plugin (FernetMenta branch)"
+DESCRIPTION="VDR plugin: VNSI Streamserver Plugin (FernetManta repo)"
 HOMEPAGE="https://github.com/FernetMenta/vdr-plugin-vnsiserver"
-SRC_URI=""
+SRC_URI="https://github.com/FernetMenta/vdr-plugin-vnsiserver/archive/v1.2.0.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 DEPEND=">=media-video/vdr-1.7.14"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+		>=media-plugins/xbmc-addon-pvr-0.0.1_p20140213"
+# Maintainer, please add also media-plugins/xbmc-addon-pvr with the same patchlevel
+# to the tree, so it is guaranteed that the server and the addon fit together
 
-S="${WORKDIR}/${P}"
+S="${WORKDIR}/vdr-plugin-${VDRPLUGIN}-${PV}"
 
 src_prepare() {
 	vdr-plugin-2_src_prepare

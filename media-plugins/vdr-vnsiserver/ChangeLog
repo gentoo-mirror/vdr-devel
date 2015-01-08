@@ -1,6 +1,13 @@
 # ChangeLog for media-plugins/vdr-vnsiserver
-# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+*vdr-vnsiserver-1.2.0 (08 Jan 2015)
+
+  08 Jan 2015; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-vnsiserver-1.2.0.ebuild, vdr-vnsiserver-9999.ebuild:
+  bump; fixed -9999.ebuild to checkout the FernetMenta tree, as vnssiver plugin
+  has removed from Opdenkamp branch
 
 *vdr-vnsiserver-0.9.4_p20140213 (18 Feb 2014)
 
