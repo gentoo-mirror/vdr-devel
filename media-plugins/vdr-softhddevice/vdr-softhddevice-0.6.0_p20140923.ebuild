@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -63,6 +63,10 @@ src_prepare() {
 
 	if has_version ">=media-video/ffmpeg-0.8"; then
 		BUILD_PARAMS+=" SWRESAMPLE=1"
+	fi
+
+	if has_version ">=media-video/libav-0.8"; then
+		BUILD_PARAMS+=" AVRESAMPLE=1"
 	fi
 }
 

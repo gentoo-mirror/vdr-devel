@@ -1,6 +1,10 @@
 # ChangeLog for media-plugins/vdr-softhddevice
-# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+  15 Jan 2015; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-softhddevice-0.6.0_p20140923.ebuild, vdr-softhddevice-9999.ebuild:
+  fixed build param for media-libs/libav
 
 *vdr-softhddevice-0.6.0_p20140923 (03 Oct 2014)
 
