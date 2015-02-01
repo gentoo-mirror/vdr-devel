@@ -2,6 +2,12 @@
 # Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-2.1.8 (01 Feb 2015)
+
+  01 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.8.ebuild,
+  +files/vdr-2.1.8_gentoo.patch:
+  bump; this version reduced the available use-flags due support in core vdr
+
 *vdr-2.1.7 (18 Jan 2015)
 
   18 Jan 2015; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.7.ebuild,
