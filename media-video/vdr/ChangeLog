@@ -2,6 +2,13 @@
 # Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-2.1.8-r1 (03 Feb 2015)
+
+  03 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.8-r1.ebuild,
+  +files/vdr-2.1.8-scheduleswitch.diff:
+  upstream test request,
+  http://www.vdr-portal.de/index.php?page=Thread&postID=1230810
+
 *vdr-2.1.8 (01 Feb 2015)
 
   01 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.8.ebuild,
