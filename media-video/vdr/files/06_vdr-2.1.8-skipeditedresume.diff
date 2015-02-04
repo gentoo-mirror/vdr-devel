@@ -1,0 +1,12 @@
+diff -Naur vdr-2.1.8.orig/dvbplayer.c vdr-2.1.8/dvbplayer.c
+--- vdr-2.1.8.orig/dvbplayer.c	2015-02-04 10:20:26.000000000 +0100
++++ vdr-2.1.8/dvbplayer.c	2015-02-04 10:22:10.000000000 +0100
+@@ -431,6 +431,8 @@
+   if (index) {
+      int Index = ptsIndex.FindIndex(DeviceGetSTC());
+      if (Index >= 0) {
++        if (Setup.SkipEdited && marks.First() && abs(Index - marks.First()->Position()) <= int(round(RESUMEBACKUP * framesPerSecond)))
++           Index = 0; // when stopping within RESUMEBACKUP of the first mark the recording shall still be considered unviewed
+ #ifdef USE_RESUMERESET
+         int backup = int(round(RESUMEBACKUP * framesPerSecond));
+         if (Index >= index->Last() - backup)

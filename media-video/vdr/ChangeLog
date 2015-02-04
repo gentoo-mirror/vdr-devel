@@ -2,6 +2,17 @@
 # Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*vdr-2.1.8-r2 (04 Feb 2015)
+
+  04 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-2.1.8-r1.ebuild,
+  +vdr-2.1.8-r2.ebuild, +files/02_vdr-2.1.8-binaryskipstrict.diff,
+  +files/01_vdr-2.1.8-eit-memleak-v1.diff,
+  +files/03_vdr-2.1.8-scheduleswitch.diff,
+  -files/vdr-2.1.8-scheduleswitch.diff,
+  +files/04_vdr-2.1.8-scheduleswitchblue.diff,
+  +files/06_vdr-2.1.8-skipeditedresume.diff:
+  test request from upstream for several patches
+
 *vdr-2.1.8-r1 (03 Feb 2015)
 
   03 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.8-r1.ebuild,

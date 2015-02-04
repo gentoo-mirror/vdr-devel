@@ -217,7 +217,11 @@ src_prepare() {
 	# http://www.vdr-portal.de/index.php?page=Thread&postID=1230810
 	einfo "\ntest request from upstream maintainer"
 	einfo "http://www.vdr-portal.de/index.php?page=Thread&postID=1230810"
-	epatch "${FILESDIR}/${P}-scheduleswitch.diff"
+	epatch "${FILESDIR}/01_vdr-2.1.8-eit-memleak-v1.diff"
+	epatch "${FILESDIR}/02_vdr-2.1.8-binaryskipstrict.diff"
+	epatch "${FILESDIR}/03_vdr-2.1.8-scheduleswitch.diff"
+	epatch "${FILESDIR}/04_vdr-2.1.8-scheduleswitchblue.diff"
+	epatch "${FILESDIR}/06_vdr-2.1.8-skipeditedresume.diff"
 
 	epatch_user
 
