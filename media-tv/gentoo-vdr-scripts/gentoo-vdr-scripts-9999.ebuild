@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-tv/gentoo-vdr-scripts/gentoo-vdr-scripts-9999.ebuild,v 1.8 2006/10/13 10:43:30 zzam Exp $
 
@@ -33,21 +33,16 @@ pkg_setup() {
 	enewuser vdr -1 /bin/bash "${VDR_HOME}" vdr,video,audio,cdrom
 }
 
-# disabled for testing
-#src_prepare() {
-#	use systemd && sed -i "${S}"/Makefile -e "s:VDRSYSTEMD ?= 0:VDRSYSTEMD = 1:"
-#}
-
 src_install() {
-	emake -s install DESTDIR="${D}" || die "make install failed"
-	nonfatal dodoc README TODO ChangeLog
+	default
+	nonfatal dodoc README* TODO ChangeLog
 
 	# create necessary directories
 	diropts -ovdr -gvdr
 	keepdir "${VDR_HOME}"
 
 	local kd
-	for kd in shutdown-data merged-config-files dvd-images tmp; do
+	for kd in shutdown-data merged-config-files dvd-images; do
 		keepdir "${VDR_HOME}/${kd}"
 	done
 }
