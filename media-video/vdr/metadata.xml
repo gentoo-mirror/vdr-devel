@@ -17,6 +17,7 @@
 		<flag name="html">Install HTML documentation</flag>
 		<flag name="jumpplay">Enables automatic jumping over cut marks while watching a recording</flag>
 		<flag name="jumpingseconds">skip seconds in played records</flag>
+		<flag name="kbd">enable keyboard support as remote device</flag>
 		<flag name="mainmenuhooks">Allows to replace main menu entries by some special plugins (like epgsearch, extrecmenu, ...)</flag>
 		<flag name="menuorg">Enables support for the menuorg-plugin</flag>
 		<flag name="menuselection">adds support for menu hotkeys of double digits</flag>
