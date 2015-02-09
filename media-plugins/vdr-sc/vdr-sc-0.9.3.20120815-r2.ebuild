@@ -1,29 +1,30 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=5
 
-RESTRICT="mirror"
+#RESTRICT="mirror"
 
 inherit vdr-plugin-2
 
 HG_REVISION="29b7b5f231c8"
-HG_REVISION_DATE="20120721"
+HG_REVISION_DATE="20120815"
 
 DESCRIPTION="VDR Plugin: SoftCAM"
 HOMEPAGE="http://207.44.152.197/vdr2.htm#sc"
-#SRC_URI="http://207.44.152.197/${P}.tar.gz"
-#SRC_URI="http://vdr.websitec.de/download/${PN}/${P}.tar.gz"
-SRC_URI="http://85.17.209.13:6100/archive/${HG_REVISION}.tar.gz -> vdr-sc-0.9.3.${HG_REVISION_DATE}.tar.gz"
+SRC_URI="http://vdr.websitec.de/download/${PN}/${P}.tar.gz"
+#SRC_URI="http://85.17.209.13:6100/archive/${HG_REVISION}.tar.gz -> vdr-sc-0.9.3.${HG_REVISION_DATE}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="3dnow +cardclient +conax +constcw +cryptoworks +irdeto mmx
-	+nagra +nds +sc-conax +sc-cryptoworks +sc-irdeto +sc-nagra +sc-seca
-	+sc-viaccess +sc-videoguard2 +seca +shl sse sse2 +viaccess
-	dvbsddevice dvbhddevice"
+IUSE="+cardclient +conax +constcw +cryptoworks +irdeto +nagra +nds
+		+sc-conax +sc-cryptoworks +sc-irdeto +sc-nagra +sc-seca
+		+sc-viaccess +sc-videoguard2 +seca +shl +viaccess
+		dvbsddevice dvbhddevice"
+
+X86_CPU_FEATURE=( 3dnow:amd3dnow mmx:mmx sse:sse sse2:sse2 )
 
 DEPEND=">=media-video/vdr-1.7.21
 	>=dev-libs/openssl-0.9.7
