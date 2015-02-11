@@ -68,10 +68,10 @@ src_prepare() {
 	if has_version ">=media-video/libav-0.8"; then
 		BUILD_PARAMS+=" AVRESAMPLE=1"
 	fi
-}
 
-src_install() {
-	vdr-plugin-2_src_install
-
-	dodoc ChangeLog Todo
+	if has_version ">=media-video/vdr-2.1.10"; then
+		sed -e "s:pm = RenderPixmaps():pm = dynamic_cast<cPixmapMemory *>(RenderPixmaps()):"\
+			-e "s:delete pm;:DestroyPixmap(pm);:"\
+			-i softhddevice.cpp
+	fi
 }
