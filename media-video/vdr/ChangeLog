@@ -2,6 +2,10 @@
 # Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  11 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org>
+  files/vdr-2.1.10_gentoo.patch:
+  patch fixed
+
 *vdr-2.1.10 (11 Feb 2015)
 
   11 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-2.1.9.ebuild,

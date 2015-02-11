@@ -45,7 +45,7 @@ diff -Naur vdr-2.1.7.orig/Makefile vdr-2.1.7/Makefile
 -	@mkdir -p $(DESTDIR)$(ARGSDIR)
 -	@mkdir -p $(DESTDIR)$(CACHEDIR)
 +#	@mkdir -p $(DESTDIR)$(CONFDIR)
-+#	@mkdir -p $(DESTDIR)$(ARGSDIR)
++	@mkdir -p $(DESTDIR)$(ARGSDIR)
 +#	@mkdir -p $(DESTDIR)$(CACHEDIR)
  	@mkdir -p $(DESTDIR)$(RESDIR)
  
