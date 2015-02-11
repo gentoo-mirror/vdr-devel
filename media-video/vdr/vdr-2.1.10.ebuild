@@ -102,6 +102,15 @@ lang_po() {
 	LING_PO=$( ls ${S}/po | sed -e "s:.po::g" | cut -d_ -f1 | tr \\\012 ' ' )
 }
 
+src_configure() {
+	# support languages, written from right to left
+	export "BIDI=$(usex bidi 1 0)"
+	# systemd notification support
+	export "SDNOTIFY=$(usex systemd 1 0)"
+	# with/without keyboard
+	export "USE_KBD=$(usex kbd 1 0)"
+}
+
 src_prepare() {
 	# apply maintainace-patches
 	ebegin "Changing paths for gentoo"
@@ -148,26 +157,8 @@ src_prepare() {
 		LIBDIR			= ${PLUGIN_LIBDIR}
 		PCDIR			= /usr/$(get_libdir)/pkgconfig
 
-		#BIDI = 1
-		#SDNOTIFY = 1
-		NO_KBD = 1
 	EOT
 	eend 0
-
-	# support languages, written from right to left
-	if use bidi; then
-		sed -e "s:#BIDI = 1:BIDI = 1:" -i Make.config
-	fi
-
-	# systemd notification support
-	if use systemd; then
-		sed -e "s:#SDNOTIFY = 1:SDNOTIFY = 1:" -i Make.config
-	fi
-
-	# with/witout keyboard
-	if use kbd; then
-		sed -e "s:NO_KBD = 1:#NO_KBD = 1:" -i Make.config
-	fi
 
 	if ! use vanilla; then
 
@@ -222,6 +213,12 @@ src_prepare() {
 
 	epatch "${FILESDIR}/${P}_gentoo.patch"
 
+	# fix some makefile issues
+	sed -e "s:ifndef NO_KBD:ifeq (\$(USE_KBD),1):" \
+		-e "s:ifdef BIDI:ifeq (\$(BIDI),1):" \
+		-e "s:ifdef SDNOTIFY:ifeq (\$(SDNOTIFY),1):" \
+		-i "${S}"/Makefile
+
 	epatch_user
 
 	add_cap CAP_UTF8
@@ -252,7 +249,7 @@ src_prepare() {
 src_install() {
 	# trick makefile not to create a videodir by supplying it with an existing
 	# directory
-	emake \
+	einstall \
 	VIDEODIR="/" \
 	DESTDIR="${D}" install || die "emake install failed"
 
@@ -278,11 +275,19 @@ src_install() {
 	chown -R vdr:vdr "${D}/${CONF_DIR}"
 }
 
+pkg_preinstall() {
+
+	has_version "<${CATEGORY}/${PN}-2.2"
+	previous_less_than_2_2=$
+}
+
 pkg_postinst() {
 
-#	elog "\n\t---- 15 YEARS ANNIVERSARY EDITON ----\n"
-#	elog "\tA lot of thanks to Klaus Schmiedinger"
-#	elog "\tfor this nice piece of Software...\n"
+	if [[ $previous_less_than_2_2 = 0 ]] ; then
+		elog "\n\t---- 15 YEARS ANNIVERSARY EDITON ----\n"
+		elog "\tA lot of thanks to Klaus Schmiedinger"
+		elog "\tfor this nice piece of Software...\n"
+	fi
 
 	elog "It is a good idea to run vdrplugin-rebuild now."
 
