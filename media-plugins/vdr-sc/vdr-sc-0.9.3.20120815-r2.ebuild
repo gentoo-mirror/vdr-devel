@@ -22,22 +22,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE="+cardclient +conax +constcw +cryptoworks +irdeto +nagra +nds
 		+sc-conax +sc-cryptoworks +sc-irdeto +sc-nagra +sc-seca
 		+sc-viaccess +sc-videoguard2 +seca +shl +viaccess
-		dvbsddevice dvbhddevice 3dnow mmx sse sse2"
-
-### DAMND !!! HOW DOES THIS FUCK WORK????
-
-#		cpu_flags_x86_3dnow:amd3dnow cpu_flags_x86_mmx:mmx
-#		cpu_flags_x86_sse:sse cpu_flags_x86_sse2:sse2"
-
-#X86_CPU_FEATURES=( 3dnow:amd3dnow mmx:mmx sse:sse sse2:sse2 )
-
-##CPU_FEATURES="cpu_flags_x86_3dnow:amd3dnow cpu_flags_x86_mmx:mmx
-##				cpu_flags_x86_sse:sse cpu_flags_x86_sse2:sse2"
-
-#CPU_FEATURES="${X86_CPU_FEATURES[@]/#/cpu_flags_x86_}"
-#for i in ${CPU_FEATURES} ; do
- #   IUSE="${IUSE} ${i%:*}"
-#done
+		dvbsddevice dvbhddevice
+		cpu_flags_x86_3dnow cpu_flags_x86_mmx
+		cpu_flags_x86_sse cpu_flags_x86_sse2"
 
 DEPEND=">=media-video/vdr-1.7.21
 	>=dev-libs/openssl-0.9.7
@@ -93,13 +80,13 @@ src_prepare() {
 		# have 3dnow and AMDs do. SSE achieves good results only on Intel CPUs,
 		# and LONG is best on 64-bit AMD CPUs.
 
-	if ! use 3dnow && use sse2; then
+	if ! use cpu_flags_x86_3dnow && use cpu_flags_x86_sse2; then
 		PARALLEL=PARALLEL_128_SSE2
-	elif ! use 3dnow && use sse; then
+	elif ! use cpu_flags_x86_3dnow && use cpu_flags_x86_sse; then
 		PARALLEL=PARALLEL_128_SSE
 	elif use amd64; then
 		PARALLEL=PARALLEL_64_LONG
-	elif use mmx; then
+	elif use cpu_flags_x86_mmx; then
 		PARALLEL=PARALLEL_64_MMX
 	else
 	# fallback values:

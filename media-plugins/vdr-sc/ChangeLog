@@ -4,6 +4,10 @@
 
   11 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org>
   vdr-sc-0.9.3.20120815-r2.ebuild:
+  fixed CPU_FLAGS_X86 handling
+
+  11 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-sc-0.9.3.20120815-r2.ebuild:
   minor fixes
 
 *vdr-sc-0.9.3.20120815-r2 (09 Feb 2015)
