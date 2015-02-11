@@ -22,9 +22,22 @@ KEYWORDS="~amd64 ~x86"
 IUSE="+cardclient +conax +constcw +cryptoworks +irdeto +nagra +nds
 		+sc-conax +sc-cryptoworks +sc-irdeto +sc-nagra +sc-seca
 		+sc-viaccess +sc-videoguard2 +seca +shl +viaccess
-		dvbsddevice dvbhddevice"
+		dvbsddevice dvbhddevice 3dnow mmx sse sse2"
 
-X86_CPU_FEATURE=( 3dnow:amd3dnow mmx:mmx sse:sse sse2:sse2 )
+### DAMND !!! HOW DOES THIS FUCK WORK????
+
+#		cpu_flags_x86_3dnow:amd3dnow cpu_flags_x86_mmx:mmx
+#		cpu_flags_x86_sse:sse cpu_flags_x86_sse2:sse2"
+
+#X86_CPU_FEATURES=( 3dnow:amd3dnow mmx:mmx sse:sse sse2:sse2 )
+
+##CPU_FEATURES="cpu_flags_x86_3dnow:amd3dnow cpu_flags_x86_mmx:mmx
+##				cpu_flags_x86_sse:sse cpu_flags_x86_sse2:sse2"
+
+#CPU_FEATURES="${X86_CPU_FEATURES[@]/#/cpu_flags_x86_}"
+#for i in ${CPU_FEATURES} ; do
+ #   IUSE="${IUSE} ${i%:*}"
+#done
 
 DEPEND=">=media-video/vdr-1.7.21
 	>=dev-libs/openssl-0.9.7
@@ -36,6 +49,12 @@ S="${WORKDIR}/sc-${HG_REVISION}"
 
 # dirty fix, fails on more jobserver on FFdecsa
 export MAKEOPTS="-j1"
+
+src_configure() {
+	# plugin dvbsddevice/dvbhddevice with transfermode support
+	export "WITH_DVBSDDEVICE=$(usex dvbsddevice 1 0)"
+	export "WITH_DVBHDDEVICE=$(usex dvbhddevice 1 0)"
+}
 
 src_prepare() {
 	vdr-plugin-2_src_prepare
@@ -98,13 +117,7 @@ src_prepare() {
 
 	export PARALLEL
 
-	# plugin dvbhddevice dvbsddevice with transfermode support
-	export WITH_DVBSDDEVICE=0 WITH_DVBHDDEVICE=0
 	epatch "${FILESDIR}/${P}_makefile.diff"
-	sed -e 's:"../dvbhddevice/dvbhdffdevice.h":<dvbhdffdevice.h>:' -i device-hd.c
-	sed -e 's:"../dvbsddevice/dvbsdffdevice.h":<dvbsdffdevice.h>:' -i device-sd.c
-	use dvbsddevice && WITH_DVBSDDEVICE=1
-	use dvbhddevice && WITH_DVBHDDEVICE=1
 
 	# Remove unwanted plugins
 	cd systems/ || die "cd systems/ failed"
@@ -127,10 +140,10 @@ src_install() {
 	doexe libsc-*.so.* || die "doexe failed"
 
 	docinto FFdecsa
-	dodoc FFdecsa/docs/* || die "dodoc FFdecsa failed"
+	nonfatal dodoc FFdecsa/docs/*
 
 	docinto examples
-	dodoc examples/* || die "dodoc examples failed"
+	nonfatal dodoc examples/*
 }
 
 pkg_postinst() {
