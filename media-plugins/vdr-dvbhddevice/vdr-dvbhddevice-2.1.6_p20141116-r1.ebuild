@@ -4,16 +4,16 @@
 
 EAPI=5
 
-inherit mercurial vdr-plugin-2
+inherit vdr-plugin-2
 
-EHG_REPO_URI="https://bitbucket.org/powARman/dvbhddevice"
-EHG_REVISION="88cd727"
-#hg_revision_date-> 20141116
+HG_REVISION="88cd727ebc99"
+HG_REVISION_DATE="20141116"
 
 DESCRIPTION="VDR Plugin: output device for the 'Full Featured' TechnoTrend
 S2-6400 DVB Card"
 HOMEPAGE="https://bitbucket.org/powARman/dvbhddevice"
-SRC_URI=""
+SRC_URI="https://bitbucket.org/powARman/dvbhddevice/get/${HG_REVISION}.tar.gz ->
+		${P}.tar.gz"
 
 KEYWORDS="~amd64 ~x86"
 SLOT="0"
@@ -23,7 +23,7 @@ IUSE=""
 DEPEND=">=media-video/vdr-2"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${VDRPLUGIN}-${EHG_REVISION}"
+S="${WORKDIR}/powARman-${VDRPLUGIN}-${HG_REVISION}"
 
 src_prepare() {
 	vdr-plugin-2_src_prepare
