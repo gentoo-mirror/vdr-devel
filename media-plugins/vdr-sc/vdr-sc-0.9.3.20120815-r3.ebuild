@@ -12,7 +12,7 @@ HG_REVISION="29b7b5f231c8"
 HG_REVISION_DATE="20120815"
 
 DESCRIPTION="VDR Plugin: SoftCAM"
-HOMEPAGE="http://207.44.152.197/vdr2.htm#sc"
+HOMEPAGE="http://www.vdr-wiki.de/wiki/index.php/Sc-plugin"
 SRC_URI="http://vdr.websitec.de/download/${PN}/${P}.tar.gz"
 #SRC_URI="http://85.17.209.13:6100/archive/${HG_REVISION}.tar.gz -> vdr-sc-0.9.3.${HG_REVISION_DATE}.tar.gz"
 
@@ -65,6 +65,11 @@ src_prepare() {
 
 	sed -e "s:FLAGS:CXXFLAGS:" \
 		-i FFdecsa/Makefile || die "sed FFdecsa Makefile failed"
+
+	sed -e "s:\"../dvbsddevice/dvbsdffdevice.h\":<dvbsdffdevice.h>:" \
+		-i device-sd.c || die "sed device-sd.c failed"
+	sed -e "s:\"../dvbhddevice/dvbhdffdevice.h\":<dvbhdffdevice.h>:" \
+		-i device-hd.c || die "sed device-hd.c failed"
 
 	# Prepare flags for FFdeCSA
 	if [ -n "${VDR_SC_PARALLEL}" ]; then
