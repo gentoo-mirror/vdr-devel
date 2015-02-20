@@ -27,5 +27,5 @@ src_install() {
 	touch searches.conf
 	insopts -m0644 -ovdr -gvdr
 	insinto /etc/vdr/plugins/${VDRPLUGIN}
-	doins last.conf searches.conf
+	nonfatal doins last.conf searches.conf
 }
