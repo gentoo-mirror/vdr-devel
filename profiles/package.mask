@@ -42,3 +42,4 @@ media-plugins/vdr-graphtftng
 =media-plugins/vdr-vnsiserver-9999
 =media-plugins/xbmc-addon-pvr-9999
 =media-tv/gentoo-vdr-scripts-9999
+=media-tv/oscam-9999

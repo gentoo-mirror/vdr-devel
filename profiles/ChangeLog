@@ -1,6 +1,9 @@
 # ChangeLog for <CATEGORY>/<PACKAGE_NAME>
-# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+  03 May 2015; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmasked oscam-9999 for live time
 
   23 Feb 2014; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   media-plugins/vdr-graphtftng masked for testing
