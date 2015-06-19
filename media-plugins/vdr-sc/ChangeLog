@@ -1,0 +1,99 @@
+# ChangeLog for media-plugins/vdr-sc
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*vdr-sc-0.9.3.20120815-r3 (18 Feb 2015)
+
+  18 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-sc-0.9.3.20120815-r2.ebuild, +vdr-sc-0.9.3.20120815-r3.ebuild:
+  fixes, provided by M.Dummer
+
+  11 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-sc-0.9.3.20120815-r2.ebuild:
+  fixed CPU_FLAGS_X86 handling
+
+  11 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-sc-0.9.3.20120815-r2.ebuild:
+  minor fixes
+
+*vdr-sc-0.9.3.20120815-r2 (09 Feb 2015)
+
+  09 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org>
+  -vdr-sc-0.9.3.20120815-r1.ebuild, +vdr-sc-0.9.3.20120815-r2.ebuild,
+  -files/vdr-sc-0.9.3.20100119-makefile-csaflags.diff:
+  fixed dead src_uri
+
+  11 Aug 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  -vdr-sc-0.9.3.20100119.ebuild, -vdr-sc-0.9.3.20100228.ebuild,
+  -vdr-sc-0.9.3.20101013.ebuild, -vdr-sc-0.9.3.20110911.ebuild,
+  -vdr-sc-0.9.3.20111122.ebuild, -vdr-sc-0.9.3.20120815.ebuild:
+  cleanup old
+
+  27 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-sc-0.9.3.20120815-r1.ebuild,
+  +files/vdr-sc-0.9.3.20120815_vdr-2.1.4_compilefix.diff:
+  compilefix >=vdr-2.1.4
+
+*vdr-sc-0.9.3.20120815-r1 (05 Jan 2014)
+
+  05 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-sc-0.9.3.20120815-r1.ebuild, -vdr-sc-9999.ebuild:
+  compile fix vdr-2.1.3
+
+  18 Feb 2013; Christian Ruppert <idl0r@gentoo.org> vdr-sc-9999.ebuild:
+  The Mercurial Eclass overrides EHG_REVISION so we have to force it to be
+  "trunk"
+
+  17 Jan 2013; Christian Ruppert <idl0r@gentoo.org> vdr-sc-9999.ebuild:
+  Some minor fixes
+
+*vdr-sc-0.9.3.20120815 (23 Sep 2012)
+
+  23 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-sc-0.9.3.20120815.ebuild, +files/vdr-sc-0.9.3.20120815_makefile.diff,
+  metadata.xml:
+  new snapshot, new plugins dvbhddevice dvbsddevice supports transfermode on
+  multituner systems
+
+  02 Apr 2012; Christian Ruppert <idl0r@gentoo.org> vdr-sc-9999.ebuild:
+  Add missing vdr-plugin_src_prepare
+
+*vdr-sc-0.9.3.20111122 (28 Feb 2012)
+
+  28 Feb 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-sc-0.9.3.20111122.ebuild:
+  update to latest hg changes, 2011.11.22
+
+  05 Feb 2012; Christian Ruppert <idl0r@gentoo.org> vdr-sc-9999.ebuild:
+  Use -j1 for now
+
+*vdr-sc-0.9.3.20110911 (19 Sep 2011)
+
+  19 Sep 2011; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-sc-0.9.3.20110911.ebuild:
+  new snapshot, 2011 Sep 11
+
+*vdr-sc-0.9.3.20101013 (26 Jun 2011)
+
+  26 Jun 2011; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-sc-0.9.3.20101013.ebuild:
+  added latest changeset in hg from 2010 Oct 13
+
+  01 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-sc-0.9.3.20100119.ebuild, +vdr-sc-0.9.3.20100228.ebuild,
+  +vdr-sc-9999.ebuild:
+  new snapshot; masked mercurial live added
+
+  20 Jan 2010; Matthias Schwarzott <zzam@gentoo.org>
+  vdr-sc-0.9.3.20100119.ebuild:
+  Fix text.
+
+  20 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-sc-0.9.3.20100119.ebuild:
+  pkg_postinst message fixed
+
+  20 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-sc-0.9.3.20100119.ebuild,
+  +files/vdr-sc-0.9.3.20100119-makefile-csaflags.diff, +metadata.xml:
+  initial ebuild
+

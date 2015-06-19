@@ -1,0 +1,5 @@
+# module hdshm create next free framebuffer device and add a symlink to fb_reel
+ATTR{name}=="hde_fb", SYMLINK+="fb_reel"
+
+# device /dev/hdshm with owner vdr gives vdr the right to run as user vdr
+SUBSYSTEM=="hdshm", OWNER="vdr", MODE="0600"

@@ -1,0 +1,34 @@
+#!/sbin/runscript
+# Copyright 1999-2008 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: 
+
+depend() {
+	need modules	
+}
+ 
+start() {
+
+	ebegin "Starting hdboot"
+ 
+	cd /opt/reelbox-ehd
+ 
+	/usr/bin/hdboot -w 15 -i linux.bin > /dev/null 2>&1 
+
+	sleep 4
+ 
+	start-stop-daemon -b --start --exec /usr/bin/shmnetd --pidfile /var/run/shmnetd.pid -m
+ 
+	eend $?
+}
+ 
+stop() {
+
+	ebegin "Stopping hdboot"
+
+	start-stop-daemon --stop --quiet \
+		--pidfile /var/run/shmnetd.pid --exec /usr/bin/shmnetd
+	local ret=$?
+	rm -f /var/run/shmnetd.pid
+	eend ${ret}
+}

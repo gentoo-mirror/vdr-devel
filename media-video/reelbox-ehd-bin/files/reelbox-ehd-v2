@@ -1,0 +1,18 @@
+#!/sbin/runscript
+# Copyright 1999-2012 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+command="/usr/bin/shmnetd"
+start_stop_daemon_args="--make-pidfile --background"
+pidfile="/var/run/shmnetd.pid"
+name="eHD boot"
+
+depend() {
+	need modules
+}
+
+start_pre() {
+	ebegin "loading linux.bin in reel HD card"
+	/usr/bin/hdboot -w 15 -i /opt/reelbox-ehd/linux.bin > /dev/null 2>&1
+}

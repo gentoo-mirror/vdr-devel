@@ -1,0 +1,13 @@
+# ChangeLog for media-tv/oscam
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*oscam-9999 (03 May 2015)
+*oscam-1.20_p20150429 (03 May 2015)
+
+  03 May 2015; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +oscam-1.20_p20150429.ebuild, +oscam-9999.ebuild, +files/oscam.confd,
+  +files/oscam.initd, +files/oscam.service, +files/oscam_watchdog.sh,
+  +metadata.xml:
+  initial commit
+

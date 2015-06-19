@@ -1,0 +1,110 @@
+
+
+### The version number of this plugin (taken from the main source file):
+
+VERSION = $(shell grep 'static const char \*VERSION *=' $(PLUGIN).c | awk '{ print $$6 }' | sed -e 's/[";]//g')
+
+
+### The version number of VDR (taken from VDR's "config.h"):
+
+APIVERSION = $(shell grep 'define APIVERSION ' $(VDRDIR)/config.h | awk '{ print $$3 }' | sed -e 's/"//g')
+
+VDRLOCALE = $(shell grep '^LOCALEDIR' $(VDRDIR)/Makefile)
+
+
+### The name of the distribution archive:
+
+ARCHIVE = $(PLUGIN)-$(VERSION)
+PACKAGE = vdr-$(ARCHIVE)
+
+
+### Includes and Defines (add further entries here):
+
+DEFINES  += -D_GNU_SOURCE -D_LARGEFILE_SOURCE
+
+ifdef DEBUG
+  DEFINES += -DDEBUG
+  CXXFLAGS += -g
+endif
+
+ifdef RBLITE
+  DEFINES += -DRBLITE
+endif
+
+ifdef REELVDR
+  DEFINES += -DREELVDR
+endif
+
+### Targets:
+
+plug: libvdr-$(PLUGIN).so
+
+all: libvdr-$(PLUGIN).so i18n
+
+### Implicit rules:
+
+%.o: %.c
+	$(CXX) $(CXXFLAGS) -c $(DEFINES) -DPLUGIN_NAME='"$(PLUGIN)"' -DPLUGIN_NAME_I18N='"$(PLUGIN)"' $(INCLUDES) -o $@ $<
+
+# Dependencies:
+
+MAKEDEP = $(CXX) -MM -MG
+DEPFILE = .dependencies
+$(DEPFILE): Makefile
+	@$(MAKEDEP) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c)   > $@
+
+-include $(DEPFILE)
+
+
+### Internationalization (I18N):
+
+PODIR     = po
+LOCALEDIR = $(VDRDIR)/locale
+I18Npo    = $(wildcard $(PODIR)/*.po)
+I18Nmsgs  = $(addprefix $(LOCALEDIR)/, $(addsuffix /LC_MESSAGES/vdr-$(PLUGIN).mo, $(notdir $(foreach file, $(I18Npo), $(basename $(file))))))
+I18Npot   = $(PODIR)/$(PLUGIN).pot
+
+%.mo: %.po
+	msgfmt -c -o $@ $<
+
+$(I18Npot): $(wildcard *.c $(PLUGIN).h)
+	xgettext -C -cTRANSLATORS --no-wrap --no-location -k -ktr -ktrNOOP --from-code=utf-8 --msgid-bugs-address='<reelbox-devel@mailings.reelbox.org>' $^ -o $@
+
+%.po: $(I18Npot)
+	msgmerge -U --no-wrap --no-location --backup=none -q $@ $<
+	@touch $@
+
+$(I18Nmsgs): $(LOCALEDIR)/%/LC_MESSAGES/vdr-$(PLUGIN).mo: $(PODIR)/%.mo
+	@mkdir -p $(dir $@)
+	cp $< $@
+
+.PHONY: i18n
+i18n: $(I18Npot) $(I18Nmsgs)
+
+
+libvdr-$(PLUGIN).so: $(OBJS)
+	$(CXX) $(CXXFLAGS) -shared $(OBJS) $(LDFLAGS) $(LIBS) -o $@
+	@cp $@ $(LIBDIR)/$@.$(APIVERSION)
+
+dist: clean
+	@rm -rf $(TMPDIR)/$(ARCHIVE)
+	@mkdir $(TMPDIR)/$(ARCHIVE)
+	@cp -a * $(TMPDIR)/$(ARCHIVE)
+	@rm -f $(TMPDIR)/$(ARCHIVE)/$(PLUGIN).kdevelop
+	@rm -f $(TMPDIR)/$(ARCHIVE)/$(PLUGIN).kdevelop.filelist
+	@rm -f $(TMPDIR)/$(ARCHIVE)/$(PLUGIN).kdevelop.pcs
+	@rm -f $(TMPDIR)/$(ARCHIVE)/$(PLUGIN).kdevses
+	@rm -rf $(TMPDIR)/$(ARCHIVE)/CVS
+	@rm -rf $(TMPDIR)/$(ARCHIVE)/Examples/CVS
+	@rm -rf $(TMPDIR)/$(ARCHIVE)/Patch/CVS
+	@ln -s $(ARCHIVE) $(TMPDIR)/$(PLUGIN)
+	@tar czf $(PACKAGE).tgz -C $(TMPDIR) $(ARCHIVE) $(PLUGIN)
+	@rm -rf $(TMPDIR)/$(ARCHIVE) $(TMPDIR)/$(PLUGIN)
+	@echo Distribution package created as $(PACKAGE).tgz
+
+clean:
+	@-rm -f $(PODIR)/*.mo $(PODIR)/*.pot
+	@-rm -f $(OBJS) $(MAIN) $(DEPFILE) *.so *.tgz core* *~
+	@-rm -f $(LIBDIR)/libvdr-$(PLUGIN).so.$(APIVERSION)
+
+MAKECOMMON_IS_SOURCED = 1

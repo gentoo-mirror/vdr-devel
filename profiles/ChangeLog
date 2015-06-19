@@ -1,0 +1,185 @@
+# ChangeLog for <CATEGORY>/<PACKAGE_NAME>
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  03 May 2015; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmasked oscam-9999 for live time
+
+  23 Feb 2014; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  media-plugins/vdr-graphtftng masked for testing
+
+  20 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmasked media-tv/gentoo-vdr-scripts-9999 for live time
+
+  07 Nov 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -use.local.desc:
+  removed empty use.local.desc
+
+  26 Oct 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  removed pmask vdr-2.1.2-r1
+
+  25 Oct 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-2.1.2-r1 masked, broken plugins on api changes
+
+  22 Oct 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmasked vdr-2.1.2, a lot of broken plugins, extpatchng with use-flag
+  combination pinplugin setup
+
+  05 Mar 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  unmaks >vdr-1.7.36-r1 and depende plugins
+
+  25 Feb 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vompserver-0.4.0 depend on >=vdr-1.7.36-r1
+
+  25 Feb 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-burn-0.2.2, depend on pmasked >=vdr-1.7.36-r1
+
+  18 Feb 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-1.7.38, vdr-permashift-0.5.1, masked for testing
+
+  15 Feb 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-1.7.36-r1 for fixed vdr-plugin-2.eclass testing masked
+
+  28 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-rcu-0.0.4, vdr-dvbsddevice-0.0.8 masked on eclass issues
+
+  26 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  rm pmask vdr-1.7.35-r1, gentoo-vdr-scripts-2.0.0_rc1
+
+  26 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  gentoo-vdr-scripts-2.0.0_rc1 pmasked
+
+  13 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmask for livetime media-plugins/xbmc-addon-pvr-9999
+
+  06 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmasked vdr-1.7.35-r1 for USEFHS handling test
+
+  06 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  removed pmaks media-video/vdr-1.7.35 and depende plugins
+
+  01 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  removed pmask =vdr-1.7.34
+
+  01 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  typo
+
+  01 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  depend on >=vdr-1.7.35, masked some plugins
+
+  31 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-1.7.34 pmask, need some global testing
+
+  27 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  masked =vdr-1.7.34, all plugins broken yet
+
+  16 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  removed pmask =media-video/vdr-1.7.33
+
+  15 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmask =vdr-1.7.33, to many broken plugins
+
+  27 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  unmasked tmp masked vdr-sc vdr-dvb(sc,hd)device
+
+  24 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  unmask >=vdr-1.7.27 and depende plugins
+
+  23 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  tmp masked for testing on transfermode included in vdr-sc
+
+  01 Jul 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  media-video/vdr-osdpip-0.1.2 pmasked, need vdr-1.7.27
+
+  10 Jun 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-skinsoppalusikka-1.7.7 pmask, need >=vdr-1.7.27
+
+  03 Jun 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  media-video/vdr-1.7.28 masked for i18n issues
+
+  27 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  removed pmask vdr-osdteletext-0.9.3; running with vdr-1.7.23 too
+
+  26 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  masking vdr-osdteletex-0.9.3; need vdr-1.7.27 (still masked)
+
+  07 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmasked vdr-femon-1.7.17, need vdr-1.7.27
+
+  07 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmasked vdr-femon-1.7.17, need vdr-1.7.27
+
+  02 Apr 2012; Christian Ruppert <idl0r@gentoo.org> package.mask:
+  Mask 1.7.27 for now as there a too many plugins broken currently
+
+  12 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  masked vdr-femon-1.7.14, need vdr-1.7.26
+
+  12 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  masked vdr-noepg-0.0.1, need vdr-1.7.26
+
+  08 Feb 2012; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  unmask vdr-1.7.22, depend vdr-femon, vdr-ttxtsubs
+
+  30 Dec 2011; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmasked vdr-femon-1.7.11; need vdr-1.7.22
+
+  30 Dec 2011; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  masked vdr-1.7.22, last checks before go to maintree
+
+  09 Oct 2011; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  pmasked media-plugins/vdr-ttxtsubs-0.2.4, need >=vdr-1.7.21
+
+  16 Sep 2011; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  removed pmask >=vdr-17.19 and depended plugins
+
+  09 May 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  masked media-plugins/vdr-vnsiserver-9999 for livetime
+
+  07 Apr 2010; Joerg Bornkessel <hd_brummy@gentoo.org> ChangeLog:
+  add some debuginfo for eclass changes
+
+  22 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  unmask vdr-1.7.13/14 and plugins depended on this version
+
+  21 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-1.7.14 masked, need some addaption in vdrplugin.eclass before
+
+  08 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  masked vdr-1.7.13; vdr-txttsubs-0.2.1
+
+  05 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  masked some plugins, need vdr-1.7.13
+
+  01 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-sc-9999, masked for live time
+
+  23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  removed all masks for vdr-1.7.12
+
+  23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  reel-*-14440 masked
+
+  23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  =media-plugins/vdr-femon-1.7.6 masked, need vdr-1.7.12
+
+  22 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-1.7.12 masked, need newest vdr-reelbox plugin
+
+  20 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  unmask for vdr-1.7.11
+
+  17 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  media-plugins/vdr-skinsopplusikka-1.7.0 masked, need >=vdr-1.7.11
+
+  10 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-1.7.7 unmask, also depended masked plugins
+
+  09 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  media-plugins/vdr-streamdev-0.3.5_pre20090510 masked; need vdr-1.7.5
+
+  07 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> ChangeLog:
+  vdr-ttxtsub-0.1.0 masked; need >=vdr-1.7.6
+
+  05 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
+  vdr-1.7.7. masked; need >=linux-headers-2.6.29, bug #266837
+

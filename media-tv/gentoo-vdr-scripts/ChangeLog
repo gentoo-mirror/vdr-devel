@@ -1,0 +1,19 @@
+# ChangeLog for media-tv/gentoo-vdr-scripts
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  05 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org>
+  gentoo-vdr-scripts-9999.ebuild:
+  minor fixes
+
+  20 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  gentoo-vdr-scripts-9999.ebuild:
+  disabled use-flag systemd, system relevanted files will installed by default;
+  ebuild cleaned up from unneeded code
+
+*gentoo-vdr-scripts-9999 (20 Jan 2014)
+
+  20 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +gentoo-vdr-scripts-9999.ebuild, +metadata.xml:
+  added pmasked -9999.ebuild to check out the git repo; pmasked
+

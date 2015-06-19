@@ -1,0 +1,64 @@
+# ChangeLog for media-plugins/vdr-reelbox
+# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  29 Sep 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-reelbox-3.14916-r1.ebuild:
+  libav10 fixes
+
+  29 Sep 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-reelbox-3.14916-r1.ebuild:
+  libav9 compile fix
+
+  15 Jun 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-reelbox-3.14916-r1.ebuild,
+  +files/vdr-reelbox-3.14916_libav9-ffmpeg2.patch:
+  fixed compile libav9/ffmpeg2
+
+*vdr-reelbox-3.14916-r1 (11 Apr 2013)
+
+  11 Apr 2013; Joerg Bornkessel <hd_brummy@gentoo.org>
+  -vdr-reelbox-3.14440.ebuild, -files/reelbox-3.14440_makefile.diff,
+  -files/vdr-reelbox-3.14440_vdr-1.7.12-not-reelpatched.diff,
+  +vdr-reelbox-3.14916-r1.ebuild,
+  +files/vdr-reelbox-3.14916-v2_vdr-1.7.12-not-reelpatched.diff,
+  +files/reelbox.mk, -files/save-setup_3.14440.diff,
+  -files/save-setup_3.14916.diff:
+  cleanup; new default Makefile
+
+  09 Apr 2013; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-reelbox-3.14916.ebuild:
+  eapi=5; removed untranslated po files; fixed compile ffmepg
+
+  15 Nov 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-reelbox-3.14916.ebuild:
+  moved to virtual/ffmpeg
+
+  19 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-reelbox-3.14916.ebuild, files/vdr-reelbox-3.14916_vdr-1.7.27.diff:
+  moved to vdr-plugin-2.eclass
+
+  18 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +files/reelbox-3.14916_makefile.diff:
+  added missing makefile.diff
+
+*vdr-reelbox-3.14916 (09 Apr 2012)
+
+  09 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-reelbox-3.14916.ebuild, +files/vdr-reelbox-3.14916_ffmpeg.diff,
+  +files/vdr-reelbox-3.14916_libpng-1.5.diff,
+  +files/vdr-reelbox-3.14916_vdr-1.7.12-not-reelpatched.diff,
+  +files/vdr-reelbox-3.14916_vdr-1.7.27.diff, +files/save-setup_3.14916.diff:
+  version bump to revision 14916, png-1.5 compile fix, ffmpeg compile fix,
+  eapi=4
+
+  30 Jun 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-reelbox-3.14440.ebuild:
+  compilefix for >=ffmpeg-0.6
+
+  23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-reelbox-3.14440.ebuild, +files/reelbox-3.14440_makefile.diff,
+  +files/save-setup_3.14440.diff,
+  +files/vdr-reelbox-3.14440_vdr-1.7.12-not-reelpatched.diff, +metadata.xml:
+  initial revision for vdr-1.7.12
+

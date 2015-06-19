@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<herd>media-tv</herd>
+<maintainer>
+<email>hd_brummy@gentoo.org</email>
+<name>Joerg Bornkessel</name>
+</maintainer>
+	<use>
+		<flag name='cardclient'>No Description</flag>
+		<flag name='conax'>No Description</flag>
+		<flag name='constcw'>No Description</flag>
+		<flag name='cryptoworks'>No Description</flag>
+		<flag name='dvbhddevice'>Supports transfermode for multituner systems"</flag>
+		<flag name='dvbsddevice'>Supports transfermode for multituner systems"</flag>
+		<flag name='irdeto'>No Description</flag>
+		<flag name='nagra'>No Description</flag>
+		<flag name='nds'>No Description</flag>
+		<flag name='sc-conax'>No Description</flag>
+		<flag name='sc-cryptoworks'>No Description</flag>
+		<flag name='sc-irdeto'>No Description</flag>
+		<flag name='sc-nagra'>No Description</flag>
+		<flag name='sc-seca'>No Description</flag>
+		<flag name='sc-viaccess'>No Description</flag>
+		<flag name='sc-videoguard2'>No Description</flag>
+		<flag name='seca'>No Description</flag>
+		<flag name='shl'>No Description</flag>
+		<flag name='viaccess'>No Description</flag>
+	</use>
+</pkgmetadata>
+

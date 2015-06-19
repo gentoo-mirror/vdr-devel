@@ -1,0 +1,14 @@
+# ChangeLog for media-video/reelbox-ehd-headers
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*reelbox-ehd-headers-14916 (09 Apr 2012)
+
+  09 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +reelbox-ehd-headers-14916.ebuild:
+  version bump to revision 14916, eapi=4
+
+  23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +reelbox-ehd-headers-14440.ebuild, +files/Make.common, +metadata.xml:
+  initial revision for vdr-1.7.12
+

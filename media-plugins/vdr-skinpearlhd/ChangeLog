@@ -1,0 +1,14 @@
+# ChangeLog for media-plugins/vdr-skinpearlhd
+# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  11 Aug 2014; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-skinpearlhd-9999.ebuild:
+  eapi=5
+
+*vdr-skinpearlhd-9999 (07 Jan 2012)
+
+  07 Jan 2012; Christian Ruppert <idl0r@gentoo.org>
+  +vdr-skinpearlhd-9999.ebuild, +metadata.xml:
+  Initial import.
+

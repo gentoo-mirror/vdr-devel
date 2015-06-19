@@ -1,0 +1,748 @@
+# ChangeLog for media-video/vdr
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  20 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-2.1.1.ebuild,
+  -vdr-2.1.2-r1.ebuild, -vdr-2.1.3.ebuild, -vdr-2.1.4.ebuild,
+  -vdr-2.1.5.ebuild, -vdr-2.1.6.ebuild, -vdr-2.1.6-r1.ebuild,
+  -vdr-2.1.6-r2.ebuild, -vdr-2.1.7.ebuild, -vdr-2.1.8.ebuild,
+  -vdr-2.1.8-r2.ebuild, -vdr-2.1.9.ebuild, -files/vdr-2.1.1_gentoo.patch,
+  -files/vdr-2.1.6_gentoo.patch, -files/vdr-2.1.7_C++11.patch,
+  -files/vdr-2.1.7_gentoo.patch, -files/02_vdr-2.1.8-binaryskipstrict.diff,
+  -files/01_vdr-2.1.8-eit-memleak-v1.diff,
+  -files/03_vdr-2.1.8-scheduleswitch.diff,
+  -files/04_vdr-2.1.8-scheduleswitchblue.diff,
+  -files/06_vdr-2.1.8-skipeditedresume.diff, -files/vdr-2.1.8_gentoo.patch,
+  -files/vdr-2.1.9_gentoo.patch:
+  clean up
+
+  11 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org>
+  files/vdr-2.1.10_gentoo.patch:
+  patch fixed
+
+*vdr-2.1.10 (11 Feb 2015)
+
+  11 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-2.1.9.ebuild,
+  +vdr-2.1.10.ebuild, +files/vdr-2.1.10_gentoo.patch:
+  bump
+
+*vdr-2.1.9 (08 Feb 2015)
+
+  08 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.9.ebuild,
+  +files/vdr-2.1.9_gentoo.patch, metadata.xml:
+  bump
+
+*vdr-2.1.8-r2 (04 Feb 2015)
+
+  04 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-2.1.8-r1.ebuild,
+  +vdr-2.1.8-r2.ebuild, +files/02_vdr-2.1.8-binaryskipstrict.diff,
+  +files/01_vdr-2.1.8-eit-memleak-v1.diff,
+  +files/03_vdr-2.1.8-scheduleswitch.diff,
+  -files/vdr-2.1.8-scheduleswitch.diff,
+  +files/04_vdr-2.1.8-scheduleswitchblue.diff,
+  +files/06_vdr-2.1.8-skipeditedresume.diff:
+  test request from upstream for several patches
+
+*vdr-2.1.8-r1 (03 Feb 2015)
+
+  03 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.8-r1.ebuild,
+  +files/vdr-2.1.8-scheduleswitch.diff:
+  upstream test request,
+  http://www.vdr-portal.de/index.php?page=Thread&postID=1230810
+
+*vdr-2.1.8 (01 Feb 2015)
+
+  01 Feb 2015; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.8.ebuild,
+  +files/vdr-2.1.8_gentoo.patch:
+  bump; this version reduced the available use-flags due support in core vdr
+
+*vdr-2.1.7 (18 Jan 2015)
+
+  18 Jan 2015; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.7.ebuild,
+  +files/vdr-2.1.7_C++11.patch, +files/vdr-2.1.7_gentoo.patch:
+  bump
+
+  04 Jan 2015; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-2.1.1.ebuild,
+  vdr-2.1.2-r1.ebuild, vdr-2.1.3.ebuild, vdr-2.1.4.ebuild, vdr-2.1.5.ebuild,
+  vdr-2.1.6.ebuild, vdr-2.1.6-r1.ebuild, vdr-2.1.6-r2.ebuild:
+  fixed documentation URL, wrt bug 534486
+
+*vdr-2.1.6-r2 (05 Oct 2014)
+
+  05 Oct 2014; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.6-r2.ebuild:
+  better systemd support, reported by L.Muresan on wrt bug 524428
+
+  27 Sep 2014; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-2.1.6-r1.ebuild:
+  fixed typo in patchset
+
+*vdr-2.1.6-r1 (26 Sep 2014)
+
+  26 Sep 2014; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.6-r1.ebuild,
+  +files/vdr-2.1.6_gentoo.patch, metadata.xml:
+  extended patchset for vdr-permashift-1;
+
+  wrt bug 521570; wrt bug 499444
+
+*vdr-2.1.5 (24 Feb 2014)
+
+  24 Feb 2014; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.5.ebuild:
+  bump
+
+*vdr-2.1.4 (27 Jan 2014)
+
+  27 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.4.ebuild:
+  bump
+
+*vdr-2.1.3 (05 Jan 2014)
+
+  05 Jan 2014; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-2.1.2-r1.ebuild,
+  +vdr-2.1.3.ebuild, metadata.xml:
+  bump
+
+  25 Oct 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-2.1.2.ebuild,
+  +vdr-2.1.2-r1.ebuild, metadata.xml:
+  new extpng patchsetM use-flag/patch setup removed, please use use-flag
+  menuorg and depended plugin vdr-menuorg
+
+*vdr-2.1.2-r1 (25 Oct 2013)
+
+  25 Oct 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-2.1.2.ebuild,
+  +vdr-2.1.2-r1.ebuild, metadata.xml:
+  new extpng patchsetM use-flag/patch setup removed, please use use-flag
+  menuorg and depended plugin vdr-menuorg
+
+*vdr-2.1.2 (22 Oct 2013)
+
+  22 Oct 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.2.ebuild:
+  bump
+
+*vdr-2.1.1 (01 Sep 2013)
+
+  01 Sep 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.1.1.ebuild,
+  +files/vdr-2.1.1_gentoo.patch, +files/channel_alternative.conf,
+  +metadata.xml:
+  start next developer tree vdr-2.1.x
+
+  01 Apr 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.23.ebuild,
+  -vdr-1.7.24-r1.ebuild, -vdr-1.7.25.ebuild, -vdr-1.7.30.ebuild,
+  -vdr-1.7.31.ebuild, -vdr-1.7.32-r1.ebuild, -vdr-1.7.33.ebuild,
+  -vdr-1.7.33-r1.ebuild, -vdr-1.7.36.ebuild, -vdr-1.7.36-r1.ebuild,
+  -vdr-1.7.38.ebuild, -vdr-1.7.39.ebuild, -vdr-1.7.40.ebuild,
+  -vdr-1.7.41.ebuild, -vdr-1.7.41-r1.ebuild, -vdr-1.7.42.ebuild,
+  -vdr-2.0.0.ebuild, -metadata.xml:
+  cleanup
+
+*vdr-2.0.0 (31 Mar 2013)
+
+  31 Mar 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-2.0.0.ebuild,
+  +files/vdr-2.0.0_gentoo.patch:
+  bump, major release
+
+*vdr-1.7.42 (24 Mar 2013)
+
+  24 Mar 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.42.ebuild,
+  +files/vdr-1.7.42_gentoo.patch:
+  bump
+
+*vdr-1.7.41-r1 (20 Mar 2013)
+
+  20 Mar 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.41-r1.ebuild:
+  readded use-flug vasarajanauloja; fixed permission /var/cache/vdr, reported
+  by M.Dummmer, thx
+
+*vdr-1.7.41 (16 Mar 2013)
+
+  16 Mar 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.41.ebuild,
+  +files/extpng-vdr-1.7.41-gentoo-edition-v1_001-plugin-permashift.patch,
+  +files/vdr-1.7.41_gentoo.patch:
+  bump; droped deprecated use-flag vasarajanauloja
+
+*vdr-1.7.40 (12 Mar 2013)
+
+  12 Mar 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.40.ebuild,
+  +files/extpng-vdr-1.7.40-gentoo-edition-v1_001-plugin-permashift.patch,
+  +files/vdr-1.7.40_gentoo.patch, metadata.xml:
+  bump; disabled deprecated use-flag volctrl
+
+*vdr-1.7.39 (05 Mar 2013)
+
+  05 Mar 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.39.ebuild,
+  +files/vdr-1.7.39-fixutf8.diff, +files/vdr-1.7.39_gentoo.patch:
+  bump
+
+  20 Feb 2013; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.38.ebuild:
+  extpatchng -v5, fix in fr_FR.po file
+
+*vdr-1.7.38 (18 Feb 2013)
+
+  18 Feb 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.38.ebuild,
+  +files/extpng-vdr-1.7.38-gentoo-edition-v3_001-addon-permashift.patch,
+  +files/vdr-1.7.38_gentoo.patch, metadata.xml:
+  bump
+
+*vdr-1.7.36-r1 (15 Feb 2013)
+
+  15 Feb 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.36-r1.ebuild:
+  fixed handling for missing exptng compile option in vdr.pc
+
+*vdr-1.7.36 (26 Jan 2013)
+
+  26 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.35.ebuild,
+  -vdr-1.7.35-r1.ebuild, -files/vdr-1.7.35_gentoo.patch, +vdr-1.7.36.ebuild,
+  +files/vdr-1.7.36_gentoo.patch:
+  bump; thx to C. Siebholz for the extpng fix on use-flag wareagle
+
+*vdr-1.7.35-r1 (06 Jan 2013)
+
+  06 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.35-r1.ebuild:
+  testing version, default enabled USEFHS from vdr source
+
+  01 Jan 2013; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.34.ebuild,
+  -files/vdr-1.7.34_gentoo.patch:
+  cleanup version vdr-1.7.34
+
+*vdr-1.7.35 (31 Dec 2012)
+
+  31 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.35.ebuild,
+  +files/vdr-1.7.35_gentoo.patch:
+  bump
+
+  28 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.34.ebuild:
+  fixed missing install pkconfig file vdr.pc
+
+*vdr-1.7.34 (27 Dec 2012)
+
+  27 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.34.ebuild,
+  +files/vdr-1.7.34_gentoo.patch:
+  bump
+
+*vdr-1.7.33-r1 (26 Dec 2012)
+
+  26 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.33-r1.ebuild,
+  metadata.xml:
+  replaced limiekuutio with vasarajanauloja patch; note: the do finaly the
+  same, yust renaming from the patch developer for the vdr-1.7 developer tree
+
+  16 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.33.ebuild:
+  extpatch -v14, fixed pinplugin patch
+
+  15 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.33.ebuild:
+  extpatch -v13, fixed jumpplay part
+
+  15 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.33.ebuild:
+  fixed extpatch v12
+
+*vdr-1.7.33 (15 Dec 2012)
+
+  15 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.33.ebuild,
+  +files/vdr-1.7.33_parallelmake.patch:
+  bump; eapi=5; use-flag pinplugin disabled, patch broken
+
+*vdr-1.7.32-r1 (07 Dec 2012)
+
+  07 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.32.ebuild,
+  +vdr-1.7.32-r1.ebuild:
+  disable cutterlimit part; fixed compile on use-flag wareagleicon
+
+  04 Dec 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.32.ebuild:
+  added missing parallel install patch
+
+*vdr-1.7.32 (03 Dec 2012)
+
+  03 Dec 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.32.ebuild:
+  Version bump to 1.7.32
+
+  20 Nov 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +files/vdr-1.7.32_parallel-install.patch:
+  parallel-install.patch
+
+  06 Oct 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.31.ebuild:
+  Fix epatch
+
+*vdr-1.7.31 (06 Oct 2012)
+
+  06 Oct 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.31.ebuild:
+  Version bump. Also include a patch by Johns, to fix liemikuutio's sorting -
+  http://www.vdr-portal.de/board60-linux/board14-betriebssystem/board56-gentoo/
+  p1094557-unmasking-vdr-1-7-27-on-overlay-vdr-devel/#post1094557
+
+  27 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.30.ebuild,
+  +files/vdr-1.7.30_parallel-install.patch:
+  fixed install problem in install-conf, reported by several users; patched by
+  negril @ IRC #gentoo-vdr
+
+  24 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.27.ebuild,
+  -vdr-1.7.28.ebuild, -vdr-1.7.29.ebuild, vdr-1.7.30.ebuild:
+  cleanup; added some info about the obsoleted i18n handling, see bug #414177
+
+  17 Sep 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.27.ebuild,
+  vdr-1.7.28.ebuild, vdr-1.7.29.ebuild, vdr-1.7.30.ebuild:
+  better linguas detection
+
+*vdr-1.7.30 (10 Sep 2012)
+
+  10 Sep 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.30.ebuild:
+  Version bump
+
+*vdr-1.7.29 (14 Jul 2012)
+
+  14 Jul 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.29.ebuild:
+  Version bump
+
+  09 Jul 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.27.ebuild,
+  -files/vdr-1.7.27_linguas.diff, +files/vdr-1.7.27_linguas-v2.diff,
+  vdr-1.7.28.ebuild:
+  fixed install on empty or unsupported linguas variable
+
+  10 Jun 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.28.ebuild:
+  timerinfo temp droped, need new version in extpatch
+
+*vdr-1.7.28 (03 Jun 2012)
+
+  03 Jun 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.28.ebuild:
+  Version bump
+
+  20 May 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.27.ebuild,
+  files/vdr-1.7.27_linguas.diff:
+  linguas install fails on unsupported values, reported by Michael B. on IRC
+  #gentoo-vdr
+
+  06 May 2012; Joerg Bornkessel <hd_brummy@gentoo.org>
+  files/vdr-1.7.27_linguas.diff:
+  fixed linguas patch, failed on install if LINGUAS value is en
+
+  02 May 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.23.ebuild,
+  vdr-1.7.24-r1.ebuild:
+  added fontconfig_fonsort.patch to vdr-1.7.24 vdr-1.7.23
+
+  02 May 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.25.ebuild:
+  added fontconfig_fonsort.patch to vdr-1.7.25
+
+  01 May 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.27.ebuild,
+  +files/vdr-1.7.27_fontconfig_fontsort.patch:
+  compilefix contconfig-2.9.0
+
+  15 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.27.ebuild,
+  +files/vdr-1.7.27_linguas.diff:
+  first improvement for LINGUAS support
+
+  08 Apr 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.23.ebuild:
+  Temp. restore vdr-1.7.23
+
+  06 Apr 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.27.ebuild,
+  metadata.xml:
+  fixed patchset for use-flag jumpplay hardlinkcutter compile
+
+  03 Apr 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.27.ebuild:
+  Export CC and CXX
+
+  03 Apr 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.27.ebuild:
+  Fix liemikuutio patch
+
+*vdr-1.7.27 (02 Apr 2012)
+
+  02 Apr 2012; Christian Ruppert <idl0r@gentoo.org> -vdr-1.7.21.ebuild,
+  -vdr-1.7.21-r1.ebuild, -vdr-1.7.22.ebuild, -vdr-1.7.23.ebuild,
+  +vdr-1.7.27.ebuild, -files/vdr-1.7.21-dxr3-subtitlehack.diff,
+  -files/vdr-1.7.21-makefile-install-header.diff,
+  -files/vdr-1.7.21-shared-tinyxml.diff, -files/vdr-1.7.21_po-files-fix.diff,
+  +files/vdr-1.7.27-fix_channel_names.patch, metadata.xml:
+  Version bump and cleanup.
+
+*vdr-1.7.25 (04 Mar 2012)
+
+  04 Mar 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.25.ebuild:
+  Version bump to 1.7.25. The noepg patch has been removed as vdr offers almost
+  the same functionality as of 1.7.25
+
+  03 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.24-r1.ebuild:
+  more cleanups for install info
+
+  03 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.24-r1.ebuild:
+  removed unneeded dev-util/unifdev depend
+
+  03 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.24-r1.ebuild:
+  cleanup unused upgrade info
+
+  03 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.24-r1.ebuild:
+  fixed quoting
+
+  03 Mar 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.24-r1.ebuild:
+  added user info for upgrade from vdr-1.6.x
+
+  20 Feb 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.24-r1.ebuild:
+  Remove useless do_unifdef() stuff as the non-defined blocks will be ignored
+  by the compiler anyway.
+
+*vdr-1.7.24-r1 (20 Feb 2012)
+
+  20 Feb 2012; Christian Ruppert <idl0r@gentoo.org> -vdr-1.7.24.ebuild,
+  +vdr-1.7.24-r1.ebuild:
+  Revbump
+
+  19 Feb 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.24.ebuild:
+  added part for upgrade info
+
+  19 Feb 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.24.ebuild,
+  +files/1.7.24-time_shift.patch:
+  Add a Time-Shift fix,
+  http://linuxtv.org/pipermail/vdr/2012-February/025779.html
+
+*vdr-1.7.24 (19 Feb 2012)
+
+  19 Feb 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.24.ebuild:
+  Version bump to 1.7.24
+
+  15 Feb 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.21.ebuild,
+  vdr-1.7.21-r1.ebuild, vdr-1.7.22.ebuild, vdr-1.7.23.ebuild:
+  move media-tv to virtual/linuxtv-dvb-headers, bug #403929
+
+  14 Feb 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.23.ebuild:
+  fixed wrong api version detection
+
+  11 Feb 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.23.ebuild:
+  VDR_LOCAL_PATCHES are deprecated up from vdr-1.7.23, use now the portage
+  feature epatch_user for user own patches
+
+  08 Feb 2012; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.23.ebuild:
+  fixed depend version for gentoo-vdr-scripts
+
+  07 Feb 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.23.ebuild:
+  Fix media-tv/linuxtv-dvb-headers dependency and apiversion check
+
+  05 Feb 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.23.ebuild:
+  Use REQUIRED_USE for useflag checks. Fix some dependencies.
+
+  05 Feb 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.23.ebuild,
+  metadata.xml:
+  Add html useflag for html docs
+
+*vdr-1.7.23 (05 Feb 2012)
+
+  05 Feb 2012; Christian Ruppert <idl0r@gentoo.org> +vdr-1.7.23.ebuild:
+  Version bump to 1.7.23
+
+  05 Feb 2012; Christian Ruppert <idl0r@gentoo.org> metadata.xml:
+  Cleanup metadata.xml
+
+  05 Feb 2012; Christian Ruppert <idl0r@gentoo.org> -vdr-1.7.0.ebuild,
+  -vdr-1.7.0-r1.ebuild, -vdr-1.7.1.ebuild, -vdr-1.7.7.ebuild,
+  -vdr-1.7.9.ebuild, -vdr-1.7.10.ebuild, -vdr-1.7.11.ebuild,
+  -vdr-1.7.11-r1.ebuild, -vdr-1.7.12.ebuild, -vdr-1.7.13.ebuild,
+  -vdr-1.7.14.ebuild, -vdr-1.7.14-r1.ebuild, -vdr-1.7.14-r2.ebuild,
+  -vdr-1.7.15.ebuild, -vdr-1.7.16.ebuild, -vdr-1.7.16-r1.ebuild,
+  -vdr-1.7.17.ebuild, -vdr-1.7.17-r1.ebuild, -vdr-1.7.17-r2.ebuild,
+  -vdr-1.7.17-r3.ebuild, -vdr-1.7.18.ebuild, -vdr-1.7.19.ebuild,
+  -files/vdr-1.6.0-dxr3-subtitlehack.diff,
+  -files/vdr-1.6.0-makefile-install-header.diff,
+  -files/vdr-1.7.0-multiproto-update.diff, -files/vdr-1.7.0_ehd-svn-9336.diff,
+  -files/vdr-1.7.7-dxr3-subtitlehack.diff,
+  -files/vdr-1.7.7-ext_reelbox7_gentoo.diff,
+  -files/vdr-1.7.7-extensions-gcc-4.4.diff, -files/vdr-1.7.7-gcc-4.4.diff,
+  -files/vdr-1.7.7-makefile-install-header.diff,
+  -files/vdr-1.7.9-dvb-api-test.diff, -files/vdr-1.7.9-dxr3-subtitlehack.diff,
+  -files/vdr-1.7.9-ext_reelbox7_gentoo.diff,
+  -files/vdr-1.7.9-extensions-gcc-4.4.diff,
+  -files/vdr-1.7.9-makefile-install-header.diff,
+  -files/vdr-1.7.10-dxr3-subtitlehack.diff,
+  -files/vdr-1.7.10-extensions-gcc-4.4.diff,
+  -files/vdr-1.7.10-makefile-install-header.diff,
+  -files/vdr-1.7.11-dxr3-subtitlehack.diff,
+  -files/vdr-1.7.11-makefile-install-header.diff,
+  -files/vdr-1.7.12-dxr3-subtitlehack.diff,
+  -files/vdr-1.7.12-makefile-install-header.diff,
+  -files/vdr-1.7.13-dxr3-subtitlehack.diff,
+  -files/vdr-1.7.13-makefile-install-header.diff,
+  -files/vdr-1.7.14-dxr3-subtitlehack.diff,
+  -files/vdr-1.7.14-makefile-install-header.diff,
+  -files/vdr-1.7.15-dxr3-subtitlehack.diff,
+  -files/vdr-1.7.15-makefile-install-header.diff,
+  -files/vdr-1.7.16-dxr3-subtitlehack.diff, -files/vdr-1.7.16-ldflags.patch,
+  -files/vdr-1.7.16-makefile-install-header.diff,
+  -files/vdr-1.7.17-dxr3-subtitlehack.diff,
+  -files/vdr-1.7.17-makefile-install-header.diff,
+  -files/vdr-1.7.17-shared-tinyxml.diff,
+  -files/vdr-1.7.17_jumpplay-hotfix.diff,
+  -files/vdr-1.7.18-makefile-install-header.diff,
+  -files/vdr-1.7.18-shared-tinyxml.diff,
+  -files/vdr-1.7.18_jumpplay-hotfix.diff,
+  -files/vdr-1.7.19-dxr3-subtitlehack.diff,
+  -files/vdr-1.7.19-makefile-install-header.diff,
+  -files/vdr-1.7.19-shared-tinyxml.diff,
+  -files/vdr-1.7.19_jumpplay-hotfix.diff:
+  Remove some old versions
+
+  18 Jan 2012; Christian Ruppert <idl0r@gentoo.org> vdr-1.7.7.ebuild,
+  vdr-1.7.9.ebuild, vdr-1.7.10.ebuild, vdr-1.7.11.ebuild, vdr-1.7.11-r1.ebuild,
+  vdr-1.7.12.ebuild, vdr-1.7.13.ebuild, vdr-1.7.14.ebuild,
+  vdr-1.7.14-r1.ebuild, vdr-1.7.14-r2.ebuild, vdr-1.7.15.ebuild,
+  vdr-1.7.16.ebuild, vdr-1.7.16-r1.ebuild, vdr-1.7.17.ebuild,
+  vdr-1.7.17-r1.ebuild, vdr-1.7.17-r2.ebuild, vdr-1.7.17-r3.ebuild,
+  vdr-1.7.18.ebuild, vdr-1.7.19.ebuild, vdr-1.7.21.ebuild,
+  vdr-1.7.21-r1.ebuild, vdr-1.7.22.ebuild:
+  Fix media-tv/linuxtv-dvb-headers dependencies
+
+  30 Dec 2011; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.22.ebuild:
+  some fixe for install
+
+  30 Dec 2011; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.22.ebuild,
+  metadata.xml:
+  changed handling of use-flag jumpingseconds
+
+*vdr-1.7.22 (30 Dec 2011)
+
+  30 Dec 2011; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.22.ebuild,
+  +files/vdr-1.7.22-makefile-install-header.diff,
+  +files/vdr-1.7.22-shared-tinyxml.diff:
+  bump to vdr-1.7.22, pmasked
+
+  24 Oct 2011; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.21-r1.ebuild:
+  keyworded ~arm
+
+*vdr-1.7.21-r1 (23 Oct 2011)
+
+  23 Oct 2011; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.21-r1.ebuild:
+  removed unneeded dxr3 subtitle patch, vdr-dxr3-0.2.13 dont need a patched vdr
+  anymore
+
+  16 Sep 2011; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.21.ebuild:
+  removed missing keyword mask
+
+*vdr-1.7.21 (16 Sep 2011)
+
+  16 Sep 2011; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.21.ebuild,
+  +files/vdr-1.7.21-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.21-makefile-install-header.diff,
+  +files/vdr-1.7.21-shared-tinyxml.diff, +files/vdr-1.7.21_po-files-fix.diff:
+  version bump
+
+  02 Jul 2011; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.19.ebuild:
+  fixed download URL
+
+*vdr-1.7.19 (22 Jun 2011)
+
+  22 Jun 2011; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.19.ebuild,
+  +files/vdr-1.7.19-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.19-makefile-install-header.diff,
+  +files/vdr-1.7.19-shared-tinyxml.diff,
+  +files/vdr-1.7.19_jumpplay-hotfix.diff:
+  version bump; droped use-flag rotor, use plugin vdr-rotor-ng
+
+*vdr-1.7.18 (23 Apr 2011)
+
+  23 Apr 2011; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.18.ebuild,
+  +files/vdr-1.7.18-makefile-install-header.diff,
+  +files/vdr-1.7.18-shared-tinyxml.diff,
+  +files/vdr-1.7.18_jumpplay-hotfix.diff:
+  version bump
+
+*vdr-1.7.17-r3 (26 Mar 2011)
+
+  26 Mar 2011; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +vdr-1.7.17-r3.ebuild, +files/vdr-1.7.17_jumpplay-hotfix.diff:
+  new extensions patch
+
+*vdr-1.7.17 (13 Mar 2011)
+
+  13 Mar 2011; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.17.ebuild,
+  +files/vdr-1.7.17-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.17-makefile-install-header.diff,
+  +files/vdr-1.7.17-shared-tinyxml.diff:
+  version bump; new default locale DIR, some use-flags temp dropped
+
+*vdr-1.7.16-r1 (05 Oct 2010)
+
+  05 Oct 2010; Matthias Schwarzott <zzam@gentoo.org> +vdr-1.7.16-r1.ebuild,
+  +files/vdr-1.7.16-ldflags.patch:
+  Fix vdr not respecting LDFLAGS, Bug #333493.
+
+  22 Sep 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.16.ebuild:
+  fix missing install menu.c for use-flag setup
+
+  22 Sep 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.16.ebuild:
+  removed unused use-flags
+
+  21 Sep 2010; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.16.ebuild,
+  +files/vdr-1.7.16-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.16-makefile-install-header.diff:
+  version bump; droped keyword ppc
+
+  15 Jun 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.15.ebuild:
+  fixed Extp-NG url
+
+  07 Jun 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.15.ebuild:
+  compile fixed for broken extp-ng
+
+  06 Jun 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.14-r2.ebuild,
+  +vdr-1.7.15.ebuild, +files/vdr-1.7.15-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.15-makefile-install-header.diff:
+  version bump, fixed extp-ng url older version
+
+  03 Jun 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.14-r1.ebuild,
+  +vdr-1.7.14-r2.ebuild:
+  new ext-patch-ng-V7, fixed url for -V5 patch
+
+  04 May 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.14.ebuild,
+  +vdr-1.7.14-r1.ebuild:
+  new ext-patch-ng-V5, fixed url for -V1 patch
+
+  21 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.14.ebuild,
+  +files/vdr-1.7.14-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.14-makefile-install-header.diff:
+  version bump vdr-1.7.14, masked
+
+  09 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.13.ebuild:
+  depend to fixed version of ExtP-NG
+
+  08 Mar 2010; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.13.ebuild,
+  +files/vdr-1.7.13-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.13-makefile-install-header.diff:
+  version bump
+
+  24 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.12.ebuild:
+  fix on patchset, dos2unix
+
+  23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.12.ebuild:
+  einfo fixes
+
+  23 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.12.ebuild,
+  metadata.xml:
+  minor fixes
+
+  22 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.12.ebuild,
+  +files/vdr-1.7.12-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.12-makefile-install-header.diff,
+  +files/channel_alternative.conf, metadata.xml:
+  version bump, some use-flag renaming, includes extensionspatch-ng from
+  cooperhead
+
+  16 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.11.ebuild,
+  vdr-1.7.11-r1.ebuild:
+  patch url fixed
+
+  02 Feb 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.11.ebuild,
+  +vdr-1.7.11-r1.ebuild, -files/vdr-1.7.11-extensions-gcc-4.4.diff,
+  metadata.xml:
+  new extpatch (copperhead_v6); clean up
+
+  25 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.11.ebuild:
+  Manifest fixed; removed debugmacros.h
+
+  20 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.11.ebuild,
+  +files/vdr-1.7.11-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.11-extensions-gcc-4.4.diff,
+  +files/vdr-1.7.11-makefile-install-header.diff:
+  version bump
+
+  10 Jan 2010; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.10.ebuild,
+  +files/vdr-1.7.10-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.10-extensions-gcc-4.4.diff,
+  +files/vdr-1.7.10-makefile-install-header.diff:
+  version bump; new ehd patch, need reelbox-ehd-* up from svn revision 13968
+
+  22 Nov 2009; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.7.ebuild,
+  vdr-1.7.9.ebuild, +files/vdr-1.7.9-dvb-api-test.diff, metadata.xml:
+  Fix use-flag ehd, reported by bienchen1984 on vdr-portal. Fix compilation
+  against dvb api 5.1 and newer.
+
+  17 Nov 2009; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.4-r1.ebuild,
+  -files/vdr-1.7.4-ext66_atsc-fix.diff,
+  -files/vdr-1.7.4_reelbox.10388_gentoo.diff, vdr-1.7.9.ebuild:
+  cleanup, fixed vdr-1.7.9 compile for vanilla use-flag
+
+  20 Oct 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.9.ebuild:
+  removed docs install of extpatch
+
+  20 Oct 2009; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.9.ebuild,
+  +files/vdr-1.7.9-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.9-ext_reelbox7_gentoo.diff,
+  +files/vdr-1.7.9-extensions-gcc-4.4.diff,
+  +files/vdr-1.7.9-makefile-install-header.diff:
+  version bump; another user ext-patch is used for the zulu extensionspatch
+
+  11 Oct 2009; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.0.ebuild,
+  vdr-1.7.0-r1.ebuild, vdr-1.7.1.ebuild, vdr-1.7.4-r1.ebuild,
+  vdr-1.7.7.ebuild:
+  Change uris to point to the new homepage/download location.
+
+  06 Jul 2009; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.0.ebuild,
+  vdr-1.7.0-r1.ebuild, vdr-1.7.1.ebuild, vdr-1.7.4-r1.ebuild:
+  Remove debug use-flag, that did just enable -g compiler flag.
+
+  01 Jul 2009; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.7.ebuild,
+  +files/vdr-1.7.7-extensions-gcc-4.4.diff, +files/vdr-1.7.7-gcc-4.4.diff:
+  Fix compilation with gcc-4.4
+
+  01 Jul 2009; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.0.ebuild,
+  vdr-1.7.0-r1.ebuild, vdr-1.7.1.ebuild, vdr-1.7.4-r1.ebuild,
+  vdr-1.7.7.ebuild:
+  Lots of small cleanups from vdr-1.6 ebuilds.
+
+  01 Jul 2009; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.4-r1.ebuild,
+  vdr-1.7.7.ebuild:
+  No longer default-enable s2apiwrapper, as linux-headers 2.6.29 needed for
+  s2api are now in mainline gentoo. Fix detecting enabled s2apiwrapper with
+  new headers and die. Depend on linuxtv-dvb-headers-5 for s2api. Moved ehd
+  flag to IUSE.
+
+  10 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.7.ebuild:
+  linux-headers-2.6.29 added to depend
+
+  10 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.7.ebuild:
+  fixed use-flag handling for iptv, liemikuutio
+
+  05 May 2009; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.7.ebuild,
+  +files/vdr-1.7.7-dxr3-subtitlehack.diff,
+  +files/vdr-1.7.7-ext_reelbox7_gentoo.diff,
+  +files/vdr-1.7.7-makefile-install-header.diff, metadata.xml:
+  version bump; need >=linux-headers-2.6.29
+
+  29 Mar 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.0-r1.ebuild:
+  fixed wrong header include dvdread -> dvdnav; thanks to R.Hertell for
+  reporting on #263840
+
+  25 Mar 2009; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.0-r1.ebuild,
+  +files/vdr-1.7.0_ehd-svn-9336.diff, metadata.xml:
+  vdr-1.7.0-r1 support for s2api and ehd, extpatch v68
+
+  10 Feb 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.4-r1.ebuild:
+  apiwrapper detection fixed again
+
+  10 Feb 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.4-r1.ebuild,
+  +files/vdr-1.7.4_reelbox.10388_gentoo.diff,
+  -files/vdr-1.7.4_reelbox.10388.diff:
+  rewritten ehd patch
+
+  08 Feb 2009; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.4-r1.ebuild:
+  fixed wrong api version detection
+
+  08 Feb 2009; Joerg Bornkessel <hd_brummy@gentoo.org> -vdr-1.7.4.ebuild,
+  +vdr-1.7.4-r1.ebuild, +files/vdr-1.7.4_reelbox.10388.diff, metadata.xml:
+  moved use-flag s2api to s2apewrapper, added support for reel eHD
+
+  03 Feb 2009; Joerg Bornkessel <hd_brummy@gentoo.org> +vdr-1.7.4.ebuild,
+  +files/vdr-1.7.4-ext66_atsc-fix.diff, metadata.xml:
+  version bump
+
+  16 Sep 2008; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.1.ebuild:
+  ext-patch-64 added, fixed path to -ext_h264.diff
+
+  13 Sep 2008; Matthias Schwarzott <zzam@gentoo.org> metadata.xml,
+  +vdr-1.7.1.ebuild:
+  Version bumped. Using extensions-patch v63 now. Fixed a typo in name of
+  new extension cmdreccmdi18n. WARNING: This version contains large changes
+  in video handling, so expect it not to work as good as the versions
+  before. Added use-flags to metadata.xml.
+
+  15 Jun 2008; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-1.7.0.ebuild:
+  fixed download url
+
+  27 May 2008; Matthias Schwarzott <zzam@gentoo.org> vdr-1.7.0.ebuild:
+  Added h264 use-flag and apply the relevant patch then.
+
+  26 May 2008; Matthias Schwarzott <zzam@gentoo.org>
+  +files/vdr-1.6.0-dxr3-subtitlehack.diff,
+  +files/vdr-1.6.0-makefile-install-header.diff,
+  +files/vdr-1.7.0-multiproto-update.diff, +metadata.xml, +vdr-1.7.0.ebuild:
+  Added ebuild with added multiproto support based on vdr-1.6.0_p1-r1 from
+  portage tree.
