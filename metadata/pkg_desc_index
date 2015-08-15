@@ -9,6 +9,7 @@ media-plugins/vdr-softhddevice 0.6.0 0.6.0_p20140108 0.6.0_p20140923 0.6.1_p2015
 media-plugins/vdr-vnsiserver 0.9.0_p20130105 0.9.2_p20131021 0.9.3_p20140104 0.9.4_p20140213 1.2.0 9999: VDR plugin: VNSI Streamserver Plugin (FernetMenta branch)
 media-plugins/vdr-yaepghd 9999: yaepghd plugin for nice epg
 media-plugins/xbmc-addon-pvr 0.0.1_p20130110 0.0.1_p20140213 9999: XBMC addon: add VDR (http://www.cadsoft.de/vdr) as a TV/PVR Backend
+media-tv/gentoo-vdr-scripts 9999: Scripts necessary for use of vdr as a set-top-box
 media-tv/media-build-experimental 0.0.1_p20141123 0.0.1_p20150129 0.0.1_p20150509: Video 4 Linux experimental driver
 media-tv/oscam 1.20_p20150429 9999: OSCam is an Open Source Conditional Access Module software
 media-video/reelbox-ehd-bin 14440 14916: Reelbox player for the Reel eHD PCI card SVN
