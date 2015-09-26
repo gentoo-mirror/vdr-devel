@@ -78,24 +78,14 @@ media-tv/oscam:touch -
 media-tv/oscam:www - 
 media-video/vdr:alternatechannel - Use alternate channel on record
 media-video/vdr:bidi - fribid support, for languages, written from right to left
-media-video/vdr:binaryskip - add supports for binary skipping in records
-media-video/vdr:ddepgentry - remove duplicate EPG entries
-media-video/vdr:dxr3 - Enable tweaks to improve vdr behaviour on dxr3-cards
 media-video/vdr:graphtft - support for grapftft plugin up from vdr-graphtft-0.1.7
 media-video/vdr:html - Install HTML documentation
-media-video/vdr:jumpingseconds - skip seconds in played records
-media-video/vdr:jumpplay - Enables automatic jumping over cut marks while watching a recording
 media-video/vdr:kbd - enable keyboard support as remote device
 media-video/vdr:mainmenuhooks - Allows to replace main menu entries by some special plugins (like epgsearch, extrecmenu, ...)
 media-video/vdr:menuorg - Enables support for the menuorg-plugin
 media-video/vdr:menuselection - adds support for menu hotkeys of double digits
 media-video/vdr:naludump - Removes NALU fill data from h.264-Streams of TS files
-media-video/vdr:permashift - permanent timeshift by recording live TV on hard disk, need plugin vdr-permashift
 media-video/vdr:permashift_v1 - permanent timeshift by recording live TV on RAM, need plugin >=vdr-permashift-1
 media-video/vdr:pinplugin - Support for pin plugin
-media-video/vdr:resumereset - rreset resume of EOF
 media-video/vdr:setup - Enable support for the plugin vdr-setup
 media-video/vdr:ttxtsubs - support for ttxtsubs plugin
-media-video/vdr:vasarajanauloja - replacement for the liemikuutio patch, adds some nice must haves features
-media-video/vdr:wareagleicon - Replace original icon set in menu
-media-video/vdr:yaepg - Enables support for the plugin vdr-yaepg
