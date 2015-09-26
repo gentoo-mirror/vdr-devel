@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/vdr/vdr-2.2.0.ebuild,v 1.5 2015/03/30 13:25:58 hd_brummy Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils flag-o-matic multilib toolchain-funcs
 
 # Switches supported by extensions-patch
-EXT_PATCH_FLAGS="pinplugin graphtft naludump mainmenuhooks menuorg menuselection resumereset"
-#tmp disabled: alternatechannel permashift_v1 pinplugin ttxtsubs (-> channels)
+EXT_PATCH_FLAGS="pinplugin graphtft naludump mainmenuhooks menuorg menuselection"
+#tmp disabled: alternatechannel permashift_v1 pinplugin ttxtsubs (-> channels) resumereset
 
 # names of the use-flags
 EXT_PATCH_FLAGS_RENAMED=""
@@ -273,6 +273,7 @@ src_install() {
 #		insinto /etc/vdr
 #		doins "${FILESDIR}"/channel_alternative.conf
 #	fi
+
 
 	chown -R vdr:vdr "${D}/${CONF_DIR}"
 }
