@@ -7,8 +7,8 @@ EAPI=5
 inherit eutils flag-o-matic multilib toolchain-funcs
 
 # Switches supported by extensions-patch
-EXT_PATCH_FLAGS="pinplugin graphtft naludump mainmenuhooks menuorg menuselection"
-#tmp disabled: alternatechannel permashift_v1 pinplugin ttxtsubs (-> channels) resumereset
+EXT_PATCH_FLAGS="pinplugin graphtft naludump mainmenuhooks menuorg menuselection resumereset"
+#tmp disabled: alternatechannel permashift_v1 pinplugin ttxtsubs (-> channels)
 
 # names of the use-flags
 EXT_PATCH_FLAGS_RENAMED=""
@@ -145,7 +145,7 @@ src_prepare() {
 		DVBDIR			= ${DVBDIR}
 		PLUGINLIBDIR	= ${PLUGIN_LIBDIR}
 		CONFDIR			= ${CONF_DIR}
-#		ARGSDIR			= \$(CONFDIR)/conf.d
+		ARGSDIR			= \$(CONFDIR)/conf.d
 		VIDEODIR		= /var/vdr/video
 		LOCDIR			= \$(PREFIX)/share/locale
 		INCDIR			= \$(PREFIX)/include
@@ -255,6 +255,9 @@ src_install() {
 	DESTDIR="${D}" install || die "emake install failed"
 
 	keepdir "${PLUGIN_LIBDIR}"
+
+	# config dir for new plugin conf path
+	keepdir "${CONF_DIR}/conf.avail"
 #	keepdir "${ARGSDIR}"
 
 	# backup for plugins they don't be able to create this dir
