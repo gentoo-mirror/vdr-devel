@@ -87,5 +87,6 @@ media-video/vdr:menuselection - adds support for menu hotkeys of double digits
 media-video/vdr:naludump - Removes NALU fill data from h.264-Streams of TS files
 media-video/vdr:permashift_v1 - permanent timeshift by recording live TV on RAM, need plugin >=vdr-permashift-1
 media-video/vdr:pinplugin - Support for pin plugin
+media-video/vdr:resumereset - rreset resume of EOF
 media-video/vdr:setup - Enable support for the plugin vdr-setup
 media-video/vdr:ttxtsubs - support for ttxtsubs plugin
