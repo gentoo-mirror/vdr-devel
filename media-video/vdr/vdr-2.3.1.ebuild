@@ -7,8 +7,7 @@ EAPI=5
 inherit eutils flag-o-matic multilib toolchain-funcs
 
 # Switches supported by extensions-patch
-EXT_PATCH_FLAGS="pinplugin graphtft naludump mainmenuhooks menuorg menuselection resumereset"
-#tmp disabled: alternatechannel permashift_v1 pinplugin ttxtsubs (-> channels)
+EXT_PATCH_FLAGS="alternatechannel permashift_v1 pinplugin graphtft naludump mainmenuhooks menuorg menuselection resumereset ttxtsubs"
 
 # names of the use-flags
 EXT_PATCH_FLAGS_RENAMED=""
@@ -276,7 +275,6 @@ src_install() {
 #		insinto /etc/vdr
 #		doins "${FILESDIR}"/channel_alternative.conf
 #	fi
-
 
 	chown -R vdr:vdr "${D}/${CONF_DIR}"
 }
