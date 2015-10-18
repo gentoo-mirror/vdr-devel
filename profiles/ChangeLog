@@ -2,6 +2,10 @@
 # Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  18 Oct 2015; Joerg Bornkessel <hd_brummy@gentoo.org>
+  +default/linux/package.use.mask, package.use.mask:
+  add default/linux/package.use.mask
+
   18 Oct 2015; Joerg Bornkessel <hd_brummy@gentoo.org> +package.use.mask:
   added package.use.mask
 
