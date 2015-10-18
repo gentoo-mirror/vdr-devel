@@ -2,6 +2,9 @@
 # Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  18 Oct 2015; Joerg Bornkessel <hd_brummy@gentoo.org> +package.use.mask:
+  added package.use.mask
+
   27 Sep 2015; Joerg Bornkessel <hd_brummy@gentoo.org> package.mask:
   vdr-2.3.1 tmp masked, bcs 99% plugins will fail on compile
 
