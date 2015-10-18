@@ -276,7 +276,6 @@ src_install() {
 #		doins "${FILESDIR}"/channel_alternative.conf
 #	fi
 
-
 	chown -R vdr:vdr "${D}/${CONF_DIR}"
 }
 

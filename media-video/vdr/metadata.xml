@@ -20,7 +20,6 @@
 		<flag name="permashift_v1">permanent timeshift by recording live TV on RAM, need plugin >=vdr-permashift-1</flag>
 		<flag name="pinplugin">Support for pin plugin</flag>
 		<flag name="resumereset">rreset resume of EOF</flag>
-		<flag name="setup">Enable support for the plugin vdr-setup</flag>
 		<flag name="ttxtsubs">support for ttxtsubs plugin</flag>
 	</use>
 </pkgmetadata>

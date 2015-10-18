@@ -2,6 +2,10 @@
 # Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  18 Oct 2015; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-2.3.1.ebuild,
+  metadata.xml:
+  rm useless blankline; rm useless use-flag setup
+
   18 Oct 2015; Joerg Bornkessel <hd_brummy@gentoo.org> vdr-2.3.1.ebuild:
   readded use-flags, masked tmp by package.use.mask
 
