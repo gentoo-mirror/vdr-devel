@@ -30,6 +30,8 @@ media-plugins/vdr-skinpearlhd:hideoclocktext - Hide oClock test
 media-plugins/vdr-skinpearlhd:yaepg - Enables yaepg skin
 media-plugins/vdr-softhddevice:vaapi - Enables VAAPI (Video Acceleration API) for hardware decoding
 media-plugins/vdr-softhddevice:vdpau - Enables VDPAU decoders (requires nVidia video cards and binary nvidia-drivers to offload CPU processing to video card)
+media-plugins/vdr-streamdev:client - Compile the VDR plugin vdr-streamdev-client that acts like a dvb-budget card
+media-plugins/vdr-streamdev:server - Compile the VDR plugin vdr-streamdev-server that allows remote systems to access the DVB cards used for the local VDR
 media-tv/gentoo-vdr-scripts:nvram - Add support for using nvram-wakeup to set wakeup time in bios
 media-tv/oscam:anticasc - 
 media-tv/oscam:cacheex - 
