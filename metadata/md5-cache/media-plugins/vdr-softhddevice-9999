@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup unpack
+DEPEND=>=media-video/vdr-2 x11-libs/libX11 >=x11-libs/libxcb-1.8 x11-libs/xcb-util-wm x11-libs/xcb-util-keysyms x11-libs/xcb-util-renderutil alsa? ( media-libs/alsa-lib ) opengl? ( virtual/opengl ) vaapi? ( x11-libs/libva virtual/ffmpeg[vaapi] ) vdpau? ( x11-libs/libvdpau virtual/ffmpeg[vdpau] ) virtual/pkgconfig x11-libs/xcb-util >=media-tv/gentoo-vdr-scripts-0.4.2 virtual/linuxtv-dvb-headers dev-vcs/git
+DESCRIPTION=VDR Plugin: Software and GPU emulated HD output device
+EAPI=5
+HOMEPAGE=http://projects.vdr-developer.org/projects/show/plg-softhddevice
+IUSE=alsa +debug opengl oss vaapi vdpau xscreensaver
+LICENSE=AGPL-3
+RDEPEND=>=media-video/vdr-2 x11-libs/libX11 >=x11-libs/libxcb-1.8 x11-libs/xcb-util-wm x11-libs/xcb-util-keysyms x11-libs/xcb-util-renderutil alsa? ( media-libs/alsa-lib ) opengl? ( virtual/opengl ) vaapi? ( x11-libs/libva virtual/ffmpeg[vaapi] ) vdpau? ( x11-libs/libvdpau virtual/ffmpeg[vdpau] ) >=media-tv/gentoo-vdr-scripts-0.4.2 >=app-eselect/eselect-vdr-0.0.2
+REQUIRED_USE=opengl? ( vaapi ) || ( vaapi vdpau ) || ( alsa oss )
+RESTRICT=test
+SLOT=0
+_eclass_exported_funcs=pkg_postrm:vdr-plugin-2 pkg_postinst:vdr-plugin-2 pkg_setup:- src_unpack:git-2 src_prepare:- src_compile:vdr-plugin-2 src_install:-
+_eclasses_=eutils	f20548a2f7b0128068388cd2ec26708a	flag-o-matic	85dc1eac3c64d8141374490ed64122e5	git-2	df00117322129fb906bb0a53c3d6a020	multilib	3972ca401cf7dbb430df9995f5d8d580	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85	unpacker	1d149d9bda7723e740cfd28118f27813	vdr-plugin-2	10cd413f0e936b01e977002c4c9409c9
+_md5_=91dcc4d06ed845edb9330173246f967a

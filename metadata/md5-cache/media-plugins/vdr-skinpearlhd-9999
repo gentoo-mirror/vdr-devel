@@ -1,0 +1,12 @@
+DEFINED_PHASES=install prepare unpack
+DEPEND=dev-vcs/git
+DESCRIPTION=VDR PearlHD Skin
+EAPI=5
+HOMEPAGE=http://projects.vdr-developer.org/projects/skin-pearlhd/
+IUSE=yaepg +dynamicfonts +hideoclocktext
+LICENSE=GPL-2
+RDEPEND=media-plugins/vdr-text2skin
+SLOT=0
+_eclass_exported_funcs=src_unpack:git-2 src_prepare:- src_install:-
+_eclasses_=git-2	df00117322129fb906bb0a53c3d6a020
+_md5_=423efcae4286865ee85ffffb361cdb47
