@@ -1,6 +1,13 @@
 # ChangeLog for media-plugins/vdr-sc
-# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2016 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+*vdr-sc-0.9.3.20120815-r4 (07 May 2016)
+
+  07 May 2016; Joerg Bornkessel <hd_brummy@gentoo.org>
+  vdr-sc-0.9.3.20120815-r2.ebuild, vdr-sc-0.9.3.20120815-r3.ebuild,
+  +vdr-sc-0.9.3.20120815-r4.ebuild, metadata.xml:
+  compilefix gcc-5; eapi=6
 
 *vdr-sc-0.9.3.20120815-r3 (18 Feb 2015)
 
