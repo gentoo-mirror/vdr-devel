@@ -2,9 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
-
-#RESTRICT="mirror"
+EAPI=6
 
 inherit vdr-plugin-2
 
@@ -44,6 +42,9 @@ src_configure() {
 }
 
 src_prepare() {
+	# fix bug 987654 by restoring pre-GCC5 inline semantics
+	append-cflags -std=gnu89
+
 	vdr-plugin-2_src_prepare
 
 	if has_version ">=media-video/vdr-2.1.3"; then
@@ -51,7 +52,7 @@ src_prepare() {
 	fi
 
 	if has_version ">=media-video/vdr-2.1.4"; then
-		epatch "${FILESDIR}"/vdr-sc-0.9.3.20120815_vdr-2.1.4_compilefix.diff
+		eapply "${FILESDIR}"/vdr-sc-0.9.3.20120815_vdr-2.1.4_compilefix.diff
 	fi
 
 	sed -e 's:^SINCLUDES += :&-I/usr/include/vdr :' \
@@ -109,7 +110,10 @@ src_prepare() {
 
 	export PARALLEL
 
-	epatch "${FILESDIR}/${P}_makefile.diff"
+	eapply -p0 "${FILESDIR}/${P}_makefile.diff"
+
+	#gcc-5 compile fix
+	sed -e "s:int config:unsigned int config:" -i log.c
 
 	# Remove unwanted plugins
 	cd systems/ || die "cd systems/ failed"
