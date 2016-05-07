@@ -1,15 +1,15 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/gentoo-vdr-scripts/gentoo-vdr-scripts-9999.ebuild,v 1.8 2006/10/13 10:43:30 zzam Exp $
+# $Id$
 
-EAPI=5
+EAPI=6
 
-inherit eutils git-2 user
+inherit git-r3 user
 
-EGIT_REPO_URI="git://git.overlays.gentoo.org/proj/gentoo-vdr-scripts.git"
+EGIT_REPO_URI="git://git.gentoo.org/proj/gentoo-vdr-scripts.git"
 
 DESCRIPTION="Scripts necessary for use of vdr as a set-top-box"
-HOMEPAGE="http://www.gentoo.org/"
+HOMEPAGE="https://www.gentoo.org/"
 SRC_URI=""
 
 LICENSE="GPL-2"
@@ -35,6 +35,7 @@ pkg_setup() {
 
 src_install() {
 	default
+
 	nonfatal dodoc README* TODO ChangeLog
 
 	# create necessary directories
