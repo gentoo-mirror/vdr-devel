@@ -1,6 +1,6 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="2"
 
@@ -19,7 +19,7 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}
-		>=sys-fs/udev-141"
+		virtual/udev"
 
 S=${WORKDIR}/hdshm3
 
