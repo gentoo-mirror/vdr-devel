@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
@@ -21,7 +21,7 @@ DEPEND=">=media-video/vdr-1.7.36
 		>=media-video/reelbox-ehd-headers-${PV}
 		virtual/ffmpeg
 		media-libs/libmad
-		media-libs/libpng
+		media-libs/libpng:*
 		media-libs/alsa-lib"
 RDEPEND="${DEPEND}"
 
