@@ -1,10 +1,10 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
-inherit flag-o-matic toolchain-funcs vdr-plugin-2
+inherit vdr-plugin-2
 
 VERSION="1309" # every bump, new version
 
