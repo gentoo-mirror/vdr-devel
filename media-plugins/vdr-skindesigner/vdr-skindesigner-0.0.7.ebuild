@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
@@ -24,7 +24,7 @@ FONT_S="${S}/fonts/VDROpenSans"
 DEPEND=">=media-video/vdr-2.0.0
 	dev-libs/libxml2
 	gnome-base/librsvg
-	virtual/jpeg
+	virtual/jpeg:*
 	x11-libs/cairo[svg]
 	media-plugins/vdr-epgsearch"
 RDEPEND="${DEPEND}"
