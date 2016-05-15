@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
@@ -75,8 +75,7 @@ REQUIRED_USE="
 DEPEND="dev-util/cmake"
 RDEPEND="${DEPEND}
 	dev-libs/openssl
-	usb? ( virtual/libusb:1
-	       dev-libs/libusb-compat )
+	usb? ( virtual/libusb:1 )
 	pcsc? ( sys-apps/pcsc-lite )"
 
 RESTRICT="mirror strip"
