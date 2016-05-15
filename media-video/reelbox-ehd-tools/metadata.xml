@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-<herd>media-tv</herd>
-	<maintainer>
+	<maintainer type="person">
 		<email>hd_brummy@gentoo.org</email>
 		<name>Joerg Bornkessel</name>
 	</maintainer>
-	<maintainer>
+	<maintainer type="person">
 		<email>joerg_pb@gmx.net</email>
 		<name>Joerg Krause</name>
+		<description>Proxied maintainer</description>
+	</maintainer>
+	<maintainer type="project">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
 	</maintainer>
 </pkgmetadata>
 
