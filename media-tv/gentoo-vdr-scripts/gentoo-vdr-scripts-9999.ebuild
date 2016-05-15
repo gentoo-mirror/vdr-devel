@@ -34,9 +34,9 @@ pkg_setup() {
 }
 
 src_install() {
-	default
+	local DOCS=( README* TODO ChangeLog )
 
-	nonfatal dodoc README* TODO ChangeLog
+	default
 
 	# create necessary directories
 	diropts -ovdr -gvdr
