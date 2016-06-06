@@ -1,0 +1,15 @@
+DEFINED_PHASES=compile configure install postinst prepare test unpack
+DEPEND=dev-util/cmake sys-devel/make >=dev-util/cmake-2.8.12 virtual/pkgconfig dev-vcs/git
+DESCRIPTION=OSCam is an Open Source Conditional Access Module software
+EAPI=5
+HOMEPAGE=www.streamboard.tv/wiki/OSCam/de/
+IUSE=+protocol_camd33 +protocol_camd35 +protocol_camd35_tcp +protocol_cccam +protocol_cccshare +protocol_constcw +protocol_gbox +protocol_ghttp +protocol_newcamd +protocol_pandora +protocol_radegast +protocol_serial +reader_bulcrypt +reader_conax +reader_cryptoworks +reader_dgcrypt +reader_dre +reader_griffin +reader_irdeto +reader_nagra +reader_seca +reader_tongfang +reader_viaccess +reader_videoguard +cardreader_phoenix +cardreader_internal +cardreader_sc8in1 +cardreader_mp35 +cardreader_smargo +cardreader_smartreader +cardreader_db2com +cardreader_stapi +anticasc cacheex cw_cycle_check debug +dvbapi ipv6 irdeto_guessing lcd led loadbalancing +monitor pcsc +reader +ssl touch usb +www
+KEYWORDS=~amd64 ~arm ~x86
+LICENSE=GPL-2
+RDEPEND=dev-util/cmake dev-libs/openssl usb? ( virtual/libusb:1 ) pcsc? ( sys-apps/pcsc-lite )
+REQUIRED_USE=protocol_camd35_tcp? ( protocol_camd35 ) reader_nagra? ( reader ) reader_irdeto? ( reader irdeto_guessing ) reader_conax? ( reader ) reader_cryptoworks? ( reader ) reader_seca? ( reader ) reader_viaccess? ( reader ) reader_videoguard? ( reader ) reader_dre? ( reader ) reader_tongfang? ( reader ) reader_bulcrypt? ( reader ) reader_griffin? ( reader ) reader_dgcrypt? ( reader ) cardreader_db2com? ( reader ) cardreader_internal? ( reader ) cardreader_mp35? ( reader usb ) cardreader_phoenix? ( reader usb ) cardreader_sc8in1? ( reader usb ) cardreader_smargo? ( reader usb ) cardreader_smartreader? ( reader usb ) cardreader_stapi? ( reader ) pcsc? ( reader usb )
+RESTRICT=mirror strip
+SLOT=0
+_eclass_exported_funcs=pkg_postinst:- src_unpack:git-2 src_prepare:- src_configure:- src_compile:cmake-utils src_test:cmake-utils src_install:-
+_eclasses_=cmake-utils	9e0d156beee613940cde06d0bc00791b	eutils	792f83d5ec9536cb5ccef375469d8bde	flag-o-matic	d270fa247153df66074f795fa42dba3e	git-2	672c3929a162f221a53b4ccb4d25d8a2	multilib	d062ae4ba2fc40a19c11de2ad89b6616	systemd	3165c885f3c71ffae7a867d931fb0e07	toolchain-funcs	d513d423d449877e49d99af3f7af7acb	versionator	99ae9d758cbe7cfed19170e7d48f5a9c
+_md5_=1cc405cbb1228fde5529c25eabbf26af
