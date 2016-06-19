@@ -310,3 +310,5 @@ pkg_postinst() {
 	elog "To get an idea how to proceed now, have a look at our vdr-guide:"
 	elog "\thttps://wiki.gentoo.org/wiki/VDR"
 }
+
+# repoman test wrt  bug 585864
