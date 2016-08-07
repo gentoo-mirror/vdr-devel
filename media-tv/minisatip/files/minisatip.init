@@ -1,0 +1,31 @@
+#!/sbin/openrc-run
+# Copyright 1999-2016 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $ID$
+
+description="miniSAT>IP Server"
+
+start() {
+	ebegin "Starting ${SVCNAME}"
+
+	start-stop-daemon --start -x ${SVCNAME} -- ${MINISATIP_PARAM}
+
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping ${SVCNAME}"
+
+	start-stop-daemon --stop -x ${SVCNAME} --retry 10 -p /var/run/minisatip.pid
+
+	sleep 1
+
+	if [ -n "$(pidof minisatip)" ]; then
+		eerror  "${SVCNAME} does not terminate normally - killing ${SVCNAME}"
+		killall -v -KILL minisatip
+		sleep 1
+		[ -f /var/run/minisatip.pid ] && rm /var/run/minisatip.pid
+	fi
+
+	eend $?
+}
