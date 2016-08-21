@@ -1,8 +1,8 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI=5
+EAPI=6
 
 inherit vdr-plugin-2
 
@@ -13,15 +13,23 @@ SRC_URI="https://github.com/manio/vdr-plugin-dvbapi/archive/v${PV}.tar.gz -> vdr
 KEYWORDS="~amd64 ~x86"
 SLOT="0"
 LICENSE="GPL-2"
-IUSE="cpu_flags_x86_3dnow cpu_flags_x86_mmx cpu_flags_x86_sse cpu_flags_x86_sse2"
+IUSE="cpu_flags_x86_3dnow cpu_flags_x86_mmx cpu_flags_x86_sse cpu_flags_x86_sse2 dvbcsa"
 
-DEPEND=">=media-video/vdr-2.1.4"
+DEPEND=">=media-video/vdr-2.1.4
+		dvbcsa? ( media-libs/libdvbcsa )"
+
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/vdr-plugin-dvbapi-${PV}"
 
+DOCS="HISTORY INSTALL README FFdecsa/docs"
+
 src_prepare() {
 	vdr-plugin-2_src_prepare
+
+	use dvbcsa &&\
+		sed -e "s:PLUGIN = dvbapi:PLUGIN = dvbapi\nLIBDVBCSA = 1:" \
+			-i Makefile
 
 	# respect the system CXXFLAGS
 	sed -e "s:FLAGS:CXXFLAGS:" -i FFdecsa/Makefile
@@ -64,6 +72,7 @@ src_prepare() {
 	fi
 
 	export PARALLEL
+
 }
 
 pkg_postinst() {
