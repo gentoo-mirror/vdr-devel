@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
-inherit eutils
+inherit
 
 DESCRIPTION="Free implementation of the DVB Common Scrambling Algorithm - DVB/CSA"
-HOMEPAGE="http://www.videolan.org/developers/${PN}.html"
-SRC_URI="http://download.videolan.org/pub/videolan/${PN}/${PV}/${P}.tar.gz"
+HOMEPAGE="https://www.videolan.org/developers/${PN}.html"
+SRC_URI="https://download.videolan.org/pub/videolan/${PN}/${PV}/${P}.tar.gz"
 
 KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-2"
@@ -16,12 +16,6 @@ SLOT="0"
 IUSE="debug cpu_flags_x86_mmx cpu_flags_x86_sse2 +static-libs"
 
 DEPEND=""
-
-DOCS=( AUTHORS ChangeLog INSTALL NEWS README )
-
-src_prepare() {
-	epatch_user
-}
 
 src_configure() {
 	econf \
