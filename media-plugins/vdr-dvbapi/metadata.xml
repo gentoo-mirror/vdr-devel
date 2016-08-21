@@ -5,5 +5,8 @@
 		<email>hd_brummy@gentoo.org</email>
 		<name>Joerg Bornkessel</name>
 	</maintainer>
+	<use>
+		<flag name="dvbcsa">support free implementation of the DVB Common Scrambling Algorithm</flag>
+	</use>
 </pkgmetadata>
 
