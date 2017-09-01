@@ -9,5 +9,5 @@ LICENSE=GPL-2
 RDEPEND=nvram? ( sys-power/nvram-wakeup ) app-admin/sudo sys-process/wait_on_pid
 SLOT=0
 _eclass_exported_funcs=pkg_setup:- src_unpack:git-r3 src_install:-
-_eclasses_=git-r3	78651c07ca1c1373bf81545d39eb9769	user	e4b567c44272a719fabf53f0f885d3f7
+_eclasses_=git-r3	4f7ddb4119309845d6687213171ab445	user	e4b567c44272a719fabf53f0f885d3f7
 _md5_=e80333ddc052b5ba4823b4642ce8c098
