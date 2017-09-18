@@ -8,5 +8,5 @@ KEYWORDS=~amd64 ~arm ~ppc ~x86
 LICENSE=GPL-2
 RDEPEND=nvram? ( sys-power/nvram-wakeup ) app-admin/sudo sys-process/wait_on_pid
 SLOT=0
-_eclasses_=git-r3	4f7ddb4119309845d6687213171ab445	user	e4b567c44272a719fabf53f0f885d3f7
+_eclasses_=git-r3	52a888802d25387c2c74cb845d1219bc	user	e4b567c44272a719fabf53f0f885d3f7
 _md5_=e80333ddc052b5ba4823b4642ce8c098
