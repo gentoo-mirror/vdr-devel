@@ -1,4 +1,4 @@
-DEFINED_PHASES=compile install postinst postrm prepare setup unpack
+DEFINED_PHASES=compile config install postinst postrm prepare setup unpack
 DEPEND=>=media-video/vdr-2 x11-libs/libX11 >=x11-libs/libxcb-1.8 x11-libs/xcb-util-wm x11-libs/xcb-util-keysyms x11-libs/xcb-util-renderutil alsa? ( >=media-libs/alsa-lib-1.0.28 ) opengl? ( virtual/opengl ) vaapi? ( x11-libs/libva virtual/ffmpeg[vaapi] ) vdpau? ( x11-libs/libvdpau virtual/ffmpeg[vdpau] ) virtual/pkgconfig x11-libs/xcb-util >=media-tv/gentoo-vdr-scripts-0.4.2 virtual/linuxtv-dvb-headers
 DESCRIPTION=VDR Plugin: Software and GPU emulated HD output device
 EAPI=5

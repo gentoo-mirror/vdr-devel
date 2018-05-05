@@ -1,4 +1,4 @@
-DEFINED_PHASES=compile configure install postinst postrm prepare setup unpack
+DEFINED_PHASES=compile config configure install postinst postrm prepare setup unpack
 DEPEND=>=media-video/vdr-1.7.21 >=dev-libs/openssl-0.9.7:* dvbsddevice? ( >=media-plugins/vdr-dvbsddevice-0.0.5-r1 ) dvbhddevice? ( >=media-plugins/vdr-dvbhddevice-0.0.4_p20120614 ) >=media-tv/gentoo-vdr-scripts-0.4.2 virtual/linuxtv-dvb-headers
 DESCRIPTION=VDR Plugin: SoftCAM
 EAPI=5
