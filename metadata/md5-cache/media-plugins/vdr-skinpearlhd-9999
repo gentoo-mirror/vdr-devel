@@ -7,5 +7,5 @@ IUSE=yaepg +dynamicfonts +hideoclocktext
 LICENSE=GPL-2
 RDEPEND=media-plugins/vdr-text2skin
 SLOT=0
-_eclasses_=git-2	45ff482316b52b3f96ff6b7309b77f03
+_eclasses_=git-2	249c1a0962573f4ce2c28f0d5b6b35d4
 _md5_=3ee34dd5bec904cdd5b67d1849588bea
