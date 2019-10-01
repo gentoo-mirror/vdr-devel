@@ -1,4 +1,3 @@
-media-libs/libdvbcsa 1.1.0: Free implementation of the DVB Common Scrambling Algorithm - DVB/CSA
 media-plugins/vdr-dvbapi 2.2.3: VDR Plugin: allows connect VDR to OScam
 media-plugins/vdr-graphtftng 0.4.8: VDR Plugin: VDR OSD on TFT
 media-plugins/vdr-reelbox 3.14916 3.14916-r1: VDR Plugin: for the Reel eHD PCI card
