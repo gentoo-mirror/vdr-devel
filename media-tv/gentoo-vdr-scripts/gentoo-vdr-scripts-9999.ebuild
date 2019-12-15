@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -9,7 +8,7 @@ inherit git-r3 user
 EGIT_REPO_URI="git://git.gentoo.org/proj/gentoo-vdr-scripts.git"
 
 DESCRIPTION="Scripts necessary for use of vdr as a set-top-box"
-HOMEPAGE="https://www.gentoo.org/"
+HOMEPAGE="https://gitweb.gentoo.org/proj/gentoo-vdr-scripts.git/about/"
 SRC_URI=""
 
 LICENSE="GPL-2"
