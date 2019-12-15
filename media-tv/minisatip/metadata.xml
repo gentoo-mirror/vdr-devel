@@ -4,7 +4,7 @@
 	<maintainer type="person">
 		<email>hd_brummy@gentoo.org</email>
 		<name>Joerg Bornkessel</name>
-    </maintainer>
+	</maintainer>
 	<use>
 		<flag name='dvbcsa'>enable libdvbcsa support</flag>
 	</use>
