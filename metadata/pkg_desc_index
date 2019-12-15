@@ -1,14 +1,12 @@
 media-libs/libdvbcsa 1.1.0: Free implementation of the DVB Common Scrambling Algorithm - DVB/CSA
 media-plugins/vdr-dvbapi 2.2.3: VDR Plugin: allows connect VDR to OScam
-media-plugins/vdr-graphtftng 0.4.8: VDR Plugin: VDR OSD on TFT
 media-plugins/vdr-reelbox 3.14916 3.14916-r1: VDR Plugin: for the Reel eHD PCI card
-media-plugins/vdr-sc 0.9.3.20120815-r2 0.9.3.20120815-r3 0.9.3.20120815-r4: VDR Plugin: SoftCAM
-media-plugins/vdr-skindesigner 0.0.1 0.0.3 0.0.5 0.0.7: VDR Plugin: A VDR skinning engine that displays XML based Skins
+media-plugins/vdr-sc 0.9.3.20120815-r4: VDR Plugin: SoftCAM
+media-plugins/vdr-skindesigner 0.0.7: VDR Plugin: A VDR skinning engine that displays XML based Skins
 media-plugins/vdr-skinpearlhd 9999: VDR PearlHD Skin
-media-plugins/vdr-softhddevice 0.6.0 0.6.0_p20140923 0.6.1_p20150209 0.6.1_p20150310 0.6.1_p20151001 9999: VDR Plugin: Software and GPU emulated HD output device
+media-plugins/vdr-softhddevice 0.6.1_p20151001 9999: VDR Plugin: Software and GPU emulated HD output device
 media-plugins/vdr-streamdev 0.6.1_p20151004: VDR Plugin: Client/Server and http streaming plugin
-media-plugins/vdr-vnsiserver 0.9.0_p20130105 0.9.2_p20131021 0.9.3_p20140104 0.9.4_p20140213 1.2.0 9999: VDR plugin: VNSI Streamserver Plugin (FernetMenta branch)
-media-plugins/vdr-yaepghd 9999: yaepghd plugin for nice epg
+media-plugins/vdr-vnsiserver 1.2.0 9999: VDR plugin: VNSI Streamserver Plugin (FernetMenta branch)
 media-plugins/xbmc-addon-pvr 0.0.1_p20130110 0.0.1_p20140213 9999: XBMC addon: add VDR (http://www.cadsoft.de/vdr) as a TV/PVR Backend
 media-tv/gentoo-vdr-scripts 9999: Scripts necessary for use of vdr as a set-top-box
 media-tv/media-build-experimental 0.0.1_p20141123 0.0.1_p20150129 0.0.1_p20150509 0.0.1_p20150509-r1: Video 4 Linux experimental driver

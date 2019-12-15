@@ -3,10 +3,6 @@
 # * generated automatically using pmaint *
 
 media-plugins/vdr-dvbapi:dvbcsa - support free implementation of the DVB Common Scrambling Algorithm
-media-plugins/vdr-graphtftng:graphtft-fe - Install external x11 remote frontend
-media-plugins/vdr-graphtftng:theme_avp - graphTFT Alian vs. Predator theme
-media-plugins/vdr-graphtftng:theme_deepblue - graphTFT default theme
-media-plugins/vdr-graphtftng:touchscreen - Enable Touchscreen support
 media-plugins/vdr-sc:cardclient - No Description
 media-plugins/vdr-sc:conax - No Description
 media-plugins/vdr-sc:constcw - No Description

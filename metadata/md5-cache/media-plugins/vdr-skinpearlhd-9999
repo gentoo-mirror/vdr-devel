@@ -9,4 +9,4 @@ PROPERTIES=live
 RDEPEND=media-plugins/vdr-text2skin
 SLOT=0
 _eclasses_=git-2	3aabf18eba60687bbe6855eba271f688
-_md5_=3ee34dd5bec904cdd5b67d1849588bea
+_md5_=59b744363b43839b1e38745827316b8b
