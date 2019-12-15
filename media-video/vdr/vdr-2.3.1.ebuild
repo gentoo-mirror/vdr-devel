@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 inherit eutils flag-o-matic multilib toolchain-funcs
 
@@ -24,9 +23,9 @@ S="${WORKDIR}/${MY_P}"
 EXT_P="extpng-${P}-gentoo-edition-v3"
 
 DESCRIPTION="Video Disk Recorder - turns a pc into a powerful set top box for DVB"
-HOMEPAGE="http://www.tvdr.de/"
+HOMEPAGE="https://www.tvdr.de/"
 SRC_URI="ftp://ftp.tvdr.de/vdr/Developer/${MY_P}.tar.bz2
-	http://dev.gentoo.org/~hd_brummy/distfiles/${EXT_P}.patch.bz2"
+	https://dev.gentoo.org/~hd_brummy/distfiles/${EXT_P}.patch.bz2"
 
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~x86"
 SLOT="0"
