@@ -1,6 +1,5 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -10,7 +9,6 @@ inherit font vdr-plugin-2
 
 DESCRIPTION="VDR Plugin: A VDR skinning engine that displays XML based Skins"
 HOMEPAGE="http://projects.vdr-developer.org/projects/plg-skindesigner"
-#SRC_URI="mirror://vdr-developerorg/${VERSION}/${P}.tgz"
 SRC_URI="http://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-${PV}.tar.bz2"
 
 LICENSE="GPL-2 Apache-2.0"
