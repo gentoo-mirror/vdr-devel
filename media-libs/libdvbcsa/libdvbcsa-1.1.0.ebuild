@@ -1,10 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
-
-inherit
 
 DESCRIPTION="Free implementation of the DVB Common Scrambling Algorithm - DVB/CSA"
 HOMEPAGE="https://www.videolan.org/developers/${PN}.html"
