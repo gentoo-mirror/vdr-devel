@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -22,7 +21,7 @@ else
 fi
 
 DESCRIPTION="OSCam is an Open Source Conditional Access Module software"
-HOMEPAGE="www.streamboard.tv/wiki/OSCam/de/"
+HOMEPAGE="http://www.streamboard.tv/wiki/OSCam/de/"
 SRC_URI=""
 
 LICENSE="GPL-2"
@@ -73,8 +72,7 @@ REQUIRED_USE="
 "
 
 DEPEND="dev-util/cmake"
-RDEPEND="${DEPEND}
-	dev-libs/openssl
+RDEPEND="dev-libs/openssl
 	usb? ( virtual/libusb:1 )
 	pcsc? ( sys-apps/pcsc-lite )"
 
