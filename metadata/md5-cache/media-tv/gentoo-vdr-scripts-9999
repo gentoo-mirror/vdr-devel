@@ -2,7 +2,7 @@ DEFINED_PHASES=install setup unpack
 DEPEND=>=dev-vcs/git-1.8.2.1[curl]
 DESCRIPTION=Scripts necessary for use of vdr as a set-top-box
 EAPI=6
-HOMEPAGE=https://www.gentoo.org/
+HOMEPAGE=https://gitweb.gentoo.org/proj/gentoo-vdr-scripts.git/about/
 IUSE=nvram
 KEYWORDS=~amd64 ~arm ~ppc ~x86
 LICENSE=GPL-2
@@ -10,4 +10,4 @@ PROPERTIES=live
 RDEPEND=nvram? ( sys-power/nvram-wakeup ) app-admin/sudo sys-process/wait_on_pid
 SLOT=0
 _eclasses_=git-r3	6d22636df236df4cc8475f7b7668bdcd	user	00484e1be1aac73e24fca1c99557a7d6
-_md5_=e80333ddc052b5ba4823b4642ce8c098
+_md5_=2a969ce78858a099f6cc7823496cd7bf
