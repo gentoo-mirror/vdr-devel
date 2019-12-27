@@ -6,7 +6,7 @@ media-plugins/vdr-skindesigner 0.0.7: VDR Plugin: A VDR skinning engine that dis
 media-plugins/vdr-skinpearlhd 9999: VDR PearlHD Skin
 media-plugins/vdr-softhddevice 0.6.1_p20151001 9999: VDR Plugin: Software and GPU emulated HD output device
 media-plugins/vdr-streamdev 0.6.1_p20151004: VDR Plugin: Client/Server and http streaming plugin
-media-plugins/vdr-vnsiserver 1.2.0 9999: VDR plugin: VNSI Streamserver Plugin (FernetMenta branch)
+media-plugins/vdr-vnsiserver 1.2.0 1.8.0 9999: VDR plugin: VNSI Streamserver Plugin (FernetMenta branch)
 media-plugins/xbmc-addon-pvr 0.0.1_p20130110 0.0.1_p20140213 9999: XBMC addon: add VDR (http://www.cadsoft.de/vdr) as a TV/PVR Backend
 media-tv/gentoo-vdr-scripts 9999: Scripts necessary for use of vdr as a set-top-box
 media-tv/media-build-experimental 0.0.1_p20141123 0.0.1_p20150129 0.0.1_p20150509 0.0.1_p20150509-r1: Video 4 Linux experimental driver
