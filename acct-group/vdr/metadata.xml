@@ -7,9 +7,6 @@
 </maintainer>
 <maintainer type="project">
 	<email>vdr@gentoo.org</email>
-	<name>Gentoo VDR Project</name>
+	<name>Gentoo Vdr Project</name>
 </maintainer>
-<use>
-	<flag name="nvram">Add support for using nvram-wakeup to set wakeup time in bios</flag>
-</use>
 </pkgmetadata>

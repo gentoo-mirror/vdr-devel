@@ -7,9 +7,11 @@
 </maintainer>
 <maintainer type="project">
 	<email>vdr@gentoo.org</email>
-	<name>Gentoo VDR Project</name>
+	<name>Gentoo Vdr Project</name>
 </maintainer>
 <use>
-	<flag name="nvram">Add support for using nvram-wakeup to set wakeup time in bios</flag>
+	<flag name="graphlcd">add needed groups lp, usb for <pkg>media-plugin/vdr-graphlcd</pkg></flag>
+	<flag name="remote">add needed group input for <pkg>media-plugins/vdr-remote</pkg></flag>
+	<flag name="serial">add group uucp for access to serial/ttyS* for <pkg>media-plugins/vdr-serial</pkg></flag>
 </use>
 </pkgmetadata>
