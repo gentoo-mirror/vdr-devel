@@ -76,16 +76,3 @@ media-tv/oscam:reader_viaccess -
 media-tv/oscam:reader_videoguard - 
 media-tv/oscam:touch - 
 media-tv/oscam:www - 
-media-video/vdr:alternatechannel - Use alternate channel on record
-media-video/vdr:bidi - fribid support, for languages, written from right to left
-media-video/vdr:graphtft - support for media-plugins/vdr-graphtftplugin up from version 0.1.7
-media-video/vdr:html - Install HTML documentation
-media-video/vdr:kbd - enable keyboard support as remote device
-media-video/vdr:mainmenuhooks - Allows to replace main menu entries by some special plugins (like epgsearch, extrecmenu, ...)
-media-video/vdr:menuorg - Enables support for the media-plugins/vdr-menuorg
-media-video/vdr:menuselection - adds support for menu hotkeys of double digits
-media-video/vdr:naludump - Removes NALU fill data from h.264-Streams of TS files
-media-video/vdr:permashift_v1 - permanent timeshift by recording live TV on RAM, need plugin >=mediaplugins/vdr-permashift-1
-media-video/vdr:pinplugin - Support for media-plugins/vdr-pin
-media-video/vdr:resumereset - rreset resume of EOF
-media-video/vdr:ttxtsubs - support for media-plugins/vdr-ttxtsubs
