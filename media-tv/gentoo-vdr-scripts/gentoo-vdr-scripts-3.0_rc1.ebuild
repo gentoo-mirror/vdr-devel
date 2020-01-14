@@ -17,7 +17,7 @@ DEPEND="acct-group/vdr
 RDEPEND="app-admin/sudo
 	sys-process/wait_on_pid"
 
-S="${WORKDIR}/${PN}-${GVS_VERSION}"
+#S="${WORKDIR}/${PN}-${GVS_VERSION}"
 
 VDR_HOME=/var/vdr
 
