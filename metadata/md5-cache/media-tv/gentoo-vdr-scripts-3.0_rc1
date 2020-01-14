@@ -8,4 +8,4 @@ LICENSE=GPL-2
 RDEPEND=app-admin/sudo sys-process/wait_on_pid
 SLOT=0
 SRC_URI=https://gitweb.gentoo.org/proj/gentoo-vdr-scripts.git/snapshot/gentoo-vdr-scripts-3.0_rc1.tar.bz2
-_md5_=b9d629a5f1dd81ed219592653ec3ee0f
+_md5_=186dd9e96f9a362cf3e7be1d4711cc2a
