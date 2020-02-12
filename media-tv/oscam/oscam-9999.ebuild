@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -16,8 +16,8 @@ if [ "${OSCAM_VCS}" == "svn" ] ; then
 	inherit subversion
 	ESVN_REPO_URI="${OSCAM_ESVN_REPO_URI:-http://streamboard.de.vu/svn/oscam/trunk}"
 else
-	inherit git-2
-	EGIT_REPO_URI="${OSCAM_EGIT_REPO_URI:-git://github.com/gfto/oscam.git}"
+	inherit git-r3
+	EGIT_REPO_URI="${OSCAM_EGIT_REPO_URI:-https://github.com/gfto/oscam.git}"
 fi
 
 DESCRIPTION="OSCam is an Open Source Conditional Access Module software"
@@ -78,7 +78,7 @@ RDEPEND="dev-libs/openssl
 
 RESTRICT="mirror strip"
 
-S="${WORKDIR}/${PN}"
+S="${WORKDIR}/${P}"
 
 src_prepare() {
 	if [ "${OSCAM_VCS}" != "svn" ] ; then

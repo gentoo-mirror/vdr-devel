@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
 
-inherit vdr-plugin-2 git-2
+inherit vdr-plugin-2 git-r3
 
 RESTRICT="test"
 
@@ -32,6 +32,8 @@ RDEPEND=">=media-video/vdr-2
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	x11-libs/xcb-util"
+
+S="${WORKDIR}/${P}"
 
 REQUIRED_USE="opengl? ( vaapi )
 			|| ( vaapi vdpau )
