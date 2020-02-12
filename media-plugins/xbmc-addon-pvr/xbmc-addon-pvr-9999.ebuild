@@ -1,11 +1,11 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
 
-inherit git-2 autotools multilib
+inherit autotools git-r3 multilib
 
-EGIT_REPO_URI="git://github.com/opdenkamp/xbmc-pvr-addons.git"
+EGIT_REPO_URI="https://github.com/opdenkamp/xbmc-pvr-addons.git"
 
 DESCRIPTION="XBMC addon: add VDR (http://www.cadsoft.de/vdr) as a TV/PVR Backend"
 HOMEPAGE="https://github.com/opdenkamp/xbmc-pvr-addons"
@@ -19,7 +19,7 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}"
 
-S=${WORKDIR}/${PN}
+S="${WORKDIR}/${P}"
 
 src_prepare() {
 	eautoreconf
