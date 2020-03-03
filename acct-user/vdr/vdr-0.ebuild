@@ -10,7 +10,7 @@ DESCRIPTION="VDR (VideoDiskRecorder) user"
 IUSE="graphlcd remote serial systemd"
 
 ACCT_USER_ID=452
-ACCT_USER_HOME=/var/vdr
+ACCT_USER_HOME=/var/lib/vdr
 ACCT_USER_HOME_OWNER=vdr:vdr
 ACCT_USER_HOME_PERMS=0775
 ACCT_USER_GROUPS=( audio cdrom vdr video )
