@@ -21,11 +21,16 @@
 ##   End example
 ##
 
-# Joerg Bornkessel <hd_brummy@gentoo.org> ( 12/Jan/2020 )
+# Joerg Bornkessel <hd_brummy@gentoo.org> ( 03/Mar/2020 )
 # temp pmasked for testing
+# We strongly recommend,
+#	_DO_NOT_ 
+# unmask this versions,
+# it would possible break your vdr install
+# and will result in a not starting VDR system
 acct_group/vdr
 acct-user/vdr
-=media-tv/gentoo-vdr-scripts-3.0_rc1
+=media-tv/gentoo-vdr-scripts-3.0_rc*
 
 # Joerg Bornkessel <hd_brummy@gentoo.org>
 #  on behalf of QA Team
