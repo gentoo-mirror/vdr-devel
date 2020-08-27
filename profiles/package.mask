@@ -31,6 +31,7 @@
 acct_group/vdr
 acct-user/vdr
 =media-tv/gentoo-vdr-scripts-3.0_rc*
+=media-tv/gentoo-vdr-scripts-9999.3
 
 # Joerg Bornkessel <hd_brummy@gentoo.org>
 #  on behalf of QA Team
