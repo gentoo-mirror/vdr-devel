@@ -3,11 +3,10 @@ DEPEND=>=dev-vcs/git-1.8.2.1[curl]
 DESCRIPTION=Scripts necessary for use of vdr as a set-top-box
 EAPI=6
 HOMEPAGE=https://gitweb.gentoo.org/proj/gentoo-vdr-scripts.git/about/
-IUSE=nvram
 KEYWORDS=~amd64 ~arm ~ppc ~x86
 LICENSE=GPL-2
 PROPERTIES=live
-RDEPEND=nvram? ( sys-power/nvram-wakeup ) app-admin/sudo sys-process/wait_on_pid
+RDEPEND=app-admin/sudo sys-process/wait_on_pid
 SLOT=0
 _eclasses_=git-r3	8ec5b53812bce105ae7943930e4660f8	user	7b7fc6ec5eb1c1eee55b0609f01e7362	user-info	a2abd4e2f4c3b9b06d64bf1329359a02
-_md5_=2a969ce78858a099f6cc7823496cd7bf
+_md5_=e5524cb9e5715848711ec93546e0b794
