@@ -4,6 +4,7 @@ media-libs/libdvbcsa 1.1.0: Free implementation of the DVB Common Scrambling Alg
 media-plugins/vdr-dvbapi 2.2.3: VDR Plugin: allows connect VDR to OScam
 media-plugins/vdr-reelbox 3.14916 3.14916-r1: VDR Plugin: for the Reel eHD PCI card
 media-plugins/vdr-sc 0.9.3.20120815-r4: VDR Plugin: SoftCAM
+media-plugins/vdr-skindesigner 1.2.8: VDR Plugin: A VDR skinning engine that displays XML based Skins
 media-plugins/vdr-softhddevice 0.6.1_p20151001 9999: VDR Plugin: Software and GPU emulated HD output device
 media-plugins/vdr-streamdev 0.6.1_p20151004: VDR Plugin: Client/Server and http streaming plugin
 media-plugins/vdr-vnsiserver 1.2.0 1.8.0 9999: VDR plugin: VNSI Streamserver Plugin (FernetMenta branch)
