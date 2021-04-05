@@ -1,31 +1,30 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
 inherit font vdr-plugin-2
 
-#VERSION="1813" # every bump, new version!
-
 DESCRIPTION="VDR Plugin: A VDR skinning engine that displays XML based Skins"
-HOMEPAGE="http://projects.vdr-developer.org/projects/plg-skindesigner"
-SRC_URI="http://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-${PV}.tar.bz2"
+HOMEPAGE="https://github.com/vdr-projects/vdr-plugin-skindesigner"
+SRC_URI="https://github.com/vdr-projects/vdr-plugin-skindesigner/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
-LICENSE="GPL-2 Apache-2.0"
+LICENSE="GPL-2+ Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 FONT_SUFFIX="ttf"
 FONT_S="${S}/fonts/VDROpenSans"
 
-DEPEND=">=media-video/vdr-2.0.0
+DEPEND=">=media-video/vdr-2.2.0
 	dev-libs/libxml2
 	gnome-base/librsvg
-	virtual/jpeg:*
-	x11-libs/cairo[svg]
-	media-plugins/vdr-epgsearch"
+	net-misc/curl
+	virtual/jpeg
+	x11-libs/cairo[svg]"
 RDEPEND="${DEPEND}"
+
+S=${WORKDIR}/vdr-plugin-${VDRPLUGIN}-${PV}
 
 # font.eclass functions:
 # pkg_setup src_install pkg_postinst pkg_postrm
