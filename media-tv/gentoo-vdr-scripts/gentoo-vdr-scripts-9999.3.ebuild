@@ -1,4 +1,4 @@
-# Copyright 2020 Gentoo Authors
+# Copyright 2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -32,11 +32,6 @@ src_install() {
 	# create necessary directories
 	diropts -ovdr -gvdr
 	keepdir "${VDR_HOME}"
-
-	local kd
-	for kd in shutdown-data merged-config-files dvd-images; do
-		keepdir "${VDR_HOME}/${kd}"
-	done
 }
 
 VDRSUDOENTRY="vdr ALL=NOPASSWD:/usr/share/vdr/bin/vdrshutdown-really.sh"
